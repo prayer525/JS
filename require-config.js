@@ -17,15 +17,16 @@
 
 	require.config({
 		paths: {
-			 'jquery': ['bower_components/jquery/dist/jquery.min']
-			 // 'bootstrap': ['bower_components/bootstrap/dist/js/bootstrap.min'],
+			 'jquery': ['bower_components/jquery/dist/jquery.min'],
+			 'bootstrap': ['bower_components/bootstrap/dist/js/bootstrap.min'],
+			 'highlight':['javascripts/highlight'],
 			 // 'moment':['bower_components/moment/min/moment.min'],
 			 // 'datetimepicker':['bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min'],
 			 // 'dataTable':['bower_components/datatables/jquery.dataTables.min'],
 			 // 'dataTableBoot':['bower_components/datatables/dataTables.bootstrap.min'],
 			 // 'sortable':['js/jquery.sortable'],
 			 // 'textEditor':['bower_components/summernote/dist/summernote'],
-			 'main': ['js/main']
+			 'main': ['javascripts/main']
 		},
 		shim: {
 			'bootstrap': ['jquery']
@@ -36,8 +37,8 @@
 		baseUrl: '../'
 	});
 	// , "cordova",  'moment', 'datetimepicker', 'dataTable', 'dataTableBoot', 'textEditor', 'bootstrap', 'moment', 'datetimepicker'
-	require(['jquery'], function(){
-		require(['common']);
+	require(['jquery','bootstrap','highlight'], function(){
+		require(['main']);
 		// require(['sortable'], function(){
 		// 	require(['common']);
 		// })

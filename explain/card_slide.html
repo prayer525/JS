@@ -1,0 +1,71 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Card Slide
+	</h1>
+</section>
+<!-- Main content -->
+<section class="content">
+	<!-- Small boxes (Stat box) -->
+	
+	<div class="row">
+		<h3>Live Demo</h3>
+		
+		<style>
+		.lock {overflow:hidden;}
+		.slide-wrap {width:100%; height:200px; overflow:hidden;}
+		.slide-wrap .slide {position:relative; width:100%; height:100%; overflow:hidden; padding:0; margin:0;}
+		.slide-wrap .slide li {position:absolute; top:0; left:0; width:100%; height:100%; z-index:1;}
+		.slide-wrap .slide li.red {background:#faa;}
+		.slide-wrap .slide li.blue {background:#aaf;}
+		.slide-wrap .slide li.green {background:#afa;}
+		.slide-wrap .slide li.current {z-index:3;}
+		.slide-wrap .slide li.next {z-index:2;}
+		</style>
+
+		<div class="slide-wrap">
+			<ul class="slide">
+				<li class="red">First page</li>
+				<li class="blue">Second page</li>
+				<li class="green">Third page</li>
+			</ul>
+		</div>
+
+		
+
+		<h3>Markup</h3>
+
+<pre><code>&lt;div class="slide-wrap"&gt;
+	&lt;ul class="slide"&gt;
+		&lt;li class="red"&gt;a&lt;/li&gt;
+		&lt;li class="blue"&gt;b&lt;/li&gt;
+		&lt;li class="green"&gt;c&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+		
+		<h3>Css</h3>
+
+<pre><code>.lock {overflow:hidden;}
+.slide-wrap {width:100%; height:200px; overflow:hidden;}
+.slide-wrap .slide {position:relative; width:100%; height:100%; overflow:hidden;}
+.slide-wrap .slide li {position:absolute; top:0; left:0; width:100%; height:100%; z-index:1;}
+.slide-wrap .slide li.red {background:red;}
+.slide-wrap .slide li.blue {background:blue;}
+.slide-wrap .slide li.green {background:green;}
+.slide-wrap .slide li.current {z-index:3;}
+.slide-wrap .slide li.next {z-index:2;}</code></pre>
+
+		<h3>Javascript</h3>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+	cardSlide.init('.slide li')
+&lt;/script&gt;</code></pre>
+	</div>
+	<!-- /.row -->
+</section>
+<!-- /.content -->
+
+<script src="make_lib/card_slide.js"></script>
+<script type="text/javascript">
+cardSlide.init('.slide li')
+</script>
