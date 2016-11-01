@@ -57,9 +57,10 @@ var cardSlide = {
         }
 
         if(_this.unlock){
-            document.ontouchmove = function(evt){
-                evt.preventDefault();
-            }
+        	_this.addClass(document.body, 'lock');
+            // document.ontouchmove = function(evt){
+            //     evt.preventDefault();
+            // }
             _this.unlock = false;
         }
 
@@ -81,7 +82,8 @@ var cardSlide = {
             _this.initAni(evt.target, _this.point.xDiff);
         }
         if(!_this.unlock){
-            document.ontouchmove = null;
+            // document.ontouchmove = null;
+            _this.removeClass(document.body, 'lock')
             _this.unlock = true;
         }
 

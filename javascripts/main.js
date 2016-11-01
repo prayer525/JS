@@ -351,7 +351,6 @@ $(function(){
 function init(){
 	/* code highlight */
 	var snippet = document.querySelectorAll('pre code');
-	console.log('snippet : ' , snippet.length)
 
 	for(var i=0; i<snippet.length; i++){
 		hljs.highlightBlock(snippet[i]);
