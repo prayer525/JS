@@ -34,7 +34,7 @@
 			// 'sortable':['jquery'],
 			// 'dataTableBoot':['dataTable']
 		},
-		baseUrl: '../'
+		baseUrl: './'
 	});
 	// , "cordova",  'moment', 'datetimepicker', 'dataTable', 'dataTableBoot', 'textEditor', 'bootstrap', 'moment', 'datetimepicker'
 	require(['jquery','bootstrap','highlight'], function(){
