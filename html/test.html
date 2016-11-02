@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: License</title>
+<style>
+* {margin:0; padding:0;}
+html, body {width:100%; height:100%;}
+.lock {overflow:hidden;}
+.slide-wrap {position:relative; width:100%; height:200px; overflow:hidden;}
+.slide-wrap .slide {position:relative; width:100%; height:100%; overflow:hidden;}
+.slide-wrap .slide li {position:absolute; top:0; left:0; width:100%; height:100%; z-index:1;}
+.slide-wrap .slide li.red {background:red;}
+.slide-wrap .slide li.blue {background:blue;}
+.slide-wrap .slide li.green {background:green;}
+.slide-wrap .slide li.current {z-index:3;}
+.slide-wrap .slide li.next {z-index:2;}
+.slide-wrap .slide li div {width:100%; height:100%; background:#fff;}
+.slide-wrap a.btn-left-arrow {position:absolute; top:50%; left:10px; display:inline-block; z-index:4;}
+.slide-wrap a.btn-right-arrow {position:absolute; top:50%; right:10px; display:inline-block; z-index:4;}
+</style>
+</head>
+<body>
+<!-- ========== Start ========== -->
+<div class="slide-wrap">
+    <ul class="slide">
+        <li class="red"><div>page</div></li>
+        <li class="blue">b</li>
+        <li class="green">c</li>
+    </ul>
+    <a href="#" class="btn-left-arrow">left</a>
+    <a href="#" class="btn-right-arrow">right</a>
+</div>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p>6</p>
+<p>7</p>
+<p>8</p>
+<div id="bodyTxt"></div>
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript">
+var slide = {
+    init:function(){
+        _this = this;
+
+        /*
+            start, end, different position variable
+        */
+        _this.point = {
+            xDown:null,
+            yDown:null,
+            xUp:null,
+            yUp:null,
+            xDiff:null,
+            yDiff:null
+        }
+
+        // _target 아래에 있는 모든 list 를 선택
+        _this.el = document.body;
+        _this.regEvt(_this.el);
+        _this.bodyTxt = document.getElementById('bodyTxt');
+    },
+
+    /*
+        list 에 event 등록 현재는 mobile & pc 를 동시에 등록.
+        후에 해당 target device 에만 event 등록하게 변경
+    */
+    regEvt:function(_el){
+            // mobile, tablet device
+            _this.el.addEventListener('touchstart', _this.fnTouchStart, false);
+            _this.el.addEventListener('touchmove', _this.fnTouchMove, false);
+            _this.el.addEventListener('touchend', _this.fnTouchEnd, false);
+    },
+    /* touch start, mouse down */
+    fnTouchStart:function(evt){
+        console.log(evt)
+        _this.point.xDown = evt.touches[0].clientX;
+        _this.point.yDown = evt.touches[0].clientY;
+    },
+    /* touch move, mouse move */
+    fnTouchMove:function(evt){
+        // 값이 없을 경우 return
+        if ( ! _this.point.xDown || ! _this.point.yDown ) {
+            return;
+        }
+
+        // start , end position 의 차이를 구한다.
+        _this.point.xDiff = evt.touches[0].clientX - _this.point.xDown;
+        _this.point.yDiff = evt.touches[0].clientY - _this.point.yDown;
+
+        _this.bodyTxt.innerHTML = _this.point.xDiff;
+    },
+    fnTouchEnd:function(evt){
+        
+        _this.point = {
+            xDown:null,
+            yDown:null,
+            xUp:null,
+            yUp:null,
+            xDiff:null,
+            yDiff:null
+        }
+    }
+}
+slide.init()
+
+</script>
+</html>
