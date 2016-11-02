@@ -148,7 +148,21 @@ var cardSlide = {
 
 		// X 축의 변화 값이 Y 축의 변화 값 보다 크면 좌우 슬라이드 동작
 		if ( Math.abs( _this.point.xDiff ) > Math.abs( _this.point.yDiff ) ) {
-			_this.li[_this.liIdx].style.webkitTransform = '-webkit-translate3d('+_this.point.xDiff+'px,0,0)';
+			if(_this.li[_this.liIdx].style.transform){
+				_this.li[_this.liIdx].style.transform ='translate3d('+_this.point.xDiff+'px,0,0)';
+			}
+			else if(_this.li[_this.liIdx].style.OTransform){
+				_this.li[_this.liIdx].style.OTransform ='translate3d('+_this.point.xDiff+'px,0,0)';
+			}
+			else if(_this.li[_this.liIdx].style.msTransform){
+				_this.li[_this.liIdx].style.msTransform ='translate3d('+_this.point.xDiff+'px,0,0)';
+			}
+			else if(_this.li[_this.liIdx].style.MozTransform){
+				_this.li[_this.liIdx].style.MozTransform ='translate3d('+_this.point.xDiff+'px,0,0)';
+			}
+			else if(_this.li[_this.liIdx].style.WebkitTransform){
+				_this.li[_this.liIdx].style.WebkitTransform ='translate3d('+_this.point.xDiff+'px,0,0)';
+			}
 		}
 	},
 	/* touch end, mouse up */
