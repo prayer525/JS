@@ -50,6 +50,10 @@ var cardSlide = {
 		// slide list 의 length : 빈번하게 사용되는 값이라 변수에 저장해서 사용
 		_this.length = _this.li.length;
 
+		_this.styleProp = _this.getStyleProperty('transform');
+
+		console.log(_this.styleProp)
+
 		/*
 			issue : touchmove, left/right animation 시 event.target 의 translate 의 위치값을 변경
 					- event target 이 li가 아니라 다른 자식노드 (li > div > span) 가 됐을 때
@@ -71,7 +75,7 @@ var cardSlide = {
 		// ㅣㅑ
 		_this.regEvt(_this.li)
 
-		_this.getStyleProperty()
+		
 
 	},
 
@@ -150,21 +154,8 @@ var cardSlide = {
 
 		// X 축의 변화 값이 Y 축의 변화 값 보다 크면 좌우 슬라이드 동작
 		if ( Math.abs( _this.point.xDiff ) > Math.abs( _this.point.yDiff ) ) {
-			if(_this.li[_this.liIdx].style.transform){
-				_this.li[_this.liIdx].style.transform ='translate3d('+_this.point.xDiff+'px,0,0)';
-			}
-			else if(_this.li[_this.liIdx].style.OTransform){
-				_this.li[_this.liIdx].style.OTransform ='translate3d('+_this.point.xDiff+'px,0,0)';
-			}
-			else if(_this.li[_this.liIdx].style.msTransform){
-				_this.li[_this.liIdx].style.msTransform ='translate3d('+_this.point.xDiff+'px,0,0)';
-			}
-			else if(_this.li[_this.liIdx].style.MozTransform){
-				_this.li[_this.liIdx].style.MozTransform ='translate3d('+_this.point.xDiff+'px,0,0)';
-			}
-			else if(_this.li[_this.liIdx].style.WebkitTransform){
-				_this.li[_this.liIdx].style.WebkitTransform ='translate3d('+_this.point.xDiff+'px,0,0)';
-			}
+			console.log('_this.li[_this.liIdx].style[_this.styleProp] : ' , _this.li[_this.liIdx].style[_this.styleProp])
+			_this.li[_this.liIdx].style[_this.styleProp] ='translate3d('+_this.point.xDiff+'px,0,0)';
 		}
 	},
 	/* touch end, mouse up */
@@ -377,40 +368,33 @@ var cardSlide = {
 			_this.liIdx = _index+1;
 		}
 	},
-	getStyleProperty:function(){
+	getStyleProperty:function(propName, element) {
  
 		var prefixes = ['Moz', 'Webkit', 'Khtml', 'O', 'Ms'];
 		var _cache = { };
+		element = element || document.documentElement;
+		var style = element.style,
+		prefixed,
+		uPropName;
 
-		function getStyleProperty(propName, element) {
-			element = element || document.documentElement;
-			var style = element.style,
-			prefixed,
-			uPropName;
-
-			// check cache only when no element is given
-			if (arguments.length == 1 && typeof _cache[propName] == 'string') {
-				return _cache[propName];
-			}
-			// test standard property first
-			if (typeof style[propName] == 'string') {
-				return (_cache[propName] = propName);
-			}
-
-			// capitalize
-			uPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
-
-			// test vendor specific properties
-			for (var i=0, l=prefixes.length; i<l; i++) {
-				prefixed = prefixes[i] + uPropName;
-				if (typeof style[prefixed] == 'string') {
-					return (_cache[propName] = prefixed);
-				}
-			}
+		// check cache only when no element is given
+		if (arguments.length == 1 && typeof _cache[propName] == 'string') {
+			return _cache[propName];
+		}
+		// test standard property first
+		if (typeof style[propName] == 'string') {
+			return (_cache[propName] = propName);
 		}
 
-		alert(getStyleProperty('transform', _this.li[0]))
+		// capitalize
+		uPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
 
-		return getStyleProperty;
+		// test vendor specific properties
+		for (var i=0, l=prefixes.length; i<l; i++) {
+			prefixed = prefixes[i] + uPropName;
+			if (typeof style[prefixed] == 'string') {
+				return (_cache[propName] = prefixed);
+			}
+		}
 	}
 }
