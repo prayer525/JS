@@ -135,25 +135,7 @@ var cardSlide = {
 	},
 	/* touch move, mouse move */
 	fnTouchMove:function(evt){
-		// 값이 없을 경우 return
-		if ( ! _this.point.xDown || ! _this.point.yDown ) {
-			return;
-		}
-
-		// event type 설정 touch device 나 PC나 동일 이벤트 변수 사용 
-
-		document.getElementById('slideconsole').innerHTML = _this.li[_this.liIdx].getAttribute('style')
-
-		// slide 동작시 화면의 위 아래 슬라이드를 막기 위해 body 에 스타일 지정
-		document.body.setAttribute('style','overflow:hidden;');
-
-		// start , end position 의 차이를 구한다.
-		_this.point.xDiff = evt.touches[0].clientX - _this.point.xDown;
-
-		// X 축의 변화 값이 Y 축의 변화 값 보다 크면 좌우 슬라이드 동작
-		if ( Math.abs( _this.point.xDiff ) > Math.abs( _this.point.yDiff ) ) {
-			_this.li[_this.liIdx].style[_this.styleProp] ='translate3d('+_this.point.xDiff+'px,0,0)';
-		}
+			_this.li[_this.liIdx].style[_this.styleProp] ='translate3d('+(evt.touches[0].clientX - _this.point.xDown)+'px,0,0)';
 	},
 	/* touch end, mouse up */
 	fnTouchEnd:function(evt){
