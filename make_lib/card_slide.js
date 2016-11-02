@@ -71,6 +71,8 @@ var cardSlide = {
 		// ㅣㅑ
 		_this.regEvt(_this.li)
 
+		_this.getStyleProperty()
+
 	},
 
 	/*
@@ -406,6 +408,8 @@ var cardSlide = {
 				}
 			}
 		}
+
+		alert(getStyleProperty('transform', _this.li[0]))
 
 		return getStyleProperty;
 	}
