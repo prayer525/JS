@@ -141,9 +141,6 @@ var cardSlide = {
 		}
 
 		// event type 설정 touch device 나 PC나 동일 이벤트 변수 사용 
-		if(evt.type.indexOf('touch') > -1){
-			evt = evt.touches[0];
-		}
 
 		document.getElementById('slideconsole').innerHTML = _this.li[_this.liIdx].getAttribute('style')
 
@@ -151,8 +148,7 @@ var cardSlide = {
 		document.body.setAttribute('style','overflow:hidden;');
 
 		// start , end position 의 차이를 구한다.
-		_this.point.xDiff = evt.clientX - _this.point.xDown;
-		_this.point.yDiff = evt.clientY - _this.point.yDown;
+		_this.point.xDiff = evt.touches[0].clientX - _this.point.xDown;
 
 		// X 축의 변화 값이 Y 축의 변화 값 보다 크면 좌우 슬라이드 동작
 		if ( Math.abs( _this.point.xDiff ) > Math.abs( _this.point.yDiff ) ) {
