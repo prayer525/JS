@@ -129,6 +129,11 @@ var cardSlide = {
 	},
 	/* touch move, mouse move */
 	fnTouchMove:function(evt){
+		// 값이 없을 경우 return
+		if ( ! _this.point.xDown) {
+			return;
+		}
+
 		// event type 설정 touch device 나 PC나 동일 이벤트 변수 사용 
 		if(evt.type.indexOf('touch') > -1){
 			evt = evt.touches[0];
