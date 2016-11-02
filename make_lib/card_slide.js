@@ -145,7 +145,7 @@ var cardSlide = {
 			evt = evt.touches[0];
 		}
 
-		document.getElementById('slideconsole').innerHTML = _this.li[_this.liIdx].style[_this.styleProp];
+		document.getElementById('slideconsole').innerHTML = _this.li[_this.liIdx].getAttribute('style')
 
 		// slide 동작시 화면의 위 아래 슬라이드를 막기 위해 body 에 스타일 지정
 		document.body.setAttribute('style','overflow:hidden;');
