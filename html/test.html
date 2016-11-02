@@ -170,7 +170,7 @@ var slide = {
             나누는 숫자(40)가 작을수록 slide 속도가 빨라진다.
             후에 사용자로부터 입력 받아서 사용 가능하다.
         */
-        _this.step = _this.liWidth / 40;
+        _this.step = _this.liWidth / 100;
 
         /*
             slide animation 동작중 추가 이벤트를 막기 위한 변수.
@@ -185,7 +185,7 @@ var slide = {
         */
         window.onresize = function(){
             _this.liWidth = _this.li[0].offsetWidth;
-            _this.step = _this.liWidth / 40;
+            _this.step = _this.liWidth / 100;
         }
 
         // slide list 의 length : 빈번하게 사용되는 값이라 변수에 저장해서 사용
@@ -373,7 +373,7 @@ var slide = {
                 _this.elementInit(_target);
                 _this.animation = false;
             }
-        }, 10)
+        }, 2)
     },
     leftAni:function(_target, currentPoint){
         _this.animation = true;
@@ -386,7 +386,7 @@ var slide = {
                 _this.elementInit(_target);
                 _this.animation = false;
             }
-        }, 10)
+        }, 2)
     },
     addClass:function(_t, _cName){
         var _c = _t.getAttribute('class')
