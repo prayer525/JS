@@ -1,3 +1,12 @@
+function touchHandlerDummy(e)
+{
+    e.preventDefault();
+    return false;
+}
+document.addEventListener("touchstart", touchHandlerDummy, false);
+document.addEventListener("touchmove", touchHandlerDummy, false);
+document.addEventListener("touchend", touchHandlerDummy, false);
+
 var cardSlide = {
 	init:function(_target, _op){
 		_this = this;
