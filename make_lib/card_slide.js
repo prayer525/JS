@@ -153,9 +153,7 @@ var cardSlide = {
 		_this.point.yDiff = evt.clientY - _this.point.yDown;
 
 		// X 축의 변화 값이 Y 축의 변화 값 보다 크면 좌우 슬라이드 동작
-		if ( Math.abs( _this.point.xDiff ) > Math.abs( _this.point.yDiff ) ) {
 			_this.li[_this.liIdx].style[_this.styleProp] ='translate('+_this.point.xDiff+'px,0)';
-		}
 	},
 	/* touch end, mouse up */
 	fnTouchEnd:function(evt){
