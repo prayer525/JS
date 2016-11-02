@@ -90,12 +90,7 @@ var slide = {
         if ( ! _this.point.xDown || ! _this.point.yDown ) {
             return;
         }
-
-        // start , end position 의 차이를 구한다.
-        _this.point.xDiff = evt.touches[0].clientX - _this.point.xDown;
-        _this.point.yDiff = evt.touches[0].clientY - _this.point.yDown;
-
-        _this.bodyTxt.innerHTML = _this.point.xDiff;
+        _this.bodyTxt.innerHTML = evt.touches[0].clientX;
     },
     fnTouchEnd:function(evt){
         
