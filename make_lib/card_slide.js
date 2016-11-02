@@ -154,8 +154,7 @@ var cardSlide = {
 
 		// X 축의 변화 값이 Y 축의 변화 값 보다 크면 좌우 슬라이드 동작
 		if ( Math.abs( _this.point.xDiff ) > Math.abs( _this.point.yDiff ) ) {
-			console.log('_this.li[_this.liIdx].style[_this.styleProp] : ' , _this.li[_this.liIdx].style[_this.styleProp])
-			_this.li[_this.liIdx].style[_this.styleProp] ='translate3d('+_this.point.xDiff+'px,0,0)';
+			_this.li[_this.liIdx].style[_this.styleProp] ='translate('+_this.point.xDiff+'px,0)';
 		}
 	},
 	/* touch end, mouse up */
@@ -283,7 +282,7 @@ var cardSlide = {
 		var leftInterval = setInterval(function(){
 			if(currentPoint > -_this.liWidth){
 				currentPoint-=_this.step;
-				_target.style.webkitTransform = 'translate('+currentPoint+'px,0)';
+				_target.style.webkitTransform = 'translate3d('+currentPoint+'px,0,0)';
 			}else{
 				clearInterval(leftInterval);
 				_this.elementInit(_target);
