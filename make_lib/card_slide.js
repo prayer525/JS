@@ -52,6 +52,8 @@ var cardSlide = {
 
 		_this.styleProp = _this.getStyleProperty('transform');
 
+		console.log('_this.styleProp : ', _this.styleProp)
+
 		/*
 			issue : touchmove, left/right animation 시 event.target 의 translate 의 위치값을 변경
 					- event target 이 li가 아니라 다른 자식노드 (li > div > span) 가 됐을 때
