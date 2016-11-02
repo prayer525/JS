@@ -145,6 +145,8 @@ var cardSlide = {
 			evt = evt.touches[0];
 		}
 
+		document.getElementById('slideconsole').innerHTML = evt.clientX;
+
 		// slide 동작시 화면의 위 아래 슬라이드를 막기 위해 body 에 스타일 지정
 		document.body.setAttribute('style','overflow:hidden;');
 
@@ -153,7 +155,9 @@ var cardSlide = {
 		_this.point.yDiff = evt.clientY - _this.point.yDown;
 
 		// X 축의 변화 값이 Y 축의 변화 값 보다 크면 좌우 슬라이드 동작
-			_this.li[_this.liIdx].style[_this.styleProp] ='translate('+_this.point.xDiff+'px,0)';
+		if ( Math.abs( _this.point.xDiff ) > Math.abs( _this.point.yDiff ) ) {
+			_this.li[_this.liIdx].style[_this.styleProp] ='translate3d('+_this.point.xDiff+'px,0,0)';
+		}
 	},
 	/* touch end, mouse up */
 	fnTouchEnd:function(evt){
@@ -367,7 +371,7 @@ var cardSlide = {
 	},
 	getStyleProperty:function(propName, element) {
  
-		var prefixes = ['Moz', 'Webkit', 'Khtml', 'O', 'Ms'];
+		var prefixes = ['Moz', 'Webkit', 'Khtml', 'O', 'Ms', "webkit"];
 		var _cache = { };
 		element = element || document.documentElement;
 		var style = element.style,
