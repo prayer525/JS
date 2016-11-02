@@ -52,8 +52,6 @@ var cardSlide = {
 
 		_this.styleProp = _this.getStyleProperty('transform');
 
-		console.log(_this.styleProp)
-
 		/*
 			issue : touchmove, left/right animation 시 event.target 의 translate 의 위치값을 변경
 					- event target 이 li가 아니라 다른 자식노드 (li > div > span) 가 됐을 때
@@ -72,10 +70,7 @@ var cardSlide = {
 			}
 		}
 
-		// ㅣㅑ
 		_this.regEvt(_this.li)
-
-		
 
 	},
 
@@ -131,11 +126,18 @@ var cardSlide = {
 
 		// start position X, Y 좌표 저장
 		_this.point.xDown = evt.clientX;
-		_this.point.yDown = evt.clientY;
 	},
 	/* touch move, mouse move */
 	fnTouchMove:function(evt){
-			_this.li[_this.liIdx].style[_this.styleProp] ='translate3d('+(evt.touches[0].clientX - _this.point.xDown)+'px,0,0)';
+		// event type 설정 touch device 나 PC나 동일 이벤트 변수 사용 
+		if(evt.type.indexOf('touch') > -1){
+			evt = evt.touches[0];
+		}
+
+		// start , end position 의 차이를 구한다.
+		_this.point.xDiff = evt.clientX - _this.point.xDown;
+
+		_this.li[_this.liIdx].style[_this.styleProp] ='translate3d('+_this.point.xDiff+'px,0px,0px)';
 	},
 	/* touch end, mouse up */
 	fnTouchEnd:function(evt){
@@ -230,7 +232,7 @@ var cardSlide = {
 			}
 
 			// 변경된 값만큼 animation 한다.
-			_target.style.webkitTransform = 'translate3d('+currentPoint+'px,0,0)';
+			_target.style[_this.styleProp] ='translate3d('+currentPoint+'px,0px,0px)';
 		}, 10)
 	},
 	// right animation : left animaion 과 통합해서 사용 가능
@@ -241,7 +243,7 @@ var cardSlide = {
 			// currentPoint 가 li의 넓이보다 작을 경우 step 만큼 translate 한다.
 			if(currentPoint < _this.liWidth){
 				currentPoint+=_this.step;
-				_target.style.webkitTransform = 'translate3d('+currentPoint+'px,0,0)';
+				_target.style[_this.styleProp] ='translate3d('+currentPoint+'px,0px,0px)';
 			}
 			// currentPoint 가 li의 넓이보다 클경우 끝까지 이동한걸로 판단 animation 을 종료시키고 list 를 초기화 한다.
 			else{
@@ -262,7 +264,7 @@ var cardSlide = {
 		var leftInterval = setInterval(function(){
 			if(currentPoint > -_this.liWidth){
 				currentPoint-=_this.step;
-				_target.style.webkitTransform = 'translate3d('+currentPoint+'px,0,0)';
+				_target.style[_this.styleProp] ='translate3d('+currentPoint+'px,0px,0px)';
 			}else{
 				clearInterval(leftInterval);
 				_this.elementInit(_target);
@@ -349,7 +351,7 @@ var cardSlide = {
 	},
 	getStyleProperty:function(propName, element) {
  
-		var prefixes = ['Moz', 'Webkit', 'Khtml', 'O', 'Ms', "webkit"];
+		var prefixes = ['Moz', 'Webkit', 'Khtml', 'O', 'Ms'];
 		var _cache = { };
 		element = element || document.documentElement;
 		var style = element.style,
