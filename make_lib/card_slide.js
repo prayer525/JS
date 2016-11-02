@@ -117,6 +117,7 @@ var cardSlide = {
 	/* touch start, mouse down */
 	fnTouchStart:function(evt){
 		// animation 동작 체크후 동작중이면 return
+		console.log('touchstart event : ', evt.touches[0])
 		if(_this.animation){
 			return false;
 		}
@@ -135,6 +136,8 @@ var cardSlide = {
 		if ( ! _this.point.xDown) {
 			return;
 		}
+
+		console.log('touchmove event : ', evt.touches[0])
 
 		// event type 설정 touch device 나 PC나 동일 이벤트 변수 사용 
 		if(evt.type.indexOf('touch') > -1){
