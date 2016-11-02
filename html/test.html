@@ -81,8 +81,8 @@ var slide = {
     /* touch start, mouse down */
     fnTouchStart:function(evt){
         console.log(evt)
-        _this.point.xDown = evt.touches[0].clientX;
-        _this.point.yDown = evt.touches[0].clientY;
+        _this.point.xDown = evt.touches[0].pageX;
+        _this.point.yDown = evt.touches[0].pageY;
     },
     /* touch move, mouse move */
     fnTouchMove:function(evt){
@@ -90,7 +90,8 @@ var slide = {
         if ( ! _this.point.xDown || ! _this.point.yDown ) {
             return;
         }
-        _this.bodyTxt.innerHTML = evt.touches[0].clientX;
+        console.log(evt.touches[0])
+        _this.bodyTxt.innerHTML = evt.touches[0].pageX;
     },
     fnTouchEnd:function(evt){
         
