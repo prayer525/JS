@@ -283,7 +283,7 @@ var cardSlide = {
 		var leftInterval = setInterval(function(){
 			if(currentPoint > -_this.liWidth){
 				currentPoint-=_this.step;
-				_target.style.webkitTransform = 'translate3d('+currentPoint+'px,0,0)';
+				_target.style.webkitTransform = 'translate('+currentPoint+'px,0)';
 			}else{
 				clearInterval(leftInterval);
 				_this.elementInit(_target);
