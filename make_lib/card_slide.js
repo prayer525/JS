@@ -1,12 +1,3 @@
-function touchHandlerDummy(e)
-{
-    e.preventDefault();
-    return false;
-}
-document.addEventListener("touchstart", touchHandlerDummy, false);
-document.addEventListener("touchmove", touchHandlerDummy, false);
-document.addEventListener("touchend", touchHandlerDummy, false);
-
 var cardSlide = {
 	init:function(_target, _op){
 		_this = this;
@@ -125,8 +116,8 @@ var cardSlide = {
 
 	/* touch start, mouse down */
 	fnTouchStart:function(evt){
+		evt.preventDefault();
 		// animation 동작 체크후 동작중이면 return
-		console.log('touchstart event : ', evt.touches[0])
 		if(_this.animation){
 			return false;
 		}
@@ -141,12 +132,11 @@ var cardSlide = {
 	},
 	/* touch move, mouse move */
 	fnTouchMove:function(evt){
+		evt.preventDefault();
 		// 값이 없을 경우 return
 		if ( ! _this.point.xDown) {
 			return;
 		}
-
-		console.log('touchmove event : ', evt.touches[0])
 
 		// event type 설정 touch device 나 PC나 동일 이벤트 변수 사용 
 		if(evt.type.indexOf('touch') > -1){
@@ -160,6 +150,7 @@ var cardSlide = {
 	},
 	/* touch end, mouse up */
 	fnTouchEnd:function(evt){
+		evt.preventDefault();
 		// X 축 변화 값이 +100 보다 크면 right slide
 		if(_this.point.xDiff > 100){
 			_this.rightAni(_this.li[_this.liIdx], _this.point.xDiff);
