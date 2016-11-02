@@ -1,4 +1,4 @@
-var cardSlide = {
+var tabSlide = {
 	init:function(_target, _op){
 		_this = this;
 
@@ -70,7 +70,6 @@ var cardSlide = {
 
 		// ㅣㅑ
 		_this.regEvt(_this.li)
-
 	},
 
 	/*
@@ -148,7 +147,7 @@ var cardSlide = {
 
 		// X 축의 변화 값이 Y 축의 변화 값 보다 크면 좌우 슬라이드 동작
 		if ( Math.abs( _this.point.xDiff ) > Math.abs( _this.point.yDiff ) ) {
-			_this.li[_this.liIdx].style.webkitTransform = '-webkit-translate3d('+_this.point.xDiff+'px,0,0)';
+			_this.li[_this.liIdx].style.webkitTransform = 'translate3d('+_this.point.xDiff+'px,0,0)';
 		}
 	},
 	/* touch end, mouse up */
@@ -360,39 +359,5 @@ var cardSlide = {
 			// current list 의 index 는 current index + 1
 			_this.liIdx = _index+1;
 		}
-	},
-	getStyleProperty:function(){
- 
-		var prefixes = ['Moz', 'Webkit', 'Khtml', 'O', 'Ms'];
-		var _cache = { };
-
-		function getStyleProperty(propName, element) {
-			element = element || document.documentElement;
-			var style = element.style,
-			prefixed,
-			uPropName;
-
-			// check cache only when no element is given
-			if (arguments.length == 1 && typeof _cache[propName] == 'string') {
-				return _cache[propName];
-			}
-			// test standard property first
-			if (typeof style[propName] == 'string') {
-				return (_cache[propName] = propName);
-			}
-
-			// capitalize
-			uPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
-
-			// test vendor specific properties
-			for (var i=0, l=prefixes.length; i<l; i++) {
-				prefixed = prefixes[i] + uPropName;
-				if (typeof style[prefixed] == 'string') {
-					return (_cache[propName] = prefixed);
-				}
-			}
-		}
-
-		return getStyleProperty;
 	}
 }

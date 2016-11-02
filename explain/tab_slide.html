@@ -1,0 +1,190 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Card Slide
+	</h1>
+</section>
+<!-- Main content -->
+<section class="content">
+	<!-- Small boxes (Stat box) -->
+	
+	<div class="row">
+		<blockquote>
+			<ul>
+				<li>jQuery 없이 사용 가능</li>
+				<li>좌우 어느 방향으로 움직여도 다음 컨탠츠가 노출</li>
+				<li>무한 loof</li>
+				<li>Move 거리가 100px 미만이면 재자리</li>
+			</ul>
+	    </blockquote>
+
+		<h3>Live Demo</h3>
+		
+		<style>
+		div.test-wrap {height:400px; overflow:hidden;}
+		.tab-slide-wrap {position:relative; overflow:hidden; height:100%;}
+		.tab-slide-wrap .tab-list {overflow:hidden; list-style:none; padding:0; margin:0;}
+		.tab-slide-wrap .tab-list li {float:left; display:inline-block; border:1px solid #eaeaea; width:20%; box-sizing:border-box;}
+		.tab-slide-wrap .tab-list li a {display:block; width:100%; height:40px; line-height:40px; color:#999; font-size:16px; text-align:center;}
+		.tab-slide-wrap .tab-list li.active {border-color:#bb162b;}
+		.tab-slide-wrap .tab-list li.active a {background:#bb162b; color:#fff; font-weight:bold;}
+
+		.tab-slide-wrap .tab-content {position:absolute; top:42px; left:0px; bottom:0px; width:100%; list-style:none; padding:0; margin:0;}
+		.tab-slide-wrap .tab-content li {position:absolute; top:0px; bottom:0px; left:0; width:100%; overflow:hidden; overflow-y:auto;}
+		</style>
+		<div class="test-wrap">
+			<div class="tab-slide-wrap">
+				<ul class="tab-list">
+					<li class="active"><a href="#">tab1</a></li>
+					<li><a href="#">tab2</a></li>
+					<li><a href="#">tab3</a></li>
+					<li><a href="#">tab4</a></li>
+					<li><a href="#">tab5</a></li>
+				</ul>
+				<ul class="tab-content">
+					<li class="current">
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+						<p>tab content 1</p>
+					</li>
+					<li>
+						<p>tab content 2</p>
+						<p>tab content 2</p>
+						<p>tab content 2</p>
+						<p>tab content 2</p>
+						<p>tab content 2</p>
+						<p>tab content 2</p>
+					</li>
+					<li>
+						<p>tab content 3</p>
+						<p>tab content 3</p>
+						<p>tab content 3</p>
+						<p>tab content 3</p>
+						<p>tab content 3</p>
+						<p>tab content 3</p>
+						<p>tab content 3</p>
+						<p>tab content 3</p>
+						<p>tab content 3</p>
+						<p>tab content 3</p>
+						<p>tab content 3</p>
+						<p>tab content 3</p>
+						<p>tab content 3</p>
+					</li>
+					<li>
+						<p>tab content 4</p>
+						<p>tab content 4</p>
+						<p>tab content 4</p>
+						<p>tab content 4</p>
+						<p>tab content 4</p>
+						<p>tab content 4</p>
+					</li>
+					<li>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+						<p>tab content 5</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<h3>Markup</h3>
+
+<pre><code>&lt;div class="slide-wrap"&gt;
+	&lt;ul class="slide"&gt;
+		&lt;li class="red"&gt;a&lt;/li&gt;
+		&lt;li class="blue"&gt;b&lt;/li&gt;
+		&lt;li class="green"&gt;c&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+		
+		<h3>Css</h3>
+
+<pre><code>.lock {overflow:hidden;}
+.slide-wrap {width:100%; height:200px; overflow:hidden;}
+.slide-wrap .slide {position:relative; width:100%; height:100%; overflow:hidden;}
+.slide-wrap .slide li {position:absolute; top:0; left:0; width:100%; height:100%; z-index:1;}
+.slide-wrap .slide li.red {background:red;}
+.slide-wrap .slide li.blue {background:blue;}
+.slide-wrap .slide li.green {background:green;}
+.slide-wrap .slide li.current {z-index:3;}
+.slide-wrap .slide li.next {z-index:2;}</code></pre>
+
+		<blockquote>
+			<p>class는 마음대로 지정 가능</p>
+			<p>아래는 필수 속성</p>	
+			<ul>
+				<li> &lt;ul /&gt; 은 position:relative, overflow:hidden 을 가지고 있어야한다.</li>
+				<li> &lt;li /&gt; 는 position:absolute; top:0; left:0; 속성을 가지고 있어야한다. </li>
+			</ul>
+	    </blockquote>
+
+		<h3>Javascript</h3>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+	cardSlide.init('.slide li')
+&lt;/script&gt;</code></pre>
+		
+		<blockquote>
+			<p>cardSlide.init(target) 으로 호출하고,</p>
+			<p>여기서 target은 &lt;li /&gt; 로 한다. </p>
+	    </blockquote>
+
+	</div>
+	<!-- /.row -->
+</section>
+<!-- /.content -->
+
+<script src="make_lib/tab_slide.js"></script>
+<script type="text/javascript">
+tabSlide.init('.tab-slide-wrap')
+</script>

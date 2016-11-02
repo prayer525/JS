@@ -318,14 +318,13 @@ $(function(){
 				$('.content-wrapper').html(data);
 				contentXHR = null;
 
+				// event initialize
 				init();
 			},
 			error:function(error){
 				console.log('the page was not loaded : ' , error)
 			},
 			complete:function(){
-				// event initialize
-				
 			}
 		});
 	}
