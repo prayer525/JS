@@ -137,48 +137,6 @@
 			</div>
 		</div>
 
-		<h3>Markup</h3>
-
-<pre><code>&lt;div class="slide-wrap"&gt;
-	&lt;ul class="slide"&gt;
-		&lt;li class="red"&gt;a&lt;/li&gt;
-		&lt;li class="blue"&gt;b&lt;/li&gt;
-		&lt;li class="green"&gt;c&lt;/li&gt;
-	&lt;/ul&gt;
-&lt;/div&gt;</code></pre>
-		
-		<h3>Css</h3>
-
-<pre><code>.lock {overflow:hidden;}
-.slide-wrap {width:100%; height:200px; overflow:hidden;}
-.slide-wrap .slide {position:relative; width:100%; height:100%; overflow:hidden;}
-.slide-wrap .slide li {position:absolute; top:0; left:0; width:100%; height:100%; z-index:1;}
-.slide-wrap .slide li.red {background:red;}
-.slide-wrap .slide li.blue {background:blue;}
-.slide-wrap .slide li.green {background:green;}
-.slide-wrap .slide li.current {z-index:3;}
-.slide-wrap .slide li.next {z-index:2;}</code></pre>
-
-		<blockquote>
-			<p>class는 마음대로 지정 가능</p>
-			<p>아래는 필수 속성</p>	
-			<ul>
-				<li> &lt;ul /&gt; 은 position:relative, overflow:hidden 을 가지고 있어야한다.</li>
-				<li> &lt;li /&gt; 는 position:absolute; top:0; left:0; 속성을 가지고 있어야한다. </li>
-			</ul>
-	    </blockquote>
-
-		<h3>Javascript</h3>
-
-<pre><code>&lt;script type="text/javascript"&gt;
-	cardSlide.init('.slide li')
-&lt;/script&gt;</code></pre>
-		
-		<blockquote>
-			<p>cardSlide.init(target) 으로 호출하고,</p>
-			<p>여기서 target은 &lt;li /&gt; 로 한다. </p>
-	    </blockquote>
-
 	</div>
 	<!-- /.row -->
 </section>

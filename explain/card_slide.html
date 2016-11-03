@@ -18,35 +18,32 @@
 			</ul>
 	    </blockquote>
 
-		<h3>Live Demo</h3>
+		<h3>Basic Demo</h3>
 		
 		<style>
-		.lock {overflow:hidden;}
-		.slide-wrap {width:100%; height:200px; overflow:hidden;}
-		.slide-wrap .slide {position:relative; width:100%; height:100%; overflow:hidden; padding:0; margin:0;}
+		.slide-wrap {position:relative; width:100%; height:200px; overflow:hidden;}
+		.slide-wrap .slide {position:relative; width:100%; height:100%; list-style:none; overflow:hidden; padding:0; margin:0;}
 		.slide-wrap .slide li {position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; perspective:100%}
 		.slide-wrap .slide li.red {background:#faa;}
 		.slide-wrap .slide li.blue {background:#aaf;}
 		.slide-wrap .slide li.green {background:#afa;}
 		.slide-wrap .slide li.current {z-index:3;}
 		.slide-wrap .slide li.next {z-index:2;}
+		.slide-wrap a.btn-left-arrow {position:absolute; top:50%; left:10px; display:inline-block; z-index:4;}
+		.slide-wrap a.btn-right-arrow {position:absolute; top:50%; right:10px; display:inline-block; z-index:4;}
 		</style>
 
-
-
-		<div class="slide-wrap">
+		<div class="slide-wrap" id="slide1">
 			<ul class="slide">
-				<li class="red">First page</li>
-				<li class="blue">Second page</li>
-				<li class="green">Third page</li>
+				<li class="red"><div><p>inner content</p><p>inner content</p></div>First page1</li>
+				<li class="blue">Second page1</li>
+				<li class="green">Third page1</li>
 			</ul>
 		</div>
 
-		<div id="slideconsole"></div>
-
 		<h3>Markup</h3>
 
-<pre><code>&lt;div class="slide-wrap"&gt;
+<pre><code>&lt;div class="slide-wrap" id="slide1"&gt;
 	&lt;ul class="slide"&gt;
 		&lt;li class="red"&gt;a&lt;/li&gt;
 		&lt;li class="blue"&gt;b&lt;/li&gt;
@@ -56,9 +53,8 @@
 		
 		<h3>Css</h3>
 
-<pre><code>.lock {overflow:hidden;}
-.slide-wrap {width:100%; height:200px; overflow:hidden;}
-.slide-wrap .slide {position:relative; width:100%; height:100%; overflow:hidden;}
+<pre><code>.slide-wrap {width:100%; height:200px; overflow:hidden;}
+.slide-wrap .slide {position:relative; width:100%; height:100%; list-style:none; overflow:hidden; padding:0; margin:0;}
 .slide-wrap .slide li {position:absolute; top:0; left:0; width:100%; height:100%; z-index:1;}
 .slide-wrap .slide li.red {background:red;}
 .slide-wrap .slide li.blue {background:blue;}
@@ -66,25 +62,59 @@
 .slide-wrap .slide li.current {z-index:3;}
 .slide-wrap .slide li.next {z-index:2;}</code></pre>
 
-		<blockquote>
-			<p>class는 마음대로 지정 가능</p>
-			<p>아래는 필수 속성</p>	
-			<ul>
-				<li> &lt;ul /&gt; 은 position:relative, overflow:hidden 을 가지고 있어야한다.</li>
-				<li> &lt;li /&gt; 는 position:absolute; top:0; left:0; 속성을 가지고 있어야한다. </li>
-			</ul>
-	    </blockquote>
-
 		<h3>Javascript</h3>
 
 <pre><code>&lt;script type="text/javascript"&gt;
-	cardSlide.init('.slide li')
+	// id or class 로 사용 가능
+	cardSlide.init('#slide1')
 &lt;/script&gt;</code></pre>
+
+		<h3>Optional Demo</h3>
+
+		<div class="slide-wrap slide2">
+			<ul class="slide">
+				<li class="red">First page2</li>
+				<li class="blue">Second page2</li>
+				<li class="green">Third page2</li>
+			</ul>
+			<a href="#" class="btn-left-arrow">left</a>
+    		<a href="#" class="btn-right-arrow">right</a>
+		</div>
+
+		<h3>Markup</h3>
+
+<pre><code>&lt;div class="slide-wrap"&gt;
+	&lt;ul class="slide"&gt;
+		&lt;li class="red"&gt;a&lt;/li&gt;
+		&lt;li class="blue"&gt;b&lt;/li&gt;
+		&lt;li class="green"&gt;c&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;a href="#" class="btn-left-arrow"&gt;left&lt;/a&gt;
+    &lt;a href="#" class="btn-right-arrow"&gt;right&lt;/a&gt;
+&lt;/div&gt;</code></pre>
 		
-		<blockquote>
-			<p>cardSlide.init(target) 으로 호출하고,</p>
-			<p>여기서 target은 &lt;li /&gt; 로 한다. </p>
-	    </blockquote>
+		<h3>Css</h3>
+
+<pre><code>.slide-wrap {width:100%; height:200px; overflow:hidden;}
+.slide-wrap .slide {position:relative; width:100%; height:100%; list-style:none; overflow:hidden; padding:0; margin:0;}
+.slide-wrap .slide li {position:absolute; top:0; left:0; width:100%; height:100%; z-index:1;}
+.slide-wrap .slide li.red {background:red;}
+.slide-wrap .slide li.blue {background:blue;}
+.slide-wrap .slide li.green {background:green;}
+.slide-wrap .slide li.current {z-index:3;}
+.slide-wrap .slide li.next {z-index:2;}
+
+/* pageArrow(좌우 화살표) 사용시에 필요 */
+.slide-wrap a.btn-left-arrow {position:absolute; top:50%; left:10px; display:inline-block; z-index:4;}
+.slide-wrap a.btn-right-arrow {position:absolute; top:50%; right:10px; display:inline-block; z-index:4;}</code></pre>
+		
+<pre><code>&lt;script type="text/javascript"&gt;
+	// id or class 로 사용 가능
+	cardSlide.init('#slide1', {
+		pageArrow:true, // 좌우 화살표 추가
+		fade:true // fade animation 효
+	})
+&lt;/script&gt;</code></pre>
 
 	</div>
 	<!-- /.row -->
@@ -93,5 +123,10 @@
 
 <script src="make_lib/card_slide.js"></script>
 <script type="text/javascript">
-cardSlide.init('.slide li')
+cardSlide.init('#slide1');
+
+cardSlide.init('.slide2', {
+	pageArrow:true, // default false;
+	fade:true // fade effect
+});
 </script>
