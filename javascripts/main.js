@@ -345,6 +345,7 @@ $(function(){
 
 	fnLocationPath()
 	/* // one page ajax */
+
 })
 
 function init(){

@@ -20,7 +20,7 @@
 			 'jquery': ['bower_components/jquery/dist/jquery.min'],
 			 'bootstrap': ['bower_components/bootstrap/dist/js/bootstrap.min'],
 			 'highlight':['javascripts/highlight'],
-			 // 'moment':['bower_components/moment/min/moment.min'],
+			 'swipe':['javascripts/swipe'],
 			 // 'datetimepicker':['bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min'],
 			 // 'dataTable':['bower_components/datatables/jquery.dataTables.min'],
 			 // 'dataTableBoot':['bower_components/datatables/dataTables.bootstrap.min'],
@@ -37,7 +37,7 @@
 		baseUrl: './'
 	});
 	// , "cordova",  'moment', 'datetimepicker', 'dataTable', 'dataTableBoot', 'textEditor', 'bootstrap', 'moment', 'datetimepicker'
-	require(['jquery','bootstrap','highlight'], function(){
+	require(['jquery','bootstrap','highlight', 'swipe'], function(){
 		require(['main']);
 		// require(['sortable'], function(){
 		// 	require(['common']);
