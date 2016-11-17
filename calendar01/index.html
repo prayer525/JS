@@ -19,13 +19,25 @@
 				<li>Blog URL : <a href="http://blog.kurien.co.kr" target="_blank">http://blog.kurien.co.kr</a></li>
 			</ul>
 	    </blockquote>
+
+	    <h3>원본 소스에서 바뀐 부분</h3>
+
+	    <blockquote>
+			<ul>
+				<li>해당 월의 이전달, 다음달의 날짜를 미리 보여준다.</li>
+				<li>이전달, 다음달의 날짜는 흐린 회색으로 표시한다.</li>
+				<li>ID로 작업된 CSS 를 Class 로 변경해서 여러개의 달력에 동일한 CSS 를 할당 할 수있고,<br />개별적으로 CSS 를 할당할 수도 있다.</li>
+			</ul>
+	    </blockquote>
 		
 		<style>
 		.kCalendar {margin:20px 0px;}
 		</style>
+
 		<h3>Calendar - Default</h3>
 		<pre><code>kCalendar('kCalendar');</code></pre>
 		<div id="kCalendar" class="kCalendar"></div>
+		
 		<h3>Calendar - Set Date</h3>
 		<pre><code>kCalendar('calendar2','2016-05-16');</code></pre>
 		<div id="calendar2" class="kCalendar"></div>
