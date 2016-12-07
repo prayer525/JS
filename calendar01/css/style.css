@@ -7,8 +7,10 @@
 
 .kCalendar table {width: 250px; height: 200px;}
 .kCalendar caption {display: none;}
-
-.kCalendar .sun {text-align: center; color: deeppink;}
+.kCalendar a {color:#333;}
+.kCalendar .sun a {color:#bb162b;}
+.kCalendar .sat a {color: deepskyblue;}
+.kCalendar .sun {text-align: center; color: #bb162b;}
 .kCalendar .mon {text-align: center;}
 .kCalendar .tue {text-align: center;}
 .kCalendar .wed {text-align: center;}

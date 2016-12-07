@@ -35,11 +35,25 @@
 		</style>
 
 		<h3>Calendar - Default</h3>
-		<pre><code>kCalendar('kCalendar');</code></pre>
+		<pre><code>kCalendar('kCalendar',{
+	callBack:show
+});
+
+function show(_date){
+	console.log('show : ', _date)
+}</code></pre>
 		<div id="kCalendar" class="kCalendar"></div>
 		
 		<h3>Calendar - Set Date</h3>
-		<pre><code>kCalendar('calendar2','2016-05-16');</code></pre>
+		<pre><code>kCalendar('calendar2',{
+	initDate:'2016-05-16',
+	callBack:show
+});
+
+function show(_date){
+	console.log('show : ', _date)
+}
+</code></pre>
 		<div id="calendar2" class="kCalendar"></div>
 
 	</div>
@@ -48,7 +62,16 @@
 <link href="calendar01/css/style.css" rel="stylesheet">
 <script src="calendar01/js/script.js"></script>
 <script>
-		kCalendar('kCalendar');
+		kCalendar('kCalendar',{
+			callBack:show
+		});
 		
-		kCalendar('calendar2','2016-05-16');
+		kCalendar('calendar2',{
+			initDate:'2016-05-16',
+			callBack:show
+		});
+
+		function show(_date){
+			console.log('show : ', _date)
+		}
 </script>

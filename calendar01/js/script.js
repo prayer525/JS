@@ -1,15 +1,48 @@
 /* Kurien / Kurien's Blog / http://blog.kurien.co.kr */
 /* 주석만 제거하지 않는다면, 어떤 용도로 사용하셔도 좋습니다. */
 
-function kCalendar(id, date) {
+if (!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+  };
+}
+var idOp = {};
+
+function keyCheck(obj, key){
+	for(var p in obj){
+		if(p == key){
+			return true;
+
+			break;
+		}
+	}
+
+	return false;
+}
+
+function kCalendar(id, _op) {
 	var kCalendar = document.getElementById(id);
-	
-	if( typeof( date ) !== 'undefined' ) {
-		date = date.split('-');
+	var date = null;
+
+	if(typeof _op !== 'undefined'){
+		idOp[id] = _op
+
+		if(!keyCheck(idOp[id], 'initDate')){
+			idOp[id].initDate = null;
+		}
+	}else{
+		idOp[id] = {
+			initDate:null,
+			callBack:null
+		}
+	}
+
+	if( idOp[id].initDate !== null ) {
+		date = idOp[id].initDate.split('-');
 		date[1] = date[1] - 1;
 		date = new Date(date[0], date[1], date[2]);
 	} else {
-		var date = new Date();
+		date = new Date();
 	}
 	var currentYear = date.getFullYear();
 	//년도를 구함
@@ -67,9 +100,17 @@ function kCalendar(id, date) {
 	var calendar = '';
 	
 	calendar += '		<div id="header">';
-	calendar += '			<span><a href="#" class="button left" onclick="kCalendar(\'' +  id + '\', \'' + prevDate + '\'); return false;"><</a></span>';
+	if(idOp[id].callBack !== 'undefined' && typeof idOp[id].callBack === 'function'){
+		calendar += '			<span><a href="#" class="button left" onclick="kCalendar(\'' +  id + '\', {initDate:\'' + prevDate + '\', callBack:'+idOp[id].callBack+'}); return false;"><</a></span>';
+	}else{
+		calendar += '			<span><a href="#" class="button left" onclick="kCalendar(\'' +  id + '\', {initDate:\'' + prevDate + '\'}); return false;"><</a></span>';
+	}
 	calendar += '			<span id="date">' + currentYear + '년 ' + currentMonth + '월</span>';
-	calendar += '			<span><a href="#" class="button right" onclick="kCalendar(\'' + id + '\', \'' + nextDate + '\'); return false;">></a></span>';
+	if(idOp[id].callBack !== 'undefined' && typeof idOp[id].callBack === 'function'){
+		calendar += '			<span><a href="#" class="button left" onclick="kCalendar(\'' +  id + '\', {initDate:\'' + nextDate + '\', callBack:'+idOp[id].callBack+'}); return false;">></a></span>';
+	}else{
+		calendar += '			<span><a href="#" class="button right" onclick="kCalendar(\'' + id + '\', {initDate:\'' + nextDate + '\', callBack:'+idOp[id].callBack+'}); return false;">></a></span>';
+	}
 	calendar += '		</div>';
 	calendar += '		<table border="0" cellspacing="0" cellpadding="0">';
 	calendar += '			<caption>' + currentYear + '년 ' + currentMonth + '월 달력</caption>';
@@ -100,9 +141,9 @@ function kCalendar(id, date) {
 				continue;
 			}
 			if(currentDate == dateNum){
-				calendar += '				<td class="' + dateString[j] + '">' + dateNum + '</td>';
+				calendar += '				<td class="' + dateString[j] + '"><a href="#">' + dateNum + '</a></td>';
 			}else{
-				calendar += '				<td class="' + dateString[j] + '">' + dateNum + '</td>';
+				calendar += '				<td class="' + dateString[j] + '"><a href="#">' + dateNum + '</a></td>';
 			}
 			
 		}
@@ -113,4 +154,21 @@ function kCalendar(id, date) {
 	calendar += '		</table>';
 	
 	kCalendar.innerHTML = calendar;
+
+	var _td = kCalendar.querySelectorAll('tbody a')
+
+	for(var i=0; i<_td.length; i++){
+		_td[i].addEventListener('click' , getDay, false)
+	}
+
+	function getDay(e){
+		e.preventDefault();
+		if(idOp[id].callBack !== 'undefined' && typeof idOp[id].callBack === 'function'){
+			var _day = this.innerHTML.trim();
+			if(_day.length == 1){
+				_day = '0'+_day
+			}
+			idOp[id].callBack(currentYear+''+currentMonth+''+_day)
+		}
+	}
 }
