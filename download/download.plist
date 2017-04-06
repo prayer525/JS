@@ -26,7 +26,7 @@
 					<string>https://prayer525.github.io/prayer525/download/image2.png</string>
 				</dict>
 			</array>
-			<key>metadata</key>
+			<key>download</key>
 			<dict>
 				<key>bundle-identifier</key>
 				<string>com.kia.elead.dev</string>
