@@ -1,87 +1,134 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<h1>
-		Zoom In/Out
-	</h1>
+  <h1>
+    Zoom In/Out
+  </h1>
 </section>
 <!-- Main content -->
 <section class="content">
-	<!-- Small boxes (Stat box) -->
-	<div class="row">
-		<style>
-			div#zoomContents {
-			width:100%;
+  <!-- Small boxes (Stat box) -->
+  <div class="row">
+    <style>
+      div#zoomContents {
+      border:1px solid #999;
+      width:100%;
       height:100%;
-			}
-			#target {
-			background: white;
-			border: 1px solid black;
-			}
-		</style>
-		<div id="zoomContents">
-			<div id="target">Touch and Hold with 2 pointers, then pinch in or out.<br/>
-			    The background color will change to pink if the pinch is opening (Zoom In) 
-			    or changes to lightblue if the pinch is closing (Zoom out).</div>
-			 <!-- UI for logging/debugging -->
-			 <p></p>
-       <p id="startAbsX"></p>
-			 <p id="startAbsY"></p>
-       <p id="moveAbsX"></p>
-       <p id="moveAbsY"></p>
-       <p id="endAbsX"></p>
-       <p id="endAbsY"></p>
-		</div>
-	</div>
-	<!-- /.row -->
+      max-height:300px;
+      overflow:hidden;
+      overflow-y:auto;
+      }
+      #target {
+      background: white;
+      }
+    </style>
+    <div id="zoomContents">
+      <div id="target">
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+          <p>Zoom In/Out scale test</p>
+      </div>
+      <!-- UI for logging/debugging -->
+    </div>
+    <p>touch start point X : <span id="startAbsX"></span></p>
+    <p>touch start point Y : <span id="startAbsY"></span></p>
+    <p>touch move point X : <span id="moveAbsX"></span></p>
+    <p>touch move point Y : <span id="moveAbsY"></span></p>
+    <p>touch end point X : <span id="endAbsX"></span></p>
+    <p>touch end point Y : <span id="endAbsY"></span></p>
+  </div>
+  <!-- /.row -->
 </section>
 <!-- /.content -->
 <script type="text/javascript">
-var pinchZoom = {
-  obj:{
-    startAbsX:0,
-    startAbsY:0,
-    moveAbsX:0,
-    moveAbsY:0,
-    endAbsX:0,
-    endAbsY:0
-  },
-  el:null,
-  init:function(t){
-    pinchZoom.el = document.querySelector(t);
+  var pinchZoom = {
+    obj:{
+      startAbsX:0,
+      startAbsY:0,
+      moveAbsX:0,
+      moveAbsY:0,
+      endAbsX:0,
+      endAbsY:0
+    },
+    el:null,
+    init:function(t){
+      pinchZoom.el = document.querySelector(t);
+  
+      pinchZoom.el.addEventListener('touchstart', pinchZoom.fnTouchStart, false);
+      pinchZoom.el.addEventListener('touchmove', pinchZoom.fnTouchMove, false);
+      pinchZoom.el.addEventListener('touchend', pinchZoom.fnTouchEnd, false);
+      
+    },
+    fnTouchStart:function(evt){
+      console.log('startAbsX : ' , pinchZoom.el.style)
+      if(evt.touches.length == 2){
+        pinchZoom.obj.startAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
+        pinchZoom.obj.startAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
+  
+        document.getElementById('startAbsX').innerHTML = pinchZoom.obj.startAbsX;
+        document.getElementById('startAbsY').innerHTML = pinchZoom.obj.startAbsY;
+      }
+    },
+    fnTouchMove:function(evt){
+      if(evt.touches.length == 2){
+        pinchZoom.obj.moveAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
+        pinchZoom.obj.moveAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
+  
+        document.getElementById('moveAbsX').innerHTML = pinchZoom.obj.moveAbsX;
+        document.getElementById('moveAbsY').innerHTML = pinchZoom.obj.moveAbsY;
+      }
+    },
+    fnTouchEnd:function(evt){
+      if(evt.touches.length == 2){
+        pinchZoom.obj.endAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
+        pinchZoom.obj.endAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
+  
+        document.getElementById('endAbsX').innerHTML = pinchZoom.obj.endAbsX;
+        document.getElementById('endAbsY').innerHTML = pinchZoom.obj.endAbsY;
+      }
+    },
+    fnZoomScale:function(){
+      var scaleX = pinchZoom.obj.moveAbsX/200;
+      var scaleY = pinchZoom.obj.moveAbsY/200;
+      var scale = (scaleX + scaleY) / 2
 
-    pinchZoom.el.addEventListener('touchstart', pinchZoom.fnTouchStart, false);
-    pinchZoom.el.addEventListener('touchmove', pinchZoom.fnTouchMove, false);
-    
-  },
-  fnTouchStart:function(evt){
-    console.log('startAbsX : ' , pinchZoom.obj)
-    if(evt.touches.length == 2){
-      pinchZoom.obj.startAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
-      pinchZoom.obj.startAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
 
-      document.getElementById('startAbsX').innerHTML = pinchZoom.obj.startAbsX;
-      document.getElementById('startAbsY').innerHTML = pinchZoom.obj.startAbsY;
+      pinchZoom.el.style.transform = "scale("+scale+")";
     }
-  },
-  fnTouchMove:function(evt){
-    if(evt.touches.length == 2){
-      pinchZoom.obj.moveAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
-      pinchZoom.obj.moveAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
-
-      document.getElementById('moveAbsX').innerHTML = pinchZoom.obj.moveAbsX;
-      document.getElementById('moveAbsY').innerHTML = pinchZoom.obj.moveAbsY;
-    }
-  },
-  fnTouchEnd:function(evt){
-    if(evt.touches.length == 2){
-      pinchZoom.obj.endAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
-      pinchZoom.obj.endAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
-
-      document.getElementById('endAbsX').innerHTML = pinchZoom.obj.endAbsX;
-      document.getElementById('endAbsY').innerHTML = pinchZoom.obj.endAbsY;
-    }
-  },
-}
-
-pinchZoom.init('#target');
+  }
+  
+  pinchZoom.init('#target');
 </script>
