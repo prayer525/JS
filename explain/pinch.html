@@ -68,8 +68,6 @@
     <p>touch start point Y : <span id="startAbsY"></span></p>
     <p>touch move point X : <span id="moveAbsX"></span></p>
     <p>touch move point Y : <span id="moveAbsY"></span></p>
-    <p>touch end point X : <span id="endAbsX"></span></p>
-    <p>touch end point Y : <span id="endAbsY"></span></p>
   </div>
   <!-- /.row -->
 </section>
@@ -81,8 +79,6 @@
       startAbsY:0, // touch start point y
       moveAbsX:0, // touch move point x
       moveAbsY:0, // touch move point y
-      endAbsX:0, // touch end point x
-      endAbsY:0, // touch end point y
       elWidth:0, // wrapper width : scale 비율 계산에 사용 (터치 포인트 이동거리 X / wrapper width)
       elHeight:0, // wrapper height : scale 비율 계산에 사용  (토치 포인트 이동거리 Y / wrapper height)
       oldScale:1, // 마지막 scale size 저장
@@ -100,7 +96,6 @@
       // 터치 이벤트 등록  
       pinchZoom.el.addEventListener('touchstart', pinchZoom.fnTouchStart, false);
       pinchZoom.el.addEventListener('touchmove', pinchZoom.fnTouchMove, false);
-      pinchZoom.el.addEventListener('touchend', pinchZoom.fnTouchEnd, false);
       
     },
     // touch start event
@@ -143,13 +138,6 @@
 
         console.log('pinchZoom.obj.oldScale : ' , pinchZoom.obj.oldScale)
         console.log('pinchZoom.obj.nowScale : ' , pinchZoom.obj.nowScale)
-
-        // 최종 위치 저장
-        pinchZoom.obj.endAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
-        pinchZoom.obj.endAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
-  
-        document.getElementById('endAbsX').innerHTML = pinchZoom.obj.endAbsX;
-        document.getElementById('endAbsY').innerHTML = pinchZoom.obj.endAbsY;
     },
     fnZoomScale:function(){
       // 배율 계산
