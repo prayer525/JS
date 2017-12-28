@@ -129,8 +129,8 @@
         document.getElementById('endAbsY').innerHTML = pinchZoom.obj.endAbsY;
     },
     fnZoomScale:function(){
-      var scaleX = (pinchZoom.obj.moveAbsX - pinchZoom.obj.startAbsX) / pinchZoom.obj.elWidth;
-      var scaleY = (pinchZoom.obj.moveAbsY - pinchZoom.obj.startAbsY) / pinchZoom.obj.elHeight;
+      var scaleX = (pinchZoom.obj.moveAbsX - pinchZoom.obj.startAbsX) / (pinchZoom.obj.elWidth * 10) ;
+      var scaleY = (pinchZoom.obj.moveAbsY - pinchZoom.obj.startAbsY) / (pinchZoom.obj.elHeight * 10);
 
       pinchZoom.obj.oldScale = pinchZoom.obj.oldScale + (scaleX + scaleY) / 2;
 
