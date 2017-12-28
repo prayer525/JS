@@ -1,0 +1,78 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Zoom In/Out
+	</h1>
+</section>
+<!-- Main content -->
+<section class="content">
+	<!-- Small boxes (Stat box) -->
+	<style>
+	#square {background:red; height:300px;}
+	</style>
+	<div class="row">
+		<div id="square"></div>
+	</div>
+	<!-- /.row -->
+</section>
+<!-- /.content -->
+
+
+<script type="text/javascript">
+var dom = document.body,
+    _width = parseInt($('#square').css('width')),
+    vel = 5.0,
+    min = _width,
+    max = 300,
+    scale;
+
+dom.addEventListener("gesturechange", gestureChange, false);
+dom.addEventListener("gestureend", gestureEnd, false);
+
+function gestureChange(e) {
+
+    e.preventDefault();
+
+    scale = e.scale;
+    var tempWidth = _width * scale;
+
+    if (tempWidth > max) tempWidth = max;
+    if (tempWidth < min) tempWidth = min;
+
+    $('#square').css({
+        'width': tempWidth + 'px',
+        'height': tempWidth + 'px'
+    });
+}
+
+function gestureEnd(e) {
+
+    e.preventDefault();
+    _width = parseInt($('#square').css('width'));
+}
+
+
+
+
+function test(){
+  var rect = this.el.getBoundingClientRect();
+
+  // find cursor offset within the element
+  x -= rect.left;
+  y -= rect.top;
+
+  // find the final position of the coordinate after scaling
+  var xf = x * s / this.scale;
+  var yf = y * s / this.scale;
+
+  // find the difference between the initial and final position
+  // and add the difference to the current position.
+  var dx = this.x + x - xf;
+  var dy = this.y + y - yf;
+
+  // apply the transform
+  this.transform(dx, dy, s);
+
+  return this;
+}
+</script>
