@@ -101,6 +101,7 @@
     },
     fnTouchStart:function(evt){
       if(evt.touches.length == 2){
+        document.body.style.overflow = "hidden";
         pinchZoom.obj.startAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
         pinchZoom.obj.startAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
   
@@ -120,6 +121,7 @@
       }
     },
     fnTouchEnd:function(evt){
+        document.body.style.overflow = "scroll";
         pinchZoom.obj.endAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
         pinchZoom.obj.endAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
   
