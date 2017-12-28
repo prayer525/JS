@@ -153,8 +153,8 @@
     },
     fnZoomScale:function(){
       // 배율 계산
-      var scaleX = (pinchZoom.obj.moveAbsX - pinchZoom.obj.startAbsX) / (pinchZoom.obj.elWidth * 20) ;
-      var scaleY = (pinchZoom.obj.moveAbsY - pinchZoom.obj.startAbsY) / (pinchZoom.obj.elHeight * 20);
+      var scaleX = (pinchZoom.obj.moveAbsX - pinchZoom.obj.startAbsX) / (pinchZoom.obj.elWidth * 2) ;
+      var scaleY = (pinchZoom.obj.moveAbsY - pinchZoom.obj.startAbsY) / (pinchZoom.obj.elHeight * 2);
 
       // 현재 스케일은 마지막 스케일에서 커지거나 작아진다.
       pinchZoom.obj.nowScale = pinchZoom.obj.oldScale + (scaleX + scaleY) / 2;
