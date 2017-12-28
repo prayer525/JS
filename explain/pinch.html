@@ -26,6 +26,10 @@
 			 <p></p>
        <p id="startAbsX"></p>
 			 <p id="startAbsY"></p>
+       <p id="moveAbsX"></p>
+       <p id="moveAbsY"></p>
+       <p id="endAbsX"></p>
+       <p id="endAbsY"></p>
 		</div>
 	</div>
 	<!-- /.row -->
@@ -35,30 +39,48 @@
 var pinchZoom = {
   obj:{
     startAbsX:0,
-    startAbsY:0
+    startAbsY:0,
+    moveAbsX:0,
+    moveAbsY:0,
+    endAbsX:0,
+    endAbsY:0
   },
+  el:null,
   init:function(t){
-    this.el = document.querySelector(t);
+    pinchZoom.el = document.querySelector(t);
 
-    this.el.addEventListener('touchstart', this.fnTouchStart, false);
-    this.el.addEventListener('touchmove', this.fnTouchMove, false);
-
-    console.log('el : ' , this.el)
+    pinchZoom.el.addEventListener('touchstart', pinchZoom.fnTouchStart, false);
+    pinchZoom.el.addEventListener('touchmove', pinchZoom.fnTouchMove, false);
+    
   },
   fnTouchStart:function(evt){
-    console.log('evt : ' , evt.touches)
-
+    console.log('startAbsX : ' , pinchZoom.obj)
     if(evt.touches.length == 2){
-      this.obj.startAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
-      this.obj.startAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
+      pinchZoom.obj.startAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
+      pinchZoom.obj.startAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
 
-      document.getElementById('startAbsX').innerHTML = this.obj.startAbsX;
-      document.getElementById('startAbsY').innerHTML = this.obj.startAbsY;
+      document.getElementById('startAbsX').innerHTML = pinchZoom.obj.startAbsX;
+      document.getElementById('startAbsY').innerHTML = pinchZoom.obj.startAbsY;
     }
   },
   fnTouchMove:function(evt){
-    console.log('evt : ' , evt.touches)
-  }
+    if(evt.touches.length == 2){
+      pinchZoom.obj.moveAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
+      pinchZoom.obj.moveAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
+
+      document.getElementById('moveAbsX').innerHTML = pinchZoom.obj.moveAbsX;
+      document.getElementById('moveAbsY').innerHTML = pinchZoom.obj.moveAbsY;
+    }
+  },
+  fnTouchEnd:function(evt){
+    if(evt.touches.length == 2){
+      pinchZoom.obj.endAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
+      pinchZoom.obj.endAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
+
+      document.getElementById('endAbsX').innerHTML = pinchZoom.obj.endAbsX;
+      document.getElementById('endAbsY').innerHTML = pinchZoom.obj.endAbsY;
+    }
+  },
 }
 
 pinchZoom.init('#target');
