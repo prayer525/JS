@@ -93,7 +93,6 @@
       
     },
     fnTouchStart:function(evt){
-      console.log('startAbsX : ' , pinchZoom.el.style)
       if(evt.touches.length == 2){
         pinchZoom.obj.startAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
         pinchZoom.obj.startAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
@@ -106,7 +105,9 @@
       if(evt.touches.length == 2){
         pinchZoom.obj.moveAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
         pinchZoom.obj.moveAbsY = Math.abs(evt.touches[0].clientY - evt.touches[1].clientY);
-  
+
+        pinchZoom.fnZoomScale();
+
         document.getElementById('moveAbsX').innerHTML = pinchZoom.obj.moveAbsX;
         document.getElementById('moveAbsY').innerHTML = pinchZoom.obj.moveAbsY;
       }
