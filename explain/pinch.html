@@ -82,7 +82,8 @@
       elWidth:0, // wrapper width : scale 비율 계산에 사용 (터치 포인트 이동거리 X / wrapper width)
       elHeight:0, // wrapper height : scale 비율 계산에 사용  (토치 포인트 이동거리 Y / wrapper height)
       oldScale:1, // 마지막 scale size 저장
-      nowScale:1 // 현재 scale size
+      nowScale:1, // 현재 scale size
+      currentScale:0
     },
     el:null,
     init:function(t){
@@ -104,6 +105,8 @@
       if(evt.touches.length == 2){
         // Multi touch가 시작 되면 Body 의 scrolling을 막는다.
         document.body.style.overflow = "hidden";
+
+        pinchZoom.obj.currentScale = pinchZoom.obj.oldScale
 
         // 최초 터치시 두 포인트간의 거리를 구함 (절대값으로 저장)
         pinchZoom.obj.startAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
@@ -133,9 +136,6 @@
         // touch가 끝나면 body의 scroll을 풀어준다.
         document.body.style.overflow = "scroll";
 
-        // 현재 스케일 사이즈를 최종 사이즈에 저장한다.
-        pinchZoom.obj.oldScale = pinchZoom.obj.nowScale;
-
         console.log('pinchZoom.obj.oldScale : ' , pinchZoom.obj.oldScale)
         console.log('pinchZoom.obj.nowScale : ' , pinchZoom.obj.nowScale)
     },
@@ -145,7 +145,7 @@
       var scaleY = (pinchZoom.obj.moveAbsY - pinchZoom.obj.startAbsY) / (pinchZoom.obj.elHeight * 2);
 
       // 현재 스케일은 마지막 스케일에서 커지거나 작아진다.
-      pinchZoom.obj.nowScale = pinchZoom.obj.oldScale + (scaleX + scaleY) / 2;
+      pinchZoom.obj.nowScale = pinchZoom.obj.currentScale + (scaleX + scaleY) / 2;
 
       // Min / Max 값 지정 : 후에 option parameter로 받아서 처리 가능
       if(pinchZoom.obj.nowScale < 1){
@@ -153,6 +153,8 @@
       }else if (pinchZoom.obj.nowScale > 3){
         pinchZoom.obj.nowScale = 3;
       }
+
+      pinchZoom.obj.oldScale = pinchZoom.obj.nowScale;
 
       pinchZoom.el.style.transform = "scale("+pinchZoom.obj.nowScale+")";
     }
