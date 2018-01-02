@@ -113,6 +113,7 @@
       // 터치 이벤트 등록  
       pinchZoom.el.addEventListener('touchstart', pinchZoom.fnTouchStart, false);
       pinchZoom.el.addEventListener('touchmove', pinchZoom.fnTouchMove, false);
+      pinchZoom.el.addEventListener('touchend', pinchZoom.fnTouchEnd, false);
       
     },
     // touch start event
@@ -166,9 +167,6 @@
         document.body.style.overflow = "scroll";
         pinchZoom.obj.leftPos = pinchZoom.obj.oldLeftPos;
         console.log('touch end pinchZoom.obj.leftPos : ', pinchZoom.obj.leftPos)
-  
-        console.log('pinchZoom.obj.oldScale : ' , pinchZoom.obj.oldScale)
-        console.log('pinchZoom.obj.nowScale : ' , pinchZoom.obj.nowScale)
     },
     fnZoomScale:function(){
       // 배율 계산
