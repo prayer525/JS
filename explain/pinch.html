@@ -95,7 +95,11 @@
       currentScale:0,
       leftPos:0,
       oldLeftPos:0,
-      fixLeftPos:0
+      fixLeftPos:0,
+      topPos:0,
+      oldTopPos:0,
+      fixTopPos:0,
+      length
     },
     el:null,
     init:function(t){
@@ -116,6 +120,8 @@
       // touch point가 두개일 때만 동작
       if(evt.touches.length == 1){
           pinchZoom.obj.fixLeftPos = evt.touches[0].clientX;
+          pinchZoom.obj.fixTopPos = evt.touches[0].clientY;
+          console.log('touch start pinchZoom.obj.leftPos : ', pinchZoom.obj.leftPos)
       }
       else if(evt.touches.length == 2){
         // Multi touch가 시작 되면 Body 의 scrolling을 막는다.
@@ -133,8 +139,11 @@
     },
     // touch move event
     fnTouchMove:function(evt){
+      console.log('evt.touches.length : ' , evt.touches.length)
       if(evt.touches.length == 1){
+        console.log('touch move pinchZoom.obj.leftPos : ', pinchZoom.obj.leftPos)
         pinchZoom.obj.oldLeftPos = pinchZoom.obj.leftPos + (evt.touches[0].clientX - pinchZoom.obj.fixLeftPos);
+        pinchZoom.obj.oldTopPos = pinchZoom.obj.topPos + (evt.touches[0].clientY - pinchZoom.obj.fixTopPos);
 
         pinchZoom.fnZoomScale();
       }
@@ -156,6 +165,7 @@
         // touch가 끝나면 body의 scroll을 풀어준다.
         document.body.style.overflow = "scroll";
         pinchZoom.obj.leftPos = pinchZoom.obj.oldLeftPos;
+        console.log('touch end pinchZoom.obj.leftPos : ', pinchZoom.obj.leftPos)
   
         console.log('pinchZoom.obj.oldScale : ' , pinchZoom.obj.oldScale)
         console.log('pinchZoom.obj.nowScale : ' , pinchZoom.obj.nowScale)
