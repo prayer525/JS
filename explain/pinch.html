@@ -99,7 +99,7 @@
       topPos:0,
       oldTopPos:0,
       fixTopPos:0,
-      length
+      length:0
     },
     el:null,
     init:function(t){
@@ -119,12 +119,13 @@
     // touch start event
     fnTouchStart:function(evt){
       // touch point가 두개일 때만 동작
-      if(evt.touches.length == 1){
+      pinchZoom.obj.length = evt.touches.length;
+      if(pinchZoom.obj.length == 1){
           pinchZoom.obj.fixLeftPos = evt.touches[0].clientX;
           pinchZoom.obj.fixTopPos = evt.touches[0].clientY;
           console.log('touch start pinchZoom.obj.leftPos : ', pinchZoom.obj.leftPos)
       }
-      else if(evt.touches.length == 2){
+      else if(pinchZoom.obj.length == 2){
         // Multi touch가 시작 되면 Body 의 scrolling을 막는다.
         document.body.style.overflow = "hidden";
   
@@ -140,8 +141,8 @@
     },
     // touch move event
     fnTouchMove:function(evt){
-      console.log('evt.touches.length : ' , evt.touches.length)
-      if(evt.touches.length == 1){
+      console.log('pinchZoom.obj.length : ' , pinchZoom.obj.length)
+      if(pinchZoom.obj.length == 1){
         console.log('touch move pinchZoom.obj.leftPos : ', pinchZoom.obj.leftPos)
         pinchZoom.obj.oldLeftPos = pinchZoom.obj.leftPos + (evt.touches[0].clientX - pinchZoom.obj.fixLeftPos);
         pinchZoom.obj.oldTopPos = pinchZoom.obj.topPos + (evt.touches[0].clientY - pinchZoom.obj.fixTopPos);
@@ -149,7 +150,7 @@
         pinchZoom.fnZoomScale();
       }
       // touch point가 두개일 때만 동작
-      else if(evt.touches.length == 2){
+      else if(pinchZoom.obj.length == 2){
   
         // 두 포인트간의 거리를 구함 (절대값으로 저장)
         pinchZoom.obj.moveAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
@@ -184,8 +185,16 @@
       }
   
       pinchZoom.obj.oldScale = pinchZoom.obj.nowScale;
+
+      if(pinchZoom.obj.length == 2){
+        var posleft = (pinchZoom.el.offsetWidth - (pinchZoom.el.offsetWidth * pinchZoom.obj.nowScale)) / 2 
+       pinchZoom.el.style = "transform:translate("+posleft+"px, 0px) scale("+pinchZoom.obj.nowScale+")";
+       pinchZoom.obj.oldLeftPos = posleft;
+     }else if(pinchZoom.obj.length == 1){
+        pinchZoom.el.style = "transform:translate("+pinchZoom.obj.oldLeftPos+"px, 0px) scale("+pinchZoom.obj.nowScale+")";
+     }
   
-      pinchZoom.el.style = "transform:translate("+pinchZoom.obj.oldLeftPos+"px, 0px) scale("+pinchZoom.obj.nowScale+")";
+      
 
       document.getElementById('targetWidth').innerHTML = pinchZoom.el.offsetWidth
     }
