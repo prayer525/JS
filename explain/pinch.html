@@ -135,6 +135,8 @@
     fnTouchMove:function(evt){
       if(evt.touches.length == 1){
         pinchZoom.obj.oldLeftPos = pinchZoom.obj.leftPos + (evt.touches[0].clientX - pinchZoom.obj.fixLeftPos);
+
+        pinchZoom.fnZoomScale();
       }
       // touch point가 두개일 때만 동작
       else if(evt.touches.length == 2){
