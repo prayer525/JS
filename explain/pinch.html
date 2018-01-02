@@ -14,9 +14,6 @@
       width:100%;
       height:100%;
       max-height:300px;
-      overflow:hidden;
-      overflow-y:auto;
-      -webkit-overflow-scrolling: touch;
       }
       #target {
       background: white;
@@ -97,7 +94,9 @@
       elHeight:0, // wrapper height : scale 비율 계산에 사용  (토치 포인트 이동거리 Y / wrapper height)
       oldScale:1, // 마지막 scale size 저장
       nowScale:1, // 현재 scale size
-      currentScale:0
+      currentScale:0,
+      leftPos:0,
+      oldLeftPos:0
     },
     el:null,
     init:function(t){
@@ -116,7 +115,10 @@
     // touch start event
     fnTouchStart:function(evt){
       // touch point가 두개일 때만 동작
-      if(evt.touches.length == 2){
+      if(evt.touches.length == 1){
+          pinchZoom.obj.leftPos = evt.touches[0].clientX;
+      }
+      else if(evt.touches.length == 2){
         // Multi touch가 시작 되면 Body 의 scrolling을 막는다.
         document.body.style.overflow = "hidden";
   
@@ -132,8 +134,11 @@
     },
     // touch move event
     fnTouchMove:function(evt){
+      if(evt.touches.length == 1){
+        pinchZoom.obj.oldLeftPos = evt.touches[0].clientX - pinchZoom.obj.leftPos;
+      }
       // touch point가 두개일 때만 동작
-      if(evt.touches.length == 2){
+      else if(evt.touches.length == 2){
   
         // 두 포인트간의 거리를 구함 (절대값으로 저장)
         pinchZoom.obj.moveAbsX = Math.abs(evt.touches[0].clientX - evt.touches[1].clientX);
@@ -155,8 +160,8 @@
     },
     fnZoomScale:function(){
       // 배율 계산
-      var scaleX = (pinchZoom.obj.moveAbsX - pinchZoom.obj.startAbsX) / (pinchZoom.obj.elWidth * 2) ;
-      var scaleY = (pinchZoom.obj.moveAbsY - pinchZoom.obj.startAbsY) / (pinchZoom.obj.elHeight * 2);
+      var scaleX = (pinchZoom.obj.moveAbsX - pinchZoom.obj.startAbsX) / (pinchZoom.obj.elWidth);
+      var scaleY = (pinchZoom.obj.moveAbsY - pinchZoom.obj.startAbsY) / (pinchZoom.obj.elHeight);
   
       // 현재 스케일은 마지막 스케일에서 커지거나 작아진다.
       pinchZoom.obj.nowScale = pinchZoom.obj.currentScale + (scaleX + scaleY) / 2;
@@ -170,7 +175,7 @@
   
       pinchZoom.obj.oldScale = pinchZoom.obj.nowScale;
   
-      pinchZoom.el.style.transform = "scale("+pinchZoom.obj.nowScale+")";
+      pinchZoom.el.style = "transform:translate("+pinchZoom.obj.oldLeftPos+"px, 0px) scale("+pinchZoom.obj.nowScale+")";
 
       document.getElementById('targetWidth').innerHTML = pinchZoom.el.offsetWidth
     }
