@@ -1,0 +1,66 @@
+{
+  "cordova-plugin-whitelist": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-whitelist@1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "custom-inappbrowser-plugin": {
+    "source": {
+      "type": "registry",
+      "id": "custom-inappbrowser-plugin"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-sim": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-sim"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-app-version": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-app-version"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-device": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-device"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "com.lampa.startapp": {
+    "source": {
+      "type": "registry",
+      "id": "com.lampa.startapp"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "call-number": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/Rohfosho/CordovaCallNumberPlugin.git"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "aes.encrypt": {
+    "source": {
+      "type": "local",
+      "path": "/Users/HAEEMAC/Work/workspace/MyKia_cordova/node_modules/aesEncrypt"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}

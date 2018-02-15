@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: Setting :: My Profile</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_a00_0007">
+<!-- ========== Start ========== -->
+
+    <!-- LayerPop -->
+    <div class="lightbox none"></div>
+    <div class="popup mk_c04_0002 none" id="popup">
+        <div class="popup_m">
+            <div class="popup_in">
+                <div class="p_header">
+                    <strong><!--Update Mileage--><script type="text/javascript">M.locale.localizedWrite("D1_1")</script></strong>
+                    <button class="pbtn close pl" id="popupClose"><!--Close-->
+                        <script type="text/javascript">M.locale.localizedWrite("B1_1")</script>
+                    </button>
+                </div>
+                <div class="p_body mileage_space">
+                    <strong><!--Please update your mileage!--><script type="text/javascript">M.locale.localizedWrite("E1_43")</script></strong>
+                    <input type="tel" id="popupInputMileage"/>
+                    <p class="km">Km</p>
+                </div>
+                <div class="p_footer">
+                    <button id="popupSave" class="off" disabled="disabled"><!--Save-->
+                        <script type="text/javascript">M.locale.localizedWrite("B1_3")</script>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup mk_c04_0002 none" id="popup_last">
+        <div class="popup_m">
+            <div class="popup_in">
+                <div class="p_header">
+                    <strong><!-- Update Mileage --><script type="text/javascript">M.locale.localizedWrite("L1_6")</script></strong>
+                    <button class="pbtn close pl" id="popupLastClose">Close</button>
+                </div>
+                <div class="p_body lastservice_space" id="lastServiceArea">
+                    <strong style="display: inline-block; width: 100%;"><!-- Please update your mileage! --><script type="text/javascript">M.locale.localizedWrite("E1_44")</script></strong>
+                </div>
+                <div class="p_footer">
+                    <button type="button" id="lastServiceSave" class="off" disabled="disabled"><!-- SAVE -->
+                        <script type="text/javascript">M.locale.localizedWrite("B1_3")</script>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //LayerPop -->
+
+
+<div id="wrapper">
+    <header id="header" class="f_popup">
+        <h1><!-- My Profile --><script type="text/javascript">M.locale.localizedWrite("B1_22")</script></h1>
+        <button class="hbtn fl back_white" id="close"><!--Close--><script type="text/javascript">M.locale.localizedWrite("B1_1")</script></button>
+        <button class="hbtn fr" id="save"><!--Save--><script type="text/javascript">M.locale.localizedWrite("B1_3")</script></button>
+    </header>
+
+    <section id="container" class="fix-bottom">
+        <div id="scroll">
+        <!-- contents_Start -->
+            
+            <!-- User_Info -->
+            <div class="info_usr">
+                <h2 id="name">&nbsp;</h2>
+                <ol>
+                    <li class="hbox jc">
+                        <p class="usr_tit"><!--Address--><script type="text/javascript">M.locale.localizedWrite("B1_6")</script></p>
+                        <p class="usr_sub flex" id="address">&nbsp;</p>
+                    </li>
+                    <li class="hbox jc">
+                        <p class="usr_tit"><!--Telephone--><script type="text/javascript">M.locale.localizedWrite("E1_17")</script></p>
+                        <p class="usr_sub flex" id="phone">&nbsp;</p>
+                    </li>
+                    <li class="hbox jc">
+                        <p class="usr_tit"><!--E-mail--><script type="text/javascript">M.locale.localizedWrite("E1_18")</script></p>
+                        <p class="usr_sub flex"><a href="javascript:void(0);" class="link" id="email"></a></p>
+                    </li>
+                </ol>
+            </div>
+            <!-- Car_Info -->
+            <div class="car_info">
+                <img class="img_car_info" id="carImage"/>
+                <h2 id="car">&nbsp;</h2>
+                <button class="ve_set" id="mk_a00_0004" style="display:none;"></button>
+            </div>
+            <!-- Mileage_Info -->
+            <div class="mileage_info">
+                <ul>
+                    <li id="service"><!--Last service checkup-->
+                        <button type="button" class="hbtn fr setting" id="updateLastservice"><script type="text/javascript">M.locale.localizedWrite("D1_1")</script></button>
+                        <!-- <button type="button" class="hbtn fr setting" id="updateLastservice"><script type="text/javascript">M.locale.localizedWrite("D1_1")</script></button> -->
+                        <script type="text/javascript">M.locale.localizedWrite("B1_8")</script> :
+                        <em></em>
+                    </li>
+                    <li id="mileage"><!-- Mileage -->
+                        <button type="button" class="hbtn fr setting" id="update"><script type="text/javascript">M.locale.localizedWrite("D1_1")</script></button>
+                        <script type="text/javascript">M.locale.localizedWrite("B1_11")</script> :
+                        <em></em>
+                    </li>
+                    <li id="mileageSetDate"><!--Mileage Update Date-->
+                        <script type="text/javascript">M.locale.localizedWrite("B1_47")</script> : 
+                        <em></em>
+                    </li>
+                    <li id="registered"><!-- Registered -->
+                        <script type="text/javascript">M.locale.localizedWrite("B1_15")</script> :
+                        <em></em>
+                    </li>
+                    <li id="usage"><!-- Usage -->
+                        <script type="text/javascript">M.locale.localizedWrite("B1_16")</script> :
+                        <em></em>
+                    </li>
+
+
+                    <li id="plate"></li>
+                </ul>
+            </div>
+            <!-- Natification_Info -->
+            <div class="info_noti" style="display:none;">
+                <p class="tit"><!--Notification--><script type="text/javascript">M.locale.localizedWrite("B1_12")</script></p>
+                <p class="sub"><!--Please select an item, It is maked as unread news badge number.-->
+                    <script type="text/javascript">M.locale.localizedWrite("B1_43")</script>
+                </p>
+                <ul>
+                    <li>
+                        <input type="checkbox" id="chk01" />
+                        <label for="chk01"><!-- MyKia News --><script type="text/javascript">M.locale.localizedWrite("G1_1")</script></label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="chk02" />
+                        <label for="chk02"><!-- Sales&amp;Promotion --><script type="text/javascript">M.locale.localizedWrite("G1_3")</script></label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="chk03" />
+                        <label for="chk03"><!-- MyKia Video --><script type="text/javascript">M.locale.localizedWrite("G1_5")</script></label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="chk04" />
+                        <label for="chk04"><!-- How to Video --><script type="text/javascript">M.locale.localizedWrite("B1_44")</script></label>
+                    </li>
+                </ul>
+            </div>
+            
+        <!-- //contents_End -->    
+        </div>
+    </section>
+
+    <footer id="footer">
+        <p class="img">KIA, The Power to Surprise.</p>
+    </footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../bower_components/moment/min/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+
+// touch back button 
+// 이전 버튼 터치
+$("#close").click(Page.backPageModalDown);
+
+// touch save button
+// save 버튼 터치
+$("#save").click(gfnSave);
+
+// move to change vehicle screen when change button is touched
+// 자동차 변경 버튼 터치시 자동차 변경 화면으로 이동한다.
+$("#mk_a00_0004").data(Scheme.Param,{backData:true});
+$("#mk_a00_0004").click(Page.moveToPageModalUp);
+
+// touch “Update Mileage” button
+// “Update Mileage” 버튼을 터치 시
+$("#update").click(gfnUpdate);
+
+// "Update Last Service Date" 버튼 클릭시 
+$("#updateLastservice").click(gfnLastService);
+
+// close popup
+// 팝업을 닫는다.
+$("#popupClose").click(gfnPopupClose);
+
+// Last Service Date 팝업을 닫는다.
+$("#popupLastClose").click(gfnPopupLastClose);
+
+// verify numeric on Update Mileage Input element
+// Update Mileage Input창 유효성 검사
+$("#popupInputMileage").keyup(gfnInputMileageValidate);
+
+// touch save button after insert Update Mileage
+// Update Mileage save 버튼 터치 시
+$("#popupSave").click(gfnUpdateMileage);
+$("#lastServiceSave").click(gfnUpdateLastService);
+// gfnInit();
+
+/* 
+ * display selected vehicle image when a first enters
+ * display users information (name, address, phone, email..)
+ * display notification condition
+ * display current mileage and registration date for users vehicle
+ * 최초 진입 시 선택된 차량 이미지를 표시한다
+ * 유저 개인정보(이름, 주소, 전화번호, 이메일)를 표시한다.
+ * 현재 알림 표시 설정 상태를 표시한다.
+ * 서비스 상태(현재 마일리지, 등록일)를 표시한다.
+ */
+function gfnInit(){
+	// 2017.02.28 차량정보 조회 
+	var gvlVehiclesInformationCallback={
+	    success:function(rev,setting){
+	        var vehicles=LoginManager.getVehiclesInfo();
+	        // reload vehichle all data
+	        $.extend( true, vehicles.Vehicles, rev.Vehicles );
+	     	// VIN decrypt
+			for(var i=0;i<vehicles.Vehicles.length;i++){
+				vehicles.Vehicles[i].VIN=exRHMDecrypt(vehicles.Vehicles[i].VIN);
+			}
+			LoginManager.setVehiclesInfo(vehicles);
+
+			// DisplaySetting
+			gfnDisplaySetting();
+	    }
+	};
+	// 2.6 Get user’s vehicle information (ALL)
+	var VehiclesNetwork=new NetworkManager(TrCode.VehiclesInformation,gvlVehiclesInformationCallback,false);
+	var data={
+		"CustomerId":LoginManager.getCustomerId()
+	};
+	VehiclesNetwork.send(data);
+}
+
+function gfnDisplaySetting(){
+	var myvehicle=LoginManager.getSelectedVehiclesInfo();
+	var userInfo=LoginManager.getDetailsInfo();
+	var pushInfo=LoginManager.getPushInfo();
+    $("#name").html(userInfo.FirstName + " " + userInfo.LastName);
+    $("#address").html(userInfo.Street+" "+userInfo.Housenumber+"</br>"+userInfo.PostalCode+" "+userInfo.City);
+    $("#phone").html(userInfo.Phone);
+    $("#email").html(userInfo.Email);
+    $("#chk01").attr("checked",pushInfo.IsNewsPush);
+    $("#chk02").attr("checked",pushInfo.IsSalesNProPush);
+    $("#chk03").attr("checked",pushInfo.IsVideoPush);
+    $("#chk04").attr("checked",pushInfo.IsHowToVideoPush);
+    if(myvehicle!=undefined){
+        // hide when no last maintenance date is available
+        // 마지막 서비스 일자가 없을시 마지막 서비스 일자를 숨
+        if(myvehicle.LastServiceDate != null && myvehicle.LastServiceDate.trim().length > 0){
+        	$("#service em").html(JsUtil.MomentDateFormat(myvehicle.LastServiceDate, 'L'));
+        	$("#service").show();
+        }else{
+        	$("#service").remove();
+        }
+        
+        $("#mileage em").html(JsUtil.addComma(myvehicle.CurrentMileageInKilometers)+" km");
+        // mileage update date
+        if(myvehicle.CurrentMileageSetDate != ""){
+        	$("#mileageSetDate em").html(JsUtil.MomentDateFormat(myvehicle.CurrentMileageSetDate, 'L'));
+        	$("#mileageSetDate").show();
+        }else{
+        	$("#mileageSetDate").hide();
+        }
+        
+        if(myvehicle.RegistrationDate != ""){
+            $("#registered em").html(JsUtil.MomentDateFormat(myvehicle.RegistrationDate, 'L'));   
+        }
+        $("#usage em").html(JsUtil.addComma(myvehicle.UsagePerYear)+" km/"+M.locale.localizedString("V1_3"));
+        if (LoginManager.getDetailsInfo().MarketId == 'KMSE' && myvehicle.Licenseplate) {
+            $("#plate").html(M.locale.localizedString("PN_01")+" : " + myvehicle.Licenseplate);
+        }else{
+            $("#plate").hide();
+        }
+
+        // display change button if user has vehicle greater than one
+        // 자동차가 1대 이상일 경우 자동차 변경 버튼을 표시한다.
+        if(LoginManager.getVehiclesInfo().Vehicles.length>1) $("#mk_a00_0004").show();
+        $("#car").html(myvehicle.VehicleName);
+        if (M.locale.VirtualMode) {
+            $("#carImage").attr("src","data:"+myvehicle.VehicleImageExtension+";base64,"+myvehicle.VehicleImage);
+        } else {
+            $("#carImage").attr("src", myvehicle.VehicleImageUrl);
+        }
+    }else{
+        $(".car_info").hide();
+        $(".info_mileage").hide();
+    }
+}
+
+//업데이트 LastService 팝업에 “Save”버튼 터치 시 API 2.38 통신을 시작한다
+function gfnUpdateLastService(){
+    /**
+    * LastService가 업데이트 되는동안 back key가 동작 하지 않게끔 조건식을 주기위해
+    * body에 현재 페이지의 id값을 클래스로 추가
+    * common.js의 M.onBack() 함수 내부에 조건식 추가
+    */
+    $("#day").blur();
+    $("#month").blur();
+    $("#year").blur();
+    $('body').addClass('mk_c04_0001');
+    var year = JsUtil.prependZeros($("#year").val(),4),
+        month = JsUtil.prependZeros($("#month").val(),2),
+        day = JsUtil.prependZeros($("#day").val(),2),
+        lastServiceDate = year+"-"+month+"-"+day,
+        registrationDate = LoginManager.getSelectedVehiclesInfo().RegistrationDate.substring(0, 8),
+        current = new Date(),
+        today = current.getFullYear()+''+JsUtil.prependZeros(current.getMonth()+1,2)+''+JsUtil.prependZeros(current.getDate(),2),
+        CurrentLastServiceDate = LoginManager.getSelectedVehiclesInfo().LastServiceDate.substring(0,8);
+
+    // registrationDate 보다 낮은값을 등록 할 수 없음
+    if(Number(year+""+month+""+day) <= Number(registrationDate)){
+        MApi.alert(M.locale.localizedString("Y2_18"));
+        return false;
+    }
+    // 오늘보다 이후의 날짜는 등록할 수 없음
+    else if(Number(year+""+month+""+day) > Number(today)){
+        MApi.alert(M.locale.localizedString("Y2_18"));
+        return false;
+    }
+    // 현재 마지막 서비스 날짜보다 이후 날짜는 등록할 수 없음.
+    else if(CurrentLastServiceDate > Number(year+""+month+""+day)){
+        MApi.alert(M.locale.localizedString("Y2_18"));
+        return false;
+    }
+    gfnPopupLastClose(); 
+    var callback={
+        success:function(rev,setting){
+
+            // API 2.38 통신 결과 성공 시 최초 진입 시 처리 로직이 진행된다. 
+            // 업데이트 LastService 팝업이 닫힌다
+            gfnInit();
+            M.pop.instance(M.locale.localizedString("R1_2"));
+            /**
+            * 마일리지 업데이트 후 back key 제어의 조건식이 되는 클래스 제거
+            */
+            $('body').removeClass('mk_c04_0001');
+        }
+    };
+    var LastServiceUpdatingNetwork=new NetworkManager(TrCode.LastServiceUpdate,callback,false);
+    var data={
+        "CustomerId":LoginManager.getCustomerId(),
+        //"VINnoPackage":LoginManager.getSelectedVehiclesInfo().VIN,    // 암호화 하지 않으려고 만든 VIN 필드
+        "VIN":LoginManager.getSelectedVehiclesInfo().VIN,   // 암호화 하지 않으려고 만든 VIN 필드
+        "DateOfLastService":lastServiceDate
+    };
+    LastServiceUpdatingNetwork.send(data);
+}
+
+// when landing this screen
+// 최초 진입 시
+M.onReady(function(e){
+    var os = M.info.device().os
+    if (os.name === 'iPhone OS' && parseInt(os.version, 10) < 8) {
+        $('.lightbox').hide();
+    }
+
+    gfnInit();
+
+    // lastServiceDate Format
+    if(LoginManager.getDetailsInfo().MarketId.match("KMSE")){
+        $('<input type="tel" id="year" maxlength="4" style="width: 40%;" placeholder="YYYY"/>').appendTo('#lastServiceArea');
+        $('<input type="tel" id="month" maxlength="2" style="width: 28%;" placeholder="MM"/>').appendTo('#lastServiceArea');
+        $('<input type="tel" id="day" maxlength="2" style="width: 28%;" placeholder="DD"/>').appendTo('#lastServiceArea');
+    }else{
+        $('<input type="tel" id="day" maxlength="2" style="width: 28%;" placeholder="DD"/>').appendTo('#lastServiceArea');
+        $('<input type="tel" id="month" maxlength="2" style="width: 28%;" placeholder="MM"/>').appendTo('#lastServiceArea');
+        $('<input type="tel" id="year" maxlength="4" style="width: 40%;" placeholder="YYYY"/>').appendTo('#lastServiceArea');
+    }
+
+    $("#day").keyup(gfnInputDayValidate);
+    $("#month").keyup(gfnInputMonthValidate);
+    $("#year").keyup(gfnInputYearValidate);
+});
+
+M.onRestore(function(e){
+	gfnInit();
+});
+
+// touch save button
+// save 버튼 터치
+function gfnSave(){
+	var pushInfo={};
+    pushInfo.IsNewsPush=$("#chk01").is(":checked");
+    pushInfo.IsSalesNProPush=$("#chk02").is(":checked");
+    pushInfo.IsVideoPush=$("#chk03").is(":checked");
+    pushInfo.IsHowToVideoPush=$("#chk04").is(":checked");
+    LoginManager.setPushInfo(pushInfo);
+    MApi.alert(M.locale.localizedString("B1_45"), function(){
+        Page.backPage();
+        /*
+        MApi.clearAllStack();
+        var options=Options.Default
+        options.animation = "FADE";
+        Page.moveToPage("mk_a00_0005",options);
+        */
+    });
+}
+
+// display popup when “Update Mileage” button is touched
+// “Update Mileage” 버튼을 터치 시 Update Mileage 팝업이 표시된다.
+function gfnUpdate(){
+    $("#popup").removeClass('none');
+    $(".lightbox").removeClass('none');
+}
+
+function gfnLastService(){
+    $("#popup_last").removeClass('none');
+    $(".lightbox").removeClass('none');
+}
+
+function gfnPopupLastClose(){
+    $("#popup_last").addClass('none');
+    $(".lightbox").addClass('none');
+    $("#lastServiceSave").prop("disabled",true);
+    $("#lastServiceSave").addClass("off");
+    $("#day").val("");
+    $("#month").val("");
+    $("#year").val("");
+}
+
+// close popup
+// 팝업을 닫는다.
+function gfnPopupClose(){
+    $("#popup").addClass('none');
+    $(".lightbox").addClass('none');
+	$("#popupInputMileage").val("");
+}
+
+// verify numeric Update Mileage Input element
+// // Update Mileage Input창 유효성 검사
+function gfnInputMileageValidate(){
+    var val=JsUtil.mfnNumberOnlyFilter($(this).val());
+    var maxLength=6;
+    if(val!=""){
+    	val=val.replace(/,|\.| /g,"");
+    	if(val.length>maxLength)val=val.substr(0,maxLength);
+    	if(val>240000) val=240000;
+    	val=JsUtil.addComma(val);
+    }
+    $(this).val(val);
+    if(val==0){
+        $("#popupSave").prop("disabled",true);
+        $("#popupSave").addClass("off");
+    }else{
+        $("#popupSave").prop("disabled",false);
+        $("#popupSave").removeClass("off");
+    }
+}
+
+// LastService 값 검증
+// 일검증 
+function gfnInputDayValidate(){
+    var val=JsUtil.mfnNumberOnlyFilter($(this).val());
+    var maxDay = 31;
+    if(val > maxDay) val = maxDay;
+    $(this).val(val);
+
+    gfnInputLastServiceValidate();
+}
+//월검증 
+function gfnInputMonthValidate(){
+    var val=JsUtil.mfnNumberOnlyFilter($(this).val());
+    var maxMonth = 12;
+    if(val > maxMonth) val = maxMonth;
+    $(this).val(val);
+
+    gfnInputLastServiceValidate();
+}
+// 년도검증 
+function gfnInputYearValidate(){
+    var val=JsUtil.mfnNumberOnlyFilter($(this).val());
+    $(this).val(val);
+
+    gfnInputLastServiceValidate();
+}
+
+function gfnInputLastServiceValidate(){
+    var year = JsUtil.mfnNumberOnlyFilter($('#year').val()),
+        month = JsUtil.mfnNumberOnlyFilter($('#month').val()),
+        day = JsUtil.mfnNumberOnlyFilter($('#day').val());
+    
+    if( year>0 && year.length==4 && month>0 && day>0){
+        $("#lastServiceSave").prop("disabled",false);
+        $("#lastServiceSave").removeClass("off");
+    }else{
+        $("#lastServiceSave").prop("disabled",true);
+        $("#lastServiceSave").addClass("off");
+    }
+}
+
+// calling API 2.11 when save button is touched with verify value
+// 값을 입력 후 “Save” 버튼 터치하여 API 2.11 통신을 시작한다.
+function gfnUpdateMileage(){
+    $("#popup").addClass('none');
+    $(".lightbox").addClass('none');
+	var callback={
+		success:function(rev,setting){
+
+            // display latest information after success and close popup
+            // 통신 성공 시 팝업을 닫으면서 최신 데이터를 화면에 표시한다
+			/* var vehiclesInfo=LoginManager.getVehiclesInfo();
+			vehiclesInfo.Vehicles[LoginManager.getSelectedVehiclesIndex()].CurrentMileageInKilometers=$("#popupInputMileage").val().replace(/,/g,"");
+			LoginManager.setVehiclesInfo(vehiclesInfo);
+			gfnDisplaySetting(); */
+			gfnInit();
+			M.pop.instance(M.locale.localizedString("R1_1"));
+			gfnPopupClose();
+		}
+	};
+	var MileageUpdatingNetwork=new NetworkManager(TrCode.MileageUpdating,callback,false);
+	var myvehicle=LoginManager.getSelectedVehiclesInfo();
+	var data={
+		"CustomerId":LoginManager.getCustomerId(),
+		"VIN":myvehicle.VIN,
+		"MileageInKilometers":$("#popupInputMileage").val().replace(/,|\.| /g,"")
+	};
+	MileageUpdatingNetwork.send(data);
+}
+//M.onBack=Page.backPageModalDown;
+</script>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "aesEncrypt",
+  "version": "1.0.0",
+  "description": "aes encryption",
+  "cordova": {
+    "id": "aes.encrypt",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.1.0"
+    }
+  ],
+  "author": "js",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: Test Drive Request :: list</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+<style type="text/css">
+.gmnoprint {display: none !important}
+a[target=_blank] {display: none !important}
+</style>
+</head>
+<body id="mk_c02_0002">
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+	<header id="header">
+		<h1><!-- Test Drive Request --><script type="text/javascript">M.locale.localizedWrite("E1_21")</script></h1>
+		<button type="button" class="hbtn fl home none" id="hlbtn">Home</button>
+		<button type="button" class="hbtn fr search" id="searchBtn">Search</button>
+	</header>
+
+    <!-- TAB_AREA_FIXED -->
+	<div class="sub_head menu_fixed">
+		<p class="btn_space hbox jc"><!-- 선택시 class on 추가-->
+			<button type="button" class="flex btn_tab on"><!-- List -->
+                <script type="text/javascript">M.locale.localizedWrite("E1_23")</script>
+            </button>
+            <button type="button" class="flex btn_tab"><!-- Map -->
+                <script type="text/javascript">M.locale.localizedWrite("E1_22")</script>
+            </button>
+		</p>
+		<p class="txt_tab"><strong id="cnt">0</strong> <!-- Dealers Found -->
+            <script type="text/javascript">M.locale.localizedWrite("E1_24")</script>
+        </p>
+	</div>
+
+	<section id="container" class="h_sub_01">
+		<div id="scroll">
+        <!-- contents_Start -->
+            
+			<!-- MAP_AREA -->
+			<div class="map_space none">
+				<div class="map" id="map_canvas">
+					<!-- <button type="button" class="btn_now">now position</button>
+					<button type="button" class="btn_zoom">zoom</button> -->
+				</div>
+				
+				<!--type01 = sales / type02 = service / type03 = sales&service -->
+				<!--전체 이동일 경우(Test Drive Request) -->
+				<div class="map_sub type01 none" id="footType1">
+					<button type="button" class="inside full">
+						<h2 class="ellipsis">BACCI MOTORS SRL</h2>
+						<p>STRADA DI BUSSETO, ANG. VIALE TOSELLI, 18 53100 SIENA(SI)</p>
+						<p class="txt_pos">2.9 KM</p>
+					</button>
+				</div>
+			</div>
+				
+			<!-- LIST_AREA -->
+			<div class="list_space">
+				<ul class="li_style_move">
+					<!-- sales : class type01, service : class type02, sales&service : class type03 -->
+					<!-- 
+                    <li class="map_sub type01">
+						<button>
+							<h2 class="ellipsis">BACCI MOTORS SRL</h2>
+							<p>STRADA DI BUSSETO, ANG. VIALE TOSELLI, 18 53100 SIENA(SI)</p>
+							<p class="txt_pos">2.9 KM</p>
+						</button>
+					</li>
+					<li class="map_sub type02">							
+						<button>
+							<h2 class="ellipsis">BACCI MOTORS SRL</h2>
+							<p>STRADA DI BUSSETO, ANG. VIALE TOSELLI, 18 53100 SIENA(SI)</p>
+							<p class="txt_pos">2.9 KM</p>
+						</button>
+					</li>
+                    -->
+				</ul>
+
+                <!--첫 로드시 (제일 위에 가있을 때엔 보이지 않게 해주세요 : class none) -->
+				<button type="button" class="btn_top none">Top</button>
+			</div>
+            
+        <!-- //contents_End -->
+		</div>
+	</section>
+
+	<footer id="footer">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+var myMarkerOptions={
+	canvas:"map_canvas",
+	markerIcon:""
+},
+gvlGooglMapManager,
+gvlGetItemList = null,
+gvlMyPosition = null,
+gvlMyLocContry = null,
+gvlInitFlag=false,
+gvlGetItemCallback={
+	success:function(rev,setting){
+		MApi.log(rev);
+
+		gvlGetItemList = rev.Dealers;
+		
+		gfnItemProc();
+	}
+},
+gvlGetItemNetwork=new NetworkManager(TrCode.DealerLocationInformation,gvlGetItemCallback,false);
+
+var gvlMarkerClickFlag=false;
+M.onReady(function(e){
+	$("#map_canvas").height(window.innerHeight - $("#map_canvas").offset().top - $("footer").height())
+	if (MApi.param("from") == "dealerDetail") {
+		$("#hlbtn").addClass("back");
+		$("#hlbtn").removeClass("home");
+	}
+	$("#hlbtn").removeClass("none");
+	
+	gfnInit();
+	
+	// 탭버튼 클릭
+	$(".btn_tab").click(function() {
+		var target = $(this);
+		$(".btn_tab").removeClass("on");
+		target.addClass("on");
+		
+		// List
+		if (target.index() == 0) {
+			$(".map_space").addClass("none");
+			$(".list_space").removeClass("none");
+			$("body").attr("id", "mk_c02_0002");
+			$(".li_style_move > li").remove();
+		}
+
+		// Map
+		else if (target.index() == 1) {
+			$(".list_space").addClass("none");
+			$(".map_space").removeClass("none");
+			$("body").attr("id", "mk_c02_0001");
+			gvlGooglMapManager.refreshMap();
+			$("#curLocBtn").click();
+		}
+		
+		gfnItemProc();
+	});
+	
+	$("#map_canvas").click(function() {
+		if(gvlMarkerClickFlag==false) $("#footType1").addClass("none");
+	});
+	
+	$("#searchBtn").click(function() {
+		var options=Options.Default;
+		options.param={
+			myPosition:gvlMyPosition,
+			myLocCountry:gvlMyLocContry,
+			testReq : "yes"
+		};
+		Page.moveToPage("mk_c02_0004",options);
+	});
+});
+
+function gfnInit() {
+	setTimeout(function() {
+		if(gvlGoogleMapLoad){
+			gvlGooglMapManager.callGeolocation();
+			return;
+		}
+		exWNHideIndicator();
+		gvlGooglMapManager=new GoogleMapManager(myMarkerOptions,{
+			load:function(_status){
+				exWNHideIndicator();
+				if(_status=="FAILE"){
+					MApi.alert(M.locale.localizedString("F1_32"), Page.backPage);
+				}
+			},
+			geo:function(_status,_position){
+				exWNHideIndicator();
+				if(_status=="SUCCESS"){
+					if (gvlGetItemList == null) {
+						gvlMyPosition = _position;
+						gvlGetItemNetwork.send({
+							CustomerId : LoginManager.getCustomerId(),
+							Latitude : _position.latitude,
+							Longitude : _position.longitude,
+							Radius : 60
+						});
+						
+						var geoloc = new google.maps.Geocoder(),
+							item = {};
+						geoloc.geocode({
+							"latLng" : new google.maps.LatLng(_position.latitude, _position.longitude)},
+						function(results, status) {
+							if (status == google.maps.GeocoderStatus.OK) {
+								if (results[1]) {
+									gvlMyLocContry = results[results.length-1].address_components[0];
+								}
+							}
+						});
+					}
+					else {
+						gfnItemProc();
+					}
+				}else{
+					gvlInitFlag=true;
+					MApi.confirm(M.locale.localizedString("V1_10"),[M.locale.localizedString("D1_9"), M.locale.localizedString("S1_21")],gvlGooglMapManager.goSetting);
+				}
+			},
+			scale:function(){
+				if ($("header").hasClass("none")) {
+					$("header").removeClass("none");
+					$(".sub_head").removeClass("none");
+					$("#container").css("paddingTop", "4.3rem");
+					$(".map_space").css("paddingTop", "4.5rem");
+					$("#map_canvas").height($("#map_canvas").height() - $(".sub_head").outerHeight() - $("header").outerHeight());
+				}
+				else {
+					$("header").addClass("none");
+					$(".sub_head").addClass("none");
+					$("#container").css("paddingTop", "inherit");
+					$(".map_space").css("paddingTop", "inherit");
+					$("#map_canvas").height($("#map_canvas").height() + $(".sub_head").outerHeight() + $("header").outerHeight());
+				}
+			},
+			optIns:function(_idx){
+				gvlInitFlag=true;
+				gvlGooglMapManager.moveToOptIns(_idx);
+			},
+			setting:function(_idx){
+				gvlInitFlag=true;
+				gvlGooglMapManager.goSetting(_idx);
+			}
+		});
+	}, 150);
+}
+
+function gfnItemProc() {
+    var salesCnt = 0;
+	$(gvlGetItemList).each(function(idx, item) {
+		if (item.DealerType == 2) {
+			return true;
+		}
+		salesCnt++;
+		if ($(".list_space").hasClass("none")) {
+			var itemMarkOpt = {
+				markerIcon : "../img/imap_sub_type0" + item.DealerType + ".png",
+				listener : function() {
+					gvlMarkerClickFlag=true;
+					$("#footType1").removeClass("none");
+					$("#footType1").find("h2").html(item.Name);
+					$("#footType1").find("p").eq(0).html(item.Street+", "+item.ZipCode+" "+item.Town);
+					$("#footType1").find("p").eq(1).html((item.Distance/100*100).toFixed(2)+" km");
+					$("#footType1").attr("class", $("#footType1").attr("class").replace(/type0[1-3]/g, "type0"+item.DealerType));
+					$("#footType1").data("sapCode", item.DealerSapCode);
+					$("#footType1").data("marketId", item.MarketId);
+					$("#footType1").off("click");
+					$("#footType1").click(function() {
+						var options=Options.Default;
+							options.param={
+								sapCode:$(this).data("sapCode"),
+								marketId:$(this).data("marketId"),
+								myLocCountry:gvlMyLocContry,
+								testReq:"yes"
+							};
+						Page.moveToPage("mk_c02_0003",options);
+					});
+					setTimeout(function(){
+						gvlMarkerClickFlag=false;
+					},500);
+				}
+			},
+			that = {
+				coords : {
+					latitude : item.Latitude,
+					longitude : item.Longitude,
+				}
+			}
+			gvlGooglMapManager.addChildMarker(that, itemMarkOpt);
+		}
+		else {
+			var temp = $("<li></li>").append(
+				$("<button></button>").append(
+					$("<h2></h2>").html(item.Name).addClass("ellipsis"))
+					.append($("<p></p>").html(item.Street+", "+item.ZipCode+" "+item.Town))
+					.append($("<p></p>").html((item.Distance/100*100).toFixed(2)+" km").addClass("txt_pos"))
+			).click(function() {
+				var options=Options.Default;
+					options.param={
+						sapCode:$(this).data("sapCode"),
+						marketId:$(this).data("marketId"),
+						myLocCountry:gvlMyLocContry,
+						testReq:"yes"
+					};
+				Page.moveToPage("mk_c02_0003",options);
+			}).data("sapCode", item.DealerSapCode).data("marketId", item.MarketId)
+			.addClass("map_sub").appendTo($(".li_style_move"));
+			
+			temp.addClass("type0"+item.DealerType);
+		}
+	});
+    $("#cnt").html(salesCnt);
+}
+M.onResume(function(e) {
+	if(gvlInitFlag){
+		gvlInitFlag=false;
+		gfnInit();
+	}
+});
+M.onRestore(function(e) {
+	if(gvlInitFlag){
+		gvlInitFlag=false;
+		gfnInit();
+	}
+});
+</script>
+</html>

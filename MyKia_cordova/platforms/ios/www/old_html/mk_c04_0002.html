@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="address=no">
+<title>MyKia :: Contack Kia</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<style>
+.wrap_contact_group {position:relative; min-height:100%; padding:3rem; padding-bottom:9rem;}
+.wrap_contact_group h2 {font-size:2rem; padding:1rem 0;}
+.wrap_contact_group h3 {font-size:1.6rem; font-weight:bold; padding:2rem 0 0.5rem;}
+.wrap_contact_group p {font-size:1.4rem; padding-bottom:1rem;}
+.wrap_contact_group p span {vertical-align:middle;}
+.contact_type_btn {overflow:hidden;}
+.contact_type_btn li {padding:1.5rem 0;}
+.contact_type_btn li a {display:inline-block; width:100%; height:3.5rem; padding-left:4.5rem;}
+.contact_type_btn li a i {display:none;}
+.contact_type_btn li strong {display:inline-block; height:3.5rem; line-height:3.5rem; color:#434343; font-size:1.6rem; font-weight:bold;}
+.contact_type_btn li p {padding:1.5rem 0 0rem 4.5rem;}
+.contact_type_btn li.btn_phone>a {background:url('../img/ico_phone.png') left center no-repeat; background-size:contain;}
+.contact_type_btn li.btn_email>a {background:url('../img/ico_email.png') left center no-repeat; background-size:contain;}
+.contact_type_btn li.opening_hour>em {display:inline-block; background:url('../img/ico_clock.png') center no-repeat; background-size:contain; width:3.5rem; height:3.5rem; margin-right:1rem;}
+
+#scroll {background:#fff;}
+
+</style>
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_c04_0002">
+<!-- ========== Start ========== -->
+<div id="wrapper">
+	<header id="header">
+		<h1><!-- Maintenance Schedule --><script type="text/javascript">M.locale.localizedWrite("S1_15")</script></h1>
+		<button type="button" class="hbtn fl home">Home</button>
+	</header>
+
+	<section id="container">
+		<div id="scroll">
+		<!-- contents_Start -->
+			<div class="wrap_contact_group">
+				<ul class="contact_type_btn">
+					<li class="btn_phone">
+						<a href="#"><i>phone</i><strong></strong></a>
+					</li>
+					<li class="btn_email">
+						<a href="#"><i>Email</i><strong></strong></a>
+						
+					</li>
+					<li class="opening_hour">
+						<em></em><strong><script type="text/javascript">M.locale.localizedWrite("E1_4")</script></strong>
+						<p><script type="text/javascript">M.locale.localizedWrite("E1_8")</script> - <script type="text/javascript">M.locale.localizedWrite("E1_12")</script> : <script type="text/javascript">M.locale.localizedWrite("W0_time1")</script></p>
+						<p><script type="text/javascript">M.locale.localizedWrite("T1_1")</script> - <script type="text/javascript">M.locale.localizedWrite("T1_2")</script> : <script type="text/javascript">M.locale.localizedWrite("W0_time2")</script></p>
+					</li>
+				</ul>
+
+				<!-- <div class="kia_logo"></div> -->
+			</div>
+		</div>
+	</section>
+
+	<footer id="footer">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.contact_type_btn>li>a').on('click', function(){
+		$('.contact_type_btn div').css('visibility', 'hidden');
+
+		$(this).next('div').css('visibility', 'visible');
+
+		return false;
+	})
+
+	$('.btn_phone>a').attr("href", "tel:"+M.locale.localizedString("W0_phone"))
+	$('.btn_phone>a>strong').text(M.locale.localizedString("W0_phone"))
+	$(".btn_phone>a").data(Scheme.PhoneNumber,M.locale.localizedString("W0_phone"));
+	$(".btn_phone>a").click(MApi.call);
+
+	$('.btn_email>a').attr("href", "mailTo:"+M.locale.localizedString("W0_email"))
+	$('.btn_email>a>strong').text(M.locale.localizedString("W0_email"))
+	$(".btn_email>a").data(Scheme.Email,M.locale.localizedString("W0_email"));
+	$(".btn_email>a").click(MApi.email);
+})
+
+</script>
+</html>

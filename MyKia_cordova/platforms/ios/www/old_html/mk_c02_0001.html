@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: Test Drive Request :: list</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_c03_0001">
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+    <header id="header">
+        <h1><!-- Test Drive Request --><script type="text/javascript">M.locale.localizedWrite("E1_21")</script></h1>
+        <button class="hbtn fl back">Back</button>
+        <!-- <button class="hbtn fr search">Search</button> -->
+    </header>
+
+    <section id="container">
+        <div id="scroll">
+        <!-- contents_Start -->
+            
+            <div class="car_list">
+	            <ul class="list_type_select" id="list">
+	                <!-- <li>
+	                    <input type="checkbox" id="chk01"/>
+	                    <label class="li_sub hbox js" for="chk01">
+	                        <p class="flex">New Soul ECO-electric</p>
+	                        <img src="../img/car/RP_K3Y.png"/>
+	                    </label>
+	                </li>
+	                <li>
+	                    <input type="checkbox" id="chk02"/>
+	                    <label class="li_sub hbox js" for="chk02">
+	                        <p class="flex">New Soul ECO-electric</p>
+	                        <img src="../img/car/RP_K3Y.png"/>
+	                    </label>
+	                </li>
+	                <li>
+	                    <input type="checkbox" id="chk03"/>
+	                    <label class="li_sub hbox js" for="chk03">
+	                        <p class="flex">New Soul ECO-electric</p>
+	                        <img src="../img/car/RP_K3Y.png"/>
+	                    </label>
+	                </li> -->
+	            </ul>
+			</div>
+
+        <!-- //contents_End -->
+        </div>
+
+		<div class="f_btnArea">
+			<button id="request" class="btn_red off" disabled="disabled"><!-- Select -->
+				<script type="text/javascript">M.locale.localizedWrite("B1_4")</script>
+			</button>
+		</div>
+	</section>
+
+	<footer id="footer">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+var gvlSelCarCode = "",
+	gvlMyLocCountry = MApi.param("myLocCountry"),
+	gvlDealerSapCode = MApi.param("sapCode"),
+	gvlPutTestReqNetwork = new NetworkManager(TrCode.TestDrive, {success:function(rev, setting) {
+		$("input:checked").prop("checked", false);
+		$("#request").prop("disabled", true);
+		$("#request").addClass("off");
+		$("#scroll").scrollTop(0);
+			var options=Options.GoHome;
+			options.animation="SLIDE_RIGHT";
+			MApi.html("mk_a00_0005",options);
+	}}, false);
+$("#request").click(function() {	
+	MApi.confirm(JsUtil.stringFomatter(M.locale.localizedString("S1_25"), [MApi.param("selDealerName")]), [M.locale.localizedString("D1_9"),M.locale.localizedString("E1_25")], gfnReqTestDrive);
+});
+
+function gfnReqTestDrive(idx, setting) {
+	if (idx == 1) {
+		var detailInfo = LoginManager.getDetailsInfo();
+		
+		gvlPutTestReqNetwork.send({
+			CustomerId : LoginManager.getCustomerId(),
+			Gender : detailInfo.Male ? "M" : "F",
+			Salutation : detailInfo.Male ? "Mr." : "Mrs.",
+			FirstName : detailInfo.FirstName,
+			LastName : detailInfo.LastName,
+			MobilePhone : detailInfo.Phone,
+			HomePhone : "",
+			StreetAddress1 : detailInfo.Street,
+			StreetAddress2 : "",
+			HouseNumber : detailInfo.Housenumber,
+			Postcode : detailInfo.PostalCode,
+			City : detailInfo.City,
+			CountryCode : gvlMyLocCountry.short_name,
+			Region : gvlMyLocCountry.long_name,
+			EmailAddress : detailInfo.Email,
+			RequestModel : gvlSelCarCode,
+			DealerSapCode : gvlDealerSapCode,
+			MarketingAgreement : "N",
+			OptinForNewsletter : "N"
+		});
+	}
+}
+
+M.onReady(function(e){
+	var allVehicleImagesCallback={
+		success:function(rev,setting){
+			gfnallVehicleList(rev.ModelImages, setting);
+		}
+	}
+	new NetworkManager(TrCode.AllVehicleImages,allVehicleImagesCallback,true).send({
+		"MarketId":MApi.param("marketId")
+	});
+});
+
+function gfnallVehicleList(vehicles, setting) {
+	if (vehicles.length == 0) {
+		MApi.alert(M.locale.localizedString("F1_12"));
+	}
+	$(vehicles).each(function(i,item){
+		$("<li></li>").append(
+        	$("<input name='car' type='radio' id='chk"+i+"'/>")
+		).append(
+			$("<label class='li_sub hbox js' for='chk"+i+"'></label>")
+			.append($("<p class='flex'></p>").html(item.VehicleModelName))
+			.append($("<img></img>").attr("src", item.VehicleThumbnailUrl))
+		)
+        .click(onItemClickListener)
+        .data("index",i)
+        .data("vCode", item.VehicleCode)
+        .appendTo($("#list"));
+	});
+	function onItemClickListener(){
+        $("#request").prop("disabled",false);
+        $("#request").removeClass("off");
+        var idx=$(this).data("index");
+        gvlSelCarCode = $(this).data("vCode");
+    }
+}
+</script>
+</html>

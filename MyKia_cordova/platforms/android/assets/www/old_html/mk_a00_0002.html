@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: login</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_a00_0002">
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+    <header id="login_header">
+        <img src="../img/header_login.jpg" alt="" />
+        <h1 class=""></h1>
+		<!-- <h1 class="lang_es">MiKia</h1> -->
+		<!-- <h1 class="lang_pl">MojaKia</h1> -->
+        <!-- <button type="button" class="hbtn fl home">Home</button> -->
+    </header>
+
+	<section id="login_container">
+		<div id="scroll" class="login_sub">
+        <!-- contents_Start -->
+            <div class="email-box">
+            	<span id="resetEmail" class="clear-email"></span>
+				<input id="email" type="email" class="ipt_email"/>
+			</div>
+			<input id="pwd" type="password" class="ipt_pw" style="margin-top: 5px;"/>
+
+			<!--press 시 class on추가-->
+            <button type="button" class="btn_login" id="login"><!--LOGIN-->
+                <script type="text/javascript">M.locale.localizedWrite("C1_3")</script>
+            </button>
+
+			<!--사용되지 않을경우 p에 class off 추가-->
+			<!-- stay_logged/forgooten -->
+			<p class="ta_l txt_login none">
+				<input type="checkbox" id="autoLogin" checked="true"/>
+                <label for="autoLogin"><!--Stay logged in--><script type="text/javascript">M.locale.localizedWrite("C1_4")</script></label>
+			</p>
+
+			<!-- facebook_login -->
+            <div class="fb_space">
+                <button class="btn_fb none" id="facebook"><!--Login with <strong>Facebook</strong>-->
+                    <script type="text/javascript">M.locale.localizedWrite("C1_6")</script>
+                </button>
+                <a href="javascript:void(0)" class="btn_member_ship" id="membership_link"><!--Password forgotten-->
+	                <script type="text/javascript">M.locale.localizedWrite("W0_1")</script>
+	            </a>
+	            <a href="javascript:void(0)" class="txt_login link_forggot" id="link"><!--Password forgotten-->
+                	<script type="text/javascript">M.locale.localizedWrite("C1_5")</script>
+            	</a>
+                <em class="fb_sub"><!--Please visit the webpage for membership subscription-->
+                    <script type="text/javascript">M.locale.localizedWrite("C1_7")</script>
+                </em>
+            </div>
+            
+        <!-- //contents_End -->
+        </div>
+    </section>
+
+    <footer id="footer">
+        <p class="img">KIA, The Power to Surprise.</p>
+    </footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+$("#email").attr("placeholder",M.locale.localizedString("C1_1"));
+$("#pwd").attr("placeholder",M.locale.localizedString("C1_2"));
+
+// iOS uses html language, Android uses System language, country
+// iOS는 html language사용, Android는 System language,country 사용
+// if(MApi.getPlatform() == "iOS"){
+// 	deviceLagnuage = navigator.language
+// }else{
+// 	deviceLagnuage = WN2Common("exWNgetDeviceLanguage") + "-" + WN2Common("exWNgetDeviceCountry");
+// }
+
+// var AppType = MApi.storage(Storage.AppType)
+// if(!AppType || AppType != "KMD"){
+if(M.locale.get() != 'de-DE'){
+	$("#facebook").removeClass("none");
+}
+
+// callback for API 2.1, 2.2 
+// API 2.1, 2.2 통신 결과
+var gvlLoginCallback={
+	success:function(rev,setting){
+		/*
+		* 아래 if 문은 관찰 요망
+		* 현재(2017-05-29) RHM 서버에서 내려오는 ResponseMessage 가 정확하지 않아 추가 해놓음
+		* 차후 ResponseMessage 가 확립 되면 수정
+		*/
+		console.log('gvlLoginCallback : ' , rev, setting)
+
+		// when successful
+		// 성공 시
+		if((rev.ResponseMessage).indexOf("LOGIN-OK-0") < 0 || rev.FirstTimeLogin==true){
+			console.log("ResponseMessage  :  ", rev.ResponseMessage);
+			if(rev.FirstTimeLogin==true){
+				rev.ResponseMessage = "LOGIN-OK-1";
+			}
+			var TranslatioCode = JsUtil.getResponseMessageToTranslatioCode(rev.ResponseMessage);
+			MApi.alert(M.locale.localizedString(TranslatioCode),function(){
+				$("#pwd").val("");
+				LoginManager.clear();
+			});
+			return;
+		}
+
+		// save the auto login flag
+		// 자동 로그인 여부를 스토리지에 저장한다
+		var check=$("#autoLogin").is(":checked");
+		MApi.storage(Storage.AutoLogin,check);
+		MApi.storage(Storage.FbToken,gvlFbToken);
+
+		// it stores the received result to the storage
+		// 통신 결과를 스토리지에 저장한다.
+		LoginManager.setLoginInfo(rev);
+
+		var wasCustomerId=MApi.storage(Storage.WasCustomerId);
+		var curCustomerId=LoginManager.getCustomerId();
+		var selectedCultureCode = MApi.storage(Storage.CultureCode);
+		var cultureCode=rev.CultureCode.toLowerCase();
+		var option=Options.Default;
+		//var option=Options.NoHistory;
+		var params={};
+		params.redirect=MApi.param("redirect");
+		params.hash=MApi.param("hash");
+		option.param=params;
+		MApi.storage(Storage.Authorization,rev.TokenResponse.access_token);
+
+		// checking agreement
+		// 사용자 법적 동의 여부를 확인 한다
+		if(rev.Agreement==false){
+
+			// move to License(mk_a00_0010) screen if previously agreed condition
+			// 미 동의 상태 시 법적 동의 화면(mk_a00_0010)으로 이동한다.
+			if(wasCustomerId=="" && cultureCode==selectedCultureCode){
+				var putLegalNoticeCb={
+					success:function(rev,setting){
+						Page.moveToPage("loading",option);
+					},
+					error:function(code,msg){
+						//$("#email").val("");
+						$("#pwd").val("");
+						LoginManager.clear();
+					}
+				};
+				var putLegalNoticeNetwork=new NetworkManager(TrCode.PutLegalNoticeAgreement,putLegalNoticeCb,false);
+				putLegalNoticeNetwork.send({
+					CustomerId:curCustomerId
+				});
+			}else{
+				option.param.fromLogin = "yes";
+				option.param.selectedCode = cultureCode;
+				option.action="NEW_SCR";
+				Page.moveToPage("mk_a00_0010", option);
+			}
+
+		}else if(rev.Agreement==true){
+
+			// when the state agreed to move to loading(loading) screen
+			// 동의 상태 시 사용자 정보 수집 화면(loading)으로 이동한다.
+			if(cultureCode != selectedCultureCode){
+				var legalNoticeCb={
+					success:function(rev,setting){
+						MApi.storage(Storage.LegalContent, rev);
+						MApi.storage(Storage.CultureCode, cultureCode);
+						Page.moveToPage("loading",option);
+					},
+					error:function(code,msg){
+						//$("#email").val("");
+						$("#pwd").val("");
+						LoginManager.clear();
+					}
+				};
+				var legalNoticeNetwork=new NetworkManager(TrCode.GetLegalNotice,legalNoticeCb,false);
+				legalNoticeNetwork.send({
+					"CultureCode":cultureCode
+				});
+			}else{
+				Page.moveToPage("loading",option);
+			}
+		}
+		MApi.storage(Storage.WasCustomerId,curCustomerId);
+	},
+	error:function(responseCode,responseMessage){
+		console.log('login error : ', MApi.storage(Storage.LoginTry))
+		
+		// when failed to initialize email and password field
+		// 실패 시 이메일 주소 입력란과 비밀번호 입력란을 초기화한다.
+		$("#pwd").val("");
+		exFaceBookLogout();
+		gvlFbToken = "";
+	},
+	reTry:function(){
+		gvlGetTokenNetwork.send({get:"token"});
+	}
+},
+
+// callback for API 2.29
+// API 2.29 통신 결과
+gvlGetTokenCallback={
+	success:function(rev,setting){
+
+		// when successful
+		// 성공 시
+		MApi.storage(Storage.Token,rev.Token);
+		if (gvlFbToken != "") {
+
+			// calling the API 2.2 if facebook sign
+			// 페이스북 로그인 일 경우 API 2.2 통신을 시작한다
+			gvlFbLoginNetwork.send({
+				FacebookToken : gvlFbToken
+			});
+		}
+		else {
+
+			// calling the API 2.1 if general login
+			// 일반 로그인일 경우 API 2.1 통신을 시작한다.
+			gvlLoginNetwork.send({
+		        "Email" : exRHMEncrypt($("#email").val()),
+		        "Password" : exRHMEncrypt($("#pwd").val())
+		    });
+		}
+	},
+	error:function(responseCode,responseMessage){
+		console.log('responseCode : ' , responseCode)
+		console.log('responseMessage : ' , responseMessage)
+	}
+},
+options = {timeout:60000},
+
+
+gvlLoginNetwork=new NetworkManager(TrCode.Login,gvlLoginCallback,false,options);
+gvlGetTokenNetwork=new NetworkManager(TrCode.GetToken,gvlGetTokenCallback,false);
+gvlFbLoginNetwork=new NetworkManager(TrCode.FbLogin,gvlLoginCallback,false);
+
+gvlFbToken = "";
+
+// login
+// 로그인 클릭시
+$("#login").click(gfnValidate);
+
+// to the touch “Password forgotten?” link embeded web browser to the forget my password page
+// “Password forgotten?” 문구를 터치 시 비밀번호 찾기 링크를 내장 웹브라우져를 연동하여 웹페이지를 표시한다.
+$("#link").data(Scheme.Url, M.locale.localizedString("PGURL_01"));
+$("#link").click(MApi.browser);
+
+// to the touch “Register to MyKia” button link to the registering
+// “Register to MyKia” 버튼을 터치시 회원가입 링크를 내장 웹브라우져를 연동하여 웹페이지를 표시한다.
+var memJoinUrl = M.locale.localizedString("W0_URL");
+$("#membership_link").data(Scheme.Url,memJoinUrl);
+$("#membership_link").click(MApi.browser)
+
+var localeCode = M.locale.get();
+if (localeCode.match("es")) {
+	$("#login_header > h1").attr("class", "lang_es");
+}
+else if (localeCode.match("pl")) {
+	$("#login_header > h1").attr("class", "lang_pl");
+}
+else if (localeCode.match("cs")) {
+	$("#login_header > h1").attr("class", "lang_cs");
+}
+else {
+	$("#login_header > h1").attr("class", "lang_en");
+}
+$("#login_header > h1").text("MyKia");
+
+// touch to “Login with Facebook”
+// “Login with Facebook” 버튼을 터치 시 
+$("#facebook").click(gfnFaceBookLogin);
+
+M.onReady(function(e){
+	if(MApi.getPlatform()=="iOS") {
+		$("#footer").css("position","absolute");
+		$('.ipt_email').css('lineHeight', 'inherit');
+		$('.ipt_pw').css('lineHeight', 'inherit');
+	}
+});
+
+/*
+ * it receives token from facebook app if installed that
+ * and calling API 2.29
+ * it receives token by facebook id and password if not installed facebook app
+ * and calling API 2.29
+ * 페이스북앱이 설치 되어있을 경우
+ * 페이스북앱과 연동하여 토큰을 받는다.
+ * API 2.29 통신을 시작한다.
+ * 페이스북앱이 미설치 되어있을 경우
+ * 페이스북 ID와 PASSWORD를 입력 받아 토큰을 받는다.
+ * API 2.29 통신을 시작한다.
+ */
+function gfnFaceBookLogin(){
+	function success(_token){
+		gvlFbToken = _token;
+		gvlGetTokenNetwork.send({get:"token"});
+	}
+	function cancel(){
+	}
+	exFaceBookLogin({success:success,cancel:cancel});
+}
+function gfnValidate(){
+	var email=$("#email").val(),
+		pwd=$("#pwd").val(),
+		check=$("#autoLogin").is(":checked");
+
+	/*
+	 * velify email address and password when touched Login button
+	 * “LOGIN” 버튼을 터치 시
+	 * 이메일이 입력 되었는지 확인한다.
+	 * 비밀번호가 입력 되었는지 확인한다.
+	 */
+	if(!email){
+		MApi.alert(M.locale.localizedString("S1_9"));return;
+	}else if(!pwd){
+		MApi.alert(M.locale.localizedString("S1_10"));return;
+	}else if(validateEmail(email)==false){
+		MApi.alert(M.locale.localizedString("S1_11"));
+		//$("#email").val("");
+		$("#pwd").val("");
+		return;
+	}
+	function validateEmail(email) {
+	    return Define.EmailTestRegExp.test(email);
+	}
+
+	// calling API 2.29
+	// API 2.29 통신을 시작한다.
+
+	gvlGetTokenNetwork.send({get:"token"});
+}
+
+// enter Email address
+// Email을 입력한다.
+$("#email").on("input",function(){
+	var val=$(this).val();
+	if (val) {
+		$("#resetEmail").show();
+	} else {
+		$("#resetEmail").hide();
+	}
+	if(M.locale.DevMode!=true) return;
+	if(val.indexOf("!!!")>-1){
+		gfnSuperList($(this), true);
+	}else if(val.indexOf("$$$")>-1){
+		gfnSecretList($(this), $(this));
+	}else if(val.indexOf("???")>-1){
+		gfnTestInit($(this));
+	}
+});
+
+// show super id list on the Acceptant Mode
+// Acceptant Mode에서 super 회원아이디를 불러온다.
+function gfnSuperList(self, bool){
+	self.blur();
+	M.pop.list({
+        title : 'SUPER COMMAND!',
+        message : 'DO SELECT',
+        mode:'SINGLE',
+        button: ['Confirm'],
+        list : [
+        	{}
+        ]
+    },function(idx,row,setting){
+    	var val=row.value.split("|");
+    	$("#email").val(val[0]);
+    	$("#pwd").val(val[1]);
+    });
+}
+
+// show secret id list on the Acceptant Mode
+// Acceptant Mode에서 secret 회원아이디를 불러온다.
+function gfnSecretList(self, bool){
+	self.blur();
+	M.pop.list({
+		title : 'SECRET COMMAND!',
+		message : 'DO SELECT',
+	    mode:'SINGLE',
+	    button: ['Confirm'],
+	    list : [
+	    	{}
+		]
+	},function(idx,row,setting){
+		var val=row.value.split("|");
+		$("#email").val(val[0]);
+    	$("#pwd").val(val[1]);
+	});
+}
+function gfnTestInit(self) {
+	
+}
+
+/* delete Email address */
+/* Email을 삭제한다. */
+$("#resetEmail").click(clearEmail);
+function clearEmail() {
+	$("#email").val("").focus();
+}
+</script>
+</html>

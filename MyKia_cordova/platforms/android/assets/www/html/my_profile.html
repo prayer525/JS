@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="../css/common.css">
+	<title>My Profile</title>
+</head>
+<body>
+<div id="pageMyProfile" class="wrapper" data-role="page">
+	<!-- LayerPop -->
+    <div class="lightbox none"></div>
+    <div class="popup mk-c04-0002 none" id="popup">
+        <div class="popup-m">
+            <div class="popup-in">
+                <div class="p-header">
+                    <strong data-translation-code="D1_1"><!--Update Mileage--></strong>
+                    <button class="pbtn close pl" id="popupClose" data-translation-code="B1_1"><!--Close--></button>
+                </div>
+                <div class="p-body mileage-space">
+                    <strong data-translation-code="E1_43"><!--Please update your mileage!--></strong>
+                    <input type="tel" id="popupInputMileage"/>
+                    <p class="km">Km</p>
+                </div>
+                <div class="p-footer">
+                    <button id="popupSave" class="off" disabled="disabled" data-translation-code="B1_3"><!--Save--></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup mk-c04-0002 none" id="popup_last">
+        <div class="popup-m">
+            <div class="popup-in">
+                <div class="p-header">
+                    <strong data-translation-code="L1_6"><!-- Update Mileage --></strong>
+                    <button class="pbtn close pl" id="popupLastClose">Close</button>
+                </div>
+                <div class="p-body lastservice-space" id="lastServiceArea">
+                    <strong style="display: inline-block; width: 100%;" data-translation-code="E1_44"><!-- Please update your mileage! --></strong>
+                </div>
+                <div class="p-footer">
+                    <button type="button" id="lastServiceSave" class="off" disabled="disabled" data-translation-code="B1_3"><!-- SAVE --></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //LayerPop -->
+
+	<header class="header f-popup" data-role="header" data-position="fixed" data-fullscreen="false">
+		<button class="hbtn fl back-white" data-rel="back">Back</button>
+		<h1 data-translation-code="B1_22"><!-- My Profile --></h1>
+		<!-- <button class="hbtn fr" id="save" data-translation-code="B1_3">Save</button> -->
+	</header>
+	<section class="container">
+		<div class="scroll" class="vbox">
+		<!-- contents_Start -->
+			<!-- User_Info -->
+            <div class="info-usr">
+                <h2 id="name">&nbsp;</h2>
+                <ol>
+                    <li class="hbox jc">
+                        <p class="usr-tit" data-translation-code="B1_6"><!--Address--></p>
+                        <p class="usr-sub flex" id="address">&nbsp;</p>
+                    </li>
+                    <li class="hbox jc">
+                        <p class="usr-tit" data-translation-code="E1_17"><!--Telephone--></p>
+                        <p class="usr-sub flex" id="phone">&nbsp;</p>
+                    </li>
+                    <li class="hbox jc">
+                        <p class="usr-tit" data-translation-code="E1_18"><!--E-mail--></p>
+                        <p class="usr-sub flex"><a href="javascript:void(0);" class="link" id="email"></a></p>
+                    </li>
+                </ol>
+            </div>
+            <!-- Car_Info -->
+            <div class="car-info">
+                <img class="img-car-info" id="carImage"/>
+                <h2 id="car">&nbsp;</h2>
+                <button class="ve-set" id="mk_a00_0004" style="display:none;"></button>
+            </div>
+            <!-- Mileage_Info -->
+            <div class="mileage-info">
+                <ul>
+                    <li id="service"><!--Last service checkup-->
+                        <button type="button" class="hbtn fr setting" id="updateLastservice" data-translation-code="D1_1"></button>
+                        <!-- <button type="button" class="hbtn fr setting" id="updateLastservice">></button> -->
+                        <span data-translation-code="B1_8"></span> : <em></em>
+                    </li>
+                    <li id="mileage"><!-- Mileage -->
+                        <button type="button" class="hbtn fr setting" id="update" data-translation-code="D1_1"></button>
+                        <span data-translation-code="B1_11"></span> : <em></em>
+                    </li>
+                    <li id="mileageSetDate"><!--Mileage Update Date-->
+                        <span data-translation-code="B1_47"></span> : <em></em>
+                    </li>
+                    <li id="registered"><!-- Registered -->
+                        <span data-translation-code="B1_15"></span> : <em></em>
+                    </li>
+                    <li id="usage"><!-- Usage -->
+                        <span data-translation-code="B1_16"></span> : <em></em>
+                    </li>
+                    <li id="plate"></li>
+                </ul>
+            </div>
+            <!-- Natification_Info -->
+            <div class="info-noti" style="display:none;">
+                <p class="tit" data-translation-code="B1_12"><!--Notification--></p>
+                <p class="sub" data-translation-code="B1_43"><!--Please select an item, It is maked as unread news badge number.--></p>
+                <ul>
+                    <li>
+                        <input type="checkbox" id="chk01" />
+                        <label for="chk01" data-translation-code="G1_1"><!-- MyKia News --></label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="chk02" />
+                        <label for="chk02" data-translation-code="G1_3"><!-- Sales&amp;Promotion --></label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="chk03" />
+                        <label for="chk03" data-translation-code="G1_5"><!-- MyKia Video --></label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="chk04" />
+                        <label for="chk04" data-translation-code="B1_44"><!-- How to Video --></label>
+                    </li>
+                </ul>
+            </div>
+		<!-- //contents_End -->
+		</div>
+	</section>
+	<footer class="footer" data-role="footer" data-position="fixed" data-fullscreen="false">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+</body>
+</html>

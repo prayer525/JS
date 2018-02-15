@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: Emergency Call</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_d05_0001">
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+    <header id="header">
+        <h1><!-- Emergency Call --><script type="text/javascript">M.locale.localizedWrite("F1_29")</script></h1>
+        <button type="button" class="hbtn fl home">Home</button>
+    </header>
+
+	<section id="container">
+		<div id="scroll">
+        <!-- contents_Start -->    
+            
+			<!-- Car_Info -->
+			<div class="car_info">
+				<img class="img_car_info" id="carImage" alt=""/>
+				<h2 id="car"></h2>
+			</div>
+			<!-- Txt_Info -->
+            <div class="txt_info">
+                <p class="icon_pool"><script type="text/javascript">M.locale.localizedWrite("F1_30")</script><!-- For your convenience you may contact Kia Motors Europe Customer Care with a click of a button.  --></p>
+            </div>
+			<!-- Call_Info -->
+            <div class="call_space">
+                <strong><!-- Emergency Call --></strong>
+                <ul>
+                    <li>
+						<button type="button">
+                            <p class="tit emergency"></p>
+                            <p class="link red" id="number">&nbsp;</p>
+                            <p class="btn_call" id="callNumber">call</p>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            
+        <!-- //contents_End -->
+        </div>
+    </section>
+
+    <footer id="footer">
+        <p class="img">KIA, The Power to Surprise.</p>
+    </footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+
+// 최초 진입 시 선택한 차량의 이미지를 표시한다
+function gfnInit(){
+	var myvehicle=LoginManager.getSelectedVehiclesInfo();
+// 	var breakdown=LoginManager.getBreakDownCall();
+	if(myvehicle==undefined){
+		$("#carImage").attr("src","../img/car/SL-9S.png");
+		$("#car").text("New Soul ECO-electric");
+	}else{
+        if (M.locale.VirtualMode) {
+            $("#carImage").attr("src","data:"+myvehicle.VehicleImageExtension+";base64,"+myvehicle.VehicleImage);
+        } else {
+            $("#carImage").attr("src", myvehicle.VehicleImageUrl);
+        }
+		$("#car").text(myvehicle.VehicleName);
+	}
+	var emergencyCallNumber="112",
+		country=M.locale.localizedString("Y2_22");
+
+    if(country == "Y2_22"){
+        country = "Europe"
+    }
+
+// 	if(breakdown) emergencyCallNumber=breakdown.EmergencyCallNumber;
+	$(".emergency").text(country);
+	$("#number").text(emergencyCallNumber);
+	$("#callNumber").data(Scheme.PhoneNumber,emergencyCallNumber);
+    
+    // 연락처 터치 시 내장 전화 앱 호출한다.
+    $("#callNumber").click(MApi.call);
+    $("#back").click(Page.backPage);
+}
+// gfnInit();
+M.onReady(function(e){
+    gfnInit();
+});
+</script>
+</html>

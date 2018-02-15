@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: PDF Viewer</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+<script type="text/javascript" src="../bower_components/requirejs/require.js"></script>
+<style>
+canvas {position:relative; display:block; float:left; width:100%; height:100%; z-index:1; padding:0; margin:0;}
+#container {padding-bottom:4rem;}
+#pdf_footer {position:fixed; bottom:0; left:0; background:#aaa; width:100%; height:4rem; text-align:center;}
+#pdf_footer p {height:4rem; line-height:4rem; color:#000;}
+#pdf_footer p span {display:inline; font-size:1.4rem; vertical-align:middle;}
+.btn-close {position:absolute; top:0; left:0; display:inline-block; border:none; width:4rem; height:4rem; background:#bb162b url('../img/pbtn_close.png')no-repeat center center;background-size:1.7rem;}
+</style>
+</head>
+<body>
+<div id="wrapper">
+    <header id="header">
+        <div id="normHead">
+            <h1 class="page-title"></h1>
+        </div>
+    </header>
+
+    <section id="container">
+    	<div id="slider4" class="swipe">
+			<div class="swipe_wrap">
+				<!-- <canvas></canvas> -->
+			</div>
+		</div>
+    </section>
+
+	<footer id="pdf_footer">
+		<button class="btn-close back"><!-- close --></button>
+		<p><span id="current_page"></span> / <span id="total_page"></span></p>
+	</footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript" src='../js/libs/swipe/kswipe.js'></script>
+<script type="text/javascript" src='../js/libs/swipe/swipe.js'></script>
+<script type="text/javascript">
+require.config({paths: {'pdfjs': '../js/src'}});
+
+M.onReady(function(e){
+	fnShowDocument.showDoc(M.data.storage("pathParam").fullPath);
+	$('h1.page-title').text(M.data.storage("pathParam").pageTitle)
+});
+
+var fnShowDocument = {
+	init:function(_path){
+		_this 				= this;
+		_this.path 			= _path; // pdf 경로
+		_this.totalPage 	= 0; // pdf page count
+		_this.currentPage 	= 1; // pdf current page
+		_this.el 			= null // document.getElementById('pdfViewCanvas');
+
+		// _this.swipeInit();
+	},
+	showDoc:function(_path){
+		fnShowDocument.init(_path); // 초기화
+
+		alert(_path)
+
+		require(['pdfjs/display/api', 'pdfjs/display/global', 'pdfjs/web/compatibility'], function (api, global,compatibility) {
+			// In production, change this to point to the built `pdf.worker.js` file.
+			global.PDFJS.workerSrc = '../js/src/worker_loader.js';
+
+			// Fetch the PDF document from the URL using promises.
+			api.getDocument(_path).then(function (pdf) {
+				_this.pdf = pdf;
+				_this.totalPage = pdf.numPages;
+
+				_this.pageNavi(_this.currentPage);
+			});
+		});
+	},
+	pageNavi:function(_targetPageNum){
+		if(_targetPageNum <= _this.totalPage){
+			var _el = $('<canvas id="' + ('pdfViewCanvas'+_targetPageNum) + '"></canvas>').appendTo('.swipe_wrap');
+			_this.el = document.getElementById('pdfViewCanvas'+_targetPageNum)
+		}else{
+
+			$('#current_page').text(_this.currentPage);
+			$('#total_page').text(_this.totalPage);
+
+			_this.swipeInit();
+
+			return false;
+		}
+		// Fetch the page.
+		_this.pdf.getPage(_targetPageNum).then(function (page) {
+			var scale = 1;
+			var viewport = page.getViewport(scale);
+
+			// Prepare canvas using PDF page dimensions.
+			var context = _this.el.getContext('2d');
+			_this.el.height = viewport.height;
+			_this.el.width = viewport.width;
+
+			// Render PDF page into canvas context.
+			var renderContext = {
+				canvasContext: context,
+				viewport: viewport
+			};
+			page.render(renderContext, function(renderTask){
+				console.log("renderTask : ", renderTask)
+			});
+
+			_this.pageNavi(++_targetPageNum)
+		});
+	},
+	swipeInit:function(){
+		var swipeCallback = {
+			continuous:false,
+			callback : function(curIdx) {
+				$('#current_page').text(curIdx+1);
+		    }
+		};
+		slider4 = new Swipe(document.getElementById('slider4'), swipeCallback);
+	}
+	/*
+	,
+	prevPage:function(){
+		_this.currentPage = _this.currentPage - 1;
+		if(_this.currentPage < 1){
+			_this.currentPage = 1;
+
+			return false;
+		}
+
+		_this.pageNavi(_this.currentPage);
+	},
+	nextPage:function(){
+		_this.currentPage = _this.currentPage + 1;
+		if(_this.currentPage > _this.totalPage){
+			_this.currentPage = _this.totalPage;
+
+			return false;
+		}
+
+		_this.pageNavi(_this.currentPage);
+	},
+	swipeInit:function(){
+		var el = document.getElementById('pdfViewCanvas')
+		_this.swipedetect(function(swipedir){
+		    if(swipedir == "left"){
+		    	_this.nextPage();
+		    }else if (swipedir == "right"){
+		    	_this.prevPage();
+		    }
+		})
+	},
+	swipedetect:function(callback){
+	    var swipedir,
+	    startX,
+	    startY,
+	    distX,
+	    distY,
+	    threshold = 50, //required min distance traveled to be considered swipe
+	    restraint = 300, // maximum distance allowed at the same time in perpendicular direction
+	    allowedTime = 500, // maximum time allowed to travel that distance
+	    elapsedTime,
+	    startTime,
+	    handleswipe = callback || function(swipedir){}
+	  
+	    _this.el.addEventListener('touchstart', function(e){
+	        var touchobj = e.changedTouches[0]
+	        swipedir = 'none'
+	        dist = 0
+	        startX = touchobj.pageX
+	        startY = touchobj.pageY
+	        startTime = new Date().getTime() // record time when finger first makes contact with surface
+	        e.preventDefault()
+	    }, false)
+	  
+	    _this.el.addEventListener('touchmove', function(e){
+	        e.preventDefault() // prevent scrolling when inside DIV
+	    }, false)
+	  
+	    _this.el.addEventListener('touchend', function(e){
+	        var touchobj = e.changedTouches[0]
+	        distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+	        distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+	        elapsedTime = new Date().getTime() - startTime // get time elapsed
+	        if (elapsedTime <= allowedTime){ // first condition for awipe met
+	            if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+	                swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+	            }
+	            else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+	                swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+	            }
+	        }
+	        handleswipe(swipedir)
+	        e.preventDefault()
+	    }, false)
+	}
+	*/
+}
+</script>
+</html>

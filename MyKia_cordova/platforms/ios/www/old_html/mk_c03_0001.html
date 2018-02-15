@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: Brochure Request :: List</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_c03_0001">
+<!-- ========== Start ========== -->
+
+<!-- LayerPop -->
+    <div class="lightbox none"></div>
+    <div class="popup none" id="downloadPopup">
+        <div class="popup_m">
+            <div class="popup_in">
+                <div class="p_header">
+                    <strong class="download-popup-title"><!-- Download --><script type="text/javascript">M.locale.localizedWrite("L1_3")</script></strong>
+                </div>
+                <div class="p_body loading_space loading">
+                    <strong class="download-popup-message"><!-- The manual is downloading --><script type="text/javascript">M.locale.localizedWrite("D1_8")</script></strong>
+                    <div class="progressbar">
+                        <div class="bar" style="width:0%;" id="per_bar"><div class="bar_in"></div></div>
+                    </div>
+                    <p><span id="per_int">0</span>/100</p>
+                </div>
+                <div class="p_footer">
+                    <button type="button" id="btn_download_cancel"><!-- CANCEL --><script type="text/javascript">M.locale.localizedWrite("D1_9")</script></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //LayerPop -->
+	<!-- LayerPop -->
+    <div class="popup" id="morePopup" style="display: none;">
+        <div class="popup_m" style="vertical-align: bottom;" id="morePopupBox">
+            <div class="popup_in">
+                <div class="more_popup">
+                	<button class="email_btn" id="email"><script type="text/javascript">M.locale.localizedWrite("L1_7")</script></button>
+                    <button class="open_btn" id="openIn"><script type="text/javascript">M.locale.localizedWrite("L1_5")</script></button>
+                    <button class="download_btn" id="download"><script type="text/javascript">M.locale.localizedWrite("L1_4")</script></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //LayerPop -->
+<div id="wrapper">
+    <header id="header">
+        <h1><!-- Brochure Request --><script type="text/javascript">M.locale.localizedWrite("E1_14")</script></h1>
+        <button class="hbtn fl home none" id="hlbtn">Home</button>
+        <!-- <button class="hbtn fr search">Search</button> -->
+    </header>
+
+    <section id="container">
+        <div id="scroll">
+        <!-- contents_Start -->
+            
+            <div class="car_list">
+	            <ul class="list_type_select" id="list">
+	                <!-- <li>
+	                    <input type="checkbox" id="chk01"/>
+	                    <label class="li_sub hbox js" for="chk01">
+	                        <p class="flex">New Soul ECO-electric</p>
+	                        <img src="../img/car/RP_K3Y.png"/>
+	                    </label>
+	                </li>
+	                <li>
+	                    <input type="checkbox" id="chk02"/>
+	                    <label class="li_sub hbox js" for="chk02">
+	                        <p class="flex">New Soul ECO-electric</p>
+	                        <img src="../img/car/RP_K3Y.png"/>
+	                    </label>
+	                </li>
+	                <li>
+	                    <input type="checkbox" id="chk03"/>
+	                    <label class="li_sub hbox js" for="chk03">
+	                        <p class="flex">New Soul ECO-electric</p>
+	                        <img src="../img/car/RP_K3Y.png"/>
+	                    </label>
+	                </li> -->
+	            </ul>
+			</div>
+
+			<!-- No Search Result -->
+            <div class="result_none none">
+                <p><script type="text/javascript">M.locale.localizedWrite("D1_16")</script></p>
+            </div>
+            
+        <!-- //contents_End -->
+        </div>
+		            
+		<div class="f_btnArea">
+			<button id="request" class="btn_red off" disabled="disabled"><!-- Confirm -->
+				<script type="text/javascript">M.locale.localizedWrite("E1_25")</script>
+			</button>
+		</div>
+    </section>
+
+    <footer id="footer">
+        <p class="img">KIA, The Power to Surprise.</p>
+    </footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+var gvlRegionName = "",
+	gvlCountryCode,
+	gvlSelCarCode = "",
+	gvlDealerInfo,
+	gvlInitFlag=false,
+	gvlHasClass;
+
+// Confirm”버튼 터치 시
+$("#request").click(function() {
+	// 다운로드 기능적용 할때 아래 한줄 주석 하고, 아래 팝업 주석 풀면 됩니다. author: Hwang
+	// MApi.confirm(JsUtil.stringFomatter(M.locale.localizedString("V1_4"), [gvlDealerInfo.Name]), [M.locale.localizedString("D1_9"),M.locale.localizedString("E1_25")], gfnReq);
+	$(".lightbox").removeClass('none');
+	$("#morePopup").fadeIn();
+});
+
+// Confirm”버튼 터치 시 API 2.10 통신을 시작한다.
+function gfnReq(idx, setting) {
+	if (idx == 0) {
+		return;
+	}
+	
+	var brochureNetwork = new NetworkManager(TrCode.VehicleBrochure, {
+		success : function(rev, setting) {
+			
+			// API 2.10 통신 결과 성공 시 버튼 및 리스트 선택 상태를 초기화 한다
+			$("input:checked").prop("checked", false);
+			$("#request").prop("disabled", true);
+			$("#request").addClass("off");
+			$("#scroll").scrollTop(0);
+			MApi.alert(M.locale.localizedString("H1_1"),Page.backPage);
+		}
+	}, false),
+	detailInfo = LoginManager.getDetailsInfo();
+	
+	brochureNetwork.send({
+		CustomerId : LoginManager.getCustomerId(),
+		Gender : detailInfo.Male ? "M" : "F",
+		Salutation : detailInfo.Male ? "Mr." : "Mrs.",
+		FirstName : detailInfo.FirstName,
+		LastName : detailInfo.LastName,
+		MobilePhone : detailInfo.Phone,
+		HomePhone : "",
+		StreetAddress1 : detailInfo.Street,
+		StreetAddress2 : "",
+		HouseNumber : detailInfo.Housenumber,
+		Postcode : detailInfo.PostalCode,
+		City : detailInfo.City,
+		CountryCode : gvlCountryCode,
+		Region : gvlRegionName,
+		EmailAddress : detailInfo.Email,
+		RequestModel : gvlSelCarCode,
+		DealerSapCode : gvlDealerInfo.DealerSapCode,
+		Language : LoginManager.getLoginInfo().CultureCode,
+		MarketingAgreement : "N",
+		OptinForNewsletter : "N"
+	});
+}
+M.onReady(function(e){
+	init();
+
+	$('#morePopupBox').click(gfnCloseMorePopup);
+	$('#download').click(gfnDownload);
+	$('#openIn').click(gfnOpenIn);
+	$('#email').click(gfnEmail);
+});
+
+// 최초 진입 시 API 2.8 통신을 시작한다.
+function init() {
+	if (MApi.param("from") == "dealerDetail") {
+		$("#hlbtn").addClass("back");
+		$("#hlbtn").removeClass("home");
+	}
+	$("#hlbtn").removeClass("none");
+	
+	var allVehicleImagesCallback={
+		success:function(rev,setting){
+			// API 2.8 통신 결과 성공 시 리스트를 표시한다.
+			gfnallVehicleList(rev.ModelImages, setting);
+		}
+	}
+	var vehicleNetwork = new NetworkManager(TrCode.AllVehicleImages,allVehicleImagesCallback,true);
+
+	var data = {
+		"MarketId":LoginManager.getDetailsInfo().MarketId
+	}
+	gvlCountryCode = JsUtil.getCountryCodeToMarketId(LoginManager.getDetailsInfo().MarketId)
+	gvlDealerInfo = LoginManager.getDealerInfo()
+	
+	vehicleNetwork.send(data);
+}
+
+// API 2.8 통신 결과 성공 시 리스트를 표시한다.
+function gfnallVehicleList(vehicles, setting) {
+	if (vehicles.length == 0) {
+		$('.result_none').removeClass('none');
+		//MApi.alert(M.locale.localizedString("F1_12"));
+	}
+	$(vehicles).each(function(i,item){
+		var vehicleImage = item.VehicleThumbnailUrl
+		if (M.locale.VirtualMode) {
+			vehicleImage = "data:" + item.VehicleImageExtend + ";base64," + item.VehicleImage;
+		}
+		var temp = $("<li></li>").addClass("download").append(
+        	$("<input name='car' type='radio' id='chk"+i+"'/>")
+		).append(
+			$("<label class='li_sub hbox js' for='chk"+i+"'></label>")
+			.append($("<p class='flex'></p>").html(item.VehicleModelName))
+			.append($("<span></span>").html(item.Licenseplate))
+			.append($("<img></img>").attr("src", vehicleImage))
+		)
+        .click(onItemClickListener)
+        .data("index",i)
+        .data("vCode", item.VehicleCode)
+        .data("hasPDF", item.HasBrochure);
+
+		var validatePath="doc://brochure/"+item.VehicleCode;
+		var fileInfo = M.file.info({
+	        path : validatePath
+	    });
+	    
+	    if(fileInfo.status=="SUCCESS"){
+	    	temp.data("filepath", "doc://brochure/"+item.VehicleCode+gvlFileExtension);
+			temp.removeClass("download");
+	    }
+	    temp.appendTo($("#list"));
+	});
+
+	// 리스트 터치 시 “Confirm”버튼을 활성화 상태로 변경한다.
+	function onItemClickListener(){
+        $("#request").prop("disabled",false);
+        $("#request").removeClass("off");
+        var idx=$(this).data("index");
+        gvlSelCarCode = $(this).data("vCode");
+        gvlTemp = $(this);
+    }
+}
+
+M.onResume(function(e) {
+	if(gvlInitFlag){
+		gvlInitFlag=false;
+		gfnInit();
+	}
+});
+M.onRestore(function(e) {
+	if(gvlInitFlag){
+		gvlInitFlag=false;
+		gfnInit();
+	}
+});
+</script>
+<script type="text/javascript">
+var myvehicle=LoginManager.getSelectedVehiclesInfo();
+var platform=MApi.getPlatform();
+var gvlSendType = 1,
+gvlDocumentList = [],
+gvlOwnersList = null,
+gvlQuickList = null,
+gvlTheUrl = "",
+gvlIsCancel = null,
+gvlTemp = null,
+gvlFileExtension=".pdf";
+
+function gfnEmail(){
+	MApi.confirm(JsUtil.stringFomatter(M.locale.localizedString("V1_4"), [gvlDealerInfo.Name]), [M.locale.localizedString("D1_9"),M.locale.localizedString("E1_25")], gfnReq);
+}
+
+function gfnDownload(){
+	if(!gvlTemp.data("hasPDF")){
+		gfnCloseMorePopup();
+
+		MApi.alert(M.locale.localizedString("Y2_25"), null);
+
+		return false;
+	}
+	
+	$(".download-popup-title").text(M.locale.localizedString("L1_3"))
+	$(".download-popup-message").text(M.locale.localizedString("D1_8"))
+
+	gfnDownloadDocument(false, noticeStr = M.locale.localizedString("M1_2"));
+}
+
+function gfnOpenIn(){
+	if(!gvlTemp.data("hasPDF")){
+		gfnCloseMorePopup();
+
+		MApi.alert(M.locale.localizedString("Y2_25"), null);
+
+		return false;
+	}
+
+	var popTitle = M.locale.localizedString("L1_3"),
+		popMessage = M.locale.localizedString("D1_8");
+
+	if(M.locale.localizedString("Y2_23") != "Y2_23"){
+		popTitle = M.locale.localizedString("Y2_23")
+	}
+
+	if(M.locale.localizedString("Y2_24") != "Y2_24"){
+		popMessage = M.locale.localizedString("Y2_24")
+	}
+	
+	$(".download-popup-title").text(popTitle);
+	$(".download-popup-message").text(popMessage);
+
+	if(gvlTemp.hasClass("download")){
+		// download content from server by API 2.34 if item doesn't downloaded
+		// 해당 리스트 아이템을 다운로드 받지 않은 경우
+		// API 2.34. 통신을 하여 서버로 부터 다운로드 받는다.
+		gfnDownloadDocument(true, noticeStr = M.locale.localizedString("D1_21"));
+	}else{
+		// move to detail screen when you already has been downloaded item
+		// 해당 리스트 아이템을 다운로드 받은 경우
+		// 상세 내용으로 이동한다.
+		gfnShowDocument();
+	}
+}
+
+// move to Document Viewer screen
+// Document Viewer 화면으로 이동한다.
+function gfnShowDocument(){
+	var fullpath = gvlTemp.data("filepath");
+
+	if(platform=="iOS"){
+		var params={};
+		params.path=fullpath;
+		params.orientation="DEFAULT";
+		params.animation="NONE";
+		if(gvlSendType==1) params.title=M.locale.localizedString("D1_6");
+		else params.title=M.locale.localizedString("D1_7");
+
+		M.plugin("viewer.doc").open({
+			title:params.title,
+			path:params.path
+		});
+
+	}else{
+		var params={};
+		params.path=fullpath;
+		params.orientation="DEFAULT";
+		params.animation="NONE";
+		if(gvlSendType==1) params.title=M.locale.localizedString("D1_6");
+		else params.title=M.locale.localizedString("D1_7");
+		WN2Common("exWNMuPDFActivity",JSON.stringify(params));
+	}
+}
+
+// download content from server by API 2.34 if item doesn't downloaded
+// 해당 리스트 아이템을 다운로드 받지 않은 경우
+// API 2.34. 통신을 하여 서버로 부터 다운로드 받는다.
+function gfnDownloadDocument(type, noticeStr){
+	$("#per_int").text(0);
+	$("#per_bar").width("0%");
+	$(".lightbox").removeClass('none');
+	$("#downloadPopup").removeClass('none');
+	var params={};
+	params.RequestModel = gvlSelCarCode;
+	params.DownloadContent = "0";
+	gvlTheUrl=JsUtil.getNetworkUrl()+TrCode.GetBrochure;
+	M.net.http.download({
+		url:gvlTheUrl,
+		overwrite:true,
+		timeout:60000,
+		indicator:false,
+		async:false,
+		finish : function(status, header, fileinfo, setting) {
+			console.log(status);
+			console.log(header);
+			console.log(fileinfo);
+			console.log(setting);
+			if(status!=200){
+
+				// remove download temporary files when download canceled or failed
+				// 다운로드 취소/실패 시 다운로드 임시 파일을 삭제한다. 
+				gfnCloseDownloadPopup();
+				if (gvlIsCancel == "CANCEL") {
+					gvlIsCancel = null;
+				}else {
+					MApi.alert(M.locale.localizedString("D1_15"));
+				}
+			}else{
+
+				// when download complete
+				// 다운로드 완료 시
+				var fullpath=fileinfo.fullpath;
+				
+				if(type){
+					gfnFileMove(fullpath);
+				}else{
+					if(platform=="iOS") {
+						gfnOpenDocument(fullpath);
+					}else{
+						gfnExternalMove(fullpath);
+					}
+				}
+				
+			}
+		},
+		progress : function(total, current, setting) {
+			var percent=parseInt((current/total*100));
+			$("#per_int").text(percent);
+			$("#per_bar").width(percent+"%");
+		},
+		method:"POST",
+		encoding:"utf-8",
+		parameters:params,
+		header:{
+			"Content-Type":"application/json",
+			"Authorization":"Bearer "+MApi.storage(Storage.Authorization)
+		}
+	});
+
+	$('#btn_download_cancel').click(function(){
+		gvlIsCancel = 'CANCEL';
+		M.net.http.cancel({
+			url:gvlTheUrl
+		})
+	})
+}
+
+// save the file path
+// 파일을 경로에 저장한다.
+function gfnFileMove(fullpath){
+	var validatePath="doc://brochure/";
+	var fileInfo = M.file.info({
+        path:validatePath
+    });
+    if(fileInfo.status == 'SUCCESS'){
+    	move();
+    }else{
+    	var rtn=M.file.create({
+			type:"DIR",
+			path:validatePath
+		});
+		if(rtn.status=="SUCCESS"){
+			move();
+		}else{
+			MApi.alert(M.locale.localizedString("D1_15"));
+		}
+    }
+
+    function move(){
+        console.log(fullpath);
+        console.log("doc://brochure/"+gvlSelCarCode);
+    	M.file.move({
+			type:"FILE",
+			source:fullpath,
+			indicator:false,
+			destination:"doc://brochure/"+gvlSelCarCode+gvlFileExtension,
+			overwrite:true,
+			finish:function(status,error){
+				if(status=="SUCCESS"){
+					gvlTemp.data("filepath", "doc://brochure/"+gvlSelCarCode+gvlFileExtension);
+					gvlTemp.removeClass("download");
+					gfnCloseDownloadPopup();
+					gfnComplete(fullpath);
+				}else{
+					gfnCloseDownloadPopup();
+					MApi.alert(M.locale.localizedString("D1_15"));
+				}
+			}
+		});
+    }
+}
+function gfnExternalMove(fullpath){
+	var validatePath = WN2Common("exWNgetExternaDirectory")+"/MyKia/brochure/";
+	var fileInfo = M.file.info({
+        path:validatePath
+    });
+    
+    if(fileInfo.status == 'SUCCESS'){
+    	move();
+    }else{
+    	var rtn=M.file.create({
+			type:"DIR",
+			path:validatePath
+		});
+		if(rtn.status=="SUCCESS"){
+			move();
+		}else{
+			MApi.alert(M.locale.localizedString("D1_15"));
+		}
+    }
+    function move(){
+    	var status = WN2Common("exWNmoveFile",fullpath,validatePath+gvlSelCarCode+gvlFileExtension);
+    	console.log(status);
+    	console.log(fullpath);
+    	console.log(validatePath+gvlSelCarCode);
+    	if(status == "SUCCESS"){
+    		gfnCloseDownloadPopup();
+    		MApi.alert(M.locale.localizedString("D1_10"));
+    	}else{
+    		gfnCloseDownloadPopup();
+    		MApi.alert(M.locale.localizedString("D1_15"));
+    	}
+    }
+}
+
+// iOS document menu open
+// iOS 문서 메뉴 열기
+function gfnOpenDocument(fullpath){
+ 	var result = WN2Common("exWNopenDocumentIn", fullpath);
+ 	if(result == 'YES'){
+ 		gfnCloseDownloadPopup();
+	}else{
+ 		MApi.alert(M.locale.localizedString("D1_15"));
+ 	}
+}
+// unzip file
+// zip 파일 경우 압축 해제한다.
+function gfnUnZip(fullpath){
+	var manualpath=fullpath.substring(0,fullpath.lastIndexOf(".zip"));
+	M.zip.unzip({
+		path : fullpath,
+		destination : manualpath,
+		finish : unZipFunc,
+		overwrite : true,
+		indicator : false
+	});
+}
+
+function gfnComplete(fullpath){
+	MApi.alert(M.locale.localizedString("D1_10"),function(){
+		gfnShowDocument();
+	});
+	setTimeout(function(){
+        var removeResult = M.file.remove({
+            type : 'FILE',
+            path : fullpath,
+        });
+	},2000);
+}
+
+// close popup when you cancel downloads
+// 다운로드 취소 시 팝업을 닫음
+function gfnCloseDownloadPopup(){
+	//$(".lightbox").hide();
+	//$(".popup").hide();
+	$(".lightbox").addClass('none');
+	$("#downloadPopup").addClass('none');
+}
+
+function gfnCloseMorePopup(){
+	$("#morePopup").fadeOut();
+	$(".lightbox").addClass('none');
+}
+
+</script>
+</html>

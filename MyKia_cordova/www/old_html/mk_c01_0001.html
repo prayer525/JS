@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: MyKia Dealer</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_c01_0001">
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+	<header id="header">
+		<h1><!-- MyKia Dealer --><script type="text/javascript">M.locale.localizedWrite("E1_1")</script></h1>
+		<button type="button" class="hbtn fl home">Home</button>
+	</header>
+
+	<section id="container">
+		<div id="scroll">
+        <!-- contents_Start -->    
+            
+			<!-- Dealer_Info : type01 = sales / type02 = service / type03 = sales&service -->
+			<div class="dealer_space">
+				<h2 class="" id="name">&nbsp;</h2>
+			</div>
+			<!-- Tab_Area -->
+			<!-- <div class="sub_tab">
+				<ul class="tab hbox jc"><!- selected add: li class="on" -
+					<li class="flex on">
+						<button type="button" id="informationBtn"><!- INFOMATION -
+                            <script type="text/javascript">M.locale.localizedWrite("E1_2")</script>
+                        </button>
+					</li>	
+					<li class="flex ">
+						<button type="button" id="contactBtn"><!- CONTACT -
+                            <script type="text/javascript">M.locale.localizedWrite("E1_15")</script>
+                        </button>
+					</li>
+				</ul>
+			</div> -->
+
+			<!-- tab1)INFOMATION_con -->
+			<div id="informationLayout">
+				<div class="info_dealer info_usr">
+					<div class="dealer-img-wrap">
+						<img id="dealerImg" src="" alt=""/>
+					</div>
+					<ul>
+						<li id="generalInfo">
+							<p class="usr_tit"><!-- General Info. --><script type="text/javascript">M.locale.localizedWrite("E1_3")</script></p>
+							<p class="usr_sub" id="description">&nbsp;</p>
+						</li>
+					</ul>
+				</div>
+				<div class="dealer_info">
+					<ul>
+						<li>
+							<p class="usr_tit"><!-- Address --><script type="text/javascript">M.locale.localizedWrite("B1_6")</script></p>
+							<p class="usr_sub" id="address">&nbsp;</p>
+							<button type="button" id="mapBtn">Map</button>
+						</li>
+						<li class="one_phone">
+							<p class="usr_tit"><!-- Telephone --><script type="text/javascript">M.locale.localizedWrite("E1_17")</script></p>
+							<p class="usr_sub"><em id="oneSalesPhone"></em></p>
+							<button type="button" class="ico_phone" id="call_one">Call</button>
+						</li>
+						<li class="two_phone">
+							<p class="usr_tit"><!-- Showroom --><script type="text/javascript">M.locale.localizedWrite("W0_13")</script></p>
+							<p class="usr_sub"><em id="twoSalesPhone"></em></p>
+							<button type="button" class="ico_phone" id="call_two">Call</button>
+						</li>
+						<li class="two_phone">
+							<p class="usr_tit"><!-- Workshop --><script type="text/javascript">M.locale.localizedWrite("W0_14")</script></p>
+							<p class="usr_sub"><em id="servicePhone"></em></p>
+							<button type="button" class="ico_phone" id="callService">Call</button>
+						</li>
+
+						<li class="one_email">
+							<p class="usr_tit"><!-- E-mail --><script type="text/javascript">M.locale.localizedWrite("E1_18")</script></p>
+							<p class="usr_sub"><em id="oneSalesEmail"></em></p>
+							<button type="button" class="ico_email" id="link_one">Mail</button>
+						</li>
+						<li class="two_email">
+							<p class="usr_tit"><!-- Showroom --><script type="text/javascript">M.locale.localizedWrite("W0_13")</script></p>
+							<p class="usr_sub"><em id="twoSalesEmail"></em></p>
+							<button type="button" class="ico_email" id="link_two">Mail</button>
+						</li>
+						<li class="two_email">
+							<p class="usr_tit"><!-- Workshop --><script type="text/javascript">M.locale.localizedWrite("W0_14")</script></p>
+							<p class="usr_sub"><em id="serviceEmail"></em></p>
+							<button type="button" class="ico_email" id="linkService">Mail</button>
+						</li>
+						<li class="dealer_homepage">
+							<p class="usr_tit"><!-- Homepage --><script type="text/javascript">M.locale.localizedWrite("E1_19")</script></p>
+							<p class="usr_sub"><a href="javascript:void(0);" class="link" id="site">&nbsp;</a></p>
+							<button type="button" class="ico_homepage" id="browser">Web</button>
+						</li>
+					</ul>
+
+					<div class="wrap_btn_round ta_r">
+						<button type="button" class="btn_red" id="mk_d01_0001"><!-- Select -->
+							<script type="text/javascript">M.locale.localizedWrite("E1_52")</script>
+						</button>
+					</div>
+				</div>
+				<div class="info_dealer info_usr info_service_time">
+					<ul>
+						<li>
+							<p class="usr_tit"><!-- Business hours --><script type="text/javascript">M.locale.localizedWrite("E1_4")</script></p>
+							<p class="usr_sub" id="salesLayout" style="display:none;">
+								<strong id="e1_5"><!-- [Sales] --></strong>	
+								<!--span>Mon~ Fri: 09:00~18:00</span-->
+							</p>
+							<p class="usr_sub" id="serviceLayout" style="display:none;">
+								<strong id="e1_6"><!-- [Service] --></strong>
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- tab2)CONTACT_con -->
+			<div id="contactLayout" style="display:none;">
+				
+				<!-- no select car add : class='off'
+                <div class="f_btnArea">
+					<button type="button" class="btn_white">Make an appointment<script type="text/javascript">M.locale.localizedWrite("E1_20")</script></button>
+				</div>
+                -->
+			</div>
+            
+        <!-- //contents_End -->
+		</div>
+	</section>
+
+
+    <footer id="footer">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+$("#e1_5").text(M.locale.localizedString("E1_5"));
+$("#e1_6").text(M.locale.localizedString("E1_6"));
+// $("#informationBtn").click(gfnVisibler);
+// $("#contactBtn").click(gfnVisibler);
+$("#testDrive").click(function() {
+	var option=Options.Default;
+	option.param = {"from":"dealerDetail"};
+	Page.moveToPage("mk_c02_0002",option);
+});
+$("#brochurReq").click(function() {
+	var option=Options.Default;
+	option.param = {"from":"dealerDetail"};
+	Page.moveToPage("mk_c03_0001",option);
+});
+
+$('#mk_d01_0001').click(Page.moveToPageForId)
+// function gfnVisibler(){
+// 	var id=$(this).attr("id");
+// 	switch(id){
+// 		case "informationBtn":
+// 			$("#informationBtn").parent().addClass("on");
+// 			$("#contactBtn").parent().removeClass("on");
+// 			$("#informationLayout").show();
+// 			$("#contactLayout").hide();
+// 		break;
+// 		case "contactBtn":
+// 			$("#contactBtn").parent().addClass("on");
+// 			$("#informationBtn").parent().removeClass("on");
+// 			$("#informationLayout").hide();
+// 			$("#contactLayout").show();
+// 		break;
+// 	}
+// }
+
+// 최초 진입 시 
+function gfvInit(e){
+	var dealerInfo=LoginManager.getDealerInfo();
+	/*
+	 * TODO: 전화번호 2개 표시
+	for (var i in dealerInfo) {
+		MApi.log(i + " : " + dealerInfo[i])
+	}
+	*/
+	if(!dealerInfo.DealerSapCode){
+		MApi.alert(M.locale.localizedString("S1_12"),MApi.back);
+		return;
+	}
+	$("#name").text(dealerInfo.Name);
+	$("#name").attr("class","type0"+dealerInfo.DealerType);
+	// $("#dealerImg").attr("src","../img/header_login.jpg");
+	
+	// 선호하는 딜러 이미지를 표시한다
+	//if(LoginManager.getDetailsInfo().MarketId == 'KMDE'){
+		$("#dealerImg").attr("src", "../img/default_sales.png");
+		$('.dealer-img-wrap').addClass('kmd-img');
+	/*
+	} else if (dealerInfo.CountryCode != "fr" && LoginManager.getDetailsInfo().MarketId != "KMIE") {
+		if(dealerInfo.DealerImageUrl==""||dealerInfo.DealerImageUrl==undefined)
+			$("#dealerImg").parent("div").hide();
+		else
+			$("#dealerImg").attr("src", dealerInfo.DealerImageUrl);
+	} else {
+		$('.dealer-img-wrap').hide();
+	}
+	*/
+
+	// 선호하는 딜러의 소개글을 표시한다
+	if (dealerInfo.Description) {
+		$("#description").html(dealerInfo.Description);
+		$("#generalInfo").show();
+	} else {
+		$("#generalInfo").hide();
+	}
+
+	// 판매를 하는 딜러의 경우 영업시간을 표시한다
+	var openInfo=dealerInfo.OpeningHours;
+	if(!openInfo.Sales.IsEmpty){
+		gfnTimeTable(openInfo.Sales, "#salesLayout");
+	}
+	if(!openInfo.Service.IsEmpty){
+		gfnTimeTable(openInfo.Service, "#serviceLayout");
+	}
+	if(openInfo.Sales.IsEmpty && openInfo.Service.IsEmpty){
+		$('.info_service_time').hide();
+	}
+	$("#address").html(dealerInfo.Street+"</br>"+dealerInfo.ZipCode+" "+dealerInfo.Town);
+	$("#mapBtn").click(function(){
+		var value=[];
+		value.push(dealerInfo.GeoLatitude);
+		value.push(dealerInfo.GeoLongitude);
+		exMapCall(JsUtil.stringFomatter("daddr=%@, %@",value));
+	});
+
+	// telephone btn setting
+	$(".one_phone, .two_phone").hide();
+	$('span.btn').removeClass('after');
+
+	// dealer phone number string 
+	var dealerPhone = '';
+	var  _oneSalesPhone	= $('#oneSalesPhone')
+		,_twoSalesPhone	= $('#twoSalesPhone')
+		,_servicePhone 	= $('#servicePhone')
+		,_call_one		= $('#call_one')
+		,_call_two		= $('#call_two')
+		,_callService	= $('#callService')
+		,_phoneDiv		= $('#phone').find("div")
+
+	// sales & service 둘 다 전화번호가 있을 경우
+	if(dealerInfo.Phone != "" && dealerInfo.PhoneService != "" ){
+		_twoSalesPhone.text(dealerInfo.Phone);
+		_servicePhone.text(dealerInfo.PhoneService);
+
+		// 전화걸기 버튼 셋팅
+		_call_two.data(Scheme.PhoneNumber,'+'+dealerInfo.Phone);
+		_call_two.click(MApi.call);
+		_callService.data(Scheme.PhoneNumber,'+'+dealerInfo.PhoneService);
+		_callService.click(MApi.call);
+
+		$(".two_phone").show();
+	}
+	// Service 만 전화 번호가 있을 경우
+	else if(dealerInfo.Phone=="" && dealerInfo.PhoneService != ""){
+		_oneSalesPhone.text(dealerInfo.PhoneService);
+
+		// 전화걸기 버튼 셋팅
+		_call_one.data(Scheme.PhoneNumber,'+'+dealerInfo.PhoneService);
+		_call_one.click(MApi.call);
+		$(".one_phone").show();
+	}
+	// Sales 만 전화 번호가 있을 경우
+	else if(dealerInfo.Phone != "" && dealerInfo.PhoneService == ""){
+		_oneSalesPhone.text(dealerInfo.Phone);
+
+		// 전화걸기 버튼 셋팅
+		_call_one.data(Scheme.PhoneNumber,'+'+dealerInfo.Phone);
+		_call_one.click(MApi.call);
+
+		$(".one_phone").show();
+	}
+
+	// email btn setting
+	$('.one_email, .two_email').hide();
+
+	// dealer email address string력
+	var dealerEmail = '';
+	var  _link_one		= $('#link_one')
+		,_link_two		= $('#link_two')
+		,_linkService	= $('#linkService')
+		,_oneSalesEmail	= $('#oneSalesEmail')
+		,_twoSalesEmail	= $('#twoSalesEmail')
+		,_serviceEmail	= $('#serviceEmail')
+		,_emailDiv		= $('#email').find("div")
+
+	// Sales & Service 둘 다 이메일 주소가 있을 경우
+	if(dealerInfo.Email.length > 1 && dealerInfo.EmailService.length > 1){
+		_twoSalesEmail.text(dealerInfo.Email);
+		_serviceEmail.text(dealerInfo.EmailService);
+
+		// 이메일 보내기 버튼 셋팅
+		_link_two.data(Scheme.Email,dealerInfo.Email);
+		_link_two.click(MApi.email);
+		_linkService.data(Scheme.Email,dealerInfo.EmailService);
+		_linkService.click(MApi.email);
+
+		$('.two_email').show();
+	}
+	// Service 만 이메일이 있을 경우
+	else if(dealerInfo.Email.length <= 1 && dealerInfo.EmailService.length > 1){
+		_oneSalesEmail.text(dealerInfo.EmailService);
+
+		// Service 이메일 보내기 버튼 셋팅
+		_link_one.data(Scheme.Email,dealerInfo.EmailService);
+		_link_one.click(MApi.email);
+		$('.one_email').show();
+	}
+	// Sales 만 이메일이 있을 경우
+	else if(dealerInfo.Email.length > 1 && dealerInfo.EmailService.length >= 1){
+		_oneSalesEmail.text(dealerInfo.Email);
+
+		// Sales 이메일 보내기 버튼 셋팅
+		_link_one.data(Scheme.Email,dealerInfo.Email);
+		_link_one.click(MApi.email);
+		$('.one_email').show();
+	}
+
+	if(dealerInfo.Website.length > 3){
+		$("#site").text(dealerInfo.Website);
+		$("#browser").data(Scheme.Url,dealerInfo.Website);
+		$("#browser").click(MApi.browser);
+	}else{
+		$('.dealer_homepage').hide();
+	}
+
+	var tab=M.data.param("tab");
+	if(tab=="contact") $("#contactBtn").click();
+
+	// Release 1.3 화면에서 넘어왔을경우 좌측 상단 Home아이콘으로 Back아이콘으로 변경한다.
+	if (e.param.stackFlag == 'BACK') {
+		$('#header button').addClass('back').removeClass('home')
+	}
+}
+
+// 영업시간 parser
+function gfnTimeTable(obj, idKey) {
+	function pattern(val){
+		var data=val.split(":");
+		return data[0]+":"+data[1];
+	}
+	var sort=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+	for(var key in sort){
+		var item=obj[sort[key]];
+		if(item!=null){
+			var title=sort[key];
+//				if(key==3) title=title.substring(0,4);
+//				else title=title.substring(0,3);
+			switch (key) {
+			case "0":
+				title = M.locale.localizedString("E1_8")
+				break;
+
+			case "1":
+				title = M.locale.localizedString("E1_9")
+				break;
+
+			case "2":
+				title = M.locale.localizedString("E1_10")
+				break;
+
+			case "3":
+				title = M.locale.localizedString("E1_11")
+				break;
+
+			case "4":
+				title = M.locale.localizedString("E1_12")
+				break;
+
+			case "5":
+				title = M.locale.localizedString("T1_1")
+				break;
+
+			case "6":
+				title = M.locale.localizedString("T1_2")
+				break;
+
+			default:
+				break;
+			}
+			var text="";
+			for(var i=0;i<item.length;i++){
+				if(i==0) text += '<i class="dltitle">'+title+"</i>";
+				text+=pattern(item[i].From)+" - "+pattern(item[i].To);
+				if(item.length-1!=i) text+=" / ";
+			}
+			if(text != ""){
+				$("<span></span>").html(text).appendTo(idKey);
+				$(idKey).show();
+			}
+		}
+	}
+}
+M.onReady(function(e){
+	gfvInit(e);
+});
+</script>
+</html>

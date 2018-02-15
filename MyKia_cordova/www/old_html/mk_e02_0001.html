@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: Sales &amp; Promotion  :: list</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_e02_0001">
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+    <header id="header">
+        <h1><!-- Sales &amp; Promotion --><script type="text/javascript">M.locale.localizedWrite("G1_3")</script></h1>
+        <button class="hbtn fl home">Home</button>
+    </header>
+
+	<section id="container">
+		<div id="scroll">
+        <!-- contents_Start -->
+    
+			<ul class="li_style_move">
+			<!--
+                 <li>
+					<button type="button">
+						<p class="ellipsis">Subject</p>
+						<p class="date">22/01/2015</p>
+					</button>
+                 </li>
+                 <li>
+					<button type="button">
+						<p class="ellipsis">Subject</p>
+						<p class="date">22/01/2015</p>
+					</button>
+                 </li>
+            -->
+			</ul>
+
+			<!-- No Search Result -->
+            <div class="result_none_file none">
+                <p><script type="text/javascript">M.locale.localizedWrite("D1_18")</script></p>
+            </div>
+
+        <!-- //contents_End -->
+		</div>
+	</section>
+
+	<footer id="footer">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+var gvlNewsCallback={
+	success:function(rev,setting){
+
+		// API 2.18 통신 결과 성공 시 리스트를 표시한다.
+		var unReadCnt = 0;
+		var news = sortList(rev.News);
+		$(news).each(function(idx,item){
+			if (item.NewsCategory == 1) {
+				var temp = $("<li></li>").append(
+					$("<button></button>").append(
+						$("<p></p>").html(item.NewsTitle).addClass("ellipsis"))
+						.append($("<p></p>").html(JsUtil.getDateFormatter(item.NewsDate)).addClass("date"))
+				).click(function() {
+
+					// 리스트 터치 시 상세 화면(mk_e01_0002)으로 이동한다
+					var options=Options.Default,
+						target = $(this);
+						options.param={
+							newsId:target.data("newsId"),
+							pageTitle:'mk_e02_0001'
+						};
+					Page.moveToPage("mk_e02_0002",options);
+					
+					// API 2.22 통신을 시작한다. 
+					if (!target.data("isRead")) {
+						new NetworkManager(TrCode.NewsRead, {success:function(rev,setting){
+							
+							// API 2.22 통신 결과 성공 시 홈에 표시하는 Sales&Promotions 뱃지 카운트를 감소 시킨다.
+							target.data("isRead", true);
+							var loginInfo = LoginManager.getLoginInfo();
+							loginInfo.Notification.SalesNProCnt--;
+							LoginManager.setLoginInfo(loginInfo);
+						}, error:function(code,msg,setting) {
+							void(0);
+						}}, false, {show:false}).send({
+							CustomerId : LoginManager.getCustomerId(),
+							NewsCategory : item.NewsCategory,
+							NewsId : target.data("newsId")
+						});
+					}
+				}).data("newsId", item.NewsId).data("isRead", item.NewsRead);
+				if (!item.NewsRead) {
+					unReadCnt++;
+				}
+				else {
+					temp.find("button").addClass("read");
+				}
+				temp.appendTo($(".li_style_move"));
+			}
+		});
+		
+		if ($(".li_style_move > li").size() == 0) {
+			$('.result_none_file').removeClass('none');
+			//MApi.alert(M.locale.localizedString("F1_12"));
+		}
+		var loginInfo = LoginManager.getLoginInfo();
+		loginInfo.Notification.SalesNProCnt = unReadCnt;
+		LoginManager.setLoginInfo(loginInfo);
+	}
+},
+gvlNewsNetwork=new NetworkManager(TrCode.NewsList,gvlNewsCallback,true);
+
+// 최초 진입 시 API 2.18 통신을 시작한다.
+M.onReady(function(e){
+	gvlNewsNetwork.send({
+		CustomerId : LoginManager.getCustomerId()
+	});
+});
+
+// news 날짜순 정렬
+function sortList(list) {
+	list.sort(function(a, b) {
+		if (a.NewsDate > b.NewsDate) {
+			return -1;
+		}
+		return 1;
+	})
+	return list;
+}
+</script>
+</html>
