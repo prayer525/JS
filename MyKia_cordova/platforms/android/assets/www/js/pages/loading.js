@@ -52,6 +52,9 @@ fnList.pageLoading = function(){
 		if(cnt >= arrApi.length){
 			$('#per-bar').animate({'width':'100%'},300,function(){
 				cnt = 0;
+
+				fnMergeVehicle();
+
 				$.mobile.changePage( 'main.html', { transition: 'slide'} );
 			});
 		}else{

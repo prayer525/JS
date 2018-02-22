@@ -99,7 +99,6 @@ fnList.pageLogin = function(){
 		// Web
 		catch(e){
 			createKey.set(Token, function(d){
-				console.log('d : ' , d)
 				d.key = CryptoJS.enc.Utf8.parse(d.key);
 				d.iv = CryptoJS.enc.Utf8.parse(d.iv);
 				Data.setData('Key', d);
@@ -141,12 +140,12 @@ fnList.pageLogin = function(){
 				$.mobile.changePage( "loading.html", { transition: "slide"} );
 			})
 		}else{
-			if(Data.get('LanguageCode') == data.CultureCode){
+			if(Data.get('cultureCode') == data.CultureCode){
 				var params = {
 					'CustomerId' : data.CustomerId
 				}
 				
-				getApi('PutLegalNoticeAgreement', data, function(data){
+				getApi('PutLegalNoticeAgreement', params, function(){
 					$.mobile.changePage( "loading.html", { transition: "slide"} );
 				});
 			}else{
@@ -157,7 +156,6 @@ fnList.pageLogin = function(){
 
 	var createKey = {
 		set:function(t, k){
-			console.log(t, k)
 			var keyMatrix = [91,69,75,38,39,100,2,98,105,91,6,53,111,102,48,124,112,8,122,47,68,99,7,76,60,39,80,83,34,36,107,106];
 			var ivMatrix = [17,63,95,42,6,111,3,87,106,88,19,53,126,57,84,102]
 			var keyStr = '';
@@ -179,7 +177,6 @@ fnList.pageLogin = function(){
 		}
 	}
 	window.createKey = createKey;
-
 }
 
 

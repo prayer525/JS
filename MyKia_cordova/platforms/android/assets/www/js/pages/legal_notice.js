@@ -1,8 +1,10 @@
 fnList.pageLegalNotice = function(){
 
 	var params = {
-		'CultureCode':Data.get('LanguageCode')
+		'CultureCode':Data.get('cultureCode')
 	}
+
+	getApi('GetLegalNotice', params, fnInitPage);
 
 	function fnInitPage(data){
 		var target = $("#legalIframe");
@@ -25,7 +27,7 @@ fnList.pageLegalNotice = function(){
 		if (Data.getData('Login') != '') {
 			// if users login
 			var params = {
-				'CultureCode':Data.get('cultureCode')
+				'CustomerId':Data.getData('Login').CustomerId
 			};
 			
 			getApi('PutLegalNoticeAgreement', params, function(){
@@ -35,6 +37,4 @@ fnList.pageLegalNotice = function(){
 			$.mobile.changePage( "login.html", { transition: "slide"} );
 		}
 	}
-
-	getApi('GetLegalNotice', params, fnInitPage);
 }

@@ -1,5 +1,5 @@
 fnList.pageMain = function(){
-
+	console.log('pageMain')
 	$("#main-tab-body").touchSlider({
 	    initComplete : function (e) {
 	        var _this = this;
@@ -15,35 +15,26 @@ fnList.pageMain = function(){
 	        $('.main-tab-menu').find('.btn-page').removeClass('on').eq(e.current-1).addClass('on');
 	    }
 	});
-
-	// Event
-	$('.ve-set').click(function(){
-		$.mobile.changePage( 'change_vehicle.html', { transition: 'slide'} );
-	});
-
-	$('.setting').click(function(){
-		$.mobile.changePage( 'setting.html', { transition: 'slide'} );
-	});
-
-	// Page Link
-	$('.main-sub-menu button').on('click', function(){
-		var _href = $(this).data('href') + '.html';
-
-		$.mobile.changePage( _href, { transition: "slide"} );
-	})
-
+	
 	// Page Create 
-
 	function fnInitPage(){
 		if(Data.getData('Login') == ''){
 			$.mobile.changePage( 'login.html', { transition: 'slide'} );
 		}
 
-		// Vehicle Image 
-		$('#mycar').attr('src', Data.getData('VehiclesImagesV2').Vehicles[0].VehicleImageUrl);
-
+		var selVehicleIdx = Data.getData('selectedVehicleIndex');
+		var selectedVehicleImage = null;
 		var userInfo = Data.getData('UserInformation');
 		var vehiclesInformation = Data.getData('VehiclesInformation');
+
+		// Vehicle Image
+		if(selVehicleIdx != ''){
+			selectedVehicleImage = Data.getData('VehiclesImagesV2').Vehicles[selVehicleIdx].VehicleImageUrl;
+		}else{
+			selectedVehicleImage = Data.getData('VehiclesImagesV2').Vehicles[0].VehicleImageUrl;
+			Data.setData('selectedVehicleIndex', 0);
+		}
+		$('#mycar').attr('src', selectedVehicleImage);
 
 		if(vehiclesInformation.Vehicles.length > 1){
 			$('.ve-set').show();

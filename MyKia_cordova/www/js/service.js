@@ -10,10 +10,11 @@ var serverList = {
 	}
 }
 var targetServer = '';
+var localFlag = true;
 
 var Data = {
 	data:{
-		devMode:'DEV',
+		devMode:'PRD',
 		serverFlag:'EU',
 		isFirstRun:true
 	},
@@ -108,7 +109,7 @@ var ApiInfo={
 	'MarketInformation'			: {'type':'POST', 'path':'api/market/information'},
 	'RecallInformation'			: {'type':'POST', 'path':'api/v2/recall/information'},
 	'LangSet'					: {'type':'POST', 'path':'api/lang/set'},
-	'TranslationList'			: {'type':'GET', 'path':'api/market/translationList'},
+	'TranslationList'			: {'type':'POST', 'path':'api/market/translationList'},
 	'GetToken'					: {'type':'POST', 'path':'api/gettoken'},
 	'ContentVersion'			: {'type':'POST', 'path':'api/market/getcontentversionnumber'},
 	'GetLegalNotice'			: {'type':'POST', 'path':'api/v2/market/getlegalnotice'},
@@ -127,7 +128,7 @@ var ApiInfo={
  * @param apiName, param, callback
  * @return callback
  */
- var ignoreApi = ['GetToken', 'TranslationList', 'GetLegalNotice', 'PutLegalNoticeAgreement', 'Login'];
+ var ignoreApi = ['GetToken', 'TranslationList', 'GetLegalNotice', 'Login'];
  var ajaxCount = 0;
 function getApi(apiName, param, callback){
 //	console.log('[getApi('+apiName+') : param]',param);
@@ -137,19 +138,31 @@ function getApi(apiName, param, callback){
 	ajaxCount++;
 	
 	if(apiName != null && apiName != ""){
+		var _type = ApiInfo[apiName]['type'];
+		console.log('Request : ' , apiName, param)
+
+		if(localFlag){
+			var data = JSON.parse(localData[apiName])
+
+			callback(data);
+
+			return false;
+		}
+
 		$.ajax({
-			type : ApiInfo[apiName]['type'],
+			type : _type,
 			dataType:'text',
 			contentType: 'application/json',
 			url: Data.get('targetServer')+ApiInfo[apiName]['path'],
 			data: param == null ? '' : JSON.stringify(param),
 			async: true,
+			crossDomain:true,
 			timeout: 60000,
 			beforeSend: function(request) {
 				if(apiName == 'Login'){
-					request.setRequestHeader("Token", Data.get('Token'));
+					request.setRequestHeader("Token", Data.getData('Token'));
 				}else if(!ignoreApi.includes(apiName)){
-					request.setRequestHeader("Authorization", 'Bearer '+Data.get('Login').TokenResponse.access_token);
+					request.setRequestHeader("Authorization", 'Bearer '+Data.getData('Login').TokenResponse.access_token);
 				}
 
 				if(ajaxCount == 1){
@@ -157,8 +170,10 @@ function getApi(apiName, param, callback){
 				}
 			},
 			success: function(data,statusText,xhr){
+				console.log('data : '  , data)
 				var data = JSON.parse(data);
-				console.log(apiName, param, data);
+
+				// console.log('Response : ' , data)
 
 				if(!ignoreApi.includes(apiName)){
 					fnDecryptData(data ,callback);
@@ -168,7 +183,7 @@ function getApi(apiName, param, callback){
 			},
 			error: function (xhr, ajaxOptions, thrownError){
 				// error 
-				console.log(apiName, param, thrownError);
+				console.log("Error : ", apiName, param, thrownError);
 			},
 			complete: function(data){
 				ajaxCount--;
@@ -241,6 +256,22 @@ function checkServer(){
 	targetServer = serverList[Data.get('devMode')][Data.get('serverFlag')];
 	Data.set('targetServer', targetServer);
 	return targetServer;
+}
+
+function fnMergeVehicle(){
+	// merge to VehiclesInformation from VehiclesImagesV2
+	var vehicleList = Data.getData('VehiclesInformation')
+	var vehicleImageList = Data.getData('VehiclesImagesV2');
+
+	$.each(vehicleList.Vehicles, function(vIdx, vVal){
+		$.each(vehicleImageList.Vehicles, function(iIdx, iVal){
+			if(vVal.VIN == iVal.VIN){
+				$.extend(vVal, iVal)
+			}
+		})
+	});
+	
+	Data.setData('VehiclesInformation', vehicleList);
 }
 
 /*

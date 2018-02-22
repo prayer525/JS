@@ -154,9 +154,6 @@ var JsUtil = {
 	mfnNumberOnlyFilter:function(val){
 	 	return val==undefined?"":val.replace(Define.NumberOnlyRegExp,"");
 	},
-	mfnNumberOnlyFilter:function(val){
-	 	return val==undefined?"":val.replace(Define.NumberOnlyRegExp,"");
-	},
 	prependZeros:function (str, len) {
 	    if(typeof str === 'number' || Number(str)){
 		    str = str.toString();
@@ -170,6 +167,35 @@ var JsUtil = {
 	alert:function(txt){
 		// Must find plugin
 		alert(txt);
+	},
+	getVideo:function(itemUrl){	// Youtube UR parsing
+		var videoId,
+			list,
+			videoUrl = "http://www.youtube.com/embed/",
+			thumbnailUrl;
+		var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+	    var match = itemUrl.match(regExp);
+	    if (match&&match[7].length==11){
+	    	videoId = match[7];
+	    }
+	    
+	    videoUrl += videoId + "?origin=http://example.com";
+		thumbnailUrl = "http://img.youtube.com/vi/"+videoId+"/0.jpg";
+		
+		if(itemUrl.match("list=")){
+			 var splitArray = itemUrl.split("list=");
+			 if(splitArray[1]){
+				 if(splitArray[1].match("\&")){
+					var listArray = splitArray[1].split("\&");
+					list = listArray[0];
+					videoUrl += "&list="+list;
+				}else{
+					list = splitArray[1];
+					videoUrl += "&list="+list;
+				}
+			}
+		 }
+		return {"videoId":videoId, "videoUrl":videoUrl,"thumbnailUrl":thumbnailUrl, "list":list};
 	}
 }
 /******************************************************************************************
@@ -205,9 +231,13 @@ var directCall = function(num){
    
 //암호화
 function dataEncode(message){
-	var _keyset = Data.getData('Key');
-	var encrypted = CryptoJS.AES.encrypt(message, _keyset.key, { iv: _keyset.iv});
-	return encrypted.toString();
+	if(localFlag){
+		return message;
+	}else{
+		var _keyset = Data.getData('Key');
+		var encrypted = CryptoJS.AES.encrypt(message, _keyset.key, { iv: _keyset.iv});
+		return encrypted.toString();
+	}
 }
 //복호화
 function dataDecode(encrypted){
@@ -238,6 +268,20 @@ $(document).on('click', '.open-inapp', function(){
 	setStorageItem("ref", JSON.stringify(ref));
 
 	return false;
+});
+
+/******************************************************************************************
+function : page transition
+******************************************************************************************/
+$(document).on('click', '[data-href]', function(){
+	var _href = $(this).data('href') + '.html';
+	var _translation = $(this).data('trans')
+
+	if(_translation == undefined){
+		_translation = 'slide';
+	}
+	
+	$.mobile.changePage( _href, { transition: _translation} );
 });
 
 /******************************************************************************************

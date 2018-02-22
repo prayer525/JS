@@ -25,7 +25,7 @@ fnList.pageMyProfile = function(){
 
 		function fnSetVehicle(data){
 			Data.setData('VehiclesInformation', data);
-			myvehicle = data.Vehicles[0];
+			myvehicle = data.Vehicles[Data.getData('selectedVehicleIndex')];
 
 			if(myvehicle != undefined){
 				if(myvehicle.LastServiceDate != null && myvehicle.LastServiceDate.trim().length > 0){
@@ -58,7 +58,7 @@ fnList.pageMyProfile = function(){
 		        // 자동차가 1대 이상일 경우 자동차 변경 버튼을 표시한다.
 		        if(data.Vehicles.length>1) $("#mk_a00_0004").show();
 		        $("#car").html(myvehicle.VehicleName);
-		        $("#carImage").attr("src", Data.getData('VehiclesImagesV2').Vehicles[0].VehicleImageUrl);
+		        $("#carImage").attr("src", Data.getData('VehiclesImagesV2').Vehicles[Data.getData('selectedVehicleIndex')].VehicleImageUrl);
 
 			}else{
 				$(".car-info").hide();

@@ -133,7 +133,7 @@ fnList.pageSelectCountry = function(){
 
 				var languageCode = $(this).data('culturecode');
 
-				Data.set('LanguageCode', languageCode)
+				Data.set('cultureCode', languageCode)
 
 				if(languageCode == 'de-DE'){
 					Data.set('serverFlag', 'KMD');

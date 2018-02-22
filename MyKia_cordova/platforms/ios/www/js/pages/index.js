@@ -556,7 +556,7 @@ if(version == ''){
 
 if(isFirstRun == false && Data.getData('Login') != ''){
 	setTimeout(function(){
-		//$.mobile.changePage( "main.html", { transition: "slide"} );
+		$.mobile.changePage( "main.html", { transition: "slide"} );
 	}, 2000);
 }else if(isFirstRun == false && Data.getData('Login') == ''){
 	setTimeout(function(){
