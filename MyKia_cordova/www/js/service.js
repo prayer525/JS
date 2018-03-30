@@ -1,3 +1,4 @@
+console.log('serviceJs')
 // jquery mobile에서 자동으로 Class 추가 하는것을 차단 
 var serverList = {
 	'PRD':{
@@ -10,7 +11,7 @@ var serverList = {
 	}
 }
 var targetServer = '';
-var localFlag = true;
+var localFlag = false;
 
 var Data = {
 	data:{
@@ -102,7 +103,7 @@ var ApiInfo={
 	'DealerSearching'			: {'type':'POST', 'path':'api/dealer/searching'},
 	'NewsList'					: {'type':'POST', 'path':'api/news/list'},
 	'NewsListV2'				: {'type':'POST', 'path':'api/v2/news/list'},
-	'NewsDetails'				: {'type':'POST', 'path':'api/v4/news/details'},
+	'NewsDetails'				: {'type':'POST', 'path':'api/v5/news/details'},
 	'NewsListVideo'				: {'type':'POST', 'path':'api/v2/news/listVideo'},
 	'HowToVideo'				: {'type':'POST', 'path':'api/news/howToVideo'},
 	'NewsRead'					: {'type':'POST', 'path':'api/news/read'},
@@ -149,6 +150,16 @@ function getApi(apiName, param, callback){
 			return false;
 		}
 
+		var encList = ['VIN'];
+
+		$.each(encList, function(encIdx, encItem){
+			$.each(param, function(paramIdx, paramItem){
+				if(encItem == paramIdx){
+					param[paramIdx] = dataEncode(paramItem);
+				}
+			})
+		})
+
 		$.ajax({
 			type : _type,
 			dataType:'text',
@@ -169,11 +180,8 @@ function getApi(apiName, param, callback){
 					KmeSpinner.start();
 				}
 			},
-			success: function(data,statusText,xhr){
-				console.log('data : '  , data)
-				var data = JSON.parse(data);
-
-				// console.log('Response : ' , data)
+			success: function(response,statusText,xhr){
+				var data = JSON.parse(response);
 
 				if(!ignoreApi.includes(apiName)){
 					fnDecryptData(data ,callback);
@@ -373,16 +381,4 @@ var KmeSpinner={
 		}
 	}
 };
-
-function logout(){
-	var params = {
-		CustomerId : Data.getData('Login').CustomerId
-	}
-
-	getApi('Logout', params, function(){
-		Data.apiData = {}
-
-		$.mobile.changePage( 'login.html', { transition: 'slide'} );
-	})
-}
 

@@ -1,5 +1,12 @@
 fnList.pageMain = function(){
 	console.log('pageMain')
+	
+	var _mainTabIdx = Data.getData('mainTabIdx');
+	
+	if(_mainTabIdx == ''){
+		_mainTabIdx = 1;
+	}
+
 	$("#main-tab-body").touchSlider({
 	    initComplete : function (e) {
 	        var _this = this;
@@ -8,12 +15,17 @@ fnList.pageMain = function(){
 	        var len = Math.ceil(this._len / this._view);
 	        
 	        paging.find(".btn-page").on("click", function (e) {
+	        	Data.setData('mainTabIdx', $(this).index()+1)
 	            _this.go_page($(this).index());
 	        });
+
+	        Data.setData('mainTabIdx', 0)
 	    },
 	    counter : function (e) {
+	    	Data.setData('mainTabIdx', e.current)
 	        $('.main-tab-menu').find('.btn-page').removeClass('on').eq(e.current-1).addClass('on');
-	    }
+	    },
+	    page:_mainTabIdx
 	});
 	
 	// Page Create 

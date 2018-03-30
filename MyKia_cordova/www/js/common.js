@@ -1,3 +1,4 @@
+console.log('commonJs')
 // fnGetToken();
 
 /*
@@ -24,7 +25,6 @@ function paramReplace(param){
 	return JSON.parse(param.replace(/,,/g, ""));
 }
 */
-
 var countryToLanguage = {
 	"de-at":"de-AT",
 	"fr":"fr-BE",
@@ -108,6 +108,8 @@ var i18n = function(code, type){
 	}else if(type == 'lower'){
 		return '<t data-translation-code="'+code+'" data-translation-type="lower">'+GetLangPack[code].toLowerCase()+'</t>';
 	}else if(type == 'text'){
+		return $('<span>'+GetLangPack[code]+'</span>').text();
+	}else if(type == 'text'){
 		return GetLangPack[code];
 	}else{
 		return '<t data-translation-code="'+code+'">'+GetLangPack[code]+'</t>';
@@ -130,6 +132,20 @@ var JsUtil = {
 		"hu-HU":"hu",
 		"fr-FR":"fr",
 		"fr-LU":"lb"
+	},
+	trMessageCode:function(code){
+		var defined={
+			"LOGIN-ERR-0":"C1_8",
+			"LOGIN-ERR-1":"C1_9",
+			"LOGIN-ERR-2":"S1_5",
+			"LOGIN-OK-1":"V1_5",
+			"LOGIN-OK-2":"V1_15",
+			"LOGIN-OK-5":"V1_5",
+			"PARAM-CUSTOMERID":"Y2_19",
+			"PARAM-SAPCODE":"Y2_20"
+		}
+
+		return defined[code];
 	},
 	addComma:function(val){
 		var marketId = Data.getData('UserInformation').MarketId
@@ -228,8 +244,91 @@ var directCall = function(num){
 // function errorCallback(error) {
 //   console.log("getSim error : ", error);
 // }
+
+/******************************************************************************************
+function : Google Map
+******************************************************************************************/
+function fnGoogleMap(target, param){
+	//var uluru = {lat: -25.363, lng: 131.044};
+	var markers = [];
+	var mapOption = {
+		zoom:17,
+		center:param.pos
+	}
+	var controllerOption = {
+		zoomControl: false,
+		mapTypeControl: false,
+		scaleControl: false,
+		streetViewControl: false,
+		rotateControl: false,
+		fullscreenControl: true,
+		myLocationEnabled:true
+	}
+	
+
+	$.extend(mapOption, controllerOption);
+    this.map = new google.maps.Map(document.getElementById(target), mapOption);
+    var marker = new google.maps.Marker({
+      position: param.pos,
+      map: this.map
+    });
+
+    this.addMarker=function(_position,callback){
+		var option=markerOptions={
+			map:this.map,
+			draggable:false,
+			position:fnChangePos(_position),
+			icon:"../img/imap_maker.png"
+		};
+
+		var mark=new google.maps.Marker(option);
+		markers.push(mark);
+		google.maps.event.addListener(mark, 'click', callback);
+	};
+
+    this.clearMarker = function(){
+    	for(var i in markers){
+			markers[i].setMap(null);
+		}
+		markers=[];
+    }
+
+    this.changeMarkerImg = function(idx){
+    	for(var i in markers){			
+			if(i == idx){
+				markers[i].setIcon('../img/imap_maker_active.png');
+			}else{
+				markers[i].setIcon('../img/imap_maker.png');
+			}
+		}
+    }
+
+    this.setCenter = function(pos){
+		this.map.setCenter(pos);
+    }
+
+    this.clusterMap=function(){
+		var markerCluster = new MarkerClusterer(this.map, markers,
+            {
+            	styles:[{
+            		url:"../img/imap_maker1.png",
+            		width:53,
+            		height:52,
+            		textColor:"#ffffff",
+            		textSize:15
+            	}],
+            	imagePath: '../img/imap_maker'
+        	});
+	}
+
+    function fnChangePos(_pos){
+		return new google.maps.LatLng(_pos.coords.latitude,_pos.coords.longitude);
+	}
+}
    
-//암호화
+/******************************************************************************************
+function : Data Encrypt
+******************************************************************************************/
 function dataEncode(message){
 	if(localFlag){
 		return message;
@@ -239,7 +338,10 @@ function dataEncode(message){
 		return encrypted.toString();
 	}
 }
-//복호화
+
+/******************************************************************************************
+function : Data Decrypt
+******************************************************************************************/
 function dataDecode(encrypted){
 	var _keyset = Data.getData('Key');
 	var decrypted = CryptoJS.AES.decrypt(encrypted,_keyset.key,{iv:_keyset.iv}); 
@@ -274,6 +376,7 @@ $(document).on('click', '.open-inapp', function(){
 function : page transition
 ******************************************************************************************/
 $(document).on('click', '[data-href]', function(){
+	event.preventDefault();
 	var _href = $(this).data('href') + '.html';
 	var _translation = $(this).data('trans')
 
@@ -291,13 +394,12 @@ $(document).on('click', '.header .back, .header .back-white', function(){
 	window.history.back(-1);
 });
 
-
 /******************************************************************************************
 function : used in page
 ******************************************************************************************/
 var fnList = {};
-
 $(document).on( "pagecontainershow", function ( event, ui ) {
+	
 	var activePage = $($.mobile.pageContainer.pagecontainer( "getActivePage" ) ).attr('id');
 
 	changeLang();
@@ -307,8 +409,6 @@ $(document).on( "pagecontainershow", function ( event, ui ) {
 
 		a = null;
 	}
-
-	// fnAppFnc($(activePage).attr('id'));
 }).on('pagebeforechange', function(e){
 	Data.put();
 });
@@ -316,3 +416,4 @@ $(document).on( "pagecontainershow", function ( event, ui ) {
 window.changeLang = changeLang;
 window.i18n = i18n;
 window.JsUtil = JsUtil;
+window.fnList = fnList;

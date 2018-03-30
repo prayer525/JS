@@ -165,9 +165,10 @@ NSString *EncIv = @"";
 - (NSString*)setKeyIv:(CDVInvokedUrlCommand*)param
 {
     // dynamic
-    CDVPluginResult* resultFlag = nil;
     NSString *dynamicKey = @"";
     NSString *IV = @"";
+    CDVPluginResult* resultFlag = nil;
+    
     
     @try {
         NSString *token = [param.arguments objectAtIndex:0];
@@ -198,6 +199,8 @@ NSString *EncIv = @"";
         }
         
         [self.commandDelegate sendPluginResult:resultFlag callbackId:param.callbackId];
+        
+        return false;
     }
     @catch (NSException *exception) {
         return false;

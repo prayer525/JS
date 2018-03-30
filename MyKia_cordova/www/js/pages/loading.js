@@ -7,7 +7,7 @@ fnList.pageLoading = function(){
 	# Data Field Encryption // Decryption
 	*/
 
-	var arrApi = ['UserInformation', 'VehiclesInformation', 'VehiclesImagesV2', 'RecallInformation', 'DealerInformation'];
+	var arrApi = ['UserInformation', 'VehiclesInformation', 'VehiclesImagesV2', 'RecallInformation', 'DealerInformation', 'MarketInformation'];
 	var cnt = 0;
 	var dealerSapCode, secondDealerSapCode;
 	var params = {
@@ -18,10 +18,15 @@ fnList.pageLoading = function(){
 		if(arrApi[cnt] == 'DealerInformation'){
 			var dealerParam = $.extend({'DealerSapCode':dealerSapCode}, params)
 			getApi(arrApi[cnt], dealerParam, fnExtendData)
+		}else if(arrApi[cnt] == 'MarketInformation'){
+			var _param = {
+				'CultureCode' : Data.getData('Login').CultureCode
+			}
+			
+			getApi(arrApi[cnt], _param, fnExtendData)
 		}else{
 			getApi(arrApi[cnt], params, fnExtendData)
 		}
-		
 	}
 
 	function fnExtendData(data){
@@ -45,6 +50,10 @@ fnList.pageLoading = function(){
 			}
 		}else{
 			Data.setData(arrApi[cnt], data);
+		}
+		if(arrApi[cnt] == 'VehiclesInformation'){
+			var vehicles  =data.Vehicles;
+			Data.setData('SelectedVehicle',vehicles[0]);
 		}
 
 		cnt++;

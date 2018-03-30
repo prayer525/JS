@@ -58,7 +58,7 @@ fnList.pageMaintenanceSchedule = function(){
 
         $('#name').text(userInfo.FirstName+',');
 
-        if(data.Vehicles.length>1) $('#mk_a00_0004').show();
+        if(data.Vehicles.length>1) $('.ve-set').show();
 
         var param={
             'CustomerId':Data.getData('Login').CustomerId,
