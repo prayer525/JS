@@ -49,7 +49,7 @@
     <plugin name="com.lampa.startapp" spec="^0.1.4" />
     <plugin name="call-number" spec="git+https://github.com/Rohfosho/CordovaCallNumberPlugin.git" />
     <plugin name="aes.encrypt" spec="aesEncrypt" />
-    <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-plugin-document-viewer" spec="^0.9.9" />
+    <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
 </widget>

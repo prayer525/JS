@@ -35,9 +35,9 @@
       "com.lampa.startapp": {},
       "call-number": {},
       "aes.encrypt": {},
-      "cordova-plugin-dialogs": {},
       "cordova-plugin-file": {},
-      "cordova-plugin-document-viewer": {}
+      "cordova-plugin-document-viewer": {},
+      "cordova-plugin-dialogs": {}
     },
     "platforms": [
       "ios",

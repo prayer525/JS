@@ -12,9 +12,6 @@
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
-    <feature name="Notification">
-        <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
-    </feature>
     <feature name="Sim">
         <param name="android-package" value="com.pbakondy.Sim" />
     </feature>
@@ -32,6 +29,9 @@
     <allow-navigation href="cdvfile:*" />
     <feature name="SitewaertsDocumentViewer">
         <param name="android-package" value="de.sitewaerts.cordova.documentviewer.DocumentViewerPlugin" />
+    </feature>
+    <feature name="Notification">
+        <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
     </feature>
     <name>MyKia_cordova</name>
     <description>

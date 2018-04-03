@@ -33,22 +33,6 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-dialogs.notification",
-    "file": "plugins/cordova-plugin-dialogs/www/notification.js",
-    "pluginId": "cordova-plugin-dialogs",
-    "merges": [
-      "navigator.notification"
-    ]
-  },
-  {
-    "id": "cordova-plugin-dialogs.notification_android",
-    "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
-    "pluginId": "cordova-plugin-dialogs",
-    "merges": [
-      "navigator.notification"
-    ]
-  },
-  {
     "id": "cordova-plugin-sim.Sim",
     "file": "plugins/cordova-plugin-sim/www/sim.js",
     "pluginId": "cordova-plugin-sim",
@@ -254,6 +238,22 @@ module.exports = [
       "cordova.plugins.SitewaertsDocumentViewer",
       "SitewaertsDocumentViewer"
     ]
+  },
+  {
+    "id": "cordova-plugin-dialogs.notification",
+    "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+    "pluginId": "cordova-plugin-dialogs",
+    "merges": [
+      "navigator.notification"
+    ]
+  },
+  {
+    "id": "cordova-plugin-dialogs.notification_android",
+    "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
+    "pluginId": "cordova-plugin-dialogs",
+    "merges": [
+      "navigator.notification"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -264,12 +264,12 @@ module.exports.metadata =
   "com.lampa.startapp": "0.1.4",
   "cordova-plugin-app-version": "0.1.9",
   "cordova-plugin-device": "2.0.1",
-  "cordova-plugin-dialogs": "2.0.1",
   "cordova-plugin-sim": "1.3.3",
   "cordova-plugin-whitelist": "1.3.3",
   "custom-inappbrowser-plugin": "0.0.7",
   "cordova-plugin-file": "6.0.1",
-  "cordova-plugin-document-viewer": "0.9.9"
+  "cordova-plugin-document-viewer": "0.9.9",
+  "cordova-plugin-dialogs": "2.0.1"
 };
 // BOTTOM OF METADATA
 });

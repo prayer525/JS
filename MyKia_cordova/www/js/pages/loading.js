@@ -51,10 +51,6 @@ fnList.pageLoading = function(){
 		}else{
 			Data.setData(arrApi[cnt], data);
 		}
-		if(arrApi[cnt] == 'VehiclesInformation'){
-			var vehicles  =data.Vehicles;
-			Data.setData('SelectedVehicle',vehicles[0]);
-		}
 
 		cnt++;
 

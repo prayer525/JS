@@ -549,19 +549,26 @@ if(version == ''){
 	Data.set('LanguageCodeVer', 1);
 }
 
+// if (saveAppVer == '' || appVer > saveAppVer) {
+// 	Data.del('Login');
+// 	Data.set('appVer', appVer);
+// }
+
 if(isFirstRun == false && Data.getData('Login') != ''){
 	setTimeout(function(){
-		$.mobile.changePage( "./main.html", { transition: "slide"} );
-	}, 1000);
+		$.mobile.changePage( "main.html", { transition: "slide"} );
+	}, 2000);
 }else if(isFirstRun == false && Data.getData('Login') == ''){
 	setTimeout(function(){
 		$.mobile.changePage( 'login.html', { transition: 'slide'} );
-	}, 1000);
+	}, 2000);
 }else if(isFirstRun == true){
 	setTimeout(function(){
-		$.mobile.changePage( 'select_country.html', { transition: 'slide', allowSamePageTransition:true} );
-	}, 1000);
+		$.mobile.changePage( 'select_country.html', { transition: 'slide'} );
+	}, 2000);
 }
+
+
 
 
 

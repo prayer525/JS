@@ -35,9 +35,6 @@
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
     </feature>
-    <feature name="Notification">
-        <param name="ios-package" value="CDVNotification" />
-    </feature>
     <feature name="Sim">
         <param name="ios-package" value="Sim" />
     </feature>
@@ -50,6 +47,9 @@
     </feature>
     <feature name="SitewaertsDocumentViewer">
         <param name="ios-package" value="SitewaertsDocumentViewer" />
+    </feature>
+    <feature name="Notification">
+        <param name="ios-package" value="CDVNotification" />
     </feature>
     <name>MyKia_cordova</name>
     <description>

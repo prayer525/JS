@@ -11,7 +11,7 @@ var serverList = {
 	}
 }
 var targetServer = '';
-var localFlag = false;
+var localFlag = true;
 
 var Data = {
 	data:{

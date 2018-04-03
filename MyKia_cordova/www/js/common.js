@@ -212,6 +212,15 @@ var JsUtil = {
 			}
 		 }
 		return {"videoId":videoId, "videoUrl":videoUrl,"thumbnailUrl":thumbnailUrl, "list":list};
+	},
+	objSize:function(obj){
+	    var size = 0, key;
+	    for (key in obj) {
+	        if (key != '' && key != null){
+	        	size++;
+	        } 
+	    }
+	    return size;
 	}
 }
 /******************************************************************************************
@@ -404,7 +413,10 @@ $(document).on( "pagecontainershow", function ( event, ui ) {
 
 	changeLang();
 
+	console.log('activePage : ' , activePage)
+
 	if(fnList[activePage] !== undefined){
+		console.log('activePage : ' , activePage)
 		var a = fnList[activePage]()
 
 		a = null;
