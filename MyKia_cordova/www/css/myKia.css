@@ -3,7 +3,7 @@ html,body {overflow:hidden;}
 
 .wrapper{position:relative;width:100%;height:100%;background-color:#f2f2f2;}
 .container{width:100%;height:100%;}
-.container.fix-bottom {padding-bottom:3.0rem}
+.container.fix-bottom {padding-bottom:5.5rem}
 
 .header{position:absolute;z-index:100;left:0;top:0;width:100%;height:4.3rem;line-height:4.3rem;border-top:2px solid #bb162b;box-shadow:0 .2rem .5rem gray;background:#fff;}
 .header h1{width:100%;height:100%;line-height:4.3rem;text-align:center;font-size:2.1rem;color:#000;padding: 0 34px;white-space: nowrap; margin:0;}
@@ -24,7 +24,7 @@ html,body {overflow:hidden;}
 .footer_intro{position:fixed;z-index:100;right:0;bottom:0;width:100%;height:4rem;font-size:0;line-height:0;background:transparent url('../img/bg_default_footer.png') no-repeat right top;background-size:auto 4rem;}
 .scroll{height:100%;margin:0;overflow:hidden; overflow-y:auto; -webkit-overflow-scrolling:touch;}
 
-input[type="text"], input[type="password"], input[type="tel"], input[type="number"], input[type="email"] {border-radius: 0 !important; border: 1px solid #969696 !important; box-shadow: 0 0 2px 2px #d9d9d9; padding:0 1rem;}
+input[type="text"], input[type="password"], input[type="tel"], input[type="number"], input[type="email"] {width:100%;height:2.9rem;background:#fff;border:1px solid #b9b9b9; border-radius: 0 !important; box-shadow: 0 0 2px 2px #d9d9d9; padding:0 1rem;}
 input[type="checkbox"]{width:2rem;height:2rem;margin-right:.5rem;background:url('../img/chk.png')no-repeat 0 0;background-size:6rem;}
 input[type="checkbox"]:checked{background-position:-2rem 0;}
 input[type="radio"]{width:2rem;height:2rem;margin-right:.5rem;background:url('../img/rdo.png')no-repeat 0 0;background-size:2rem;}
@@ -42,8 +42,7 @@ input[type="radio"]:checked{background-position:0 -2rem;}
 .list-type-select .li-sub span{ padding: .5rem 1rem .5rem 0; color: #000; font-size: 1.3rem; line-height: 2rem; position: absolute; bottom: 1rem; left: 1.2rem;}
 .list-type-select .li-sub img{width:auto;height:7.2rem;}
 
-.fix-bottom.f-btnArea {position: fixed; bottom: 2.5rem; background: #f0f0f0; width: 100%; height: 4.5rem; text-align:center;}
-.fix-bottom button {}
+.fix-bottom.f-btnArea {position: fixed; bottom: 2.5rem; background: #f0f0f0; width: 100%; text-align:center; padding:1rem 0 2rem;}
 
 .legalFrame {font-size:1.35rem; padding:2rem 1rem;}
 
@@ -98,6 +97,8 @@ button.my-appointments { background-color:#bb162b; border:none; border-radius:0.
 .popup{display:table;position:absolute;top:0;left:0;width:100%;height:100%;z-index:999;}
 .popup-m{display:table-cell;padding:0 1rem;vertical-align:middle;}
 .popup-in{overflow:hidden;position:relative;height:auto;margin:0 auto;text-align:center;background:#fff;border-radius:3px;box-shadow: 0 0 0 2px rgba(0,0,0,0.16);}
+.popup-more {display:block; position:absolute; bottom:0; left:0; width:100%; z-index:999;}
+.popup-more .popup-m {display:block;}
 /* ===== Pop_header ===== */
 .p-header{position:relative;height:4.5rem;background:#bb162b;}
 .p-header strong{font-size:2.1rem;color:#fff;line-height:4.5rem;}
@@ -110,7 +111,6 @@ button.my-appointments { background-color:#bb162b; border:none; border-radius:0.
 .p-footer button{width:100%;height:100%;text-align:center;color:#000;font-size:1.7rem;}
 /* ===== Pop_body ===== */
 .p-body{background:#f1f1f1;}
-.p-body>*{padding:2rem 1rem;}
 .p-body strong{color:#666;font-size:1.5rem; padding:0;}
 .p-body strong span {font-weight:normal;}
 .p-body p{color:#666;font-size:1.4rem;}
@@ -178,6 +178,19 @@ button.my-appointments { background-color:#bb162b; border:none; border-radius:0.
 .loading-img .popup-in .progressbar{position:relative; height:0.5rem; background:#3f3f3f; margin:0rem 3rem;}
 .loading-img .popup-in .bar{width:auto;height:100%;background:linear-gradient(to right, #b81c30 ,#828487, #fff);background:-webkit-linear-gradient(left,#b81c30 ,#828487, #fff);}
 .loading-img .popup-in .bar-in{width:100%;height:.5rem;background:linear-gradient(to right, #b81c30 ,#828487, #fff);background:-webkit-linear-gradient(left, #b81c30 ,#828487, #fff);}
+
+/* Progress */
+.loading .popup-in{background:transparent;box-shadow:none;text-align:center;}
+.loading .popup-in strong{color:#fff;font-size:1.5rem;}
+.loading .popup-in p{color:#b1b1b1;font-size:1.4rem;}
+.loading .popup-in span{color:#fff;font-size:1.7rem;}
+.loading .popup-in .progressbar{margin:2.5rem 3rem 1.5rem;}
+.loading .progressbar{position:relative;height:.5rem;background:#3f3f3f; padding:0 !important;}
+.loading .bar{width:auto;height:100%;background:linear-gradient(to right, #b81c30 ,#828487, #fff);background:-webkit-linear-gradient(left,#b81c30 ,#828487, #fff);}
+.loading .bar-in{width:100%;height:.5rem;background:linear-gradient(to right, #b81c30 ,#828487, #fff);background:-webkit-linear-gradient(left, #b81c30 ,#828487, #fff);}
+.loading-space{padding:2.5rem 4rem;}
+.loading-space span{color:#000;font-size:1.7rem;font-weight:bold;}
+.loading-space .progressbar{margin:3rem 0 2rem;}
 
 /* Main Page */
 .main-tab-menu{position:fixed; top:4.3rem; left:0; width:100%;height:5rem;background-color:transparent; z-index:11;}
@@ -552,10 +565,10 @@ button.my-appointments { background-color:#bb162b; border:none; border-radius:0.
 .info-dealer li .usr-sub strong {font-weight: bold;}
 .info-dealer li .usr-sub span {padding-left: 0rem;}
 .info-dealer i.dltitle {float: left; width: 5rem; overflow: hidden; clear: left; text-align: left; text-overflow: ellipsis; white-space: nowrap; padding-right: 1rem; font-weight: bolder;}
-.dealer-img-wrap {display: block; width: 100%; height: 20rem;}
+.dealer-img-wrap {display: block; width: 100%; height: auto;}
 .dealer-img-wrap div {width: 100%; height: 100%;}
 .dealer-img-wrap div.preloader {position: absolute; top: 50%; left: 50%; width: 32px; height: 32px; margin: -16px 0px 0px -16px;}
-.dealer-img-wrap img {display: block; max-width: 100%; height: 100%; margin: 0 auto;}
+.dealer-img-wrap img {display: block; max-width: 100%; margin: 0 auto;}
 .dealer-img-wrap.kmd-img {height: auto;}
 .dealer-img-wrap.kmd-img img {height: auto;}
 .dealer-info {padding: 1.5rem 1rem; background: #f0f0f0;}
@@ -608,6 +621,46 @@ button.my-appointments { background-color:#bb162b; border:none; border-radius:0.
 .dealer-short-cut p.type01 {padding-left: 7.5rem; background: url('../img/itmap_sub_type01.png') no-repeat 2.5rem .1rem; background-size: 3.2rem;}
 .dealer-short-cut p.type02 {padding-left: 7.5rem; background: url('../img/itmap_sub_type02.png') no-repeat 2.5rem .1rem; background-size: 1.5rem;}
 .dealer-short-cut p.type03 {padding-left: 7.5rem; background: url('../img/itmap_sub_type03.png') no-repeat 2.5rem .1rem; background-size: 3.2rem;}
+
+/* Parked Vehicle */
+.map-loc-sub{position:absolute;bottom:15rem;z-index:9;width:100%;padding:1.5rem 1rem;background:rgba(110,119,132, .9);}
+.map-loc-sub .time{color:#fff;font-size:1.4rem;line-height:1.85rem;}
+.map-loc-sub .add{margin:.5rem 5rem .5rem 0;color:#63cdcd;font-size:1.7rem;line-height:1.85rem;font-weight:bold;}
+.map-loc-sub .sub{color:#fff;font-size: 1.4rem;line-height:1.85rem;}
+.map-loc-sub .sub span{padding-left:2rem;margin-right:1.5rem;}
+.map-loc-sub .sub span.clock{background:url('../img/ico_map_loc_sub01.png') no-repeat 0 center;background-size:1.5rem;}
+.map-loc-sub .sub span.arrow{background:url('../img/ico_map_loc_sub02.png') no-repeat 0 center;background-size:1.5rem;}
+.map-loc-sub .btn-google{position:absolute;top:2.5rem;right:1rem;width:4.2rem;height:4.2rem;text-indent:-9999px;background:url('../img/btn_google.png') no-repeat;background-size:100%;}
+
+.map-space.memo-map{position:relative;width:100%; padding-bottom:15rem;}
+.map-space.memo-map .map button{position:absolute;right:.5rem;width:4rem;height:4rem;text-indent:-9999px;}
+.map-space.memo-map .map button.btn-now{top:1.1rem;background:url('../img/btn_now.png') no-repeat center center;background-size:3.2rem}
+.map-space.memo-map .map button.btn-zoom{top:5.2rem;background:url('../img/btn_zoom.png') no-repeat center center;background-size:3.2rem}
+
+/* ----- 메모영역 ----- */
+.memo-map-sub {width:100%;min-height:17rem;padding:1rem 1.7rem;border-top:2px solid #ccc;background:rgba(255,255,255,.7);}
+.memo-map-sub .inside{width:100%;height:100%;padding:1rem;text-align:left;}
+.memo-map-sub .inside * {width:85%;padding-left:2.5rem;margin-bottom:.3rem;}
+.memo-map-sub button{z-index:20;}
+.memo-map-sub .inside .ta_c,
+.memo-map-sub .inside .btn-white{padding:0;}
+.memo-map-sub button.full{padding:1rem 3rem 1rem;background:rgba(255,255,255,.9) url('../img/li_type_move.png') no-repeat 96.5% 1.5rem;background-size:1.1rem;}
+.memo-map-sub h2{color:#000;font-size:1.7rem;line-height:2rem;}
+.memo-map-sub p{color:#666;font-size:1.4rem;word-break:break-word;line-height:1.6rem;}
+.memo-map-sub p.txt-pos{color:#c0c0c0;}
+.memo-map-sub p.txt-pos.no-ico{padding-left:2.5rem !important;background:none !important;}
+.memo-map-sub.type01 h2{background:url('../img/imap_sub_type01.png') no-repeat;background-size:2rem;}
+.memo-map-sub.type01 p.txt-pos{padding-left:7rem;background:url('../img/itmap_sub_type01.png') no-repeat 2.5rem .1rem;background-size:4rem;}
+.memo-map-sub.type02 h2{background:url('../img/imap_sub_type02.png') no-repeat;background-size:2rem;}
+.memo-map-sub.type02 p.txt-pos{padding-left:8.5rem;background:url('../img/itmap_sub_type02.png') no-repeat 2.5rem .1rem;background-size:5.4rem;}
+.memo-map-sub.type03 h2{background:url('../img/imap_sub_type03.png') no-repeat;background-size:2rem;}
+.memo-map-sub.type03 p.txt-pos{padding-left:14rem;background:url('../img/itmap_sub_type03.png') no-repeat 2.5rem .1rem;background-size:10.9rem;}
+.memo-map-sub strong{display:inline-block;padding-left:2.5rem;margin-bottom:.7rem;font-size:1.7rem;color:#000;font-weight:bold;background:url('../img/ico_memo.png') no-repeat;background-size:2rem;}
+.memo-map-sub .btn-line{margin-top:.9rem;padding:.9rem 0;border-top:1px solid #adadad;}
+.memo-map-sub .btn-line #clearBtn {margin:0 0.3rem 0 0;}
+.memo-map-sub .btn-line #saveBtn {display:block; margin:0 0 0 0.3rem;}
+
+
 
 /* Manuals */
 .li-manual li {width: 100%; height: 6.5rem; border-bottom: 1px solid #ccc; background-color: #fff;}

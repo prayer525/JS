@@ -39,7 +39,7 @@ fnList.pageLoading = function(){
 			if(Data.getData('DealerInformation') == ''){
 				Data.setData('DealerInformation', data);
 			}else{
-				Data.setData('secondDealerSapCode', data);
+				Data.setData('SecondDealerInformation', data);
 			}
 			if(secondDealerSapCode != ''){
 				cnt--;
@@ -52,6 +52,15 @@ fnList.pageLoading = function(){
 			Data.setData(arrApi[cnt], data);
 		}
 
+		if(arrApi[cnt] == 'VehiclesInformation'){
+			if(Data.getData('selectedVehicleIndex') != ''){
+				Data.setData('selectedVehicle', data.Vehicles[Data.getData('selectedVehicleIndex')])
+			}else{
+				Data.setData('selectedVehicleIndex', 0)
+				Data.setData('selectedVehicle', data.Vehicles[0])
+			}
+		}
+
 		cnt++;
 
 		if(cnt >= arrApi.length){
@@ -59,6 +68,8 @@ fnList.pageLoading = function(){
 				cnt = 0;
 
 				fnMergeVehicle();
+
+				LoginManager.setSyncDate(new Date().getDateString("YYYYMMDD"));
 
 				$.mobile.changePage( 'main.html', { transition: 'slide'} );
 			});

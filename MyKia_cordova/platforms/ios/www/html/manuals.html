@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="../css/common.css">
+	<title>Manuals</title>
+</head>
+<body>
+<div id="pageManuals" class="wrapper" data-role="page">
+
+	<!-- LayerPop -->
+    <div class="lightbox none"></div>
+    <div class="popup none" id="downloadPopup">
+        <div class="popup-m">
+            <div class="popup-in">
+                <div class="p-header">
+                    <strong class="download-popup-title" data-translation-code="L1_3"><!-- Download --></strong>
+                </div>
+                <div class="p-body loading-space loading">
+                    <strong class="download-popup-message" data-translation-code="D1_8"><!-- The manual is downloading --></strong>
+                    <div class="progressbar">
+                        <div class="bar" style="width:0%;" id="per-bar"><div class="bar-in"></div></div>
+                    </div>
+                    <p><span id="per-int">0</span>/100</p>
+                </div>
+                <div class="p-footer">
+                    <button type="button" id="btn-download-cancel" data-translation-code="D1_9"><!-- CANCEL --></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //LayerPop -->
+	<!-- LayerPop -->
+    <div class="popup-more none" id="morePopup">
+        <div class="popup-m" style="vertical-align: bottom;" id="morePopupBox">
+            <div class="popup-in">
+                <div class="more-popup">
+                    <button class="open-btn" id="openIn" data-translation-code="L1_5"></button>
+                    <button class="download-btn" id="download" data-translation-code="L1_4"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //LayerPop -->
+
+	<header class="header" data-role="header" data-position="fixed" data-fullscreen="false">
+		<button class="hbtn fl back" data-rel="back">Back</button>
+		<h1 data-translation-code="D1_5"><!-- Manuals --></h1>
+	</header>
+	<section class="container">
+		<div class="scroll">
+		<!-- contents_Start -->
+			 <!-- list_area -->
+            <ul class="li-manual" id="list">
+            </ul>
+            
+            <!-- No Search Result -->
+            <div class="result-none-file none">
+                <p data-translation-code="D1_17"></p>
+            </div>
+		<!-- //contents_End -->
+		</div>
+	</section>
+	<footer class="footer" data-role="footer" data-position="fixed" data-fullscreen="false">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../css/common.css">
+    <title>Main</title>
+</head>
+<body>
+<div id="pageMain" class="wrapper" data-role="page">
+    <!-- LayerPop : 현대자동차에서 로그인 발생된 것으로 보고. -->
+    <div class="lightbox none"></div>
+    <div class="popup none">
+        <div class="popup-m">
+            <div class="popup-in">
+                <div class="p-header">
+                    <strong data-translation-code="B1_25"><!-- Recall --></strong>
+                    <button class="pbtn close pl" data-translation-code="B1_1"><!-- Close --></button>
+                </div>
+                <div class="p-body">
+                    <!-- top area -->
+                    <!-- 상단영역 -->
+                    <div class="p-data-top">
+                        <!-- <div class="hbox jc">
+                            <img src="../img/p_usr.png"/>
+                            <strong class="flex">ANELLI AUTO DUE S.p.A.ANELE S.</strong>
+                        </div>
+                        <p>Hello Mr. Raffaello</p>
+                        <p>We have an important infomation for you. Please read the following message.</p> -->
+                    </div>
+                    <!-- footer area -->
+                    <!-- 하단영역 -->
+                    <div class="p-data-bottom">
+                        <!-- <strong>29 / 03 / 2015</strong>
+                        <p>Callback of Picanto</p>
+                        <button class="btn_white">Read more</button> -->
+                    </div>
+                </div>
+                <div class="p-footer">
+                    <input type="checkbox" id="chk01" data-role="none" />
+                    <label for="chk01" data-role="none" data-translation-code="B1_5"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //LayerPop -->
+
+    <header class="header">
+        <!-- <button type="button" class="hbtn fl setting" id="Register">Register</button> -->
+        <h1>&nbsp;</h1>
+        <button type="button" class="hbtn fr setting" data-href="setting">Setting</button>
+    </header>
+
+    <!-- MENU_AREA_fixed -->
+    <div class="main-tab-menu">
+        <ul class="hbox js">
+            <li class="btn-page"><button type="button" data-translation-code="B1_18"><!-- MY VEHICLE --></button></li>
+            <li class="btn-page"><button type="button" data-translation-code="B1_17"><!-- MY SERVICE --></button></li>
+            <li class="btn-page"><button type="button" data-translation-code="B1_19"><!-- DRIVING HELP --></button></li>
+            <li class="btn-page"><button type="button" data-translation-code="B1_20"><!-- KIA NEWS --></button></li>
+        </ul>
+    </div>
+
+    <section class="container">
+        <div id="main-tab-body">
+            <ul>
+                <li class="my-vehicle">
+                    <h2 data-translation-code="B1_18"><!-- MY VEHICLE --></h2>
+                    <div class="mycar"><img class="img-mycar" id="mycar" src="" alt=""/></div>
+                    <button type="button" class="ve-set" style="display:none;" data-href="my_vehicle">setting</button>
+                    <ul class="main-sub-menu">
+                        <li class="my-profile">
+                            <button type="button" data-translation-code="B1_22" data-href="my_profile"><!-- Update<br/>Mileage --></button>
+                        </li>
+                        <li class="manuals">
+                            <button type="button" data-translation-code="D1_5" data-href="manuals"><!-- Manuals --></button>
+                        </li>
+                        <li class="dashboard">
+                            <button type="button" data-translation-code="B1_29" data-href="dashboard_indicator"><!-- Dashboard<br/>Indicator --></button>
+                        </li>
+                        <li class="how-to-video">
+                            <button type="button" data-translation-code="B1_30" data-href="how_to_video"><!-- How to<br/>Videos --><span class="badge" style="display:none;" id="how2video">0</span></button>
+                        </li>
+                    </ul>
+                </li>
+                <li class="my-service">
+                    <h2 data-translation-code="B1_17"><!-- MY SERVICE --></h2>
+                    <ul class="main-sub-menu">
+                        <li class="maintenance">
+                            <button type="button" data-translation-code="B1_34" data-href="maintenance_schedule"><!-- Maintenance<br/>Schedule --><span class="badge" style="display:none;" id="maintenace">N</span></button>
+                        </li>
+                        <!-- when user has only one dealer : countries except Sweden -->
+                        <!-- 딜러가 한명일 경우 : 스웨덴을 제외한 나라 -->
+                        <li class="mykia-dealer">
+                            <button type="button" data-translation-code="B1_31" data-href="mykia_dealer"><!-- MyKia<br/>Dealer --></button>
+                        </li>
+                        <li class="my-appointments" style="width:100%;"><a href="my_appointment.html">
+                            <button type="button" data-translation-code="W0_12"><!-- My Appointments --></button>
+                        </a></li>
+                        <li class="app-link" style="display:none;">
+                            <button type="button" data-translation-code="WL_01"><!-- App Link --></button>
+                        </li>
+
+                        <li class="green-box" style="display:none;">
+                            <button type="button">Green Box</button>
+                        </li>
+                        <li class="contact-kia" style="display:none;">
+                            <button type="button" data-translation-code="S1_15" data-href="contact_us"><!-- Contact Kia --></button>
+                        </li>
+                    </ul>
+                </li>
+                <li class="driving-help">
+                    <h2 data-translation-code="B1_42"><!-- DRIVING HELP --></h2>
+                    <ul class="main-sub-menu">
+                        <li class="dealer-locator">
+                            <button type="button" data-translation-code="B1_35" data-href="dealer_locator"><!-- Dealer<br/>Locator --></button>
+                        </li>
+                        <!-- <li ><button>Fuel Station<br/>Locator</button></li> -->
+                        <li class="parked">
+                            <button type="button" data-translation-code="B1_36"><!-- Parked Vehicle<br/>Locator --></button>
+                        </li>
+                        <li class="breakdown">
+                            <button type="button" data-translation-code="B1_37" data-href="breakdown_assistance"><!-- Breakdown<br/>Assistance --></button>
+                        </li>
+                        <li class="emergency">
+                            <button type="button" data-translation-code="B1_38" data-href="emergency_call"><!-- Emergency<br/>Call --></button>
+                        </li>
+                        <!-- <li></li> -->
+                    </ul>
+                </li>
+                <li class="kia-news">
+                    <h2 data-translation-code="B1_27"><!-- KIA NEWS --></h2>
+                    <ul class="main-sub-menu sub-menu-eu">
+                        <li class="mykia-video">
+                            <button type="button" data-translation-code="B1_41" data-href="mykia_video"><!-- MyKia<br/>Video --><span class="badge" style="display:none;" id="kiavideo">0</span></button>
+                        </li>
+                        <li class="brochure">
+                            <button type="button" data-translation-code="B1_33" data-href="brochure_request"><!-- Brochure<br/>Request --></button>
+                        </li>
+                        <li class="mykia-news">
+                            <button type="button" data-translation-code="B1_39" data-href="news_list"><!-- MyKia<br/>News --><span></span><span class="badge" style="display:none;" id="kianews">0</span></button>
+                        </li>
+                    </ul>
+                    <ul class="main-sub-menu sub-menu-kmd">
+                        <li class="mykia-video">
+                            <button type="button" data-translation-code="B1_41"><!-- MyKia<br/>Video --><span class="badge" style="display:none;" id="kiavideo">0</span></button>
+                        </li>
+                        <li class="mykia-news">
+                            <button type="button" data-translation-code="B1_39" data-href="news_list"><!-- MyKia<br/>News --><span></span><span class="badge" style="display:none;" id="kianews">0</span></button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- FOOTER_AREA -->
+    <footer class="footer">
+        <p class="img">KIA, The Power to Surprise.</p>
+    </footer>
+</div>
+<script data-main="../require-config" src="../bower_components/requirejs/require.js"></script>
+</body>
+</html>

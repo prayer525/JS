@@ -1,0 +1,54 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "aes.encrypt": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "call-number": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "com.lampa.startapp": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-app-version": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-document-viewer": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-sim": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "custom-inappbrowser-plugin": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-file-opener2": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    }
+  },
+  "dependent_plugins": {}
+}

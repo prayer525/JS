@@ -1,0 +1,71 @@
+<!--i class="fa fa-calendar"></i><label for="input1">Select Day</label-->
+
+<div class="row calendar-wrap">
+	<div class="col-xs-9 cal-cont">
+		<div class="header">
+			<i class="left" 
+				ng-click="prevMonth()"
+				ng-hide="isThisMonth()"
+			>&lt;</i>
+			<span ng-bind="getThisMonth()"></span>
+			<i class="right" ng-click="nextMonth()">&gt;</i>
+		</div>
+		<div class="week names">
+			<span class="day">{{ 'SU' | i18n:'W2_1' }}</span>
+			<span class="day">{{ 'MO' | i18n:'W2_2' }}</span>
+			<span class="day">{{ 'TU' | i18n:'W2_3' }}</span>
+			<span class="day">{{ 'WE' | i18n:'W2_4' }}</span>
+			<span class="day">{{ 'TH' | i18n:'W2_5' }}</span>
+			<span class="day">{{ 'FR' | i18n:'W2_6' }}</span>
+			<span class="day">{{ 'SA' | i18n:'W2_7' }}</span>
+		</div>
+		<div class="week" ng-repeat="week in weeks">
+			<span class="day" 	ng-class="{
+										 today 				: day.isToday
+										,'different-month'	: !day.isCurrentMonth || day.beforeDay
+										,selected			: day.date.isSame(selected)
+										,available			: day.isAvailable
+									}"
+								ng-click="selectMonth(day)" 
+								ng-repeat="day in week.days"
+							><em>{{day.number}}</em></span>
+		</div>
+	</div>
+
+	<div class="col-xs-3 timeslot">
+		<ul class="list-group">
+			<li class="list-group-item">
+				<button class="btn btn-none btn-block" 
+											ng-click="prevTime()"
+										>
+					<i class="glyphicon glyphicon-triangle-top"></i>
+				</button>
+			</li>
+			<li class="list-group-item text-info" 
+											ng-repeat="time in times track by $index"
+											ng-class="{
+												 opened 	: time.Status == 0
+												,closed 	: time.Status == 1 || time.Status == 2
+												,selected 	: selectedTime == $index
+											}"
+											ng-click="selectTime(time, $index)"
+										><span>{{time.Start | getTime}}</span></li>
+			<li class="list-group-item text-info">
+				<button class="btn btn-none btn-block"
+											ng-click="nextTime()"
+										>
+					<i class="glyphicon glyphicon-triangle-bottom"></i>
+				</button>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="row date-legend">
+	<div class="col-xs-5 col-xs-offset-2"><i class="ico-circle-gray"></i><span>{{ 'Unavailable' | i18n:'W3_1' }}</span></div>
+	<div class="col-xs-5"><i class="ico-circle-red"></i><span>{{ 'Available' | i18n:'W3_2' }}</span></div>
+</div>
+
+
+
+

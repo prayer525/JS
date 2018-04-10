@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>test page</title>
+	</head>
+	<body>
+		<div class="app">
+			<h1>Apache Cordova Test 2</h1>
+			<a href="#" class="open-inapp" target="_blank" data-href="../index.html" data-option="location=no,zoom=no">Go to index page</a>
+			<button type="button">Click</button>
+		</div>
+<script src="../bower_components/requirejs/require.js"></script>
+<script>
+require.config({
+	waitSeconds: 0,
+	paths: {
+		 'cordova':	 ['cordova'],
+		 'jquery':	  ['bower_components/jquery/dist/jquery.min'],
+		 'moment':	  ['bower_components/moment/min/moment.min'],
+		 'crypto-js':   ['bower_components/crypto-js/crypto-js'],
+		 'service':	 ['js/service']
+	},
+	shim: {
+		//'bootstrap': ['jquery'],
+		//'navbar': ['jquery'],
+		//'bxslider': ['jquery'],
+		//'xpull':['jquery'],
+		//'gCalendar':['service']
+		// 'common':['jquery'],
+		// 'sortable':['jquery'],
+		// 'dataTableBoot':['dataTable']
+	},
+	baseUrl: '../',
+	urlArgs: "bust=" + (new Date()).getTime() // cache manage,
+});
+require(['cordova', 'jquery', 'moment', 'crypto-js', 'service'], function(){
+	console.log('aa')
+});
+require.onError = function (err) {
+	if (err.requireType === 'timeout') {
+//		  console.log("error: "+err);
+	} 
+	else {
+		throw err;
+	}   
+};
+</script>
+	</body>
+</html>

@@ -1,0 +1,113 @@
+<section>
+	<!-- BTN_AREA_FIXED -->
+	<div class="sub_head">
+		<!-- <p class="btn_space hbox jc">
+			<button type="button" class="flex btn_tab" 
+													ng-class="{
+														on: tabPage == CONSTANT.TAB_DEALER_LIST
+													}"
+													ng-click="tabPage = CONSTANT.TAB_DEALER_LIST"
+												>
+				{{ 'List' | i18n:'E1_23' }}
+			</button>
+			<button type="button" class="flex btn_tab" 
+													ng-class="{
+														on: tabPage == CONSTANT.TAB_DEALER_MAP
+													}"
+													ng-click="tabPage = CONSTANT.TAB_DEALER_MAP"
+												>
+				{{ 'Map' | i18n:'E1_22' }}
+			</button>
+		</p> -->
+		<p class="txt_tab">
+			<strong id="cnt">{{ dealers.length }}</strong> {{ 'Dealers Found' | i18n:'E1_24' }}
+		</p>
+	</div>
+
+	<!-- 검색 -->
+	<div id="header" class="f_popup search type2">
+		<h1>Search</h1>
+		<p class="search_box">
+			<input type="text" class="auto-complete" placeholder="" 
+																kme-autocomplate
+																ng-model="searchKeyword"
+															/>
+			<button type="button" class="btn_cancel" 
+												ng-click="closeSearch()"
+												ng-show="searchKeyword != ''"
+											>
+				delete
+			</button>
+		</p>
+		<!--button type="button" class="hbtn fr" ng-click="closeSearch()">{{ 'Close' | i18n:'B1_1' }}</button-->
+	</div>
+
+	<!-- contents_Start -->	 
+	<!-- LIST_AREA -->
+	<!-- <div class="list_space"
+						ng-show="tabPage == CONSTANT.TAB_DEALER_LIST"
+					>
+		<ul class="li_style_move">
+			<!--sales : class type01--
+			<li class="map_sub" 
+							ng-repeat="dealer in dealers"
+							ng-class="{
+								 type01 : dealer.DealerType == CONSTANT.DEALER_TYPE_SALES
+								,type02 : dealer.DealerType == CONSTANT.DEALER_TYPE_SERVICE
+								,type03 : dealer.DealerType == CONSTANT.DEALER_TYPE_SALES_SERVICE
+							}"
+						>
+				<button type="button" 
+								ng-click="goDealerDetail( dealer.DealerSapCode )"
+							>
+					<h2 class="ellipsis"
+									ng-bind-html="dealer.Name | html"
+								>
+					</h2>
+					<p>
+						<span class="street"
+										ng-bind-html="dealer.Street | html">
+						</span>
+						<span class="town"
+										ng-bind-html="dealer.Town | html">
+						</span>
+					</p>
+					<p class="txt_pos">{{ dealer.Distance | number:2 }} KM</p>
+				</button>
+			</li>
+		</ul>
+		<div class="result_none" ng-show="dealers.length == 0">
+			<p>No Search Result</p>
+		</div>
+
+		<!--첫 로드시 (제일 위에 가있을 때엔 보이지 않게 해주세요 : class none) --
+		<button type="button" class="btn_top none">Top</button>
+	</div> -->
+
+	<!-- MAP_AREA -->
+	<div class="map_space">
+
+		<div kme-map></div>
+		
+		<!-- 딜러 상세보기 -->
+		<div class="map_sub" 
+						ng-show="showMapDetail != ''"
+						ng-class="{
+							 'type01': dealerDetailInfo.Type == 1
+							,'type02': dealerDetailInfo.Type == 2
+							,'type03': dealerDetailInfo.Type == 3
+						}"
+					>
+			<button type="button" class="inside full"
+										ng-click="goDealerDetail( dealerDetailInfo.DealerSapCode )"
+								>
+				<h2 class="ellipsis"
+								ng-bind-html="dealerDetailInfo.Name | html"
+							>
+				</h2>
+				<p ng-bind-html="dealerDetailInfo.Address | html"></p>
+			</button>
+		</div>
+	</div>
+	<!-- //contents_End -->
+</section>

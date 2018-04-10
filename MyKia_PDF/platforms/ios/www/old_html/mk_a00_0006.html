@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: Setting</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_a00_0006">
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+	<header id="header">
+		<h1><!--Setting--><script type="text/javascript">M.locale.localizedWrite("B1_21")</script></h1>
+		<button type="button" class="hbtn fl back">Back</button>
+	</header>
+
+	<section id="container">
+		<div id="scroll">
+		<!-- contents_Start -->
+
+			<ul class="li_setting">
+				<li id="mk_a00_0007" class="profile"><!--  2015-05-22 -->
+					<button type="button">
+						<p><!-- My Profile --><script type="text/javascript">M.locale.localizedWrite("B1_22")</script></p>
+					</button>
+				</li>
+				<li id="mk_a00_0008" class="language"><!--  2015-05-22 -->
+					<button type="button">
+						<p><!-- Language --><script type="text/javascript">M.locale.localizedWrite("B1_23")</script></p>
+					</button>
+				</li>
+				<li data-id="license" class="contactus"><!--  2015-05-22 -->
+					<button type="button">
+						<p><!-- Contact Us --><script type="text/javascript">M.locale.localizedWrite("S1_15")</script></p>
+					</button>
+				</li>
+				<li data-id="license" class="termsofuse"><!--  2015-05-22 -->
+					<button type="button">
+						<p><!-- Terms of use --><script type="text/javascript">M.locale.localizedWrite("S1_16")</script></p>
+					</button>
+				</li>
+				<li data-id="license" class="privacy"><!--  2015-05-22 -->
+					<button type="button">
+						<p><!-- Privacy Policy --><script type="text/javascript">M.locale.localizedWrite("S1_17")</script></p>
+					</button>
+				</li>
+				<li id="mk_a00_0009" class="optIns"><!-- 2015-06-05 -->
+					<button type="button">
+						<p><!-- Opt Ins --><script type="text/javascript">M.locale.localizedWrite("S1_18")</script></p>
+					</button>
+				</li>
+				<li id="sync" class="update" style="display:none;"><!--  2015-05-22 -->
+					<button type="button" class="hbox jc">
+						<p class="flex"><!-- Update Profile --><script type="text/javascript">M.locale.localizedWrite("S1_14")</script></p>
+						<p class="flex sync_date">&nbsp;</p>
+					</button>
+				</li>
+				<li id="logout" class="logout" style="display:none;"><!--  2015-05-22 -->
+					<button type="button">
+						<p><!-- Logout --><script type="text/javascript">M.locale.localizedWrite("B1_10")</script></p>
+					</button>
+				</li>
+			</ul>
+
+		<!-- //contents_End -->
+		</div>
+	</section>
+
+	<footer id="footer">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+var needRefresh = false;
+
+// touch Profile menu
+// Profile를 터치할경우
+$("#mk_a00_0007").click(Page.moveToPageModalUp);
+
+// touch Language menu
+// Language를 터치할 경우
+$("#mk_a00_0008").click(Page.moveToPageModalUp);
+
+// touch Opt Ins menu
+// Opt Ins을 터치 할 경우
+$("#mk_a00_0009").click(Page.moveToPageModalUp);
+
+// touch logout button
+// 로그아웃 버튼 터치
+$("#logout").click(gfnLogout);
+
+// touch Update Profile menu
+// Update Profile을 터치할 경우
+$("#sync").click(gfnDataSync);
+
+// touch Contact Us, terms of Use, Private Policy menu
+// Contact Us, terms of Use, Private Policy를 터치할 경우
+$("[data-id=license]").click(gfnMoveLicense);
+
+var gvlLogoutCallback={
+		success:function(rev,setting){
+			// refresh menu after success logout
+			// 로그아웃 성공시 데이터를 로컬 데이터를 삭제후, 화면 메뉴를 갱신한다.
+			LoginManager.clear();
+			gfnInit();
+			M.execute("exFaceBookLogout");
+		},
+		error:function(code,msg){
+			LoginManager.clear();
+			gfnInit();
+			M.execute("exFaceBookLogout");
+		}
+	},
+	gvlLogoutNetwork=new NetworkManager(TrCode.Logout,gvlLogoutCallback,false);
+
+// when landing this screen
+// 최초 진입 시
+function gfnInit(){
+	var marketId = LoginManager.getDetailsInfo().MarketId;
+	var shownMarket = ["KMSW", "KMIT", "KMBE"];
+	
+	// Language 선택 표시 제거 국가 체크 
+	// 2017-11-07 : 모든 국가에 '영어' 포함 - 언어 선택 메뉴 fix
+	/*
+	if($.inArray(marketId, shownMarket) > -1){
+		$("#mk_a00_0008").addClass("none");
+	}
+	*/
+		
+	// check logged in
+	// 로그인 여부를 판단한다.
+	if(LoginManager.isLogin()){
+
+		/*
+		 * display logout, update profile menu when user logged in
+		 * 로그인 된 경우
+		 * 로그아웃 메뉴를 표시한다.
+		 * 프로파일 업데이트 메뉴를 표시한다.
+		 */
+		$("#logout").show();
+		$("#sync").show();
+	}else{
+
+		/*
+		 * hide logout, update profile menu user still not sign in
+		 * 로그인 되지 않은 경우
+		 * 로그아웃 메뉴를 숨긴다.
+		 * 프로파일 업데이트 메뉴를 숨긴다.
+		 */
+		$("#logout").hide();
+		$("#sync").hide();
+		/* 
+		 * 2017.03.13
+	 	 * logout시 login 화면으로 이동한다.	
+		 */
+		M.page.html("mk_a00_0002.html",Options.ClearTop);
+	}
+
+	// display this date when user touches update profile menu
+	// 프로파일 업데이트에 최종 업데이트 일자를 표시한다.
+	var syncDate = LoginManager.getSyncDate();
+	$(".sync_date").text(JsUtil.getDateFormatter(syncDate));
+}
+
+// logout
+// 로그아웃 버튼을 누르면 로그아웃 처리한다.
+function gfnLogout(){
+	function callback(index){
+		if(index==1){
+			gvlLogoutNetwork.send({
+		    	"CustomerId" : LoginManager.getCustomerId()
+		    });
+		}
+	}
+	MApi.confirm(M.locale.localizedString("B1_46"),[M.locale.localizedString("D1_9"),M.locale.localizedString("B1_10")],callback);
+}
+
+// move to loading screen for download users data
+// 로딩화면으로 이동하여 서버로 부터 데이터를 새로 내려받는다
+function gfnDataSync(){
+	var option=Options.NoHistory;
+	var params={};
+	needRefresh = true;
+	params.redirect="setting";
+	option.param=params;
+	Page.moveToPage("loading",option);
+}
+
+// move to License screen when Contact Us, terms of Use, Private Policy menu touched
+// Contact Us, terms of Use, Private Policy를 터치할 경우 “License” 화면으로 이동한다.
+function gfnMoveLicense(){
+	var idx = $("[data-id=license]").index($(this)),
+		options=Options.NoHistory,
+		theParam = {};
+	
+	switch (idx) {
+	case 0:
+		theParam.type="contact";
+		break;
+
+	case 1:
+		theParam.type = "term";
+		break;
+
+	case 2:
+		theParam.type = "privacy";
+		break;
+
+	default:
+		break;
+	}
+	
+	options.param = theParam;
+	Page.moveToPage("license",options);
+}
+M.onReady(function(e){
+	gfnInit();
+});
+M.onRestore(function(e){
+	gfnInit();
+});
+
+// touch back button
+// needRefresh: main screen does not refresh after update profile and move back to main screen
+// main screen should force refresh if needRefresh parameter is true
+// 이전 버튼을 터치할 경우
+// needRefresh: 프로파일 업데이트후 언어가 바뀌지 않아서 메인에서 새로고침 필요함을 뜻함
+$(".back").off('click');
+$(".back").on('click', function(e){
+	M.page.back({
+		param: {
+			"needRefresh": needRefresh
+		}
+	});
+	return false;
+});
+
+</script>
+</html>

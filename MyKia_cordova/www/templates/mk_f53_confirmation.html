@@ -1,0 +1,89 @@
+<section>
+	<!-- progress step -->
+	<div class="progress-wrap">
+		<div kme-progress-step></div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<dl class="appointment-confirm confirmation">
+				<dt>
+					<i class="ico-default-type ico-car-red"></i>
+					{{ 'Appointments Type' | i18n:'W0_21' }}
+				</dt>
+				<dd>
+					<p ng-bind="typeString"></p>
+					<button ng-click="modify( CONSTANT.MODIFY_TYPE )">
+						<img src="../img/appointments/ico_setting_gray.png" alt="">
+					</button>
+				</dd>
+				<dt ng-show="modelName">
+					<i class="ico-default-type ico-handle-red"></i>
+					{{ 'Car Model' | i18n:'D1_13' }}
+				</dt>
+				<dd ng-show="modelName">
+					<p ng-bind="modelName"></p>
+					<button ng-click="modify( CONSTANT.MODIFY_MODEL )">
+						<img src="../img/appointments/ico_setting_gray.png" alt="">
+					</button>
+				</dd>
+				<dt>
+					<i class="ico-default-type ico-dealer-red-pin"></i>
+					{{ 'Selected Dealer' | i18n:'W0_22' }}
+				</dt>
+				<dd>
+					<p ng-bind="dealerName"></p>
+					<p ng-bind="dealerAddress"></p>
+					<button ng-click="modify( CONSTANT.MODIFY_DEALER )">
+						<img src="../img/appointments/ico_setting_gray.png" alt="">
+					</button>
+				</dd>
+				<dt ng-show="type == CONSTANT.SHOWROOM_TITLE_MEET_SALES_ADVISOR"
+									>
+					<i class="ico-default-type ico-question-red-fill"></i>
+					{{ 'Meeting Question' | i18n:'WS_23' }}
+				</dt>
+				<dd ng-show="type == CONSTANT.SHOWROOM_TITLE_MEET_SALES_ADVISOR"
+									>
+					<p ng-bind="subjectsString"></p>
+					<p ng-bind="question"></p>
+					<button ng-click="modify( CONSTANT.MODIFY_MEETING_QUESTION )">
+						<img src="../img/appointments/ico_setting_gray.png" alt="">
+					</button>
+				</dd>
+				<dt ng-hide="flagKMBE">
+					<i class="ico-default-type ico-time-red"></i>
+					{{ 'Date &amp; Time' | i18n:'W0_23' }}
+				</dt>
+				<dd ng-hide="flagKMBE">
+					<p ng-bind="dateTime"></p>
+					<button ng-click="modify( CONSTANT.MODIFY_DATETIME )">
+						<img src="../img/appointments/ico_setting_gray.png" alt="">
+					</button>
+				</dd>
+				<dt class="wordwrap">
+					<i class="ico-default-type ico-checked-red-fill"></i>{{ 'Call Back from Dealer' | i18n:'W3_3' }}
+				</dt>
+				<dd>
+					<div class="form-group chk-call-back" style="padding-top:1rem; margin-bottom:0;">
+						<input type="radio" id="callbackYes" ng-model="callbackByDealer" value="true">
+						<label for="callbackYes" style="margin-right:1rem;">{{ 'Yes' | i18n:'N1_7' }}</label>
+						<input type="radio" id="callbackNo" ng-model="callbackByDealer" value="false">
+						<label for="callbackNo">{{ 'No' | i18n:'N1_6' }}</label>
+					</div>
+				</dd>
+				<dd class="txt-field"
+							ng-show="type == CONSTANT.SHOWROOM_TITLE_GET_QUOTE || type == CONSTANT.SHOWROOM_TITLE_TEST_DRIVE"
+						>
+					<textarea name="" id="" placeholder="{{ 'Additional Message' | i18n:'W0_24' }}"
+																							kme-scroll-to
+																							kme-set-focus
+																							ng-model="comment"
+						></textarea>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</section>
+<div class="btn-fix gray text-center">
+	<button type="button" class="btn btn-red-round" ng-click="nextstep()">{{ 'Confirm' | i18n:'E1_25' }}</button>
+</div>

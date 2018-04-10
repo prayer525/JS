@@ -9,6 +9,7 @@
 </head>
 <body>
 <div id="pageBrochureRequest" class="wrapper" data-role="page">
+
 	<!-- LayerPop -->
     <div class="lightbox none"></div>
     <div class="popup none" id="downloadPopup">
@@ -31,15 +32,14 @@
         </div>
     </div>
     <!-- //LayerPop -->
-
 	<!-- LayerPop -->
-    <div class="popup none" id="morePopup">
-        <div class="popup_m" style="vertical-align: bottom;" id="morePopupBox">
-            <div class="popup_in">
-                <div class="more_popup">
-                	<button class="email_btn" id="email" data-translation-code="L1_7"></button>
-                    <button class="open_btn" id="openIn" data-translation-code="L1_5"></button>
-                    <button class="download_btn" id="download" data-translation-code="L1_4"></button>
+    <div class="popup-more none" id="morePopup">
+        <div class="popup-m" style="vertical-align: bottom;" id="morePopupBox">
+            <div class="popup-in">
+                <div class="more-popup">
+                	<button class="email-btn" id="email" data-translation-code="L1_7"></button>
+                    <button class="open-btn" id="openIn" data-translation-code="L1_5"></button>
+                    <button class="download-btn" id="download" data-translation-code="L1_4"></button>
                 </div>
             </div>
         </div>
@@ -53,42 +53,21 @@
 	<section class="container fix-bottom">
 		<div class="scroll">
 		<!-- contents_Start -->
-			<div class="car_list">
-	            <ul class="list_type_select" id="list">
-	                <!-- <li>
-	                    <input type="checkbox" id="chk01"/>
-	                    <label class="li_sub hbox js" for="chk01">
-	                        <p class="flex">New Soul ECO-electric</p>
-	                        <img src="../img/car/RP_K3Y.png"/>
-	                    </label>
-	                </li>
-	                <li>
-	                    <input type="checkbox" id="chk02"/>
-	                    <label class="li_sub hbox js" for="chk02">
-	                        <p class="flex">New Soul ECO-electric</p>
-	                        <img src="../img/car/RP_K3Y.png"/>
-	                    </label>
-	                </li>
-	                <li>
-	                    <input type="checkbox" id="chk03"/>
-	                    <label class="li_sub hbox js" for="chk03">
-	                        <p class="flex">New Soul ECO-electric</p>
-	                        <img src="../img/car/RP_K3Y.png"/>
-	                    </label>
-	                </li> -->
+			 <!-- list_area -->
+            <div class="car-list">
+	            <ul class="list-type-select" id="list">
+	               
 	            </ul>
 			</div>
-
-			<!-- No Search Result -->
-            <div class="result_none none">
-                <p data-translation-code="D1_16"></p>
+            
+            <!-- No Search Result -->
+            <div class="result-none-file none">
+                <p data-translation-code="D1_17"></p>
             </div>
 		<!-- //contents_End -->
 		</div>
-
-		<!-- btnArea -->		
 		<div class="fix-bottom f-btnArea">
-			<button href="legal_notice.html" class="btn-red off btn-confirm-legal-notice" disabled="disabled" data-translation-code="T1_7"><!-- Save --></button>
+			<button id="request" class="btn-red off" disabled="disabled" data-role="none" data-translation-code="E1_25"><!-- Confirm --></button>
 		</div>
 	</section>
 	<footer class="footer" data-role="footer" data-position="fixed" data-fullscreen="false">

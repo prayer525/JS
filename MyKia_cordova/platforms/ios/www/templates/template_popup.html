@@ -1,0 +1,25 @@
+<div class="pop-window">
+	<div class="p_header">
+		<!-- <h2>{{ title }}</h2> -->
+		<h3>
+			{{ popup.distance | number:0 }} 
+			{{ 'km' | i18n:'WS_27' }} / 
+			{{ popup.months | number:0 }} 
+			{{ 'Month' | i18n:'Y1_1' }} </h3>
+		<div class="ngdialog-close custom"></div>
+	</div>
+	<div class="ngdialog-message">
+		
+		<div class="scroll">
+			<ul class="mt">
+				<li
+					ng-repeat="content in popup.contents"
+					ng-class="{'tit': content.indexOf('---') > -1}"
+				><span>{{ content }}</span></li>
+			</ul>
+		</div>
+	</div>
+	<!-- <div class="btn-wrap2">
+		<button class="btn btn-red-round" ng-click="routine.selectDetailInfo(popup.index)">{{ 'Select' | i18n:'B1_4' }}</button>
+	</div> -->
+</div>

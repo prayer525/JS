@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: Parked Vehicle Locator </title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+<style type="text/css">
+.gmnoprint {display: none !important}
+a[target=_blank] {display: none !important}
+</style>
+</head>
+<body id="mk_d03_0001">
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+    <header id="header">
+        <h1><!-- Parked Vehicle Locator --><script type="text/javascript">M.locale.localizedWrite("F1_19")</script></h1>
+        <button type="button" class="hbtn fl home">Home</button>
+    </header>
+
+	<section id="container">
+		<div id="scroll" class="vbox">
+        <!-- contents_Start -->     
+
+			<!-- POINT_AREA -->
+			<div class="map_loc_sub none" id="mapSub">
+				<p class="time" id="time">&nbsp;</p>
+				<p class="add" id="title">&nbsp;</p>
+				<p class="sub">
+					<span class="clock" id="dura">&nbsp;</span>
+					<span class="arrow" id="dist">&nbsp;</span>
+				</p>
+				<button type="button" class="btn_google" id="callMapBtn">google</button>
+			</div>
+
+            <!-- MAP_AREA -->
+			<div class="memo_map flex" id="map_canvas">
+				<!-- 지도영역: 아이콘1 개발시 아래 이미지 삭제해주세요
+				<button type="button" class="btn_now">now position</button>
+				<img src="../img/ico_map_type01.png" alt=""/> -->
+			</div>						
+			<!-- MEMO_AREA  -->
+			<div class="memo_map_sub">
+				<strong><!-- MEMO --><script type="text/javascript">M.locale.localizedWrite("F1_20")</script></strong>
+				<input type="text" placeholder="Your notes" id="parkNote"/>
+				<p class="btn_line hbox jc">
+					<!--press class on / disabled class off-->
+					<button type="button" class="btn_white flex off " data-id="footerBtn" id="clearBtn"><!-- Clear -->
+						<script type="text/javascript">M.locale.localizedWrite("F1_22")</script>
+					</button>
+					<button type="button" class="btn_white flex" data-id="footerBtn" id="saveBtn"><!-- Save -->
+						<script type="text/javascript">M.locale.localizedWrite("B1_3")</script>
+					</button>
+				</p>
+			</div>
+ 
+        <!-- //contents_End -->
+        </div>
+    </section>
+
+    <footer id="footer" class="">
+        <p class="img">KIA, The Power to Surprise.</p>
+    </footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+$("#parkNote").attr("placeholder",M.locale.localizedString("F1_21"));
+var myMarkerOptions={
+	canvas:"map_canvas",
+	markerIcon:"",
+	notUseScale : true
+},
+gvlGooglMapManager,
+gvlSavedLocation = null,
+gvlPosition = null,
+gvlDirectionsDisplay = null,
+gvlDirectionsService = null,
+gvlInitFlag=false;
+
+M.onReady(function(e){
+	$("#map_canvas").height($("body").height()-($(".memo_map_sub").outerHeight()+$("header").outerHeight()));
+
+	// 최초 진입 시 주차 위치 정보가 저장 되어 있는 경우 버튼 타입을 변경한다.
+	gfnBtnChanger();
+	
+	// 구글맵을 load 한다.
+	gfnInit();
+	
+	// “Save”버튼 터치 시
+	$("#saveBtn").click(function() {
+		if ($(this).hasClass("off")) {
+			return false;
+		}
+		MApi.confirm(M.locale.localizedString("N1_3"), [M.locale.localizedString("D1_9"), M.locale.localizedString("F1_33")],
+				function(idx, setting) {
+			if (idx == 1) {
+
+				/*
+				 * 현재 사용자 위치를 스토리지에 저장한다.
+				 * 위치 정보를 스토리지에 저장한다.
+				 * 주차 시간을 스토리지에 저장한다.
+				 * 메모 내용을 스토리지에 저장한다.
+				 */
+                MApi.storage(Storage.ParkedLocation, gvlSavedLocation);
+                var tempTime = new Date();
+                var pattern="DD/MM/YYYY hh:mm";
+                if(M.locale.get().match("sv-SE")) pattern="YYYY-MM-DD hh:mm";
+                MApi.storage(Storage.ParkedTime, tempTime.getDateString(pattern));
+                MApi.storage(Storage.ParkedNote, $("#parkNote").val());
+                gfnDrawMap(gvlPosition);
+			}
+		});
+	});
+	
+	// “Clear”버튼 터치 시
+	$("#clearBtn").click(function() {
+		if ($(this).hasClass("off")) {
+			return false;
+		}
+		MApi.confirm(M.locale.localizedString("N1_5"), [M.locale.localizedString("N1_6"), M.locale.localizedString("N1_7")],
+				function(idx, setting) {
+			if (idx == 1) {
+				
+				/*
+				 * 구글맵을 초기화 한다.
+				 * 위치 정보를 스토리지에서 삭제한다.
+				 * 주차 시간을 스토리지에서 삭제한다.
+				 * 메모 내용을 스토리지에서 삭제한다.
+				 * 버튼 타입을 변경한다.
+				 */
+				gvlGooglMapManager.setDefaultCenter(true);
+				M.data.removeStorage(Storage.ParkedLocation);
+				M.data.removeStorage(Storage.ParkedTime);
+				$("#parkNote").prop("disabled", false);
+				$("#parkNote").val("");
+				gvlSavedLocation = "";
+				gvlDirectionsDisplay.setMap(null);
+				gvlGooglMapManager.getMap().setZoom(17);
+				$("#mapSub").addClass("none");
+				$("#curLocBtn").click();
+			}
+		});
+	})
+});
+
+// 구글맵을 load 한다.
+function gfnInit() {
+
+	var platform=MApi.getPlatform();
+	if(platform=="iOS"){
+		$("input").css("-webkit-transform","translate3d(0,0,0)");
+	}
+
+	setTimeout(function() {
+		if (gvlGoogleMapLoad) {
+			if (gvlDirectionsDisplay != null)
+				gvlDirectionsDisplay.setMap(null);
+			$("#curLocBtn").click();
+			return;
+		}
+		gvlGooglMapManager=new GoogleMapManager(myMarkerOptions,{
+			load:function(_status){
+				if(_status=="FAILE"){
+					MApi.alert(M.locale.localizedString("F1_32"), Page.backPage);
+				}
+			},
+			geo:function(_status, _position) {
+				if(_status=="SUCCESS"){
+
+					// 구글맵 Load 결과 성공 시 현재 위치 정보를 수집한다.
+					gvlPosition = _position;
+					if (M.locale.VirtualMode) {
+						_position = {
+							 'latitude': "48.8340693"
+							,'longitude': "2.2855585"
+						}
+					}
+					gfnDrawMap(_position)
+
+					// init set zoom level setting
+					gvlGooglMapManager.getMap().setZoom(17);
+				}else{
+					gvlInitFlag=true;
+					MApi.confirm(M.locale.localizedString("V1_10"),[M.locale.localizedString("D1_9"), M.locale.localizedString("S1_21")],gvlGooglMapManager.goSetting);
+				}
+			},
+			optIns:function(_idx){
+				/* gvlInitFlag=true;
+				gvlGooglMapManager.moveToOptIns(_idx); */
+				if (_idx==1) { // Gps setting logic is Make
+					var optInsVal = MApi.storage(Storage.optInsVal);
+					if (!optInsVal) {
+						var optInsVal = {
+					        gps:true,
+					        call:false
+					    }
+					}else{
+						optInsVal.gps = true;
+					}
+					
+				    MApi.storage(Storage.optInsVal, optInsVal);
+				    gfnInit();
+				}
+				else { // backPage
+					Page.backPage();
+			    }
+			},
+			setting:function(_idx){
+				gvlInitFlag=true;
+				gvlGooglMapManager.goSetting(_idx);
+			}
+		});
+
+		if(gvlSavedLocation=="")
+			gvlGooglMapManager.setDefaultCenter(true);
+		else
+			gvlGooglMapManager.setDefaultCenter(false);
+	}, 150);
+}
+
+// 현재 위치 정보 수집 결과 성공 시 맵에 현재 위치를 표시한다
+function gfnDrawMap(_position){
+	gfnBtnChanger();
+	if (gvlSavedLocation == "") {
+		MApi.log(_position);
+		gvlSavedLocation = _position;
+	}
+	else {
+		var geoloc = new google.maps.Geocoder(),
+			item = {};
+		geoloc.geocode({
+			"latLng" : new google.maps.LatLng(gvlSavedLocation.latitude, gvlSavedLocation.longitude)},
+			function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+
+					// 현재 위치 정보 수집 결과 성공 시 맵에 현재 위치를 표시한다
+					item.coords = gvlSavedLocation;
+					item.title = results[0].formatted_address;
+					
+					$("#mapSub").removeClass("none");
+					$("#title").text(item.title);
+					$("#parkNote").val(MApi.storage(Storage.ParkedNote));
+					$("#parkNote").prop("disabled", true);
+					
+					if (gvlDirectionsDisplay == null) {
+						gvlDirectionsDisplay = new google.maps.DirectionsRenderer(),
+						gvlDirectionsService = new google.maps.DirectionsService();
+					}
+					var parkedLoc = new google.maps.LatLng(gvlSavedLocation.latitude, gvlSavedLocation.longitude),
+						curLoc = new google.maps.LatLng(_position.latitude, _position.longitude);
+					
+					if (M.locale.VirtualMode) {
+						curLoc = new google.maps.LatLng(48.8319722, 2.2883361);
+					}
+
+					gvlDirectionsDisplay.setMap(gvlGooglMapManager.getMap());
+					var request = {
+						origin: curLoc,
+						destination: parkedLoc,
+						// Note that Javascript allows us to access the constant
+						// using square brackets and a string value as its
+						// "property."
+						travelMode: google.maps.TravelMode.TRANSIT
+					};
+
+					/* 
+					 * 주차 위치 정보가 저장 되어 있는 경우
+					 * 주차 위치를 맵에 표시한다.
+					 * 이동 소요시간을 표시한다.
+					 * 이동 거리를 표시한다.
+					 * 주차 시간을 표시한다.
+					 * 사용자와 주차 위치를 도보 기준으로 맵에 그린다.
+					 * 메모 내용을 표시한다.
+					 */
+					gvlDirectionsService.route(request, function(response, status) {
+						if (status == google.maps.DirectionsStatus.OK) {
+							gvlDirectionsDisplay.setDirections(response);
+							var timeVal = response.routes[0].legs[0].duration.value,
+								distVal = response.routes[0].legs[0].distance.value
+							$("#dura").text(Math.ceil(timeVal/60)+"min");
+							$("#dist").text((distVal/1000)+" km");
+							$("#time").text(MApi.storage(Storage.ParkedTime));
+							$("#callMapBtn").off("click");
+							$("#callMapBtn").click(function() {
+								gvlGooglMapManager.callMap({coords : gvlSavedLocation});
+							});
+						}
+					});
+				}
+			}
+		);
+	}
+}
+
+// 최초 진입 시 주차 위치 정보가 저장 되어 있는 경우 버튼 타입을 변경한다.
+function gfnBtnChanger() {
+	gvlSavedLocation = MApi.storage(Storage.ParkedLocation);
+	var btn = $("[data-id=footerBtn]");
+	btn.addClass("off");
+	if (gvlSavedLocation == "") {
+		btn.eq(1).removeClass("off");
+		btn.eq(1).removeClass("btn_white");
+		btn.eq(1).addClass("btn_red");
+	}
+	else {
+		btn.eq(0).removeClass("off");
+		btn.eq(1).addClass("btn_white");
+		btn.eq(1).removeClass("btn_red");
+	}
+}
+
+M.onResume(function(e) {
+	if(gvlInitFlag){
+		gvlInitFlag=false;
+		gfnInit();
+	}
+});
+
+M.onRestore(function(e) {
+	if(gvlInitFlag){
+		gvlInitFlag=false;
+		gfnInit();
+	}
+});
+
+window.onresize = function() {
+	$("footer").toggleClass("none");
+}
+</script>
+</html>

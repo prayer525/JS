@@ -1,0 +1,7 @@
+/* @import '../bower_components/jquery-mobile/css/jquery.mobile-1.4.5.min.css'; */
+@import 'reset.css';
+@import 'spinner.css';
+@import 'jquery.mobile.custom.css';
+@import '../bower_components/jquery.modal/css/jquery.modal.css';
+@import '../bower_components/swiper/dist/css/swiper.css';
+@import 'myKia.css';

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: License</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<style type="text/css">
+.confirm_area {padding: 0 2.5rem;}
+#contentIframe {font-family:NeoSansPro,sans-serif,helvetica !important; font-size:1.6rem !important; padding:2rem;}
+#contentIframe p {margin:1rem 0 !important;}
+</style>
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body>
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+	<header id="header">
+		<h1>&nbsp;</h1>
+		<button type="button" class="hbtn fl back">Back</button>
+	</header>
+    
+	<section id="container">
+		<div id="scroll">
+			<div id="contentIframe">
+			</div>
+		</div>
+	</section>
+
+	<footer id="footer">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+var type, gvlLegalContent;
+
+if(M.locale.PocMode){
+	gvlLegalContent = getMocks('api/v2/market/getlegalnotice')
+}else{
+	gvlLegalContent = MApi.storage(Storage.LegalContent);
+}
+
+M.onReady(function(e) {
+	init()
+});
+function init() {
+	type = MApi.param("type")
+	switch (type) {
+	case "contact":
+		$("#header > h1").text(M.locale.localizedString("S1_15"))
+		$("#contentIframe").html(gvlLegalContent.ContactUs);
+		break;
+
+	case "term":
+		$("#header > h1").text(M.locale.localizedString("S1_16"))
+		$("#contentIframe").html(gvlLegalContent.TermsOfUse);
+		break;
+
+	case "privacy":
+		$("#header > h1").text(M.locale.localizedString("S1_17"))
+		$("#contentIframe").html(gvlLegalContent.PrivacyPolicy);
+		break;
+
+	default:
+		break;
+	}
+	
+	var lists = $("iframe").contents().find("a");
+	lists.each(function(idx, item) {
+		var temp = item.href;
+		if (temp.indexOf("http") == 0 || temp.indexOf("https") == 0) {
+			item.href =  "javascript:parent.M.apps.browser(\""+temp+"\")";
+		}
+	});
+}
+</script>
+</html>

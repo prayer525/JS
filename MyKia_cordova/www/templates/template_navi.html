@@ -1,0 +1,18 @@
+<!-- title !== 'NONE' 경우에만 보여준다. -->
+<div 
+	ng-if="title !== 'NONE'"
+>
+	<h1 class="navbar-brand" 
+						ng-bind="title"
+					></h1>
+	<button class="navbar-left {{themeLeftIcon}}"
+											ng-cloak
+											ng-click="back()"
+										>
+	</button>
+	<button class="navbar-right {{themeRightIcon}}"
+											ng-cloak
+											ng-click="option()"
+										>
+	</button>
+</div>

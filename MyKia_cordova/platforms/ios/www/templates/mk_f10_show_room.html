@@ -1,0 +1,85 @@
+<section>
+	<!-- progress step -->
+	<div class="progress-wrap">
+		<div kme-progress-step></div>
+	</div>
+	<!-- category -->
+	<div class="row no-padding tab-showroom-type">
+		<div ng-class="{
+						 'col-xs-6':salesNone
+						,'col-xs-4':!salesNone
+					}"
+				>
+			<button class="nav testdrive-box" 
+							ng-click="nextstep(CONSTANT.SHOWROOM_TEST_DRIVE)"
+						>
+				<span>
+					<i class="ico_handle_white"></i>
+					<em>{{ 'Test Drive' | i18n:'WS_4' }}</em>
+				</span>
+			</button>
+		</div>
+		<div class="col-xs-4"
+						ng-hide="salesNone"
+					>
+			<button class="nav sales-box"
+							ng-click="nextstep(CONSTANT.SHOWROOM_SALES)"
+						>
+				<span>
+					<i class="ico_people_white"></i>
+					<em>{{ 'Sales' | i18n:'WS_5' }}</em>
+				</span>
+			</button>
+		</div>
+		<div ng-class="{
+						 'col-xs-6':salesNone
+						,'col-xs-4':!salesNone
+					}"
+				>
+			<button class="nav quote-box"
+							ng-click="nextstep(CONSTANT.SHOWROOM_QUOTE)"
+						>
+				<span>
+					<i class="ico_quote_white"></i>
+					<em>{{ 'Quote' | i18n:'WS_6' }}</em>
+				</span>
+			</button>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<p class="select-dealer-guide-txt"
+								ng-show="dealer.DealerType == CONSTANT.DEALER_TYPE_SERVICE">
+			{{ 'Your preferred Dealer does not have a showroom. Please select another dealer' | i18n:'WS_11' }}
+		</p>
+		<div class="border-box-white">
+			<div class="selected-dealer-info"
+									ng-show="dealer.DealerType != CONSTANT.DEALER_TYPE_SERVICE">
+				<strong ng-bind="dealer.Name"></strong>
+				<span ng-bind="dealer.FullAddress"></span>
+				<a ui-sref="/appointments/showroom/testdrive/dealer({
+																 dealerType: 1
+																,removeStack: -2
+															})">설정하기</a>
+			</div>
+
+			<ul class="list-dealer-select" ng-show="dealer.DealerType == CONSTANT.DEALER_TYPE_SERVICE">
+				<li>
+					<a ui-sref="/appointments/showroom/testdrive/dealer({
+																 dealerType: 1
+																,removeStack: -2
+															})">
+						<span><i class="ico-setting-red-circle"></i>{{ 'Change Dealer' | i18n:'E1_52' }}</span>
+					</a>
+				</li>
+				<li>
+					<a ng-click="goDealerDetail()"> 
+						<span><i class="ico-dealer-red-pin"></i>{{ 'Contact Dealer' | i18n:'WS_10' }}</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
+
+

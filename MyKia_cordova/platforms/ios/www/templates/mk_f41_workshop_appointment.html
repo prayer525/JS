@@ -1,0 +1,249 @@
+<section>
+	<!-- progress step -->
+	<div class="progress-wrap">
+		<div kme-progress-step></div>
+	</div>
+	<div class="container-fluid">
+		<!-- 
+		 * session1: Routine Maintenance 
+		-->
+		<div class="panel-group kme-panel-group">
+			<div class="panel panel-default"
+									ng-class="{
+										 'panel-primary' : routine.selectedItemIndex != null
+									}"
+								>
+				<!-- Routine Maintenance: 제목 -->
+				<div class="panel-heading"
+									ng-click="toggleSession( CONSTANT.WORKSHOP_APPOINTMENT_MAINTENANCE_ROUTINE )"
+								>
+					<h4 class="panel-title">
+						<span ng-bind="routine.title"></span>
+						<span class="float-button">
+							<i class="ico-default-type" 
+											ng-class="{
+												 'ico-up-red'  	: selectedSession == CONSTANT.WORKSHOP_APPOINTMENT_MAINTENANCE_ROUTINE
+												,'ico-down-red'	: selectedSession != CONSTANT.WORKSHOP_APPOINTMENT_MAINTENANCE_ROUTINE
+											}"
+								></i>
+						</span>
+					</h4>
+				</div>
+
+				<!-- Routine Maintenance: 리스트 -->
+				<div class="panel-collapse" 
+									ng-show="selectedSession == CONSTANT.WORKSHOP_APPOINTMENT_MAINTENANCE_ROUTINE"
+								>
+					<div class="panel-body">
+						<ul class="list-group">
+							<li class="list-group-item" 
+													ng-repeat="list in routine.lists track by $index"
+													ng-if="list.Distance > myVehicle.CurrentMileageInKilometers"
+													ng-class="{
+														'list-checked': routine.selectedItemIndex == $index
+													}"
+												>
+								<button class="btn btn-none"
+														ng-click="routine.selectItem($index)"
+													>
+									<i class="btn-rdo"></i>
+								</button>
+								{{ list.Distance | l13n:0 }} km / {{ list.Months | l13n:0 }} {{'Months' | i18n:'Y1_1'}}
+								<button class="float-button btn routine-info"
+																			ng-click="routine.showDetailInfo($index, list)"
+																		>
+									<i></i>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- // Routine Maintenance -->
+
+		<!-- 
+		 * session2: Repair 
+		-->
+		<div class="panel-group kme-panel-group">
+			<div class="panel panel-default"
+										ng-class="{
+											 'panel-primary' : repair.selectedItems.length != 0 || repair.elseNeed != ''
+										}"
+									>
+
+				<!-- Repair: 제목 -->
+				<div class="panel-heading"
+									ng-click="toggleSession( CONSTANT.WORKSHOP_APPOINTMENT_REPAIR )"
+								>
+					<h4 class="panel-title">
+						<span ng-bind="repair.title"></span>
+						<span class="float-button">
+							<i class="ico-default-type" 
+											ng-class="{
+												 'ico-up-red'	: selectedSession == CONSTANT.WORKSHOP_APPOINTMENT_REPAIR
+												,'ico-down-red'	: selectedSession != CONSTANT.WORKSHOP_APPOINTMENT_REPAIR
+											}"
+							></i>
+						</span>
+					</h4>
+				</div>
+
+				<!-- Repair: 리스트 -->
+				<div class="panel-collapse"
+										ng-show="selectedSession == CONSTANT.WORKSHOP_APPOINTMENT_REPAIR"
+									>
+					<div class="panel-body">
+						<ul class="list-group">
+							<li class="list-group-item" 
+												ng-repeat="list in repair.lists"
+												ng-class="{
+													'list-checked': !repair.isSelectedItem($index)
+												}"
+											>
+								<button class="btn btn-none"
+														ng-click="repair.selectItem($index)"
+													>
+									<i class="btn-chk"></i>
+								</button>
+								{{list.Description}}
+							</li>
+							<li class="list-group-item">
+								<textarea class="form-control" rows="3" placeholder="{{ 'Note to the dealer' | i18n:'W0_24' }}"
+													kme-scroll-to
+													ng-model="repair.elseNeed"
+													ng-class="{
+														'require': repair.selectedItems.length > 0 && repair.elseNeed == ''
+													}"
+												></textarea>
+								<p class="require-txt"
+											ng-show="repair.selectedItems.length > 0"
+								>
+									{{ 'This is required field' | i18n:'W0_20' }}
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- // Repair -->
+
+		<!-- 
+		 * session3: Maintenance Service 
+		-->
+		<div class="panel-group kme-panel-group">
+			<div class="panel panel-default" 
+										ng-class="{
+											 'panel-primary' : service.isMot
+										}">
+
+				<!-- Maintenance Service: 제목 -->
+				<div class="panel-heading"
+									ng-click="toggleSession( CONSTANT.WORKSHOP_APPOINTMENT_MAINTENANCE_SERVICE )"
+								>
+					<h4 class="panel-title">
+						<span ng-bind="service.title"></span>
+						<span class="float-button">
+							<i class="ico-default-type" 
+									ng-class="{
+										'ico-up-red'	: selectedSession == CONSTANT.WORKSHOP_APPOINTMENT_MAINTENANCE_SERVICE
+										,'ico-down-red'	: selectedSession != CONSTANT.WORKSHOP_APPOINTMENT_MAINTENANCE_SERVICE
+									}"></i>
+						</span>
+					</h4>
+				</div>
+
+				<!-- Maintenance Service: 리스트 -->
+				<div class="panel-collapse" 
+									ng-show="selectedSession == CONSTANT.WORKSHOP_APPOINTMENT_MAINTENANCE_SERVICE"
+								>
+					<div class="panel-body">
+						<ul class="list-group">
+							<li class="list-group-item" 
+													ng-class="{
+														'list-checked': service.isMot
+													}">
+								<button class="btn btn-none"
+														ng-click="service.selectItem()"
+													>
+									<i class="btn-rdo"></i>
+								</button>
+								<span class="multi-list">
+									{{ 'Registered' | i18n:'B1_15' }} <strong>{{ myVehicle.RegistrationDateFormat | toCamelCase }}</strong>
+									<br>
+									{{ 'Expired Date of Service' | i18n:'Y1_20' }} <strong>{{ myVehicle.NextMotDateFormat | toCamelCase }}</strong>
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- // Maintenance Service -->
+
+		<!-- 
+		 * session4: Other 
+		-->
+		<div class="panel-group kme-panel-group">
+			<div class="panel panel-default"
+										ng-class="{
+											 'panel-primary' : other.comment != ''
+										}"
+									>
+
+				<!-- Other: 제목 -->
+				<div class="panel-heading"
+									ng-click="toggleSession( CONSTANT.WORKSHOP_APPOINTMENT_OTHER )"
+								>
+					<h4 class="panel-title">
+						<span ng-bind="other.title"></span>
+						<span class="float-button">
+							<i class="ico-default-type" 
+									ng-class="{
+										 'ico-up-red'  	: selectedSession == CONSTANT.WORKSHOP_APPOINTMENT_OTHER
+										,'ico-down-red'	: selectedSession != CONSTANT.WORKSHOP_APPOINTMENT_OTHER
+									}"
+								></i>
+						</span>
+					</h4>
+				</div>
+
+				<!-- Other: 선택된 항목이 표시된다. -->
+				<div class="panel-collapse"
+										ng-show="selectedSession == CONSTANT.WORKSHOP_APPOINTMENT_OTHER"
+									>
+					<div class="panel-body">
+						<ul class="list-group">
+							<li class="list-group-item">
+								<textarea class="form-control" rows="3" placeholder="{{ 'Note to the dealer' | i18n:'W0_24' }}"
+																					kme-scroll-to
+																					ng-model="other.comment"
+																				>
+								</textarea>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- // Other -->
+	</div>
+
+	<!-- 
+	 * session5: 가격정보
+	-->
+	<div class="workshop-info text-right">
+		<h3>
+			<strong>{{ 'Cost Estimation' | i18n:'WW_25' }}</strong>
+			<em><i class="ico-eur-blue"></i><span>{{ price.TotalPrice | l13n:2 }}</span>{{ '€' | currency }}</em>
+		</h3>
+		<p ng-bind-html="price.description | html"></p>
+	</div>
+</section>
+<div class="btn-fix text-center">
+	<!-- <button class="btn btn-default" onclick="history.go(-1)">Back</button> -->
+	<button class="btn btn-red-round" 
+								ng-click="nextstep()"
+							>{{ 'Continue' | i18n:'W0_18' }}</button>
+</div>

@@ -1,0 +1,33 @@
+<section>
+	<!-- progress step -->
+	<div class="progress-wrap">
+		<div kme-progress-step></div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<ul class="list-car-group">
+				<li class="list-group-item" 
+									ng-repeat="vehicle in vehicles track by $index"
+									ng-click="setVehicle($index)">
+					<span class="col-xs-1 check-rdo">
+						<input type="radio" name="optvehicle"
+													ng-checked="selectedVerhicle === $index"
+												>
+					</span>
+					<span class="col-xs-11 border-box">
+						<div kme-preload>
+							<img ng-src="{{ getVehicleImage($index) }}" alt="" 
+																			kme-img-error
+																		>
+						</div>
+						<span ng-bind="vehicle.VehicleModelName"></span>
+					</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
+<div class="btn-fix text-center">
+	<!-- <button class="btn btn-default" onclick="history.go(-1);return false;">Back</button> -->
+	<a class="btn btn-red-round" ng-click="nextstep()">{{ 'Continue' | i18n:'W0_18' }}</a>
+</div>

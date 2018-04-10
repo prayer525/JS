@@ -39,6 +39,7 @@ var Data = {
 			v = '';
 		}
 		Data.apiData[k] = v;
+		Data.put();
 	},
 	getData:function(k){
 		if(Data.apiData[k] === undefined){
@@ -132,7 +133,7 @@ var ApiInfo={
  var ignoreApi = ['GetToken', 'TranslationList', 'GetLegalNotice', 'Login'];
  var ajaxCount = 0;
 function getApi(apiName, param, callback){
-//	console.log('[getApi('+apiName+') : param]',param);
+	console.log('Request : ', apiName, param);
 	var apiObj;
 	var data;
 	var jsonStr;
@@ -140,7 +141,6 @@ function getApi(apiName, param, callback){
 	
 	if(apiName != null && apiName != ""){
 		var _type = ApiInfo[apiName]['type'];
-		console.log('Request : ' , apiName, param)
 
 		if(localFlag){
 			var data = JSON.parse(localData[apiName])
@@ -152,13 +152,15 @@ function getApi(apiName, param, callback){
 
 		var encList = ['VIN'];
 
-		$.each(encList, function(encIdx, encItem){
-			$.each(param, function(paramIdx, paramItem){
-				if(encItem == paramIdx){
-					param[paramIdx] = dataEncode(paramItem);
-				}
+		if(param != null){
+			$.each(encList, function(encIdx, encItem){
+				$.each(param, function(paramIdx, paramItem){
+					if(encItem == paramIdx){
+						param[paramIdx] = dataEncode(paramItem);
+					}
+				})
 			})
-		})
+		}
 
 		$.ajax({
 			type : _type,
@@ -187,6 +189,69 @@ function getApi(apiName, param, callback){
 					fnDecryptData(data ,callback);
 				}else{
 					callback(data);
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError){
+				// error 
+				console.log("Error : ", apiName, param, thrownError);
+			},
+			complete: function(data){
+				ajaxCount--;
+
+				if(ajaxCount == 0){
+					KmeSpinner.stop();
+				}
+			}
+		});
+	}
+}
+
+function getAppointmentApi(apiName, type, param, callback){
+	console.log('Request : ', apiName, param);
+	var apiObj;
+	var data;
+	var jsonStr;
+	ajaxCount++;
+
+	callback.success=callback.success||function(){};
+	callback.error=callback.error||undefined;
+	callback.reTry=callback.reTry||undefined;
+	callback.networkConnectFail=callback.networkConnectFail||undefined;
+	
+	if(apiName != null && apiName != ""){
+		var encList = ['VIN'];
+
+		$.each(encList, function(encIdx, encItem){
+			$.each(param, function(paramIdx, paramItem){
+				if(encItem == paramIdx){
+					param[paramIdx] = dataEncode(paramItem);
+				}
+			})
+		})
+
+		$.ajax({
+			type : type,
+			dataType:'text',
+			contentType: 'application/json',
+			url: Data.get('targetServer')+apiName,
+			data: param == null ? '' : JSON.stringify(param),
+			async: true,
+			crossDomain:true,
+			timeout: 60000,
+			beforeSend: function(request) {
+				request.setRequestHeader("Authorization", 'Bearer '+Data.getData('Login').TokenResponse.access_token);
+
+				if(ajaxCount == 1){
+					KmeSpinner.start();
+				}
+			},
+			success: function(response,statusText,xhr){
+				var data = JSON.parse(response);
+
+				if(!ignoreApi.includes(apiName)){
+					fnDecryptData(data ,callback.success);
+				}else{
+					callback.success(data);
 				}
 			},
 			error: function (xhr, ajaxOptions, thrownError){

@@ -51,6 +51,15 @@
     <feature name="Notification">
         <param name="ios-package" value="CDVNotification" />
     </feature>
+    <feature name="Geolocation">
+        <param name="ios-package" value="CDVLocation" />
+    </feature>
+    <feature name="FileTransfer">
+        <param name="ios-package" value="CDVFileTransfer" />
+    </feature>
+    <feature name="FileOpener2">
+        <param name="ios-package" value="FileOpener2" />
+    </feature>
     <name>MyKia_cordova</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

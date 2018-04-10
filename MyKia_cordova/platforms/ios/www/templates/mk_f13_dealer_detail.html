@@ -1,0 +1,188 @@
+<section>
+	<!-- Dealer_Info : type01 = sales / type02 = service / type03 = sales&service -->
+	<div class="dealer_space">
+		<h2
+			ng-class="{
+					 type01 : dealer.DealerType == CONSTANT.DEALER_TYPE_SALES
+					,type02 : dealer.DealerType == CONSTANT.DEALER_TYPE_SERVICE
+					,type03 : dealer.DealerType == CONSTANT.DEALER_TYPE_SALES_SERVICE
+				}"
+			>{{dealer.Name}}</h2>
+	</div>
+	<!-- Tab_Area -->
+	<!-- <div class="sub_tab">
+		<ul class="tab hbox jc"><! selected add: li class="on" >
+			<li class="flex" 
+						ng-class="{
+							on: tabPage == CONSTANT.TAB_DEALER_INFORMATION
+						}"
+					>
+				<button type="button" 
+								ng-click="tabPage = CONSTANT.TAB_DEALER_INFORMATION"
+							>
+					{{ 'INFOMATION' | i18n:'E1_2' }}
+				</button>
+			</li>	
+			<li class="flex"
+						ng-class="{
+							on: tabPage == CONSTANT.TAB_DEALER_CONTACT
+						}"
+					>
+				<button type="button" 
+								ng-click="tabPage = CONSTANT.TAB_DEALER_CONTACT"
+							>
+					{{ 'CONTACT' | i18n:'E1_15' }}
+				</button>
+			</li>
+		</ul>
+	</div> -->
+
+	<!-- Dealer Information -->
+	<div id="informationLayout">
+		<div class="info_dealer info_usr">
+			<!-- <div class="dealer-img-wrap ng-hide"
+								ng-show="dealer.DealerImageUrl && dealer.CountryCode !== 'fr' && userInfo.MarketId !== 'KMIE' && userInfo.MarketId !== 'KMDE'"
+				>
+				<div kme-preload>
+					<img class="info_dealer_photo" ng-src="{{ dealer.DealerImageUrl }}" alt=""
+																						kme-img-error
+																					>
+				</div>
+			</div> -->
+			<div class="dealer-img-wrap"
+				>
+				<div kme-preload>
+					<img class="info_dealer_photo" src="../img/default_sales.png" alt=""
+																						kme-img-error
+																					>
+				</div>
+			</div>
+			<ul>
+				<li id="generalInfo"
+								ng-hide="dealer.Description == ''"
+							>
+					<p class="usr_tit">{{ 'General Info' | i18n:'E1_3' }}.</p>
+					<p class="usr_sub" id="description" 
+												ng-bind-html="dealer.Description | html"
+								>
+					</p>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="dealer_info">
+			<ul>
+				<li ng-show="dealer.Town">
+					<p class="usr_tit">{{ 'Address' | i18n:'B1_6' }}</p>
+					<p class="usr_sub">{{dealer.Street}} <br>{{dealer.Town}}</p>
+					<button type="button" 
+									ng-click="goMap()"
+								>Map</button>
+				</li>
+				<li ng-show="dealerPhoneCnt == 0">
+					<p class="usr_tit">{{ 'Telephone' | i18n:'E1_17' }}</p>
+					<p class="usr_sub"><em ng-bind="salesPhone"></em></p>
+					<button type="button" class="ico_phone"
+							ng-click="goCall(salesPhone)"
+						>
+						Sales Phone
+					</button>
+				</li>
+				<li ng-show="dealerPhoneCnt == 1">
+					<p class="usr_tit">{{ 'Showroom' | i18n:'W0_13' }}</p>
+					<p class="usr_sub"><em ng-bind="salesPhone"></em></p>
+					<button type="button" class="ico_phone"
+							ng-click="goCall(salesPhone)"
+						>
+						Sales Phone
+					</button>
+				</li>
+				<li ng-show="dealerPhoneCnt == 1">
+					<p class="usr_tit">{{ 'Workshop' | i18n:'W0_14' }}</p>
+					<p class="usr_sub"><em ng-bind="servicePhone"></em></p>
+					<button type="button" class="ico_phone"
+							ng-click="goCall(servicePhone)"
+						>
+						Service Phone
+					</button>
+				</li>
+
+				<li ng-show="dealerEmailCnt == 0">
+					<p class="usr_tit">{{ 'E-mail' | i18n:'E1_18' }}</p>
+					<p class="usr_sub"><em ng-bind="salesEmail"></em></p>
+					<button type="button" class="ico_email"
+							ng-click="goMail(salesEmail)"
+						>
+						Sales Mail
+					</button>
+				</li>
+				<li ng-show="dealerEmailCnt == 1">
+					<p class="usr_tit">{{ 'Showroom' | i18n:'W0_13' }}</p>
+					<p class="usr_sub"><em ng-bind="salesEmail"></em></p>
+					<button type="button" class="ico_email"
+							ng-click="goMail(salesEmail)"
+						>
+						Sales Mail
+					</button>
+				</li>
+				<li ng-show="dealerEmailCnt == 1">
+					<p class="usr_tit">{{ 'Workshop' | i18n:'W0_14' }}</p>
+					<p class="usr_sub"><em ng-bind="serviceEmail"></em></p>
+					<button type="button" class="ico_email"
+							ng-click="goMail(serviceEmail)"
+						>
+						Service Mail
+					</button>
+				</li>
+				<li ng-show="dealer.Website">
+					<p class="usr_tit">{{ 'Homepage' | i18n:'E1_19' }}</p>
+					<p class="usr_sub"><a href="javascript:void(0);" class="link" id="site">{{dealer.Website}}</a></p>
+					<button type="button" class="ico_homepage"
+									ng-click="goWebsite(dealer.Website)"
+								>
+						Home page
+					</button>
+				</li>
+			</ul>
+			<div class="wrap_btn_round txt-r">
+				<button type="button" class="btn_red" 
+												ng-click="changeDealer()"
+											>
+					{{ 'Select' | i18n:'B1_4' }}
+				</button>
+			</div>
+		</div>
+
+		<div class="info_dealer info_usr"
+								ng-hide="dealerOpeningHour"
+							>
+			<ul>
+				<li>
+					<p class="usr_tit">{{ 'Opening hours' | i18n:'E1_4' }}</p>
+					<p class="usr_sub"
+									ng-repeat="(key, types) in dealer.OpeningHours"
+									ng-hide="types.IsEmpty == true"
+								>
+						<strong>{{key}}</strong>
+						<span 
+							ng-repeat="(day, time) in types track by $index"
+							ng-show="time[0].From"
+						>
+							<i class="dltitle">
+								{{day | limitTo:3}}
+							</i>
+						 	{{time[0].From | limitTo:5}} - {{time[0].To | limitTo:5}}
+						</span>
+					</p>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- btnArea -->
+		<!-- <div class="fix_bottom f_btnArea"
+										ng-show="canSelect()"
+									>
+			
+		</div> -->
+	</div>
+</section>

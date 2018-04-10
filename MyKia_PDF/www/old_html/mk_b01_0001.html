@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: Update Mileage</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_b01_0001">
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+    <header id="header">
+        <h1><!-- Update Mileage --><script type="text/javascript">M.locale.localizedWrite("D1_1")</script></h1>
+        <button type="button" class="hbtn fl home">Home</button>
+    </header>
+
+    <section id="container">
+        <div id="scroll" class="vbox">
+        <!-- contents_Start -->
+
+            <!-- car_AREA -->
+            <div class="car_info">
+            	<!-- Please select your model and input mileage. -->
+                <!-- <p>
+                	<script type="text/javascript">M.locale.localizedWrite("D1_2")</script>
+                </p> -->
+                <img id="carImage" class="img_car_info" alt="" />
+                <h2 id="car">&nbsp;</h2>
+                <button type="button" class="ve_set" style="display:none;" id="mk_a00_0004">Setting</button>
+            </div>
+            <!-- mileage_AREA -->
+            <div class="info_mileage">
+                <ul>
+                	<li id="service"><!--Last service checkup--><script type="text/javascript">M.locale.localizedWrite("B1_8")</script> : </li>
+                    <li id="registered"><!-- Registered --><script type="text/javascript">M.locale.localizedWrite("B1_15")</script> :</li>
+                    <li id="usage"><!-- Usage --><script type="text/javascript">M.locale.localizedWrite("B1_16")</script> : </li>
+                    <li id="mileage"><!-- Mileage --><script type="text/javascript">M.locale.localizedWrite("B1_11")</script> : </li>
+                    <li id="plate"></li>
+                </ul>
+            </div>
+            <!-- Km_AREA -->
+            <div class="info_km flex" >
+                <input type="tel" placeholder="Input mileage" id="InputMileage"/>
+                <span>km</span>
+            </div>
+	
+			<!-- btnArea -->        
+			<div class="f_btnArea">
+			    <button type="button" id="save" class="btn_red off" disabled="disabled"><!-- Save -->
+			    	<script type="text/javascript">M.locale.localizedWrite("B1_3")</script>
+			    </button>
+			</div>
+            
+        <!-- //contents_End -->
+		</div>
+    </section>
+
+    <footer id="footer">
+        <p class="img">KIA, The Power to Surprise.</p>
+    </footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+$("#mk_a00_0004").data(Scheme.Param,{backData:true});
+$("#mk_a00_0004").click(Page.moveToPageModalUp);
+
+// Call API 2.11
+// 저장 버튼 터치 시 API 2.11 통신을 시작한다.
+$("#save").click(gfnUpdateMileage);
+
+// when user type a number in the input Save button is activated
+// 입력칸에 숫자를 입력 시 저장 버튼이 활성화 된다.
+$("#InputMileage").keyup(gfnInputMileageValidate);
+$("#InputMileage").attr("placeholder",M.locale.localizedString("D1_3"));
+
+// display vehicle image, registration information, mileage information after a page has been loaded
+// 최초 진입 시 현재 선택된 차량 이미지, 해당 차량의 등록 정보, 마일리지 정보를 화면에 표시한다.
+// 최초 진입 시 서버에서 현재 차량 정보를 조회 한다.
+function gfnInit(){
+
+	// 2017.02.28 차량정보 조회 
+	var gvlVehiclesInformationCallback={
+	    success:function(rev,setting){
+	        var vehicles=LoginManager.getVehiclesInfo();
+	        // reload vehichle all data
+	        $.extend( true, vehicles.Vehicles, rev.Vehicles );
+	     	// VIN decrypt
+			for(var i=0;i<vehicles.Vehicles.length;i++){
+				vehicles.Vehicles[i].VIN=exRHMDecrypt(vehicles.Vehicles[i].VIN);
+			}
+			LoginManager.setVehiclesInfo(vehicles);
+
+			// DisplaySetting
+			gfnDisplaySetting();
+	    }
+	};
+	// 2.6 Get user’s vehicle information (ALL)
+	var VehiclesNetwork=new NetworkManager(TrCode.VehiclesInformation,gvlVehiclesInformationCallback,false);
+	var data={
+		"CustomerId":LoginManager.getCustomerId()
+	};
+	VehiclesNetwork.send(data);
+	
+}
+
+//display vehicle image, registration information, mileage information after a page has been loaded
+//최초 진입 시 현재 선택된 차량 이미지, 해당 차량의 등록 정보, 마일리지 정보를 화면에 표시한다.
+function gfnDisplaySetting(){
+	var myvehicle=LoginManager.getSelectedVehiclesInfo();
+	var vehicles=LoginManager.getVehiclesInfo();
+    $("#car").html(myvehicle.VehicleName);
+    $("#registered").html(M.locale.localizedString("B1_15")+": "+JsUtil.getDateFormatter(myvehicle.RegistrationDate));
+    $("#usage").html(M.locale.localizedString("B1_16")+": "+JsUtil.addComma(myvehicle.UsagePerYear)+" km/"+M.locale.localizedString("V1_3"));
+    $("#mileage").html(M.locale.localizedString("B1_11")+": "+"<span>"+JsUtil.addComma(myvehicle.CurrentMileageInKilometers)+" km</span>");
+
+ 	// hide when no last maintenance date is available
+    // 마지막 서비스 일자가 없을시 마지막 서비스 일자를 숨
+    if(myvehicle.LastServiceDate != null && myvehicle.LastServiceDate.trim().length > 0){
+    	$("#service").html(M.locale.localizedString("B1_8")+" : "+JsUtil.getDateFormatter(myvehicle.LastServiceDate));
+    	$("#service").show();
+    }else{
+    	$("#service").hide();
+    }
+    
+    if (LoginManager.getDetailsInfo().MarketId == 'KMSE' && myvehicle.Licenseplate) {
+        $("#plate").html(M.locale.localizedString("PN_01")+": " + myvehicle.Licenseplate);
+    }
+    if (M.locale.VirtualMode) {
+        $("#carImage").attr("src","data:"+myvehicle.VehicleImageExtension+";base64,"+myvehicle.VehicleImage);
+    } else {
+        $("#carImage").attr("src", myvehicle.VehicleImageUrl);
+    }
+    if(vehicles.Vehicles.length>1) $("#mk_a00_0004").show();
+}
+
+// touch the save button to call API 2.11
+// 저장 버튼 터치 시 API 2.11 통신을 시작한다.
+function gfnUpdateMileage(){
+	var callback={
+		success:function(rev,setting){
+
+            // apply latest mileage value and save button is deactivated, input element is initialized
+            // 성공 시 화면에 최신 마일리지 값을 반영한다. 
+            // 저장 버튼이 비활성화 되고 입력칸이 초기화 된다.
+			var vehicles=LoginManager.getVehiclesInfo();
+			vehicles.Vehicles[LoginManager.getSelectedVehiclesIndex()].CurrentMileageInKilometers=$("#InputMileage").val().replace(/,/g,"");
+			LoginManager.setVehiclesInfo(vehicles);
+			gfnDisplaySetting();
+			$("#InputMileage").val("");
+			$("#save").prop("disabled",true);
+        	$("#save").addClass("off");
+        	//MApi.alert(M.locale.localizedString("R1_1"));
+        	M.pop.instance(M.locale.localizedString("R1_1"));
+		}
+	};
+	var MileageUpdatingNetwork=new NetworkManager(TrCode.MileageUpdating,callback,false);
+	var myvehicle=LoginManager.getSelectedVehiclesInfo();
+	var data={
+		"CustomerId":LoginManager.getCustomerId(),
+		"VIN":myvehicle.VIN,
+		"MileageInKilometers":$("#InputMileage").val().replace(/,|\.|  /g,"")
+	};
+	MileageUpdatingNetwork.send(data);
+}
+
+// when user type a number in the input Save button is activated
+// 입력칸에 숫자를 입력 시 저장 버튼이 활성화 된다.
+function gfnInputMileageValidate(){
+    var val=JsUtil.mfnNumberOnlyFilter($(this).val());
+    var maxLength=6;
+    if(val!=""){
+    	val=val.replace(/,|\.|  /g,"");
+    	if(val.length>maxLength)val=val.substr(0,maxLength);
+    	if(val>240000) val=240000;
+    	val=JsUtil.addComma(val);
+    }
+    $(this).val(val);
+    if(val==0){
+        $("#save").prop("disabled",true);
+        $("#save").addClass("off");
+    }else{
+        $("#save").prop("disabled",false);
+        $("#save").removeClass("off");
+    }
+}
+M.onReady(function(e){
+	gfnInit();
+});
+M.onRestore(function(e){
+	gfnInit();
+});
+</script>
+</html>

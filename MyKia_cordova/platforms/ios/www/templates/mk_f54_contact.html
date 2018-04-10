@@ -1,0 +1,72 @@
+<style>
+<!--
+.ui-select-container .btn-default {
+	border: 1px solid #A1A1A1 !important; border-left:none; background-color: #F0F0F0;
+}
+.ui-select-container span.ui-select-placeholder,
+.ui-select-container .ui-select-match-text,
+.ui-select-container .ui-select-match-text > span {
+	border:none; margin: 3px 0 0 2px !important;
+}
+-->
+</style>
+<section>
+	<div class="container-fluid">
+		<div class="ng-hide" ng-show="UserInfo.MarketId === 'KMDE'" style="margin-top: 1rem;">
+			<p style="font-size: 1.4rem">{{ 'Hier können Sie Ihrem ausgewählten Kia-Händler online eine Serviceanfrage oder einen Terminwunsch zur Probefahrt senden. Geben Sie einfach Ihre Nachricht ein, Ihr Kia-Händler meldet sich anschließend schnellstmöglich bei Ihnen.' | i18n:'D3_1' }}</p>
+		</div>
+		<form>
+			<div class="form-group user-info-form">
+				
+				<label for="input1" class="wordwrap"><i class="ico-touch-black"></i> {{ 'Fill out your detail' | i18n:'W0_4' }}</label>
+				<input type="text" class="form-control" id="input1" placeholder="{{ 'First name' | i18n:'W0_5' }} *" 
+																						kme-require
+																						ng-model="fill.firstname"
+																					>
+
+				<label for="input2"></label>
+				<input type="text" class="form-control" id="input2" placeholder="{{ 'Sirname' | i18n:'W0_6' }} *"
+																						kme-require
+																						ng-model="fill.sirname"
+																					>
+				
+				<label for="input3"></label>
+				<input type="text" class="form-control" id="input3" placeholder="{{ 'Email' | i18n:'E1_18' }} *"
+																						kme-require
+																						ng-model="fill.emailAddress"
+																					>
+				
+				<label for="input4"></label>
+				<input type="text" class="form-control" id="input4" placeholder="{{ 'Phone' | i18n:'E1_17' }} *"
+																						kme-require
+																						ng-model="fill.phone"
+																					>
+				<p class="text-right">* {{ 'This is a required field' | i18n:'W0_20' }} </p>
+			</div>
+
+			<div class="form-group user-info-form">
+				<label for="input1"></label>
+				<i class="ico-question-square-black"></i>
+				<ui-select class="ng-hide" ng-show="UserInfo.MarketId === 'KMDE'" ng-model="fill.subject" search-enabled="false" skip-focusser="true" style="margin-bottom:7px;">
+					<ui-select-match>
+						<span ng-bind="$select.selected.ValueTitle"></span>
+					</ui-select-match>
+					<ui-select-choices repeat="subject in subjects">
+						<span ng-bind="subject.ValueTitle"></span>
+					</ui-select-choices>
+				</ui-select>
+				<label for="input2"><!-- {{ 'Fill out your Question' | i18n:'' }} --></label>
+				<textarea class="form-control" rows="3" placeholder="{{ 'Please explain your question as detailed as possible' | i18n:'W0_4' }} *"
+																						kme-require
+																						ng-model="fill.explain"
+																					></textarea>
+			</div>
+		</form>
+	</div>
+</section>
+<div class="btn-fix text-center">
+	<button class="btn btn-red-round" 
+							kme-form
+							ng-click="nextstep()"
+						>{{ 'Send' | i18n:'E1_25' }}</button>
+</div>

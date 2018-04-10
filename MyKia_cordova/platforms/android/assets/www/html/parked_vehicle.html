@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="../css/common.css">
+	<title>Parked Vehicle</title>
+</head>
+<body>
+<div id="pageParkedVehicle" class="wrapper" data-role="page">
+	<header class="header" data-role="header" data-position="fixed" data-fullscreen="false">
+		<button class="hbtn fl back" data-rel="back">Back</button>
+		<h1 data-translation-code="F1_1"><!-- Parked Vehicle --></h1>
+	</header>
+	<section class="container">
+		<div class="scroll">
+		<!-- contents_Start -->
+			<div class="map-space memo-map">
+				<div class="map" id="map_canvas">
+					<!-- 지도영역
+					<button type="button" class="btn_now">now position</button>
+					<button type="button" class="btn_zoom">zoom</button> -->
+				</div>
+
+				<div class="map-loc-sub none" id="mapSub">
+					<p class="time" id="time">&nbsp;</p>
+					<p class="add" id="title">&nbsp;</p>
+					<p class="sub">
+						<span class="clock" id="dura">&nbsp;</span>
+						<span class="arrow" id="dist">&nbsp;</span>
+					</p>
+					<button type="button" class="btn-google" id="callMapBtn">google</button>
+				</div>
+
+				<div class="memo-map-sub">
+					<strong data-translation-code="F1_20"><!-- MEMO --></strong>
+					<input type="text" placeholder="Your notes" id="parkNote"/>
+					<p class="btn-line hbox jc">
+						<!--press class on / disabled class off-->
+						<button type="button" class="btn-white flex" id="clearBtn" data-role="none" data-translation-code="F1_22"><!-- Clear --></button>
+						<button type="button" class="btn-white flex" id="saveBtn" data-role="none" data-translation-code="B1_3"><!-- Save --></button>
+					</p>
+				</div>
+
+				<div class="dealer-short-cut none" data-href="dealer_detail">
+					<h2 class="ellipsis">&nbsp;</h2>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+			</div>
+		<!-- //contents_End -->
+		</div>
+	</section>
+	<footer class="footer" data-role="footer" data-position="fixed" data-fullscreen="false">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+</body>
+</html>

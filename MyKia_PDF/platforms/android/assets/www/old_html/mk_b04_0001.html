@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: How to Videos :: List</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_b04_0001">
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+	<header id="header">
+		<div id="normHead">
+			<h1><!-- How to Videos --><script type="text/javascript">M.locale.localizedWrite("D1_12")</script></h1>
+			<button type="button" class="hbtn fl home">Home</button>
+			<button type="button" class="hbtn fr search" id="srchOpen">Search</button>
+		</div>
+        
+		<div id="srchHead" class="none">
+			<h1>Search</h1>
+			<p class="search_box">
+				<input type="text" placeholder="" id="srchVal"/>
+				<button type="button" class="btn_cancel none">delete</button>
+			</p>
+			<button type="button" class="hbtn fr" id="srchClose"><!-- Close -->
+                <script type="text/javascript">M.locale.localizedWrite("B1_1")</script>
+            </button>
+		</div>
+	</header>
+
+	<section id="container">
+		<div id="scroll">
+        <!-- contents_Start -->
+            
+			<!-- list -->
+			<ul class="li_youtube" id="list">
+				<!-- youtube 
+				<li class="youtube">
+					<button type="button">
+						<p>SMART TAILGATE</p>
+						<p>http://youtu.be/xodpYoxzVBk</p>
+					</button>
+				</li> -->
+			</ul>
+				
+			<div class="result_none none">
+				<p><!-- No Search Result --><script type="text/javascript">M.locale.localizedWrite("D1_16")</script></p>
+			</div>
+            
+        <!-- //contents_End -->    
+		</div>
+	</section>
+
+	<footer id="footer">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+//2. This code loads the IFrame Player API code asynchronously.
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var playVideoId,
+	player;
+
+// API 2.21 통신 결과 성공 시 유튜브 리스트를 화면에 표시한다.
+var gvlHowToVideoCallback={
+	success:function(rev,setting){
+		var unSeenCnt = 0;
+		$(rev.Video).each(function(idx,item){
+			if(item.NewsCategory==3){
+				// videoUrl parsing
+				var video = JsUtil.getVideo(item.VideoUrl);
+				var targetId = "video_"+idx;
+				var temp = $("<li></li>")
+				.append(
+					$('<img/>').attr("src", video.thumbnailUrl)
+				)
+				.append(
+					$("<button></button>")
+					.append($("<p></p>").text(item.VideoTitle))
+					//.append($("<p></p>").text(item.VideoUrl).addClass("ellipsis"))
+				)
+				.append(
+					$("<div></div>").addClass("youtube_player")
+				)
+				.data(Scheme.Url,item.VideoUrl)
+				.click(function(){
+					if(player){
+						console.log(player);
+						player.clearVideo();
+						player.destroy();
+						player = null;
+					}
+					if($(this).find('button').hasClass("on")){
+						//$(this).find('.youtube_player').html('');
+						$(this).find('button').removeClass("on");
+						$('.youtube_player').not(_player).slideUp();
+					}else{
+						var _player = $(this).find('.youtube_player')
+						var _iframe = $('<div></div>').attr("id", targetId)
+						
+						$('.li_youtube li button').not($(this).find('button')).removeClass('on');
+						$('.youtube_player').not(_player).slideUp();
+
+						_iframe.src = item.VideoUrl;
+						_player.append(_iframe);
+						$(this).append(_player);
+						_player.slideDown();
+						$(this).find('button').addClass("on");
+						
+						player = new YT.Player(targetId, {
+						    height: '200px',
+						    width: '100%',
+						    playerVars: { 'list': video.list,'autoplay': 1},
+						    videoId: video.videoId,
+						    events: {
+						    }
+						});
+
+						playVideoId = targetId;
+					}
+				}).click(function() {
+
+					// 각 리스트 터치 시 해당 내용에 맞는 유튜브 링크로 연결이 된다.
+					var target = $(this);
+					if (!target.data("isRead")) {
+
+						// 이전에 읽지 않은 리스트 인 경우 API 2.22 통신을 시작한다
+						new NetworkManager(TrCode.NewsRead, {success:function(rev,setting){
+
+							// API 2.22 통신 성공 시 읽지 않은 비디오 카운트를 갱신한다.
+							target.data("isRead", true);
+							var loginInfo = LoginManager.getLoginInfo();
+							loginInfo.Notification.How2VideoCnt--;
+							LoginManager.setLoginInfo(loginInfo);
+						}, error:function(code,msg,setting) {
+							void(0);
+						}}, false, {show:false}).send({
+							CustomerId : LoginManager.getCustomerId(),
+							NewsCategory : item.NewsCategory,
+							NewsId : target.data("newsId")
+						});
+					}
+				}).data("isRead", item.NewsRead).data("newsId", item.NewsId);
+				if (!item.NewsRead) {
+					unSeenCnt++;
+				}
+				else {
+					temp.find("button").addClass("read");
+				}
+				temp.appendTo("#list");
+			}
+		});
+
+		if($("#list > li").size()==0){
+			$('.result_none').removeClass('none');
+		}
+		
+		var loginInfo = LoginManager.getLoginInfo();
+		loginInfo.Notification.How2VideoCnt = unSeenCnt;
+		LoginManager.setLoginInfo(loginInfo);
+
+		WN2CommonAsync("exWNNetworkIndicatorRemoveAll");
+	}
+},
+gvlHowToVideoNetwork=new NetworkManager(TrCode.HowToVideo,gvlHowToVideoCallback);
+
+
+// 최초 진입 시
+M.onReady(function(e){
+	init();
+});
+
+// 최초 진입 시 API 2.21 통신을 시작한다.
+function init() {
+	gvlHowToVideoNetwork.send({
+		"CustomerId":LoginManager.getCustomerId()
+	});
+
+	// 검색버튼을 터치시
+	$("#srchOpen").click(function() {
+		$("#normHead").addClass("none");
+		$("#srchHead").removeClass("none");
+		$("body").attr("id", "mk_b04_0002").addClass("search");
+		$("header").addClass("f_popup search");
+		$("#container").addClass("f_size");
+		$("#list > li").addClass("none");
+	});
+	
+	// Close 버튼을 터치시
+	$("#srchClose").click(function() {
+		$("header").removeClass("f_popup search");
+		$("body").attr("id", "mk_b04_0001").removeClass("search");
+		$("#srchHead").addClass("none");
+		$("#normHead").removeClass("none");
+		$("#container").removeClass("f_size");
+		$("#list > li").removeClass("none");
+		$("#srchVal").val("");
+		$(".btn_cancel").addClass("none");
+		$(".result_none").addClass("none");
+	});
+	
+	// 검색어를 입력시
+	$("#srchVal").on("input", function() {
+		var srchVal = $(this).val(),
+			list = $("#list > li");
+		if (srchVal != "") {
+			$(".btn_cancel").removeClass("none");
+			list.each(function(idx, item) {
+				if (!list.eq(idx).find("p").eq(0).text().toUpperCase().match(srchVal.toUpperCase())) {
+					list.eq(idx).addClass("none");
+				}
+				else {
+					list.eq(idx).removeClass("none");
+				}
+				
+				if (list.not(".none").length == 0) {
+					$(".result_none").removeClass("none");
+				}
+				else {
+					$(".result_none").addClass("none");
+				}
+			});
+		}
+		else {
+			$(".btn_cancel").addClass("none");
+			$("#list > li").addClass("none");
+		}
+	});
+	
+	// 검색어 삭제 버튼을 터치시
+	$(".btn_cancel").on("touchend", function(e) {
+		e.preventDefault();
+		$("#srchVal").val("");
+		$("#list > li").addClass("none");
+		$(".result_none").addClass("none");
+		$(this).addClass("none");
+	});
+}
+</script>
+</html>

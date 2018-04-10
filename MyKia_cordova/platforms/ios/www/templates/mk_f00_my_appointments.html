@@ -1,0 +1,155 @@
+<section>
+	<!-- category -->
+	<div class="row no-padding">
+		<div class="col-xs-12 only-showroom"
+						ng-hide="appMenuDiff || flagKMBE"
+		>
+			<div class="showroom-box">
+				<button
+						ng-click="goShowroom()"
+					>
+					<i><!-- icon - car --></i>
+					<p>{{ 'Make a showroom appointment' | i18n:'E1_20' }}</p>
+				</button>
+			</div>
+		</div>
+		<div class="col-xs-12 only-showroom"
+						ng-hide="!flagKMBE"
+		>
+			<div class="showroom-box">
+				<button
+						ng-click="goWorkshop()"
+					>
+					<i><!-- icon - car --></i>
+					<p>{{ 'Workshop' | i18n:'W0_14' }}</p>
+				</button>
+			</div>
+		</div>
+		<div class="col-xs-6"
+						ng-hide="!appMenuDiff || flagKMBE"
+		>
+			<div class="showroom-box">
+				<button
+						ng-click="goShowroom()"
+					>
+					<i><!-- icon - car --></i>
+					<p>{{ 'ShowRoom' | i18n:'W0_13' }}</p>
+				</button>
+			</div>
+		</div>
+		<div class="col-xs-6"
+						ng-hide="!appMenuDiff || flagKMBE"
+		>
+			<div class="workshop-box">
+				<button 
+						ng-click="goWorkshop()"
+					>
+					<i><!-- icon repair --></i>
+					<p>{{ 'Workshop' | i18n:'W0_14' }}</p>
+				</button>
+			</div>			
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<!-- Campaign List -->
+			<ul class="list-group list-theme2"
+										ng-show="hasAppointment === true"
+									>
+				<li ng-repeat="appointment in appointments"
+					ng-class="{
+								'history' 		: appointment.scheduleStatus === 'History'
+							}"
+					>
+					<a ui-sref="/appointments/detail({
+													appointmentId: appointment.AppointmentId
+												})">
+						<strong>{{ appointment.AppointmentTypeString }}</strong>
+						<p>{{ appointment.date }}</p>
+						<span ng-bind-html="appointment.DealerName | html"></span>
+						<p ng-show="hasAppointmentModel">{{ appointment.model }}</p>
+					</a>
+					<!-- legend icon -->
+					<i class="ico-group"
+								ng-class="{
+									 'ico-checked-red' 		: appointment.scheduleStatusCode === 'W0_15'
+									,'ico-checked-red-dot' 	: appointment.scheduleStatusCode === 'W0_16'
+									,'ico-circle-gray' 		: appointment.scheduleStatusCode === 'W0_17'
+								}"
+							>
+					</i>
+				</li>
+			</ul>
+
+			<!-- Appointments list 설명 -->
+			<div class="row legend-area" 
+								ng-show="hasAppointment === true"
+							>
+				<div class="col-xs-4"><i class="ico-group ico-checked-red"></i><span class="vert-mid-txt">{{ 'Scheduled' | i18n:'W0_15' }}</span></div>
+				<div class="col-xs-4"><i class="ico-group ico-checked-red-dot"></i><span class="vert-mid-txt">{{ 'Unscheduled' | i18n:'W0_16' }}</span></div>
+				<div class="col-xs-4"><i class="ico-group ico-circle-gray"></i><span class="vert-mid-txt">{{ History | i18n:'W0_17' }}</span></div>
+			</div>
+
+			<!-- Appointments 내역이 없으면 이미지를 보여줌 -->
+			<div class="panel panel-default no-image"
+											ng-show="hasAppointment === false"
+										>
+				<!-- <img 
+					ng-src="{{defaultImage}}" alt=""
+				> -->
+			</div>
+			<div class="no-appointment-message"
+										ng-show="hasAppointment === false"
+									>
+				{{ 'No upcoming appointment. Please schedule a new one above' | i18n:'Y2_13' }}
+			</div>
+
+			<!-- Campaign -->
+			<ul class="list-theme1">
+				<li 
+					ng-class="{
+						'list-unread':!campaign.CampaignRead
+					}" 
+					ng-repeat="campaign in campaigns track by $index"
+					ng-click="viewCampaign(campaign, $index)"
+				>
+					<span class="icon"
+									ng-class="{
+										open: selectedCampaign == $index
+									}"
+								>
+					</span>
+
+					<!-- Campaign List -->
+					<div class="campaign-list">
+						{{ campaign.CampaignTitle }}
+						<span>{{ campaign.CampaignStartDate }} ~ {{ campaign.CampaignEndDate }}</span>
+					</div>
+					
+					<!-- campaign Detail -->
+					<div class="campaign-detail">
+						<div class="row" 
+									ng-show="selectedCampaign == $index"
+								>
+							<div class="col-xs-12 img_space">
+								<p kme-preload>
+									<img ng-src="{{ campaignDetail.CampaignImageUrl }}" alt=""
+																						kme-img-error
+																					>
+								</p>
+							</div>
+							<div class="txt_space">
+								<p class="p1" 
+										ng-bind-html="campaignDetail.CampaignText | html"
+									>
+								</p>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>	
+</section>

@@ -1,0 +1,149 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "custom-inappbrowser-plugin",
+        "scope": null,
+        "escapedName": "custom-inappbrowser-plugin",
+        "name": "custom-inappbrowser-plugin",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/HAEEMAC/Work/workspace/MyKia_cordova"
+    ]
+  ],
+  "_from": "custom-inappbrowser-plugin@latest",
+  "_id": "custom-inappbrowser-plugin@0.0.7",
+  "_inBundle": false,
+  "_inCache": true,
+  "_integrity": "sha1-ZHY0lb6H6y562xoI8CCblupc7uA=",
+  "_location": "/custom-inappbrowser-plugin",
+  "_nodeVersion": "8.9.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/custom-inappbrowser-plugin-0.0.7.tgz_1513190143179_0.17887279530987144"
+  },
+  "_npmUser": {
+    "name": "nitin-kapoor",
+    "email": "kapoor.23nitin@gmail.com"
+  },
+  "_npmVersion": "5.5.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "custom-inappbrowser-plugin@0.0.1",
+    "name": "custom-inappbrowser-plugin",
+    "escapedName": "cordova-plugin-inappbrowser",
+    "rawSpec": "0.0.7",
+    "saveSpec": null,
+    "fetchSpec": "0.0.7"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/custom-inappbrowser-plugin/-/custom-inappbrowser-plugin-0.0.7.tgz",
+  "_shasum": "64763495be87eb2e7adb1a08f0209b96ea5ceee0",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-inappbrowser@0.0.1",
+  "_where": "D:\\Users\\pankaj_ku\\APP\\RnD\\npm\\New folder\\DemoProj\\node_modules",
+  "author": {
+    "name": "nitin-kapoor"
+  },
+  "bugs": {
+    "url": "https://github.com/nitin-kapoor/custom-inappbrowser-plugin/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-inappbrowser",
+    "platforms": [
+      "android",
+      "amazon-fireos",
+      "ubuntu",
+      "ios",
+      "osx",
+      "wp7",
+      "wp8",
+      "windows8",
+      "windows",
+      "firefoxos"
+    ]
+  },
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Custom Inappbrowser plugin which helps to to load third-party (untrusted) content, instead of loading that into the main Cordova webview. For iOS platform, removed 'DONE' button or close button and it's functionality from the footer bar left corner, added",
+  "devDependencies": {
+    "eslint": "^4.0.0",
+    "eslint-config-semistandard": "^11.0.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  },
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "dist": {
+    "integrity": "sha512-u+HuCgYqZc+vrkTXp5zU7UmphhiDzLSjw2OTiNhB1QTd5nCLBR7UFTjQOHZHBEupAta48zZVnGc1YBx0xzYxvg==",
+    "shasum": "bcf28a56870e873fbbd9073e67d511856da7d955",
+    "tarball": "https://registry.npmjs.org/custom-inappbrowser-plugin/-/custom-inappbrowser-plugin-0.0.7.tgz"
+  },
+  "engines": {
+    "cordovaDependencies": {
+      "0.2.3": {
+        "cordova": ">=3.1.0"
+      },
+      "2.0.0": {
+        "cordova": ">100"
+      }
+    }
+  },
+  "gitHead": "032f24ae09193f4d8615ebeea189f22312f98344",
+  "homepage": "https://github.com/nitin-kapoor/custom-inappbrowser-plugin#readme",
+  "keywords": [
+    "cordova",
+    "in",
+    "app",
+    "browser",
+    "inappbrowser",
+    "inAppBrowser",
+    "custom",
+    "custom-inappbrowser-plugin",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-amazon-fireos",
+    "cordova-ubuntu",
+    "cordova-ios",
+    "cordova-osx",
+    "cordova-wp7",
+    "cordova-wp8",
+    "cordova-windows8",
+    "cordova-windows",
+    "cordova-firefoxos"
+  ],
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "nitin-kapoor",
+      "email": "kapoor.23nitin@gmail.com"
+    }
+  ],
+  "name": "custom-inappbrowser-plugin",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitin-kapoor/custom-inappbrowser-plugin.git"
+  },
+  "scripts": {
+    "eslint": "node node_modules/eslint/bin/eslint www && node node_modules/eslint/bin/eslint src && node node_modules/eslint/bin/eslint tests",
+    "test": "npm run eslint"
+  },
+  "types": "./types/index.d.ts",
+  "version": "0.0.7"
+}

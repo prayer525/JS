@@ -4,18 +4,12 @@ fnList.pageDealerLocator = function(){
         pos:{lat: -25.363, lng: 131.044}
     }
 
-    // customer location
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(fnMakeMap);
-    } else {
-        console.log('Geolocation is not supported for this Browser/OS.');
-
-        fnMakeMap()
-    }
-
     function fnMakeMap(pos){
-        if(pos != null){
+        console.log('fnMakeMap pos : ' , pos)
+
+        KmeSpinner.stop();
+        
+        if(pos != ''){
             mapParam.pos.lat = pos.coords.latitude;
             mapParam.pos.lng = pos.coords.longitude;
         }
@@ -24,7 +18,7 @@ fnList.pageDealerLocator = function(){
 
         var param = {
             CustomerId : Data.getData('Login').CustomerId,
-            Radius : 30000,
+            Radius : 10000,
             LimitToMarket   : true
         }
 
@@ -62,6 +56,27 @@ fnList.pageDealerLocator = function(){
 
         gMap.clusterMap();
     }
+
+    function errorGeo(error){
+        console.log('geo error : ' , error)
+
+        if(confirm('Retry?')){
+            fnGetPos()
+        }
+    }
+
+    function fnGetPos(){
+        if (navigator.geolocation.getCurrentPosition) {
+            KmeSpinner.start();
+            navigator.geolocation.getCurrentPosition(fnMakeMap, errorGeo, { maximumAge: 10000, timeout: 15000, enableHighAccuracy: true });
+        } else {
+            console.log('Geolocation is not supported for this Browser/OS.');
+
+            fnMakeMap()
+        }
+    }
+
+    fnGetPos()
 }
 
 

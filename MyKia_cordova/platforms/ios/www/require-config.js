@@ -57,11 +57,12 @@
 			 'mykia_dealer'				: ['js/pages/mykia_dealer'],
 			 'dealer_locator'			: ['js/pages/dealer_locator'],
 			 'dealer_detail'			: ['js/pages/dealer_detail'],
-			 //'parked_vehicle'			: ['js/pages/parked_vehicle'],
+			 'parked_vehicle'			: ['js/pages/parked_vehicle'],
 			 'setting'					: ['js/pages/setting'],
 			 'language'					: ['js/pages/language'],
 			 'license'					: ['js/pages/license'],
-			 //'manuals'					: ['js/pages/manuals'],
+			 'manuals'					: ['js/pages/manuals'],
+			 'view_pdf'					: ['js/pages/view_pdf'],
 			 'localData'				: ['js/local_data'],
 		},
 		shim: {
@@ -83,8 +84,8 @@
 				require(['select_country', 'legal_notice', 'login', 'loading', 'main', 'my_vehicle', 'my_profile', 
 					'dashboard_indicator', 'dashboard_indicator_view', 'how_to_video', 'maintenance_schedule', 'contact_us',
 					'breakdown_assistance', 'emergency_call', 'mykia_video', 'brochure_request', 'news_list', 'news_detail',
-					'promotion_list', 'mykia_dealer', 'setting', 'language', 'license', 'dealer_locator', 'dealer_detail',
-					 'index']);
+					'promotion_list', 'mykia_dealer', 'setting', 'language', 'license', 'dealer_locator', 'dealer_detail', 'manuals',
+					 'view_pdf', 'parked_vehicle', 'index']);
 			})
 		})
 		

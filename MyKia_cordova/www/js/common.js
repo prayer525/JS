@@ -46,6 +46,36 @@ var Define = {
 	EmailTestRegExp:/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 }
 
+Number.prototype.to2 = function() { return (this > 9 ? "" : "0")+this; };
+Date.MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+Date.DAYS   = ["Sun", "Mon", "Tue", "Wed", "Tur", "Fri", "Sat"];
+Date.prototype.getDateString = function(dateFormat) {
+     var result = "";
+     dateFormat = dateFormat == 8 && "YYYY.MM.DD" ||
+     dateFormat == 6 && "hh:mm:ss" ||
+     dateFormat || "YYYY.MM.DD hh:mm:ss" ||
+     dateFormat || "YYYY-MM-DD hh:mm";
+     for (var i = 0; i < dateFormat.length; i++) {
+          result += dateFormat.indexOf("YYYY", i) == i ? (i+=3, this.getFullYear()           ) :
+          dateFormat.indexOf("YY",   i) == i ? (i+=1, String(this.getFullYear()).substring(2)) :
+          dateFormat.indexOf("MMM",  i) == i ? (i+=2, Date.MONTHS[this.getMonth()]           ) :
+          dateFormat.indexOf("MM",   i) == i ? (i+=1, (this.getMonth()+1).to2()              ) :
+          dateFormat.indexOf("M",    i) == i ? (      this.getMonth()+1                      ) :
+          dateFormat.indexOf("DDD",  i) == i ? (i+=2, Date.DAYS[this.getDay()]               ) :
+          dateFormat.indexOf("DD",   i) == i ? (i+=1, this.getDate().to2()                   ) :
+          dateFormat.indexOf("D"   , i) == i ? (      this.getDate()                         ) :
+          dateFormat.indexOf("hh",   i) == i ? (i+=1, this.getHours().to2()                  ) :
+          dateFormat.indexOf("h",    i) == i ? (      this.getHours()                        ) :
+          dateFormat.indexOf("mm",   i) == i ? (i+=1, this.getMinutes().to2()                ) :
+          dateFormat.indexOf("m",    i) == i ? (      this.getMinutes()                      ) :
+          dateFormat.indexOf("ss",   i) == i ? (i+=1, this.getSeconds().to2()                ) :
+          dateFormat.indexOf("s",    i) == i ? (      this.getSeconds()                      ) :
+          (dateFormat.charAt(i));
+     }
+     
+     return result;
+};
+
 var GetLangPack = null;
 
 var changeLang = function(){
@@ -102,17 +132,21 @@ var i18n = function(code, type){
 	if(GetLangPack == null){
 		GetLangPack = Data.get('Translations');
 	}
-	
-	if(type == 'upper'){
-		return '<t data-translation-code="'+code+'" data-translation-type="upper">'+GetLangPack[code].toUpperCase()+'</t>';
-	}else if(type == 'lower'){
-		return '<t data-translation-code="'+code+'" data-translation-type="lower">'+GetLangPack[code].toLowerCase()+'</t>';
-	}else if(type == 'text'){
-		return $('<span>'+GetLangPack[code]+'</span>').text();
-	}else if(type == 'text'){
-		return GetLangPack[code];
+
+	if(GetLangPack[code] == undefined){
+		return code
 	}else{
-		return '<t data-translation-code="'+code+'">'+GetLangPack[code]+'</t>';
+		if(type == 'upper'){
+			return '<t data-translation-code="'+code+'" data-translation-type="upper">'+GetLangPack[code].toUpperCase()+'</t>';
+		}else if(type == 'lower'){
+			return '<t data-translation-code="'+code+'" data-translation-type="lower">'+GetLangPack[code].toLowerCase()+'</t>';
+		}else if(type == 'text'){
+			return $('<span>'+GetLangPack[code]+'</span>').text();
+		}else if(type == 'html'){
+			return GetLangPack[code];
+		}else{
+			return '<t data-translation-code="'+code+'">'+GetLangPack[code]+'</t>';
+		}
 	}
 }
 
@@ -330,6 +364,10 @@ function fnGoogleMap(target, param){
         	});
 	}
 
+	this.getMap=function(){
+		return this.map;
+	}
+
     function fnChangePos(_pos){
 		return new google.maps.LatLng(_pos.coords.latitude,_pos.coords.longitude);
 	}
@@ -408,12 +446,7 @@ function : used in page
 ******************************************************************************************/
 var fnList = {};
 $(document).on( "pagecontainershow", function ( event, ui ) {
-	
 	var activePage = $($.mobile.pageContainer.pagecontainer( "getActivePage" ) ).attr('id');
-
-	changeLang();
-
-	console.log('activePage : ' , activePage)
 
 	if(fnList[activePage] !== undefined){
 		console.log('activePage : ' , activePage)
@@ -422,10 +455,88 @@ $(document).on( "pagecontainershow", function ( event, ui ) {
 		a = null;
 	}
 }).on('pagebeforechange', function(e){
+	changeLang();
+
 	Data.put();
 });
+
+/******************************************************************************************
+function : LoginManager for My Appointment
+******************************************************************************************/
+var LoginManager = {
+	setSyncDate:function(_date){
+		Data.setData('syncDate', _date)
+	},
+	getSyncDate:function(){
+		return Data.getData('syncDate')
+	},
+	isLogin:function(){
+		if(Data.getData('Login') != ''){
+			return true;
+		}else{
+			return false;
+		}
+	},
+	getSecondDealerInfo:function(){
+		var dealer = Data.getData('SecondDealerInformation')
+
+		if(dealer == ''){
+			dealer = {}
+		}
+
+		return dealer;
+	},
+	getDealerInfo:function(){
+		return Data.getData('DealerInformation');
+	},
+	getVehiclesInfo:function(){
+		return Data.getData('VehiclesInformation');
+	},
+	getBreakDownCall:function(){
+		return Data.getData('MarketInformation');
+	},
+	getLoginInfo:function(){
+		return Data.getData('Login');
+	},
+	getSelectedVehiclesInfo:function(){
+		return Data.getData('selectedVehicle');
+	},
+	getPushInfo:function(){
+		var data = {
+			'IsHowToVideoPush'	:true,
+			'IsNewsPush'		:true,
+			'IsSalesNProPush'	:true,
+			'IsVideoPush'		:true
+		}
+
+		return data;
+	},
+	getDetailsInfo:function(){
+		return Data.getData('UserInformation')
+	},
+	getSelectedVehiclesIndex:function(){
+		return Data.getData('selectedVehicleIndex')
+	},
+	getRecallInformation:function(){
+		return Data.getData('RecallInformation');
+	}
+}
+
+var Dialog = {
+	confirm:function(text, callBack, title, buttonGroup){
+		if(navigator.notification != undefined){
+			navigator.notification.confirm(text, callBack, title, buttonGroup);
+		}else{
+			if(confirm(text)){
+				callBack();
+			}
+		}
+	}
+}
 
 window.changeLang = changeLang;
 window.i18n = i18n;
 window.JsUtil = JsUtil;
 window.fnList = fnList;
+window.LoginManager = LoginManager;
+window.Dialog = Dialog;

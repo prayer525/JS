@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: License</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<style type="text/css">
+.confirm_area {padding: 0 2.5rem;}
+</style>
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_a00_0010">
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+	<header id="header">
+		<h1><!-- Legal Notice --><script type="text/javascript">M.locale.localizedWrite("T1_5")</script></h1>
+		<button class="hbtn fl back">Back</button>
+	</header>
+    
+	<section id="container" class="fix-bottom">
+		<div id="scroll">
+			<!--iframe id="legalIframe" style="width:100%; overflow-x:hidden"></iframe-->
+			<div id="legalIframe" class="legalFrame"></div>
+		</div>
+		
+		<!-- CONFIRM AREA -->
+		<div class="fix_bottom confirm_area none">
+			<p class="btn_line hbox jc">
+				<!--press class on / disabled class off-->
+				<!--
+				<button type="button" class="btn_white flex off" id="mk_a00_0011" data-active><!-- Deny --
+					<script type="text/javascript">M.locale.localizedWrite("T1_6")</script>
+				</button>
+				-->
+				<button type="button" class="btn_red flex off" id="acceptBtn" data-active><!-- Accept -->
+					<script type="text/javascript">M.locale.localizedWrite("T1_7")</script>
+				</button>
+			</p>
+		</div>
+	</section>
+
+	<footer id="footer">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+var gvlLegalNoticeCB = {
+	success:function(rev,setting){
+
+		// display Legal contents after API 2.31 success
+		// API 2.31 통신 결과 성공 시 법적 문구를 화면에 표시한다
+		MApi.storage(Storage.LegalContent, rev);
+		var target = $("#legalIframe");
+		target.html(rev.LegalLanding).css({wordWrap: "break-word"});
+		$(".confirm_area").removeClass("none");
+		var contentHeight = target.height() + $(".confirm_area").height();
+		$("#legalIframe").height(contentHeight);
+		var lists = $("iframe").contents().find("a");
+		lists.each(function(idx, item) {
+			var temp = item.href;
+			if (temp.indexOf("http") == 0 || temp.indexOf("https") == 0) {
+				item.href =  "javascript:parent.M.apps.browser(\""+temp+"\")";
+			}
+		});
+		
+		// scroll event
+		// 스크롤 이벤트 처리
+		$('#scroll').scroll(function(){
+			var percent = parseInt( $(this).scrollTop() / $("#legalIframe").outerHeight() * 100, 10)
+	    	if (percent > 65) {
+	    		readLegalAll();
+	    	}
+		}); 
+
+		// Accept button active if Legal content is short
+		// Legal 컨텐츠 내용이 적을 경우 Accept 가능하게 예외처리 
+		var legalContent = $("#legalIframe").outerHeight()
+			,screenHeight = $(window).height()
+		if (screenHeight*2 > legalContent) {
+			readLegalAll();
+		}
+
+	},
+	error:function(code,msg){
+
+		// move back when API 2.31 failed
+		// API 2.31 통신 결과 실패 시 이전 화면으로 이동한다
+		LoginManager.clear();
+		M.execute("exFaceBookLogout");
+		Page.backPage();
+	}
+},
+gvlPutLegalNoticeCb={
+	success:function(rev,setting){
+		
+		// move to loading screen after API 2.32 success
+		// API 2.32 통신 결과 성공 시 사용자 정보 수집 화면(loading)으로 이동한다.
+		var option=Options.NoHistory;
+		var params={};
+           params.redirect=MApi.param("redirect");
+		option.param=params;
+		Page.moveToPage("loading",option);
+	},
+	error:function(code,msg){
+
+		// move back network communication failed
+		// 실패 시 이전 화면으로 이동한다.
+		LoginManager.clear();
+		M.execute("exFaceBookLogout");
+		Page.backPage();
+	}
+},
+gvlLegalNoticeNetwork = new NetworkManager(TrCode.GetLegalNotice,gvlLegalNoticeCB,false),
+gvlPutLegalNoticeNetwork=new NetworkManager(TrCode.PutLegalNoticeAgreement,gvlPutLegalNoticeCb,false),
+gvlFromLogin=MApi.param("fromLogin"),
+gvlSelectedCode="";
+//$("#mk_a00_0011").click(Page.moveToPageModalUp);
+
+// acceptance of term
+// 약관동의 버튼 클릭
+$("[data-active]").click(function(){
+	var active = $(this).data('active');
+
+	// call API 2.32 when “Accept” button is touched
+	// “Accept” 버튼 터치 시 API 2.32 통신을 시작한다
+	if (active == 'accept') {
+		if (gvlFromLogin == "yes") {
+			gvlPutLegalNoticeNetwork.send({CustomerId:LoginManager.getCustomerId()});
+		}else{
+			//Page.goHome();
+			M.page.html("mk_a00_0002.html",Options.NoHistory);
+		}
+		MApi.storage(Storage.CultureCode, gvlSelectedCode);
+		return false;
+	}
+
+	// move to app information(mk_a00_0011) screen when “Deny” button is touched
+	// “Deny” 버튼 터치 시 앱 정보 화면(mk_a00_0011)으로 이동한다
+	if (active == 'deny') {
+		M.page.back();
+	}
+});
+
+// call API 2.31 after landed this screen
+// 화면 진입시 API 2.31 통신을 시작한다
+function gfnOnInit(){
+
+	gvlSelectedCode = M.data.global(Storage.CultureCode);
+	if (gvlFromLogin == "yes"){
+		gvlSelectedCode = MApi.param("selectedCode");
+	}
+	gvlLegalNoticeNetwork.send({
+		"CultureCode":gvlSelectedCode
+	});
+}
+
+// Accept button is actived after scrolling down
+// 법적 문구를 모두 스크롤 하면 Accept 버튼이 활성화 된다.
+function readLegalAll() {
+	$('#acceptBtn')
+		.removeClass('off')
+		.data('active', 'accept')
+	$('#mk_a00_0011')
+		.removeClass('off')
+		.data('active', 'deny')
+}
+
+// when landed this screen
+// 화면 진입시 
+M.onReady(function(e) {
+	if(MApi.getDeviceType()=="tablet") {
+		$("#legalIframe").attr("class", "legalFrameTablet");
+	}else{
+		$('#legalIframe').attr("class", "legalFrame");
+	}
+	
+	gfnOnInit();
+});
+M.onBack=function(e){};
+</script>
+</html>

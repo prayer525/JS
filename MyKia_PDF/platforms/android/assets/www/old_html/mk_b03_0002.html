@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<title>MyKia :: dashboard indecator :: detail.Info</title>
+<link rel="stylesheet" type="text/css" href="../css/morpheus_style.css">
+<script type="text/javascript" src="../js/mcore.min.js"></script>
+</head>
+<body id="mk_b03_0002">
+<!-- ========== Start ========== -->
+
+<div id="wrapper">
+	<header id="header">
+		<h1><!-- Dashboard Indicator --><script type="text/javascript">M.locale.localizedWrite("D1_11")</script></h1>
+		<button type="button" class="hbtn fl back">Back</button>
+	</header>
+
+	<section id="container">
+		<div id="scroll">
+        <!-- contents_Start -->
+            
+			<!-- img_area -->
+            <div class="d_i_img">
+                <div><p class="ta_c"><img id="view" alt="img"/></p></div>
+            </div>            
+            <!-- text_area -->
+            <div class="d_i_txt">
+                <h2 id="title"></h2>
+                <div class="d_i_sub">
+                	<p id="text"></p>
+                	<p><b id="action"></b></p>
+                </div>
+            </div>
+            
+        <!-- //contents_End -->    
+        </div>
+    </section>
+
+	<footer id="footer">
+		<p class="img">KIA, The Power to Surprise.</p>
+	</footer>
+</div>
+
+<!-- ========== //End ========== -->
+</body>
+<script type="text/javascript" src="../js/ui/common.js"></script>
+<script type="text/javascript">
+
+// 최초 진입 시 앞에서 선택한 대시보드 상세 내용이 화면에 표시된다.
+M.onReady(function(e){
+    var key=M.data.param("key");
+    var imgUrl = "../img/icon_Dashboard_" + key.replace("d_i_", "") + ".png";
+    $("#view").attr("src",imgUrl);
+    $("#title").text(M.locale.localizedString(key + "_title"));
+    $("#text").text(M.locale.localizedString(key + "_text"));
+    $("#action").text(M.locale.localizedString(key + "_action"));
+})
+</script>
+</html>
