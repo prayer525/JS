@@ -122,6 +122,19 @@ var ApiInfo={
 	'SetPreferredDealer'		: {'type':'POST', 'path':'api/user/setPreferredDealer'},
 	'GetBrochure'				: {'type':'POST', 'path':'api/lead/getBrochure'},
 	'GetEncryption'				: {'type':'POST', 'path':'api/encryption/encrypt256'}
+
+	,'GetDealerAvailability'			: {'type':'POST', 'path':'api/v2/appointments/getdealeravailability'} 			// 2.27.1
+	,'GetAppointments' 					: {'type':'POST', 'path':'api/v2/appointments/getappointments'} 				// 2.27.2
+	,'GetAppointmentDetails' 			: {'type':'POST', 'path':'api/v3/appointments/getappointmentdetails'} 			// 2.27.3
+	,'GetMaintenanceOperations' 		: {'type':'POST', 'path':'api/v3/appointments/getmaintenanceoperations'} 		// 2.27.4
+	,'GetMaintenanceOperationDetails' 	: {'type':'POST', 'path':'api/v2/appointments/getmaintenanceoperationdetails'} 	// 2.27.5
+	,'GetMaintenanceOperationsPrice' 	: {'type':'POST', 'path':'api/v2/appointments/getmaintenanceoperationprice'} 	// 2.27.6
+	,'SaveServiceAppointment' 			: {'type':'POST', 'path':'api/v3/appointments/saveserviceappointment'} 			// 2.27.6.1
+	,'SaveContactMeForAService' 		: {'type':'POST', 'path':'api/v2/appointments/savecontactmeforservice'} 			// 2.27.6.2
+	,'SaveSalesAppointment' 			: {'type':'POST', 'path':'api/v3/appointments/savesalesappointment'} 			// 2.27.6.3
+	,'GetCampaignList' 					: {'type':'POST', 'path':'api/campaigns/list'} 									// 2.35
+	,'GetCampaignsDetails' 				: {'type':'POST', 'path':'api/v2/campaigns/details'} 							// 2.36 - 3.36
+	,'GetValues' 						: {'type':'POST', 'path':'api/v2/generic/values/'} 								// 2.37.1 
 };
 
 /** 
@@ -131,6 +144,7 @@ var ApiInfo={
  * @return callback
  */
  var ignoreApi = ['GetToken', 'TranslationList', 'GetLegalNotice', 'Login'];
+ var encryptApi = ['UserInformation', 'VehiclesImagesV2', 'VehiclesInformation'];
  var ajaxCount = 0;
 function getApi(apiName, param, callback){
 	console.log('Request : ', apiName, param);
@@ -185,7 +199,7 @@ function getApi(apiName, param, callback){
 			success: function(response,statusText,xhr){
 				var data = JSON.parse(response);
 
-				if(!ignoreApi.includes(apiName)){
+				if(encryptApi.includes(apiName)){
 					fnDecryptData(data ,callback);
 				}else{
 					callback(data);

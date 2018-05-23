@@ -18,7 +18,6 @@ define([
 	,'moment'
 	,'accounting'
 ], function(angular, moment, accounting) {
-	console.log('filter')
 	
 	/**
 	 * myKiaApp.filter 정의

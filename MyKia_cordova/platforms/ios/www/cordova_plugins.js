@@ -41,20 +41,28 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-sim.Sim",
-    "file": "plugins/cordova-plugin-sim/www/sim.js",
-    "pluginId": "cordova-plugin-sim",
+    "id": "cordova-plugin-dialogs.notification",
+    "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+    "pluginId": "cordova-plugin-dialogs",
     "merges": [
-      "window.plugins.sim"
+      "navigator.notification"
     ]
   },
   {
-    "id": "custom-inappbrowser-plugin.inappbrowser",
-    "file": "plugins/custom-inappbrowser-plugin/www/inappbrowser.js",
-    "pluginId": "custom-inappbrowser-plugin",
+    "id": "cordova-plugin-document-viewer.SitewaertsDocumentViewer",
+    "file": "plugins/cordova-plugin-document-viewer/www/sitewaertsdocumentviewer.js",
+    "pluginId": "cordova-plugin-document-viewer",
     "clobbers": [
-      "cordova.InAppBrowser.open",
-      "window.open"
+      "cordova.plugins.SitewaertsDocumentViewer",
+      "SitewaertsDocumentViewer"
+    ]
+  },
+  {
+    "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
+    "file": "plugins/cordova-plugin-facebook4/www/facebook-native.js",
+    "pluginId": "cordova-plugin-facebook4",
+    "clobbers": [
+      "facebookConnectPlugin"
     ]
   },
   {
@@ -231,20 +239,27 @@ module.exports = [
     "runs": true
   },
   {
-    "id": "cordova-plugin-document-viewer.SitewaertsDocumentViewer",
-    "file": "plugins/cordova-plugin-document-viewer/www/sitewaertsdocumentviewer.js",
-    "pluginId": "cordova-plugin-document-viewer",
+    "id": "cordova-plugin-file-opener2.FileOpener2",
+    "file": "plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js",
+    "pluginId": "cordova-plugin-file-opener2",
     "clobbers": [
-      "cordova.plugins.SitewaertsDocumentViewer",
-      "SitewaertsDocumentViewer"
+      "cordova.plugins.fileOpener2"
     ]
   },
   {
-    "id": "cordova-plugin-dialogs.notification",
-    "file": "plugins/cordova-plugin-dialogs/www/notification.js",
-    "pluginId": "cordova-plugin-dialogs",
-    "merges": [
-      "navigator.notification"
+    "id": "cordova-plugin-file-transfer.FileTransferError",
+    "file": "plugins/cordova-plugin-file-transfer/www/FileTransferError.js",
+    "pluginId": "cordova-plugin-file-transfer",
+    "clobbers": [
+      "window.FileTransferError"
+    ]
+  },
+  {
+    "id": "cordova-plugin-file-transfer.FileTransfer",
+    "file": "plugins/cordova-plugin-file-transfer/www/FileTransfer.js",
+    "pluginId": "cordova-plugin-file-transfer",
+    "clobbers": [
+      "window.FileTransfer"
     ]
   },
   {
@@ -280,27 +295,20 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-file-transfer.FileTransferError",
-    "file": "plugins/cordova-plugin-file-transfer/www/FileTransferError.js",
-    "pluginId": "cordova-plugin-file-transfer",
-    "clobbers": [
-      "window.FileTransferError"
+    "id": "cordova-plugin-sim.Sim",
+    "file": "plugins/cordova-plugin-sim/www/sim.js",
+    "pluginId": "cordova-plugin-sim",
+    "merges": [
+      "window.plugins.sim"
     ]
   },
   {
-    "id": "cordova-plugin-file-transfer.FileTransfer",
-    "file": "plugins/cordova-plugin-file-transfer/www/FileTransfer.js",
-    "pluginId": "cordova-plugin-file-transfer",
+    "id": "custom-inappbrowser-plugin.inappbrowser",
+    "file": "plugins/custom-inappbrowser-plugin/www/inappbrowser.js",
+    "pluginId": "custom-inappbrowser-plugin",
     "clobbers": [
-      "window.FileTransfer"
-    ]
-  },
-  {
-    "id": "cordova-plugin-file-opener2.FileOpener2",
-    "file": "plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js",
-    "pluginId": "cordova-plugin-file-opener2",
-    "clobbers": [
-      "cordova.plugins.fileOpener2"
+      "cordova.InAppBrowser.open",
+      "window.open"
     ]
   }
 ];
@@ -312,15 +320,16 @@ module.exports.metadata =
   "com.lampa.startapp": "0.1.4",
   "cordova-plugin-app-version": "0.1.9",
   "cordova-plugin-device": "2.0.1",
+  "cordova-plugin-dialogs": "2.0.1",
+  "cordova-plugin-document-viewer": "0.9.9",
+  "cordova-plugin-facebook4": "2.0.0",
+  "cordova-plugin-file": "6.0.1",
+  "cordova-plugin-file-opener2": "2.0.19",
+  "cordova-plugin-file-transfer": "1.7.1",
+  "cordova-plugin-geolocation": "4.0.1",
   "cordova-plugin-sim": "1.3.3",
   "cordova-plugin-whitelist": "1.3.3",
-  "custom-inappbrowser-plugin": "0.0.7",
-  "cordova-plugin-file": "6.0.1",
-  "cordova-plugin-document-viewer": "0.9.9",
-  "cordova-plugin-dialogs": "2.0.1",
-  "cordova-plugin-geolocation": "4.0.1",
-  "cordova-plugin-file-transfer": "1.7.1",
-  "cordova-plugin-file-opener2": "2.0.19"
+  "custom-inappbrowser-plugin": "0.0.7"
 };
 // BOTTOM OF METADATA
 });

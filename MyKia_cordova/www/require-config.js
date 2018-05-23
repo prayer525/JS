@@ -63,6 +63,7 @@
 			 'license'					: ['js/pages/license'],
 			 'manuals'					: ['js/pages/manuals'],
 			 'view_pdf'					: ['js/pages/view_pdf'],
+			 'apm_main'					: ['js/pages/apm_main'],
 			 'localData'				: ['js/local_data'],
 		},
 		shim: {
@@ -85,7 +86,7 @@
 					'dashboard_indicator', 'dashboard_indicator_view', 'how_to_video', 'maintenance_schedule', 'contact_us',
 					'breakdown_assistance', 'emergency_call', 'mykia_video', 'brochure_request', 'news_list', 'news_detail',
 					'promotion_list', 'mykia_dealer', 'setting', 'language', 'license', 'dealer_locator', 'dealer_detail', 'manuals',
-					 'view_pdf', 'parked_vehicle', 'index']);
+					 'view_pdf', 'parked_vehicle', 'apm_main', 'index']);
 			})
 		})
 		

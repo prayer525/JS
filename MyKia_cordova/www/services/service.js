@@ -19,7 +19,6 @@ define([
 	,'./factory'
 	,'./factory.mock'
 ], function(angular, _) {
-	console.log('service')
 	/**
 	 * myKiaApp.service 정의
 	 * controller 에서 호출할 module명을 정의한다.
@@ -54,7 +53,6 @@ define([
 	 * @ Request 			: angular http factory
 	 */
 	function Network($q, $filter, TR_CODE, STORAGE_KEY, Request, RequestMock, User, devMode) {
-		console.log('NetWork')
 		var requestOption = {
 				trCode 	: ''
 				,data 		: {}
@@ -373,7 +371,6 @@ define([
 				
 				return deferred.promise;
 			}
-			console.log('PC')
 			deferred.reject('PC');
 			return deferred.promise;
 		}
@@ -1453,12 +1450,7 @@ define([
 				,lang = Data.getData('Login').CultureCode
 				,getData
 			
-			if (!devMode() && !localFlag) {
-				deferred.resolve( Data.get('Translations') );
-				return deferred.promise;
-			}
-			getData = requestMock.getI18n(cultureCode);
-			deferred.resolve(getData);
+			deferred.resolve( Data.get('Translations') );
 			return deferred.promise;
 		}
 
@@ -1546,9 +1538,7 @@ define([
 		 * @ return void
 		 */
 		function link(page, option) {
-			console.log('service.js fn link')
-			console.log('page : ' , page)
-			console.log('option : ' , option)
+			
 		}
 
 		/*

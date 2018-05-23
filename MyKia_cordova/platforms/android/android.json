@@ -25,6 +25,34 @@
               "count": 1
             },
             {
+              "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"SitewaertsDocumentViewer\"><param name=\"android-package\" value=\"de.sitewaerts.cordova.documentviewer.DocumentViewerPlugin\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<allow-navigation href=\"cdvfile:*\" />",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"FileOpener2\"><param name=\"android-package\" value=\"io.github.pwlin.cordova.plugins.fileopener2.FileOpener2\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Geolocation\"><param name=\"android-package\" value=\"org.apache.cordova.geolocation.Geolocation\" /></feature>",
+              "count": 1
+            },
+            {
               "xml": "<feature name=\"Sim\"><param name=\"android-package\" value=\"com.pbakondy.Sim\" /></feature>",
               "count": 1
             },
@@ -37,31 +65,31 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "xml": "<feature name=\"FacebookConnectPlugin\"><param name=\"android-package\" value=\"org.apache.cordova.facebook.ConnectPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
             },
             {
-              "xml": "<allow-navigation href=\"cdvfile:*\" />",
+              "xml": "<access origin=\"https://m.facebook.com\" />",
               "count": 1
             },
             {
-              "xml": "<feature name=\"SitewaertsDocumentViewer\"><param name=\"android-package\" value=\"de.sitewaerts.cordova.documentviewer.DocumentViewerPlugin\" /></feature>",
+              "xml": "<access origin=\"https://graph.facebook.com\" />",
               "count": 1
             },
             {
-              "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
+              "xml": "<access origin=\"https://api.facebook.com\" />",
               "count": 1
             },
             {
-              "xml": "<feature name=\"Geolocation\"><param name=\"android-package\" value=\"org.apache.cordova.geolocation.Geolocation\" /></feature>",
+              "xml": "<access origin=\"https://*.fbcdn.net\" />",
               "count": 1
             },
             {
-              "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
+              "xml": "<access origin=\"https://*.akamaihd.net\" />",
               "count": 1
             },
             {
-              "xml": "<feature name=\"FileOpener2\"><param name=\"android-package\" value=\"io.github.pwlin.cordova.plugins.fileopener2.FileOpener2\" /></feature>",
+              "xml": "<preference name=\"android-minSdkVersion\" value=\"15\" />",
               "count": 1
             }
           ]
@@ -79,12 +107,12 @@
               "count": 1
             },
             {
-              "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
-              "count": 1
-            },
-            {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
               "count": 2
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
+              "count": 1
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
@@ -99,7 +127,7 @@
               "count": 1
             },
             {
-              "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
+              "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
               "count": 1
             }
           ],
@@ -116,6 +144,34 @@
             },
             {
               "xml": "<provider android:authorities=\"${applicationId}.opener.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"io.github.pwlin.cordova.plugins.fileopener2.FileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/opener_paths\" /></provider>",
+              "count": 1
+            }
+          ],
+          "application": [
+            {
+              "xml": "<meta-data android:name=\"com.facebook.sdk.ApplicationId\" android:value=\"@string/fb_app_id\" />",
+              "count": 1
+            },
+            {
+              "xml": "<meta-data android:name=\"com.facebook.sdk.ApplicationName\" android:value=\"@string/fb_app_name\" />",
+              "count": 1
+            },
+            {
+              "xml": "<activity android:configChanges=\"keyboard|keyboardHidden|screenLayout|screenSize|orientation\" android:label=\"@string/fb_app_name\" android:name=\"com.facebook.FacebookActivity\" />",
+              "count": 1
+            }
+          ]
+        }
+      },
+      "res/values/facebookconnect.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<string name=\"fb_app_id\">798930320158070</string>",
+              "count": 1
+            },
+            {
+              "xml": "<string name=\"fb_app_name\">MyKia</string>",
               "count": 1
             }
           ]
@@ -139,6 +195,24 @@
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.kia.eu.mykia"
     },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-document-viewer": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-file-opener2": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.kia.eu.mykia"
+    },
     "cordova-plugin-sim": {
       "PACKAGE_NAME": "com.kia.eu.mykia"
     },
@@ -148,22 +222,10 @@
     "custom-inappbrowser-plugin": {
       "PACKAGE_NAME": "com.kia.eu.mykia"
     },
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.kia.eu.mykia"
-    },
-    "cordova-plugin-document-viewer": {
-      "PACKAGE_NAME": "com.kia.eu.mykia"
-    },
-    "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "com.kia.eu.mykia"
-    },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.kia.eu.mykia"
-    },
-    "cordova-plugin-file-transfer": {
-      "PACKAGE_NAME": "com.kia.eu.mykia"
-    },
-    "cordova-plugin-file-opener2": {
+    "cordova-plugin-facebook4": {
+      "APP_ID": "798930320158070",
+      "APP_NAME": "MyKia",
+      "ANDROID_SDK_VERSION": "4.+",
       "PACKAGE_NAME": "com.kia.eu.mykia"
     }
   },
@@ -202,28 +264,28 @@
       ]
     },
     {
-      "id": "cordova-plugin-sim.Sim",
-      "file": "plugins/cordova-plugin-sim/www/sim.js",
-      "pluginId": "cordova-plugin-sim",
+      "id": "cordova-plugin-dialogs.notification",
+      "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+      "pluginId": "cordova-plugin-dialogs",
       "merges": [
-        "window.plugins.sim"
+        "navigator.notification"
       ]
     },
     {
-      "id": "cordova-plugin-sim.SimAndroid",
-      "file": "plugins/cordova-plugin-sim/www/android/sim.js",
-      "pluginId": "cordova-plugin-sim",
+      "id": "cordova-plugin-dialogs.notification_android",
+      "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
+      "pluginId": "cordova-plugin-dialogs",
       "merges": [
-        "window.plugins.sim"
+        "navigator.notification"
       ]
     },
     {
-      "id": "custom-inappbrowser-plugin.inappbrowser",
-      "file": "plugins/custom-inappbrowser-plugin/www/inappbrowser.js",
-      "pluginId": "custom-inappbrowser-plugin",
+      "id": "cordova-plugin-document-viewer.SitewaertsDocumentViewer",
+      "file": "plugins/cordova-plugin-document-viewer/www/sitewaertsdocumentviewer.js",
+      "pluginId": "cordova-plugin-document-viewer",
       "clobbers": [
-        "cordova.InAppBrowser.open",
-        "window.open"
+        "cordova.plugins.SitewaertsDocumentViewer",
+        "SitewaertsDocumentViewer"
       ]
     },
     {
@@ -400,43 +462,12 @@
       "runs": true
     },
     {
-      "id": "cordova-plugin-document-viewer.SitewaertsDocumentViewer",
-      "file": "plugins/cordova-plugin-document-viewer/www/sitewaertsdocumentviewer.js",
-      "pluginId": "cordova-plugin-document-viewer",
+      "id": "cordova-plugin-file-opener2.FileOpener2",
+      "file": "plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js",
+      "pluginId": "cordova-plugin-file-opener2",
       "clobbers": [
-        "cordova.plugins.SitewaertsDocumentViewer",
-        "SitewaertsDocumentViewer"
+        "cordova.plugins.fileOpener2"
       ]
-    },
-    {
-      "id": "cordova-plugin-dialogs.notification",
-      "file": "plugins/cordova-plugin-dialogs/www/notification.js",
-      "pluginId": "cordova-plugin-dialogs",
-      "merges": [
-        "navigator.notification"
-      ]
-    },
-    {
-      "id": "cordova-plugin-dialogs.notification_android",
-      "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
-      "pluginId": "cordova-plugin-dialogs",
-      "merges": [
-        "navigator.notification"
-      ]
-    },
-    {
-      "id": "cordova-plugin-geolocation.geolocation",
-      "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
-      "pluginId": "cordova-plugin-geolocation",
-      "clobbers": [
-        "navigator.geolocation"
-      ]
-    },
-    {
-      "id": "cordova-plugin-geolocation.PositionError",
-      "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
-      "pluginId": "cordova-plugin-geolocation",
-      "runs": true
     },
     {
       "id": "cordova-plugin-file-transfer.FileTransferError",
@@ -455,11 +486,50 @@
       ]
     },
     {
-      "id": "cordova-plugin-file-opener2.FileOpener2",
-      "file": "plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js",
-      "pluginId": "cordova-plugin-file-opener2",
+      "id": "cordova-plugin-geolocation.geolocation",
+      "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
+      "pluginId": "cordova-plugin-geolocation",
       "clobbers": [
-        "cordova.plugins.fileOpener2"
+        "navigator.geolocation"
+      ]
+    },
+    {
+      "id": "cordova-plugin-geolocation.PositionError",
+      "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+      "pluginId": "cordova-plugin-geolocation",
+      "runs": true
+    },
+    {
+      "id": "cordova-plugin-sim.Sim",
+      "file": "plugins/cordova-plugin-sim/www/sim.js",
+      "pluginId": "cordova-plugin-sim",
+      "merges": [
+        "window.plugins.sim"
+      ]
+    },
+    {
+      "id": "cordova-plugin-sim.SimAndroid",
+      "file": "plugins/cordova-plugin-sim/www/android/sim.js",
+      "pluginId": "cordova-plugin-sim",
+      "merges": [
+        "window.plugins.sim"
+      ]
+    },
+    {
+      "id": "custom-inappbrowser-plugin.inappbrowser",
+      "file": "plugins/custom-inappbrowser-plugin/www/inappbrowser.js",
+      "pluginId": "custom-inappbrowser-plugin",
+      "clobbers": [
+        "cordova.InAppBrowser.open",
+        "window.open"
+      ]
+    },
+    {
+      "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
+      "file": "plugins/cordova-plugin-facebook4/www/facebook-native.js",
+      "pluginId": "cordova-plugin-facebook4",
+      "clobbers": [
+        "facebookConnectPlugin"
       ]
     }
   ],
@@ -469,14 +539,15 @@
     "com.lampa.startapp": "0.1.4",
     "cordova-plugin-app-version": "0.1.9",
     "cordova-plugin-device": "2.0.1",
+    "cordova-plugin-dialogs": "2.0.1",
+    "cordova-plugin-document-viewer": "0.9.9",
+    "cordova-plugin-file": "6.0.1",
+    "cordova-plugin-file-opener2": "2.0.19",
+    "cordova-plugin-file-transfer": "1.7.1",
+    "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-sim": "1.3.3",
     "cordova-plugin-whitelist": "1.3.3",
     "custom-inappbrowser-plugin": "0.0.7",
-    "cordova-plugin-file": "6.0.1",
-    "cordova-plugin-document-viewer": "0.9.9",
-    "cordova-plugin-dialogs": "2.0.1",
-    "cordova-plugin-geolocation": "4.0.1",
-    "cordova-plugin-file-transfer": "1.7.1",
-    "cordova-plugin-file-opener2": "2.0.19"
+    "cordova-plugin-facebook4": "2.0.0"
   }
 }

@@ -4,7 +4,8 @@ fnList.pageManuals = function(){
 	var userInfo=Data.getData('UserInformation');
 	var gvlDocumentList = Data.getData('gvlDocumentList');
 	var downloadStoragePath = '';
-	var gvlTemp;
+	var gvlTemp, cancelFlg = false, fileTransfer, fileURL;
+
 
 	if(gvlDocumentList == ''){
 		var param = {
@@ -42,6 +43,7 @@ fnList.pageManuals = function(){
 				.addClass(itemExtention)
 				.click(function(){
 					gvlTemp = $(this);
+					cancelFlg = false;
 					$(".lightbox").removeClass('none');
 					$("#morePopup").removeClass('none');
 				});
@@ -56,7 +58,7 @@ fnList.pageManuals = function(){
 	}
 
 	function fnOpenIn(){
-		if(gvlTemp.data("pdfpath") == undefined){
+		if(gvlTemp.data("pdfpath") == undefined || gvlTemp.data("pdfpath") == null || gvlTemp.data("pdfpath") == '' ){
 			var popTitle = i18n('L1_3', 'text'),
 				popMessage = i18n('D1_8', 'text')
 
@@ -109,6 +111,10 @@ fnList.pageManuals = function(){
 	}
 
 	function fnOpenInApp(entry){
+		if(cancelFlg){
+			return false;
+		}
+
         gvlDocumentList[gvlTemp.index()].pdfpath = entry.toURL();
 
         Data.setData('gvlDocumentList', gvlDocumentList)
@@ -119,6 +125,10 @@ fnList.pageManuals = function(){
 	}
 
 	function fnOpenExternal(entry){
+		if(cancelFlg){
+			return false;
+		}
+
 		cordova.plugins.fileOpener2.showOpenWithDialog(
 		    entry.toURL(), 
 		    'application/pdf', 
@@ -143,8 +153,8 @@ fnList.pageManuals = function(){
 		        $(".lightbox").removeClass('none');
 				$("#downloadPopup").removeClass('none');
 
-		        var fileTransfer = new FileTransfer();
-			    var fileURL = fileEntry.toURL();
+		        fileTransfer = new FileTransfer();
+			    fileURL = fileEntry.toURL();
 
 			    fileTransfer.onprogress = function(progress){
 			    	var w =  parseInt((progress.loaded / progress.total) * 100);
@@ -206,5 +216,12 @@ fnList.pageManuals = function(){
 	$('.back').click(function(){
 		Data.setData('gvlDocumentList','');
 		localStorage.removeItem('pdfFilePath');
+	})
+
+	$('#btn-download-cancel').click(function(){
+		cancelFlg = true;
+		fileTransfer = null;
+		$(".lightbox").addClass('none');
+		$("#downloadPopup").addClass('none');
 	})
 }

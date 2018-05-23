@@ -19,8 +19,11 @@ fnList.pageMyProfile = function(){
 
 			$("#name").html(userInfo.FirstName + " " + userInfo.LastName);
 		    $("#address").html(userInfo.Street+" "+userInfo.Housenumber+"</br>"+userInfo.PostalCode+" "+userInfo.City);
-		    $("#phone").html(userInfo.Phone);
-		    $("#email").html(userInfo.Email);
+		    $("#phone").html(userInfo.Phone).click(function(){
+		    	var _num = JsUtil.blank(userInfo.Phone);
+		    	directCall(_num);
+		    });
+		    $("#email").html(userInfo.Email).attr('href','mailTo:'+userInfo.Email);
 		}
 
 		function fnSetVehicle(data){
@@ -147,7 +150,7 @@ fnList.pageMyProfile = function(){
 
 	    var params = {
 	    	"CustomerId":Data.getData('Login').CustomerId,
-			"VIN":dataEncode(myvehicle.VIN),
+			"VIN":myvehicle.VIN,
 			"MileageInKilometers":$("#popupInputMileage").val().replace(/,|\.| /g,"")
 	    }
 
@@ -231,7 +234,7 @@ fnList.pageMyProfile = function(){
 
 	    var params = {
 	    	"CustomerId":Data.getData('Login').CustomerId,
-	        "VIN":dataEncode(myvehicle.VIN),   // 암호화 하지 않으려고 만든 VIN 필드
+	        "VIN":myvehicle.VIN,
 	        "DateOfLastService":lastServiceDate
 	    }
 

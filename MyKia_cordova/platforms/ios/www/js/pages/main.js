@@ -97,7 +97,7 @@ fnList.pageMain = function(){
 			$('.sub-menu-kmd').hide();
 			$('.sub-menu-eu').show();
 		}else {
-			$('.my-appointments').attr('style', '');
+			$('.my-appointments').attr('style', 'width: 100% !important');
 			$('.app-link').hide();
 			$('.app-link-it').hide();
 			$('.sub-menu-kmd').hide();

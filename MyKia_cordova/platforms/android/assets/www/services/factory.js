@@ -123,7 +123,6 @@ define([
 					,cancelable : option.cancelable
 					,message 	: option.message || ''
 				}*/
-			console.log('getRest')
 			getAppointmentApi(option.trCode, method, option.data, callback)
 			
 			return deferred.promise;

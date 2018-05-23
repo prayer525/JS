@@ -255,6 +255,9 @@ var JsUtil = {
 	        } 
 	    }
 	    return size;
+	},
+	blank:function(str){
+		return str.replace(/ /g, '');
 	}
 }
 /******************************************************************************************
@@ -446,12 +449,7 @@ function : used in page
 ******************************************************************************************/
 var fnList = {};
 $(document).on( "pagecontainershow", function ( event, ui ) {
-	
 	var activePage = $($.mobile.pageContainer.pagecontainer( "getActivePage" ) ).attr('id');
-
-	changeLang();
-
-	console.log('activePage : ' , activePage)
 
 	if(fnList[activePage] !== undefined){
 		console.log('activePage : ' , activePage)
@@ -460,6 +458,8 @@ $(document).on( "pagecontainershow", function ( event, ui ) {
 		a = null;
 	}
 }).on('pagebeforechange', function(e){
+	changeLang();
+
 	Data.put();
 });
 
@@ -536,7 +536,7 @@ var Dialog = {
 		}
 	}
 }
-
+window.directCall = directCall;
 window.changeLang = changeLang;
 window.i18n = i18n;
 window.JsUtil = JsUtil;

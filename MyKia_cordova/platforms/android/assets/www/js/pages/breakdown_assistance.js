@@ -6,13 +6,15 @@ fnList.pageBreakdownAssistance = function(){
     $("#carImage").attr("src", myvehicle.VehicleImageUrl);
 
     $("#domestic").text(breakdown.BreakDownCallNumberLocal);
-    $("#domesticCall").click(function(){
-        // Direct Call
+    $("#domesticCall").data('domestic', JsUtil.blank(breakdown.BreakDownCallNumberLocal)).click(function(){
+        var _num = $(this).data('domestic');
+        directCall(_num);
     });
+
     $("#international").text(breakdown.BreakdownCallNumberInternational);
-    
-    $("#internationalCall").click(function(){
-        // Direct Call
+    $("#internationalCall").data('international', JsUtil.blank(breakdown.BreakdownCallNumberInternational)).click(function(){
+        var _num = $(this).data('international');
+        directCall(_num);
     });
 }
 

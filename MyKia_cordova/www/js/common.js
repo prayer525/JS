@@ -255,6 +255,9 @@ var JsUtil = {
 	        } 
 	    }
 	    return size;
+	},
+	blank:function(str){
+		return str.replace(/ /g, '');
 	}
 }
 /******************************************************************************************
@@ -533,7 +536,7 @@ var Dialog = {
 		}
 	}
 }
-
+window.directCall = directCall;
 window.changeLang = changeLang;
 window.i18n = i18n;
 window.JsUtil = JsUtil;

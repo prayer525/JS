@@ -363,7 +363,7 @@ button.my-appointments { background-color:#bb162b; border:none; border-radius:0.
 .li-youtube .youtube-player {display:none; overflow:hidden;width:100% !important; height:200px; padding:5px !important;}
 
 .search-area-top {position: absolute; top: 0; left: 0; border-bottom: 1px solid #770000; background: #bb162b; width: 100%; padding-right: 10rem; display: block; height: 4.3rem;}
-.search-area-top .search-box {position:static; box-shadow:none;} 
+.search-area-top .search-box {position:relative; top:0; box-shadow:none;} 
 .search-area-top .btn-close {position:absolute; top:0; right:0; width:auto; color:#fff; font-size:1.5em; background:transparent; height:100%; padding:0 1rem;}
 
 /* search result none */

@@ -108,7 +108,6 @@ define([
 				}
 				$scope.scheduleStatus = $filter('i18n')( $filter('convertStatus')(appointment.AppointmentStatus), $filter('convertStatus')(appointment.AppointmentStatus));
 
-				console.log(appointment)
 			}
 			,failCampaign = function(result) {
 

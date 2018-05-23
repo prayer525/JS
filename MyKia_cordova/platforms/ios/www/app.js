@@ -29,8 +29,6 @@ define([
 	,'modules/workshop/index'
 ], function(angular) {
 
-	console.log('App.js')
-
 	/**
 	 * declare angular module
 	 * module name						: myKiaApp
@@ -71,7 +69,6 @@ define([
 	 * @ CONSTANT			: CONSTANT 
 	 */
 	function AppCtrl($rootScope, $q, $filter, User, Util, CONSTANT) {
-		console.log('AppCtrl User : ' , User)
 		var  _user = null
 			,_dealer = null
 			,_vehicle = null
@@ -304,7 +301,7 @@ define([
 		var interfaceOption = {
 			rootScope: $rootScope
 		}
-		console.log('angularInterface : ', interfaceOption)
+
 		angularInterface(interfaceOption);
 	}
 

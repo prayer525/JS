@@ -24,6 +24,7 @@ fnList.pageLegalNotice = function(){
 	}
 
 	function fnLegalConfirm(){
+		Data.set('isFirstRun', false);
 		if (Data.getData('Login') != '') {
 			// if users login
 			var params = {

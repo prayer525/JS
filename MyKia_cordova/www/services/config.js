@@ -444,7 +444,6 @@ define([
 	 * @ ROUTE_URL			: Route URL 을 주입
 	 */
 	function rootRoute($stateProvider, ROUTE_URL) {
-		console.log('aa')
 		// 디폴트로 /appointments 로 라우팅
 		$stateProvider
 			

@@ -363,7 +363,7 @@ button.my-appointments { background-color:#bb162b; border:none; border-radius:0.
 .li-youtube .youtube-player {display:none; overflow:hidden;width:100% !important; height:200px; padding:5px !important;}
 
 .search-area-top {position: absolute; top: 0; left: 0; border-bottom: 1px solid #770000; background: #bb162b; width: 100%; padding-right: 10rem; display: block; height: 4.3rem;}
-.search-area-top .search-box {position:static; box-shadow:none;} 
+.search-area-top .search-box {position:relative; top:0; box-shadow:none;} 
 .search-area-top .btn-close {position:absolute; top:0; right:0; width:auto; color:#fff; font-size:1.5em; background:transparent; height:100%; padding:0 1rem;}
 
 /* search result none */
@@ -679,6 +679,49 @@ button.my-appointments { background-color:#bb162b; border:none; border-radius:0.
 .more-popup .download-btn {padding-left: 3.5rem; background: url(../img/li_type_down2.png) no-repeat 1rem 1rem; background-size: 1.9rem;}
 .more-popup .open-btn {padding-left: 3.5rem; background: url(../img/li_type_share.png) no-repeat 1rem 1rem; background-size: 1.9rem;}
 .more-popup .email-btn {padding-left: 3.5rem; background: url(../img/li_type_email.png) no-repeat 1rem 1.6rem; background-size: 1.9rem;}
+
+/**************************************************************************************************************************************
+	My Appointments 
+**************************************************************************************************************************************/
+
+/* Main */ 
+.list-theme2 {background:transparent; padding-top:1rem; margin-left:1.6rem; margin-right:1rem;}
+.list-theme2 li {position:relative; width:100%; background:url('../img/li_type_move.png')no-repeat right 1rem center; background-size:1.1rem; padding-left:4rem;}
+.list-theme2 li a {display:block; border-bottom:1px solid #a1a1a1; width:100%; height:100%; padding:0.3rem 4.5rem 0.3rem 0.2rem; font-size:1.4rem; color:#7f8084; background-color:transparent;}
+.list-theme2 li:last-child a {border-bottom:none;}
+.list-theme2 li a strong {color:#bb162b; font-size:1.7rem;}
+.list-theme2 li a p {color:#58595b;}
+.list-theme2 li i {position:absolute; top:0.3rem; left:0.5rem; display:inline-block;}
+.list-theme2 li.history strong,
+.list-theme2 li.history span,
+.list-theme2 li.history p { opacity:0.6;}
+
+/* Icon group */
+.ico-group {display:inline-block; width:2.3rem; height:2.3rem; margin-right:0.6rem;}
+.ico-group.ico-checked-red {background:url("../img/appointments/ico_check_red_round.png") left top no-repeat; background-size:contain; margin-top:-0.2rem;}
+.ico-group.ico-checked-red-dot {background:url("../img/appointments/ico_question_red_dot.png") left top no-repeat; background-size:contain; margin-top:-0.2rem;}
+.ico-group.ico-circle-gray {background:url("../img/appointments/ico_circle_gray_fill.png") left top no-repeat; background-size:contain;}
+.ico-default-type {display:inline-block; width:2.3rem; height:2.3rem; margin-right:0.6rem;}
+.ico-checked-white {background:url("../img/appointments/ico_checked_white.png") left top no-repeat; background-size:100% auto;}
+.ico-car-red {background:url("../img/appointments/ico_car_red.png") left top no-repeat; background-size:100% auto;}
+.ico-dealer-red {background:url("../img/appointments/ico_dealer_red.png") left top no-repeat; background-size:100% auto;}
+.ico-gauge-red {background:url("../img/appointments/ico_gauge_red.png") left top no-repeat; background-size:100% auto;}
+.ico-time-red {background:url("../img/appointments/ico_time_red.png") left top no-repeat; background-size:100% auto;}
+.ico-question-red {background:url("../img/appointments/ico_question_red.png") left top no-repeat; background-size:100% auto;}
+.ico-checked-red-fill { background:url("../img/appointments/ico_check_red_fill.png") left top no-repeat; background-size:100% auto;}
+.icd-phone-red {background:url("../img/appointments/ico_phone_call.png") left top no-repeat; background-size:100% auto;}
+.ico-setting-red-circle {background:url("../img/appointments/ico_setting_red_circle.png") left top no-repeat; background-size:100% auto;}
+.ico-people-red-circle {background:url("../img/appointments/ico_people_red_circle.png") left top no-repeat; background-size:100% auto;}
+.ico-people-red-circle {background:url("../img/appointments/ico_people_red_circle.png") left top no-repeat; background-size:100% auto;}
+.ico-eur-red {background:url("../img/appointments/ico_eur_red.png") left top no-repeat; background-size:100% auto;}
+.ico-eur-blue {background:url("../img/appointments/ico_eur_blue.png") left top no-repeat; background-size:100% auto;}
+.ico-question-red-fill {background:url("../img/appointments/ico_question_red_fill.png") left top no-repeat; background-size:contain;}
+.ico-touch-black {background:url("../img/appointments/ico_touch_black.png") left top no-repeat; background-size:contain;}
+.ico-question-square-black {background:url("../img/appointments/ico_question_square_black.png") left top no-repeat; background-size:contain;}
+.ico-dealer-red-pin {background:url("../img/appointments/ico_dealer_red_pin.png") left top no-repeat; background-size:contain;}
+.ico-document-red {background:url("../img/appointments/ico_document_red.png") left top no-repeat; background-size:contain;}
+.ico-handle-red {background:url("../img/appointments/ico_handle_red.png") left top no-repeat; background-size:contain;}
+.ico-trans-option-red {background:url("../img/appointments/ico_trans_option_red.png") left top no-repeat; background-size:contain;}
 
 
 /* jquery mobile conflict */

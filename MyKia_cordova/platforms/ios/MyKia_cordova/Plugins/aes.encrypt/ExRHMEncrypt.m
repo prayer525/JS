@@ -167,8 +167,6 @@ NSString *EncIv = @"";
     // dynamic
     NSString *dynamicKey = @"";
     NSString *IV = @"";
-    CDVPluginResult* resultFlag = nil;
-    
     
     @try {
         NSString *token = [param.arguments objectAtIndex:0];
@@ -190,7 +188,7 @@ NSString *EncIv = @"";
         EncKey = dynamicKey;
         EncIv = IV;
         
-        NSString *result = [NSString stringWithFormat: @"{\"key\":\"%@\",\"iv\":\"%@\"}", EncKey, EncIv];
+        NSString *result = [NSString stringWithFormat: @"\"{\"key\":\"%@\",\"iv\":\"%@\"}\"", EncKey, EncIv];
         
         if (param != nil) {
             resultFlag = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:result];
@@ -199,8 +197,6 @@ NSString *EncIv = @"";
         }
         
         [self.commandDelegate sendPluginResult:resultFlag callbackId:param.callbackId];
-        
-        return false;
     }
     @catch (NSException *exception) {
         return false;

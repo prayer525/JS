@@ -41,7 +41,13 @@ fnList.pageLogin = function(){
 		$(this).hide();
 	});
 
-	$('#login').click(loginValidate)
+	$('#login').click(loginValidate);
+
+	$('#membership_link').click(function(){
+		var options = "location=yes,zoom=no";
+		var reg = cordova.InAppBrowser.open(i18n('W0_URL','text'), "_blank", options)
+        return false;
+	})
 
 	function loginValidate(){
 		var email=$('#email').val(),
@@ -118,7 +124,7 @@ fnList.pageLogin = function(){
 	function fnAfterLogin(data){
 		// data.ResponseMessage check
 		// To do
-		if(data.responseCode == 0){
+		if(data.ResponseCode == 0){
 			modal({
 				type: 'error',
 				text: loginErrMsg[data.ResponseMessage],

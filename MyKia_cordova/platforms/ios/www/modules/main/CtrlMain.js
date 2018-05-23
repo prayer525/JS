@@ -17,7 +17,6 @@ define([
 	 './module'
 	,'moment'
 ], function(module, moment) {
-	console.log('main CtrlMain')
 
 	/**
 	 * declare appointments Controller
@@ -40,8 +39,6 @@ define([
 	 * @ Network 			: myKiaApp.services.network Service
 	 */
 	function AppointmentsCtrl($scope, $rootScope, $state, $filter, Network, ROUTE_URL, CONSTANT) {
-
-		console.log('AppointmentsCtrl')
 		
 		// set navigation title
 		// 상단 Navigation 설정

@@ -147,7 +147,7 @@ fnList.pageMyProfile = function(){
 
 	    var params = {
 	    	"CustomerId":Data.getData('Login').CustomerId,
-			"VIN":dataEncode(myvehicle.VIN),
+			"VIN":myvehicle.VIN,
 			"MileageInKilometers":$("#popupInputMileage").val().replace(/,|\.| /g,"")
 	    }
 
@@ -231,7 +231,7 @@ fnList.pageMyProfile = function(){
 
 	    var params = {
 	    	"CustomerId":Data.getData('Login').CustomerId,
-	        "VIN":dataEncode(myvehicle.VIN),   // 암호화 하지 않으려고 만든 VIN 필드
+	        "VIN":myvehicle.VIN,   // 암호화 하지 않으려고 만든 VIN 필드
 	        "DateOfLastService":lastServiceDate
 	    }
 

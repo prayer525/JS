@@ -73,7 +73,14 @@ define([
 
 				// Back버튼 눌렀을때 동작
 				scope.back = function() {
-					window.history.back(-1);
+					var _url = location.href;
+
+					if(_url.indexOf('#/appointments') > -1){
+						location.href="main.html";
+					}else{
+						window.history.back(-1);
+					}
+					
 					//M.onBack();
 				}
 
@@ -578,7 +585,6 @@ define([
 						latitude = scope.dealer.GeoLatitude
 						longitude = scope.dealer.GeoLongitude
 					}
-					console.log('latitude, longitude : ' , latitude, longitude)
 					initMap(latitude, longitude);
 					setDealerPosition();
 				}
@@ -587,8 +593,6 @@ define([
 				function initMap(lat, lng) {
 					var  myLoc
 						,markerOptions
-
-					console.log('initMap map : ' , map)
 
 					if (map === void 0) {
 
@@ -614,8 +618,6 @@ define([
 						}
 						myLoc = new google.maps.Marker(markerOptions);
 						myLoc.setPosition(mapOptions.center);
-
-						console.log('initMap myLoc : ' , myLoc)
 
 						// 지도를 클릭하면 detail을 닫음
 						scope.map.addListener('click', function() {
@@ -733,7 +735,6 @@ define([
 
 				/* 맵 전체화면 보기 */
 				function resize_scale(){
-					console.log('resize_scale')
 					$("#user_button").css({height: ""});
 					$('body').toggleClass('full-size-map');
 					if ($("body").hasClass("full-size-map")) {
@@ -746,7 +747,6 @@ define([
 
 				/* 초기 위치로 이동 버튼 생성 및 이벤트 할당 */
 				function setRefreshGeoController(){
-					console.log('setRefreshGeoController')
 					// create custom controller
 					// Create a div to hold the control.
 					var controlDiv = document.createElement('div');
@@ -764,7 +764,6 @@ define([
 
 				/* 전체화면 보기 버튼 생성 및 이벤트 할당 */
 				function setScaleContoller(){
-					console.log('setScaleContoller')
 					// custom controller
 					// Create a div to hold the control.
 					var controlDiv2 = document.createElement('div');

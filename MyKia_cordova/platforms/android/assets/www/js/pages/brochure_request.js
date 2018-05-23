@@ -3,8 +3,8 @@ fnList.pageBrochureRequest = function(){
     var userInfo=Data.getData('UserInformation');
     var gvlBrochureList = Data.getData('gvlBrochureList');
     var dealerInfo = Data.getData('DealerInformation');
-    var downloadStoragePath = '';
-    var gvlTemp,gvlSelCarCode;
+    var downloadStoragePath = '', cancelFlag = false;
+    var gvlTemp, gvlSelCarCode, fileTransfer, fileURL;
 
     if(gvlBrochureList == ''){
         var param = {
@@ -45,6 +45,7 @@ fnList.pageBrochureRequest = function(){
                             $("#request").removeClass("off");
                             gvlSelCarCode = $(this).data("vCode");
                             gvlTemp = $(this);
+                            cancelFlg = false;
                         })
 
             $("#list").append(temp);
@@ -147,6 +148,10 @@ fnList.pageBrochureRequest = function(){
     }
 
     function fnOpenInApp(entry){
+        if(cancelFlg){
+            return false;
+        }
+
         gvlBrochureList[gvlTemp.index()].pdfpath = entry.toURL();
 
         Data.setData('gvlBrochureList', gvlBrochureList)
@@ -157,6 +162,10 @@ fnList.pageBrochureRequest = function(){
     }
 
     function fnOpenExternal(entry){
+        if(cancelFlg){
+            return false;
+        }
+
         cordova.plugins.fileOpener2.showOpenWithDialog(
             entry.toURL(), 
             'application/pdf', 
@@ -181,8 +190,8 @@ fnList.pageBrochureRequest = function(){
                 $(".lightbox").removeClass('none');
                 $("#downloadPopup").removeClass('none');
 
-                var fileTransfer = new FileTransfer();
-                var fileURL = fileEntry.toURL();
+                fileTransfer = new FileTransfer();
+                fileURL = fileEntry.toURL();
 
                 fileTransfer.onprogress = function(progress){
                     var w =  parseInt((progress.loaded / progress.total) * 100);
@@ -249,5 +258,12 @@ fnList.pageBrochureRequest = function(){
     $('.back').click(function(){
         Data.setData('gvlBrochureList','');
         localStorage.removeItem('pdfFilePath');
+    })
+
+    $('#btn-download-cancel').click(function(){
+        cancelFlg = true;
+        fileTransfer = null;
+        $(".lightbox").addClass('none');
+        $("#downloadPopup").addClass('none');
     })
 }

@@ -21,8 +21,6 @@ define([
 	,'services/config'
 ], function(angular) {
 
-	console.log('main module')
-
 	/**
 	 * myKiaApp.appointments 모듈 정의
 	 * @ ui.router 					: angular.ui-route 에서 제공하는 module
@@ -53,16 +51,6 @@ define([
 	 * @ CONTROLLER_STRING 	: Controller 정의 상수
 	 */
 	function routeFn($stateProvider, TEMPLATE_STRING, ROUTE_URL, CONTROLLER_STRING) {
-
-		console.log('routeFn : ' ,appointments)
-
-
-
-		console.log('ROUTE_URL.MAIN : ' , ROUTE_URL.MAIN)
-		console.log('TEMPLATE_STRING.MAIN : ' , TEMPLATE_STRING.MAIN)
-		console.log('CONTROLLER_STRING.MAIN : ' , CONTROLLER_STRING.MAIN)
-
-		//console.log('AppointmentsCtrl : ' , AppointmentsCtrl)
 		
 		$stateProvider
 
@@ -90,7 +78,6 @@ define([
 				,controller: CONTROLLER_STRING.MAIN_CONTACT
 			})
 
-		console.log('$stateProvider.state : ' , $stateProvider)
 	}
 
 	return appointments;

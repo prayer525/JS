@@ -99,6 +99,17 @@ fnList.pageMyKiaDealer = function(){
         $('.dealer-homepage').hide();
     }
 
+    $('[data-dirct]').click(function(){
+        if($(this).data('direct') == 'call'){
+            var _num = JsUtil.blank($(this).data('phone'));
+            directCall(_num);
+        }else if($(this).data('direct') == 'email'){
+            var _link = $('<a href="mailTo:"'+$(this).data('email')+'"></a>')
+            console.log('_link : ' , _link)
+            _link.click();
+        }
+    })
+
     /*
     var tab=M.data.param("tab");
     if(tab=="contact") $("#contactBtn").click();
