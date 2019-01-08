@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no, address=no, email=no">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <title>test</title>
+    <style>
+        @charset "utf-8";
+        /* uracle pjt-team Leemh 20130715 */
+
+        *{-webkit-text-size-adjust:none;word-break:break-word;} /* 뷰표트 변환시 폰트크기 자동확대 방지 */
+        *{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box;-moz-box-sizing:border-box;vertical-align:middle;-webkit-appearance:none;appearance:none;-moz-appearance:none;resize:none;outline:0;}
+
+        html,body{position:relative;width:100%;height:100%;-webkit-tap-highlight-color:rgba(255,255,255,0); font-size:10px; font-family:NeoSansPro,sans-serif,helvetica;}
+        body,object,iframe,
+        h1,h2,h3,h4,h5,h6,div,span,p,blockquote,pre,abbr,acronym,address,cite,code,del,dfn,em,img,figure,
+        ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,
+        form,fieldset,legend,a,textarea,input,select,option,button,label,table,caption,tbody,tfoot,thead,tr,th,td,
+        article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{
+            margin:0;padding:0;border:0;outline:0;background:transparent;-webkit-box-sizing:border-box;box-sizing:border-box;-moz-box-sizing:border-box;font-style:normal;
+        }
+        /* =====  Media ===== */
+        audio:not([controls]){display:none;height:0;}
+
+        /* =====  Link ===== */
+        a:link{text-decoration:none;}
+        a:focus{outline:thin dotted;}
+        a:active,a:hover{outline:0;text-decoration:none;}
+        a:visited{text-decoration:none;}
+
+        /* =====  Typography ===== */
+        h1, h2, h3, h4, h5, h6{font-weight:normal;font-size:inherit;}
+        b{font-weight:bold;}
+        strong{font-weight:normal;vertical-align:middle;}
+        hr{display:none;box-sizing:content-box;height:0;}
+        address, caption, cite, code, dfn, em, var{font-style:normal;font-weight:normal;}
+        abbr, acronym, img, button{border:0;}
+        pre{white-space:pre-wrap;}
+        q{quotes:"\201C" "\201D" "\2018" "\2019";}
+        sub, sup{line-height:0;position:relative;vertical-align:baseline;}
+        sup{top:-0.5em;}
+        sub{bottom:-0.25em;}
+        span,em{vertical-align:middle;}
+
+        /* List */
+        ul, ol, li{list-style:none;}
+
+        /* =====  Figures ===== */
+        figure{margin:0;}
+
+        /* =====  Forms ===== */
+        button{cursor:pointer;}
+        button, input, select, textarea{border:0 none;outline:0 none;background-color:#fff;}
+        /*input{-webkit-transform:translate3d(0,0,0);}  ios8 */
+        /* button, select{text-transform:none;} */
+        textarea{vertical-align:top;border:solid 1px #ccc;}
+
+        /* =====  Table ===== */
+        table{border-collapse:collapse;empty-cells:show;border-spacing:0;table-layout:fixed;}
+        table caption, fieldset legend{display:none;}
+
+        .ui-loader.ui-corner-all {display:none;}
+
+        h1 {font-size:24px;}
+        p {font-size:16px;}
+
+        .btn-show {border:1px solid #ddd; border-radius:5px; padding:10px;}
+
+        .hide-menu-wrap {position:fixed; top:0; left:0; width:100%; height:100%; display:none;}
+        .hide-menu-wrap .back-pannel {position:absolute; top:0; left:0; width:100%; height:100%; background:#000; opacity:0.6; z-index:1; display:none;}
+        .hide-menu-wrap .hide-menu {position:absolute; top:100%; left:0; width:100%; height:auto; background:#fff; z-index:2; overflow:hidden;}
+        .hide-menu-wrap .hide-menu .hide-content {width:100%; height:100%; overflow:hidden; overflow-y:auto; -webkit-overflow-scrolling: touch;}
+        .hide-menu-wrap .hide-menu .btn-close {position:absolute; top:0; right:0; width:40px; height:40px; line-height:40px; text-align:center;}
+
+        .list li {height:30px; line-height:30px;}
+        
+    </style>
+</head>
+<body> 
+<div class="main-content">
+    <h1>Main Content</h1>
+    <p>class="list" 의 갯수를 늘렸다 줄였다 해보세요.</p>
+    <button type="button" class="btn-show">Show Popup</button>
+</div>
+<div class="hide-menu-wrap">
+    <div class="back-pannel"><!-- opacity background --></div>
+    <div class="hide-menu">
+        <div class="hide-content">
+            <ul class="list">
+                <li>Menu 1</li>
+                <li>Menu 2</li>
+                <li>Menu 3</li>
+                <li>Menu 4</li>
+                <li>Menu 5</li>
+                <li>Menu 6</li>
+                <li>Menu 7</li>
+                <li>Menu 8</li>
+                <li>Menu 9</li>
+                <li>Menu 10</li>
+                <li>Menu 11</li>
+                <li>Menu 12</li>
+                <li>Menu 13</li>
+                <li>Menu 14</li>
+                <li>Menu 15</li>
+                <li>Menu 16</li>
+                <li>Menu 17</li>
+                <li>Menu 18</li>
+                <li>Menu 19</li>
+                <li>Menu 20</li>
+                <li>Menu 21</li>
+                <li>Menu 22</li>
+                <li>Menu 23</li>
+                <li>Menu 24</li>
+                <li>Menu 25</li>
+                <li>Menu 26</li>
+                <li>Menu 27</li>
+                <li>Menu 28</li>
+                <li>Menu 29</li>
+                <li>Menu 30</li>
+            </ul>
+        </div>
+        <button type="button" class="btn-close">X</button>
+    </div>
+</div>
+
+<script>
+$(function(){
+    // 스크린 높이를 구한다.
+    var screenH = $(window).outerHeight();
+    $('.btn-show').off('click').on('click', function(){
+        // 1. show 먼저 : content 가 display:none 상태일 때는 Element의 높이를 구할 수 없다.
+        $('.hide-menu-wrap').show();
+
+        // 반투명 배경을 보여준다.
+        $('.hide-menu-wrap .back-pannel').fadeIn();
+
+        // 숨겨져있던 메뉴의 높이를 구한다.
+        var hideMenuH = $('.hide-menu').outerHeight();
+
+        // top position을 구한다. 
+        var topH = screenH - hideMenuH;
+
+        // 숨겨저있던 메뉴의 높이가 screen 높이보다 클 경우 50으로 고정
+        // 기획이 화면 전체를 덮는다면, 이 계산식이 필요 없음.
+        // 스크린 높이, 숨겨저있던 컨텐츠 높이 구할 필요 없음.
+        // 항상 0으로 ...
+        if(topH < 50){
+            topH = 50;
+        }
+        
+        // 숨겨저있던 메뉴의 높이를 지정해준다.
+        // 숨겨져있던 메뉴의 높이가 스크린 높이보다 클 경우 CSS에 의해 자동으로 스크롤 생성
+        $('.hide-menu').css({
+            height:screenH - topH + 'px'
+        })
+
+        // 숨겨져있던 메뉴의 Style이 모두 셋팅된 후 show animation 한다.
+        $('.hide-menu').animate({
+            top: topH + 'px'
+        },500)
+    });
+
+    // Hide
+    $('.btn-close').off('click').on('click', function(){
+        // 반투명 배경을 숨긴다.
+        $('.hide-menu-wrap .back-pannel').fadeOut(500);
+
+        // 숨겨진 메뉴 hide animation
+        $('.hide-menu').animate({
+            top: '100%'
+        },500, function(){
+            // Hide 에니메이션이 끝난 후 wrapper 를 display:none한다.
+            $('.hide-menu-wrap').hide();
+        })
+    })
+})
+</script>
+</body>
+</html>
