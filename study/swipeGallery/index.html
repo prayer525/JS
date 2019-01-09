@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Swipe Gallery</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./js/jquery.bxslider.js"></script>
+    <style>
+    @charset "utf-8";
+    /* uracle pjt-team Leemh 20130715 */
+
+    *{-webkit-text-size-adjust:none;word-break:break-word;} /* 뷰표트 변환시 폰트크기 자동확대 방지 */
+    *{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box;-moz-box-sizing:border-box;vertical-align:middle;-webkit-appearance:none;appearance:none;-moz-appearance:none;resize:none;outline:0;}
+
+    html,body{position:relative;width:100%;height:100%;-webkit-tap-highlight-color:rgba(255,255,255,0); font-size:10px; font-family:NeoSansPro,sans-serif,helvetica;}
+    body,object,iframe,
+    h1,h2,h3,h4,h5,h6,div,span,p,blockquote,pre,abbr,acronym,address,cite,code,del,dfn,em,img,figure,
+    ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,
+    form,fieldset,legend,a,textarea,input,select,option,button,label,table,caption,tbody,tfoot,thead,tr,th,td,
+    article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{
+        margin:0;padding:0;border:0;outline:0;background:transparent;-webkit-box-sizing:border-box;box-sizing:border-box;-moz-box-sizing:border-box;font-style:normal;
+    }
+    /* =====  Media ===== */
+    audio:not([controls]){display:none;height:0;}
+
+    /* =====  Link ===== */
+    a:link{text-decoration:none;}
+    a:focus{outline:thin dotted;}
+    a:active,a:hover{outline:0;text-decoration:none;}
+    a:visited{text-decoration:none;}
+
+    /* =====  Typography ===== */
+    h1, h2, h3, h4, h5, h6{font-weight:normal;font-size:inherit;}
+    b{font-weight:bold;}
+    strong{font-weight:normal;vertical-align:middle;}
+    hr{display:none;box-sizing:content-box;height:0;}
+    address, caption, cite, code, dfn, em, var{font-style:normal;font-weight:normal;}
+    abbr, acronym, img, button{border:0;}
+    pre{white-space:pre-wrap;}
+    q{quotes:"\201C" "\201D" "\2018" "\2019";}
+    sub, sup{line-height:0;position:relative;vertical-align:baseline;}
+    sup{top:-0.5em;}
+    sub{bottom:-0.25em;}
+    span,em{vertical-align:middle;}
+
+    /* List */
+    ul, ol, li{list-style:none;}
+
+    /* =====  Figures ===== */
+    figure{margin:0;}
+
+    /* =====  Forms ===== */
+    button{cursor:pointer;}
+    button, input, select, textarea{border:0 none;outline:0 none;background-color:#fff;}
+    /*input{-webkit-transform:translate3d(0,0,0);}  ios8 */
+    /* button, select{text-transform:none;} */
+    textarea{vertical-align:top;border:solid 1px #ccc;}
+
+    /* =====  Table ===== */
+    table{border-collapse:collapse;empty-cells:show;border-spacing:0;table-layout:fixed;}
+    table caption, fieldset legend{display:none;}
+
+
+
+
+
+    .swipe-gallery-wrapper {position:relative; display:block; width:100%; padding:0 20%;}
+    .swipe-gallery-wrapper .btn-controller {position:absolute; top:50%; display:inline-block; background-color:red; width:auto; height:34px; line-height:34px; font-size:1.4rem; margin-top:-17px;}
+    .swipe-gallery-wrapper .btn-controller a {display:block; width:100%; height:100%; color:#fff; padding:0 5px;}
+    .swipe-gallery-wrapper .btn-prev {left:10px;}
+    .swipe-gallery-wrapper .btn-next {right:10px;}
+    .swipe-gallery-wrapper .bx-viewport {overflow:visible !important;}
+    .swipe-gallery {overflow:visible;}
+    .swipe-gallery li img {display:block; width:100%;}
+    .swipe-gallery li .caption {display:none;}
+
+    .swipe-gallery-text {text-align:center; font-size:16px; height:0; line-height:24px; padding:5px 20px; box-sizing:content-box; background:#c3ffd2}
+
+    .dummy-content {background:#c4d8ff; font-size:14px; text-align:center; padding:30px 0;}
+    </style>
+</head>
+<body>
+    <div class="swipe-area">
+        <div class="swipe-gallery-wrapper">
+            <ul class="swipe-gallery">
+                <li>
+                    <div>
+                        <img src="./images/respect.jpg" />
+                        <div class="caption">항상 존경하는 마음을 가지십시오.</div>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img src="./images/respect.jpg" />
+                        <div class="caption">이는 비단 오늘뿐만이 아니라 앞으로 살아갈 나날동안 계속 되어야 할 마음입니다.</div>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img src="./images/respect.jpg" />
+                        <div class="caption">지금 당장 도움이 된다 하여 고마운 마음을 가지는 사람은 소인이오. 항상 고마움을 마음속에 품고 사는 사람은 대인이라 할 수 있을 것 입니다.</div>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img src="./images/respect.jpg" />
+                        <div class="caption">사람의 마음은 간사하여 수시로 변하니 이를 늘 경계하며 마음에 새기고 항상 같은 마음을 가질 수 있도록 노력하여 대인이 될 수 있도록 매일 노력 하여야할 것입니다.</div>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- 버튼에 이미지 넣기가 귀찮아서 텍스트로 했어요 .. 이미지는 css 수정하세요 -->
+            <span class="btn-controller btn-prev"></span>
+            <span class="btn-controller btn-next"></span>
+        </div>
+
+        <!-- 하단 고정 Text Area -->
+        <div class="swipe-gallery-text">
+            <div></div>
+        </div>
+    </div>
+
+    <div class="dummy-content">
+        AutoHeight를 보여주기 위한 하단 컨텐츠
+    </div>
+
+    <script>
+        $(function(){
+
+            // 옵션은 해당 사이트에 맞게 수정 하세요. 이것은 저스트 샘플입니다.
+            $('.swipe-gallery').bxSlider({
+                pager:false,
+                slideMargin:10,
+                adaptiveHeight:true,
+                nextSelector:$('.swipe-gallery-wrapper .btn-next'),
+                prevSelector:$('.swipe-gallery-wrapper .btn-prev'),
+                onSliderLoad:function(idx){
+                    fnFillText($(this));
+                },
+                onSlideAfter:function(idx){
+                    fnFillText($(this))
+                }
+            });
+        })
+
+        function fnFillText(_this){
+            var _h = 0;
+
+            // Gallery에 포함된 Text를 가저오는 부분입니다.
+            // caption에 html 태그가 포함 되어 있을 경우 html로 해주세요.            
+            var caption = _this.find('li[aria-hidden="false"]').find('.caption').text();
+
+            // caption에 html 태그가 포함 되어 있을 경우 html로 해주세요.
+            // Animation을 뭐라도 넣고 싶어서 hide 했다 fadeIn했다 animation 했어요..
+            // textarea가 항상 고정 높이면 뻘짓이죠 ...
+            // 또한, 이러한 효과가 거추장스럽다 한다면.... 과감하게 삭제하세요 ... ㅠㅠ
+            $('.swipe-gallery-text div').hide();
+            $('.swipe-gallery-text div').text(caption);
+            $('.swipe-gallery-text div').fadeIn(500)
+            
+            // text 영역의 높이를 구해준다.
+            _h = $('.swipe-gallery-text div').outerHeight();
+
+            console.log(_h)
+
+            // 높이를 Animation 시켜준다 /방긋/
+            $('.swipe-gallery-text').animate({
+                height:_h+'px'
+            },500)
+
+        }
+    </script>
+</body>
+</html>
