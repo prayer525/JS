@@ -654,6 +654,7 @@
           speed: 400,
           preloadImages: 'all',
           adaptiveHeight:false,
+          preventDefaultSwipeY:true,
           nextSelector:$('.bx-monthly01 .btn-next'),
           prevSelector:$('.bx-monthly01 .btn-prev'),
           onSliderLoad:function(idx){
@@ -680,6 +681,9 @@
           // 애니메이션 동작시 정상적으로 숫자가 커지고 애니메이션이 종료된 후 값을 재정의 하기 때문에 깜빡
           // 때문에 이미지 스케일 부분도 뭔가 어색하다..
           // 많이 어색하면 이미지 스케일 부분은 삭제하세요.
+
+          // 스와이프 동작중에 컨텐츠 영역이 스크롤 되면 안되기 때문에
+          // preventDefaultSwipeY:true, 를 했어요.
           
           // 현재 보여지고 있는 슬라이드의 .cont-wrap 부분을 가저온다.
           // clone()하지 않을 경우 해당 컨텐츠 자체가 이동을 하기 때문에 clone()을 해준다.
