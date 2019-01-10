@@ -139,9 +139,12 @@
                 onSliderLoad:function(idx){
                     fnFillText($(this));
                 },
-                onSlideAfter:function(idx){
+                onSlidePrev:function(){
                     fnFillText($(this))
-                }
+                },
+                onSlideNext:function(){
+                    fnFillText($(this))
+                },
             });
         })
 

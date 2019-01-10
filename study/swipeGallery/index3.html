@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>행복한 성공 파트너, 휴넷</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="global.css">
+<link rel="stylesheet" type="text/css" href="hbs_v2.css">
+<script src="./js/global.js"></script>
+<script src="./js/contents.js"></script>
+<script src="./js/jquery.bxslider.min.js"></script>
+</head>
+<body>
+<!-- pass header -->
+<header class="pass">
+  <h1 class="title">휴넷 공인중개사</h1>
+  <button type="button" class="btn-menu">메뉴</button>
+  <button type="button" class="btn-search">검색</button>
+</header>
+<!-- //.pass header -->
+<div class="container" role="main">
+  <section class="group-pass">
+ 
+    <!-- 월간이종근(S) -->
+    <section class="monthly-ljg">
+      <h1 class="ir-text">월간 이종근</h1>
+      <div class="intro">
+        <img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/tit_intro.jpg" alt="민법 완성 프로젝트 공인중개사 월간학습지"/>
+        <img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/intro.jpg" alt="월간 이종근의 알찬 구성!"/>
+      </div>
+
+      <style>
+      /*  
+        New Element 
+        좌우에 컨테츠가 미리 보여지는 영역을 위해 Wrapper를 한번 더 감싼다.
+      */
+      .swipe-wrapper {width:50%; margin:0 auto;} 
+
+      /*
+        텍스트 영역 스타일
+        1. AutoHeight를 위해 Default Height를 0으로 셋팅한다.
+      */
+      .swipe-gallery-text {width:80vw !important; height:0; margin:0 auto;}
+
+      .swipe-gallery-text h4 {
+        padding: 2vw 0;
+        font-size: 4.3vw;
+        text-align: center;
+        color:#e9c36a;
+        background:#1a1a1a;
+        border-radius: 6px;
+      }
+      .swipe-gallery-text .content {
+        margin-top: 4vw;
+      }
+      .swipe-gallery-text .content .book-cover {
+        width: 30vw;
+      }
+      .swipe-gallery-text .content .title-monthly {
+        font-weight: 800;
+        font-size: 4vw;
+        word-spacing: -0.7vw;
+        color:#0d0c0b;
+      }
+      .swipe-gallery-text ul {
+        margin-top: 2vw;
+      }
+      .swipe-gallery-text ul li {
+        padding-left: 1.6vw;
+        font-size: 3.5vw;
+        line-height: 1.4em;
+        color:#534d45;
+      }
+      .swipe-gallery-text ul li:before {
+        content:'-';
+        margin-left: -1.6vw;
+      }
+
+      /* 
+        Existing Element
+        1. 기존에 보여지던 설명은 숨겨준다.
+        2. 좌우에 미리 보여지는 이미지를 위해 bx-wrapper에 overflow:visible을 준다.
+      */
+      .slide-add-wrap .cont-wrap {display:none;}
+
+      .monthly-ljg .bx-monthly01 .bx-wrapper {overflow:visible;}
+      </style>
+
+      <div class="area01">
+        <h2 class="ir-text">월간지 리스트</h2>
+        <div class="bx-monthly01">
+          <div class="swipe-wrapper">
+            <div class="slide-add-wrap" id="BXmonthly01">
+              <!-- monthly -->
+              <div class="slide-add">
+                <span class="book-cover"><img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/temp_book.jpg" alt="1월호 표지"></span>
+                <div class="cont-wrap">
+                  <h4>월간이종근 Vol.1</h4>
+                  <p class="content">
+                    <strong class="title-monthly">Monthly issue 합격자 인터뷰</strong>
+                    <ul>
+                      <li>0원으로 2개월 합격, 그 어려운 걸 해냈습니다.</li>
+                      <li>일과 학업을 병행하며 최종합격, 꾸준함이 답이었습니다.</li>
+                    </ul>
+                  </p>
+                  <p class="content">
+                    <strong class="title-monthly">Monthly topic 민법 공부 머리보단 몸?</strong>
+                    <ul>
+                      <li>온 몸으로 익히는 민법 기본틀</li>
+                      <li>편 편 편 내편을 만들자 - 기본틀 만들기</li>
+                      <li>자판기 앞에서 [청승?] 떨지 말라! - 채권</li>
+                      <li>내놔, 치워, 하지마 - 물질적 청구권</li>
+                      <li>알아두면 쓸모 있는 민법판례 - 오표시 무해의 원칙</li>
+                    </ul>
+                  </p>
+                  <p class="content">
+                    <strong class="title-monthly">Monthly test 바로바로 적용 문제</strong>
+                  </p>
+                  <p class="content">
+                    <strong class="title-monthly">Monthly trouble 고민상담소</strong>
+                  </p>
+                  <p class="content btn-area">
+                    <button type="button" class="btn btn-type01"><span>미리보기</span></button>
+                  </p>
+                </div>
+              </div>
+              <!-- //.monthly -->
+              <!-- monthly -->
+              <div class="slide-add">
+                <span class="book-cover"><img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/temp_book2.jpg" alt="2월호 표지"></span>
+                <div class="cont-wrap">
+                  <h4>월간이종근 Vol.2</h4>
+                  <p class="content">
+                    <strong class="title-monthly">Monthly issue 두번째</strong>
+                    <ul>
+                      <li>0원으로 2개월 합격, 그 어려운 걸 해냈습니다.</li>
+                      <li>일과 학업을 병행하며 최종합격, 꾸준함이 답이었습니다.</li>
+                    </ul>
+                  </p>
+                </div>
+              </div>
+              <!-- monthly -->
+              <!-- monthly -->
+              <div class="slide-add">
+                <span class="book-cover"><img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/temp_book3.jpg" alt="3월호 표지"></span>
+                <div class="cont-wrap">
+                  <h4>월간이종근 Vol.3</h4>
+                  <p class="content">
+                    <strong class="title-monthly">Monthly issue 세번째</strong>
+                    <ul>
+                      <li>0원으로 2개월 합격, 그 어려운 걸 해냈습니다.</li>
+                      <li>일과 학업을 병행하며 최종합격, 꾸준함이 답이었습니다.</li>
+                    </ul>
+                  </p>
+                </div>
+              </div>
+              <!-- monthly -->
+            </div>
+          </div>
+          <a class="btn-controller btn-prev" href></a>
+          <a class="btn-controller btn-next" href></a>
+        </div>
+        <div class="swipe-gallery-text">
+          
+        </div>
+      </div>
+
+      <div class="area02" id="readYear">
+        <h2><img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/tit_year.png" alt="월간지 연간구독 10개월"/></h2>
+        <div class="content-inner">
+          <ul class="text-features">
+            <li>-10개월 10권 발송</li>
+            <li>-매 월 이론 및 문제풀이 강의 제공 (약 8~10강)</li>
+            <li>-노트, 필기구 등 특별 부록 상품 제공</li>
+            <li>-매 월 학습지 무료 배송</li>
+            <li class="text-orange">-1월 이후 구독신청시, 기출간교재 일괄 배송</li>
+          </ul>
+          <div class="price-area">
+            <div class="discount-rate"><strong><i>20</i>%</strong>OFF</div>
+            <div class="original-price">정가 215,000원</div>
+            <div class="final-price">172,000원</div>
+          </div>
+          <button type="button" class="btn btn-subscribe">연간 구독하기</button>
+        </div>
+      </div>
+
+      <div class="area03" id="readMonth">
+        <h2><img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/tit_month.png" alt="월간지 선택구독 1개월"/></h2>
+        <div class="content-inner">
+          <ul class="text-features">
+            <li>-선택한(구매한) 학습지 발송</li>
+            <li>-이론 및 문제풀이 강의 제공 (약 8~10강)</li>
+            <li>-학습지 무료배송</li>
+          </ul>
+          <div class="select-area">
+            <!-- select-box -->
+            <div class="select-month">
+              <label for="month">선택하기</label>
+              <select id="month" title="select month">
+                <option selected="selected">선택하기</option>
+                <option>[공인중개사] 월간이종근 2019년 Vol.1</option>
+                <option>월간이종근 2019년 Vol.2</option>
+                <option>월간이종근 2019년 Vol.3</option>
+              </select>
+            </div>
+            <!-- //.select-box -->
+            <!-- select-view -->
+            <div class="select-view">
+              <ul class="select-list">
+                <li>
+                  <div class="name">[공인중개사] 월간이종근 2019년 Vol.1</div>
+                  <div class="price">
+                    <div class="current-price"><i class="ir-text">판매가</i><i>21,500</i>원</div>
+                  </div>
+                  <button type="button" class="del-select"><span>목록에서 삭제</span></button>
+                </li>
+                <li>
+                  <div class="name">[공인중개사] 월간이종근 2019년 Vol.12</div>
+                  <div class="price">
+                    <div class="discount-price"><i class="ir-text">원가</i>21,500</div>
+                    <div class="current-price"><i class="ir-text">판매가</i><i>15,000</i>원</div>
+                  </div>
+                  <button type="button" class="del-select"><span>목록에서 삭제</span></button>
+                </li>
+              </ul>
+              <div class="info-select">
+                <div class="num">총 2권</div>
+                <div>금액<i>43,000</i>원</div>
+              </div>
+            </div>
+            <!-- //.select-view -->
+          </div>
+          <button type="button" class="btn btn-subscribe">선택 학습지 구독하기</button>
+        </div>
+      </div>
+      
+      <div class="area04">
+        <img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/tit_slide_why.png" alt="월간이종근 망설일 이유가 없습니다"/>
+        <!-- slider02 -->
+        <div class="bx-monthly02">
+					<ul class="bx-wrapper" id="BXmonthly02">
+						<li class="slide-item active">
+              <img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/slide_why_01.png" alt="가장 가벼운 민법"/>
+            </li>
+            <li class="slide-item">
+              <img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/slide_why_02.png" alt="쉬운 민법"/>
+            </li>
+            <li class="slide-item">
+              <img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/slide_why_03.png" alt="다양한 정보"/>
+            </li>
+          </ul>
+        </div>
+        <!-- //.slider02 --> 
+      </div>
+
+      <div class="area05">
+        <h2><img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/tit_topic.png" alt="10개의 주제로 민법 완전학습이 가능합니다."/></h2>
+        <!-- topic list -->
+        <!-- slider03 -->
+        <div class="bx-monthly03">
+          <ul class="topic-list" id="BXmonthly03">
+            <li class="slide-item">
+              <h4 class="topic-num">VOL. 1</h4>
+              <div class="topic-tit ellipsis">
+                <span>민법은 내 손안에</span>
+                <span>있소이다</span>
+              </div>
+              <div class="topic-subtit ellipsis">
+                <span>민법의 기본틀~</span>
+                <span>민법 총칙/채권/물권</span>
+              </div>
+            </li>
+            <li class="slide-item">
+              <h4 class="topic-num">VOL. 2</h4>
+              <div class="topic-tit ellipsis">
+                <span>개보다</span>
+                <span>못한 자식</span>
+              </div>
+              <div class="topic-subtit ellipsis">
+                <span>권리 주체와 객체</span>
+                <span>/해제와 취소 비교</span>
+              </div>
+            </li>
+            <li class="slide-item">
+              <h4 class="topic-num">VOL. 3</h4>
+              <div class="topic-tit ellipsis">
+                <span>망나니 아들,</span>
+                <span>아버지 토지 팔다</span>
+              </div>
+              <div class="topic-subtit ellipsis">
+                <span>무권대리/</span>
+                <span>유동적 무효</span>
+              </div>
+            </li>
+            <li class="slide-item">
+              <h4 class="topic-num">VOL. 4</h4>
+              <div class="topic-tit ellipsis">
+                <span>내놔, 치워,</span>
+                <span>하지마!</span>
+              </div>
+              <div class="topic-subtit ellipsis">
+                <span>점유권에 기한 물질적 청구권</span>
+                <span>본권에 기한 물권적 청구권</span>
+              </div>
+            </li>
+            <li class="slide-item">
+              <h4 class="topic-num">VOL. 5</h4>
+              <div class="topic-tit ellipsis">
+                <span>무효등기에</span>
+                <span>공신력 없다</span>
+              </div>
+              <div class="topic-subtit ellipsis">
+                <span>점유자와 회복자의 관계</span>
+                <span>소유권에 기한 물권적 청구권</span>
+              </div>
+            </li>
+            <li class="slide-item">
+              <h4 class="topic-num">VOL. 6</h4>
+              <div class="topic-tit ellipsis">
+                <span>조물주 위에 건물주</span>
+                <span>전세살이의 서러움</span>
+              </div>
+              <div class="topic-subtit ellipsis">
+                <span>물권-전세권</span>
+                <span>채권-임차권</span>
+              </div>
+            </li>
+            <li class="slide-item">
+              <h4 class="topic-num">VOL. 7</h4>
+              <div class="topic-tit ellipsis">
+                <span>가수 손모씨</span>
+                <span>전셋집 경매에 나와 화를 내는</span>
+              </div>
+              <div class="topic-subtit ellipsis">
+                <span>민법의 기본틀~</span>
+                <span>민법 총칙/채권/물권</span>
+              </div>
+            </li>
+            <li class="slide-item">
+              <h4 class="topic-num">VOL. 8</h4>
+              <div class="topic-tit ellipsis">
+                <span>시험에 반드시</span>
+                <span>나오는 16조문</span>
+              </div>
+              <div class="topic-subtit ellipsis">
+                <span>알two / 중two /</span>
+                <span>법정조문 / 로꾸꺼조문</span>
+              </div>
+            </li>
+            <li class="slide-item">
+              <h4 class="topic-num">VOL. 9</h4>
+              <div class="topic-tit ellipsis">
+                <span>‘갑을병’을</span>
+                <span>타파하라!</span>
+              </div>
+              <div class="topic-subtit ellipsis">
+                <span>주요 판례 정리</span>
+              </div>
+            </li>
+            <li class="slide-item">
+              <h4 class="topic-num">VOL. 10</h4>
+              <div class="topic-tit ellipsis">
+                <span>오프라인</span>
+                <span>마무리 특강</span>
+              </div>
+              <div class="topic-subtit ellipsis">
+                <span>시험 직전</span>
+                <span>알아야할 이론 정리</span>
+              </div>
+            </li>
+          </ul>
+          <p class="add-text">&#8251; 주제는 변경될 수 있습니다.</p>
+        </div>
+        <!-- //.slider03 --> 
+      </div>
+      
+      <div class="area06">
+        <img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/profile.jpg" alt="이종근과 함께라면 학습효율이 높아집니다." usemap="#profileMap"/>
+        <map name="profileMap" id="profileMap" data-type="responsive-map">
+          <area shape="rect" coords="404,612,585,658" data-toggle="modal" data-target="#teacherDetail" href alt="프로필 전체보기" />
+        </map>
+      </div>
+
+      <div class="area07">
+        <img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/worry.jpg" alt="매일 여러분과 고민을 함께 하겠습니다." usemap="#worryMap"/>
+        <map name="worryMap" id="worryMap" data-type="responsive-map">
+          <area shape="rect" coords="47,408,599,497" data-toggle="modal" data-target="#askTeacher" href alt="교수님, 고민 해결해주세요!" />
+          <area shape="rect" coords="98,710,297,748" href="#notice" class="move_scroll" alt="이벤트 유의사항" />
+        </map>
+      </div>
+
+      <div class="my-worry">
+        <h2><img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/tit_worry.jpg" alt="나의 고민내역"/></h2>
+        <div class="content-inner">
+          <!-- 20190110 -->
+          <ul class="my-worry-list">
+            <li>
+              <a href="#">
+                <span class="mark-status">처리중</span><span class="date">2019.01.12</span>
+                <p>공인중개사에 재능이 쥐뿔도 없는데..</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="mark-status">답변완료</span><span class="date">2019.01.12</span>
+                <p>공인중개사에 재능이 쥐뿔도 없는데..공인중개사에 재능이 쥐뿔도 없는데..공인중개사에 재능이 쥐뿔도 없는데..</p>
+              </a>
+            </li>
+          </ul>
+          <!-- //.20190110 -->
+        </div>
+      </div>
+
+      <div class="notice" id="notice">
+        <h2><img src="https://img.hunet.co.kr/m/pass/v2/sub/monthly-ljg/tit_notice.png" alt="월간이종근 구독유의사항"/></h2>
+        <div class="notice-table">
+          <h3>월간이종근정보</h3>
+          <table cellpadding="0" cellspacing="0" class="table-type01">
+            <caption class="ir-text">월간이종근 기본정보</caption>
+            <tbody>
+              <tr>
+                <th>월간학습지명</th>
+                <td>
+                  월간이종근 (발행처:휴넷공인중개사)
+                </td>
+              </tr>
+              <tr>
+                <th>구성</th>
+                <td>
+                  60~80p 분량의 실물학습지 + 온라인 해설 강의
+                  <p>* 정기 구독자에 한해, 결제 완료 시 부록이 제공됩니다.</p>
+                </td>
+              </tr>
+              <tr>
+                <th>발행일</th>
+                <td>
+                  매월 25일 익월 호 발송 (2019년 1월호는 1월 중 발송됩니다)
+                  <p>* 발송시기가 변경될 수 있습니다</p>
+                </td>
+              </tr>
+              <tr>
+                <th>강의 제공일</th>
+                <td>
+                    매월 1일 당월에 해당하는 강의 업로드 예정
+                  <p>* 업로드시기가 지연될 수 있습니다.</p>
+                </td>
+              </tr>
+              <tr>
+                <th>강의 수강방법</th>
+                <td>
+                  PC와 모바일, 패드에서 모두 수강 가능
+                  <p>PC : 나의 강의실에서 수강 가능</p>
+                  <p>모바일, 패드 : 휴넷 공인중개사 스마트 패스 APP에서 수강 가능</p>
+                  <a href="http://apps.hunet.co.kr/down/smartpass.html" target="_blank" class="btn-notice text-red">스마트 패스 APP다운받기</a>
+                </td>
+              </tr>
+              <tr>
+                <th>배송료</th>
+                <td>
+                  무료
+                </td>
+              </tr>
+              <tr>
+                <th>해외배송</th>
+                <td>
+                  해외배송 불가
+                </td>
+              </tr>
+              <tr>
+                <th>배송누락 및<br/>배송지 변경</th>
+                <td>
+                  <p>-배송누락 시 1800-8022으로 문의</p>
+                  <p>-배송지 변경은 PC 사이트 &gt; My캠퍼스에서 진행</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="notice-table">
+          <h3>정기구독 VS 선택구독</h3>
+          <!-- 정기구독 -->
+          <table cellpadding="0" cellspacing="0" class="table-type02">
+            <caption class="ir-text">월간이종근 정기구독 정보</caption>
+            <thead>
+              <tr>
+                <th colspan="2">정기구독</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>구독 횟수</th>
+                <td>총 10회</td>
+              </tr>
+              <tr>
+                <th>온라인 강의<br/>수강기간</th>
+                <td>
+                  구매일로부터 <p>2019년 12월 1일까지</p>
+                </td>
+              </tr>
+              <tr>
+                <th>환불</th>
+                <td>
+                  <p>결제 후 7일 이내 환불 신청 시 아래 기준에 따라 환불 가능</p>
+                  <ul>
+                    <li>학습 이력 無~전체 중 2강 이하 수강: 수강료 전액 환불</li>
+                    <li>학습 이력 有: 내부 환불 규정에 따라 교육비 공제 후 환불 진행(별도 문의) </li>
+                    <li>월간학습지  배송이 이미 진행된 경우, 해당 월간학습지  비용 공제 후 환불 진행</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- //.정기구독 -->
+          <!-- 선택구독 -->
+          <table cellpadding="0" cellspacing="0" class="table-type02">
+            <caption class="ir-text">월간이종근 선택구독 정보</caption>
+            <thead>
+              <tr>
+                <th colspan="2">정기구독</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>구독 횟수</th>
+                <td>총 10회</td>
+              </tr>
+              <tr>
+                <th>온라인 강의<br/>수강기간</th>
+                <td>
+                  구매일로부터 90일간
+                </td>
+              </tr>
+              <tr>
+                <th>환불</th>
+                <td>
+                  <ul>
+                    <li>월간학습지 배송 전, 전액 환불</li>
+                    <li>월간학습지 배송이 이미 진행된 경우, 환불이 불가</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- //.선택구독 -->
+        </div>
+
+        <div class="notice-table">
+            <h3>고민상담 이벤트 유의사항</h3>
+            <ul>
+              <li>
+                고민상담에 대한 답변은 최대 7일이 소요
+              </li>
+              <li>
+                  매달 2-3개의 고민 사연을 추첨할 예정이며,
+                  당첨된 고민 사연은 다음 달 월간학습지에 
+                  답변과 함께 게재
+              </li>
+              <li>
+                사연이 당첨되신 분들께는 사이다 기프티콘을 회원정보에 기재된 휴대폰 번호로 발송
+              </li>
+            </ul>
+        </div>
+      </div>
+    
+      <div class="contact">
+        <div class="phone">
+          <a href="tel:1800-8022">
+            <span class="icon"><img src="https://img.hunet.co.kr/m/pass/v2/sub/basic_free/icon_tell.png" alt="전화"/></span>
+            <strong class="num-phone">1800-8022</strong>
+          </a>
+        </div>
+        <span>운영시간 : 평일 09:00 ~ 12:00 / 13:00 ~ 18:00</span>
+      </div>
+
+      <div class="btn-float">
+        <a href="#readMonth" class="btn type-line move_scroll"><span>선택 구독하기</span></a>
+        <a href="#readYear" type="button" class="btn type-full move_scroll"><span>연간 구독하기</span></a>
+      </div>
+
+      <!-- 교수님 상세 팝업 -->
+      <article id="teacherDetail" class="modal layer-teacher">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <button type="button" data-dismiss="modal" class="btn-close">팝업닫기</button>
+            <div class="area-cont">
+              <p class="paragraph">
+                <strong class="">풍부한 민법 강의 경력</strong>
+                <ul>
+                  <li>- 현) 휴넷 공인중개사 민법 대표교수</li>
+                  <li>- 현) 배움 공인중개사 민법강사</li>
+                  <li>- 현) 박문각 공인중개사 민법강사</li>
+                  <li>- 전) EBS 공인중개사 강사</li>
+                  <li>- 공인중개사 민법 기본서 다수 편저</li>
+                </ul>
+              </p>
+              <p class="paragraph">
+                <strong>부동산 시장의 흐름을 읽는 진짜 전문가</strong>
+                <ul>
+                  <li>- 전) 건국대학교, 강남대학교 부동산학과 강사</li>
+                  <li>- 전) 건국대학교 부동산 정책 연구소 위촉연구원</li>
+                  <li>- 전) 경인방송(iTV) 강사</li>
+                  <li>- 전) 부동산TV(RTN) 방송 강사</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 고민해결 팝업 -->
+      <article id="askTeacher" class="modal layer-ask">
+        <div class="modal-dialog">
+          <div class="modal-content ask-content">
+            <button type="button" data-dismiss="modal" class="btn-close">팝업닫기</button>
+            <div class="area-header">교수님, 고민 해결해주세요!</div>
+            <div class="area-cont">
+              <ul>
+                <li>
+                  <label for="userPhone" class="pop-title">연락처</label>
+                  <input type="tel" id="userPhone"/>
+                </li>
+                <li>
+                  <label for="userEmail" class="pop-title">이메일</label>
+                  <input type="email" id="userEmail"/>
+                </li>
+                <li>
+                  <label for="userTitle" class="pop-title">제목</label>
+                  <input type="text" id="userTitle"/>
+                </li>
+                <li>
+                  <span class="pop-title">상담내용</span>
+                  <textarea id="userTitle" rows="3"></textarea>
+                </li>
+              </ul>
+              <div class="btn-area">
+                <button type="button" class="btn btn-upload-ask">등록</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- //.고민해결 팝업 -->
+		</section>
+    <script>
+      $(function(){
+        var sliderMonthly = $('#BXmonthly01').bxSlider({
+          auto: false,
+          infiniteLoop: true,
+          pager: false,  
+          controls: true,
+          minSlides: 1,
+          slideMargin: 0,
+          speed: 400,
+          preloadImages: 'all',
+          adaptiveHeight:false,
+          nextSelector:$('.bx-monthly01 .btn-next'),
+          prevSelector:$('.bx-monthly01 .btn-prev'),
+          onSliderLoad:function(idx){
+              fnFillText($(this));
+          },
+          onSlidePrev:function(){
+              fnFillText($(this))
+          },
+          onSlideNext:function(){
+              fnFillText($(this))
+          },
+          onSlideBefore:function(idx){
+            // 이미지에 부여한 스케일을 제거하기 위해 ..
+            $('.bx-monthly01 .slide-add img').attr('style','')
+          }
+        });
+
+        function fnFillText(_this){
+          var _h = 0;
+
+          // 이미지 슬라이더가 한바퀴 온전하게 돈 후 새롭게 시작할 때 깜빡이는 이유는?
+          // BxSlider에서 Translate의 포지션 값을 재정의 하기 때문이다.
+          // 포지션이 슬라이드 컨텐츠의 넓이 이상으로 커지는 것을 막기위해 값을 초기화.
+          // 애니메이션 동작시 정상적으로 숫자가 커지고 애니메이션이 종료된 후 값을 재정의 하기 때문에 깜빡
+          // 때문에 이미지 스케일 부분도 뭔가 어색하다..
+          // 많이 어색하면 이미지 스케일 부분은 삭제하세요.
+          
+          // 현재 보여지고 있는 슬라이드의 .cont-wrap 부분을 가저온다.
+          // clone()하지 않을 경우 해당 컨텐츠 자체가 이동을 하기 때문에 clone()을 해준다.
+          var caption = sliderMonthly.getCurrentSlideElement().find('.cont-wrap').clone();
+
+          // 현재 보여지고 있는 슬라이드의 이미지 스케일을 조정한다.
+          // 필요 없음 빼세욤.
+          sliderMonthly.getCurrentSlideElement().find('img').css({
+            'transform':'scale(1.1)'
+          })
+
+          // 하단 텍스트 영역에 clone()한 Element를 넣는다.
+          $('.swipe-gallery-text').html(caption);
+          
+          // .cont-wrap의 높이를 구해준다.
+          _h = $('.swipe-gallery-text .cont-wrap').outerHeight();
+
+          // 높이를 Animation 시켜준다 /방긋/
+          $('.swipe-gallery-text').animate({
+              height:_h+'px'
+          },500)
+        }
+
+        $('#BXmonthly02').bxSlider({
+          auto: true,
+          pager: true,
+          controls: false,
+          minSlides: 1,
+          maxSlides: 1,
+          loop: true,
+          autoHover: true,
+          speed: 400,
+        });
+
+        $('#BXmonthly03').bxSlider({
+          auto: false,
+          infiniteLoop: true,
+          pager: true,
+          responsive: true,
+          controls: true,
+          pagerType: 'short',
+          minSlides: 1,
+          slideMargin: 0,
+          speed: 400,
+          preventDefaultSwipeX: true,
+          shrinkItems: true,
+          preloadImages: 'all',
+        });
+
+        //move scroll
+        $("html, body").on("click", ".move_scroll", function(event){
+          event.preventDefault();
+          
+          var $hrf = $(this).attr("href"),
+              $conth = $($hrf).offset()
+            ;
+          
+          $("html, body").animate({ scrollTop:$conth.top }, 200, function(){
+            $($hrf).trigger('click');
+          });
+        });
+
+        //select-box style
+        var select = $("#month");
+        select.change(function(){
+            var select_name = $(this).children("option:selected").text();
+            $(this).siblings("label").text(select_name);
+        });
+
+        //close modal layer
+        $('.btn-close').click(function(e){
+          $('.modal-backdrop').hide();
+          $('.modal').hide();
+          reponsiveMap();
+          e.preventDefault();
+        });
+        
+      });
+    </script>
+    <!-- //.월간이종근(E) -->
+
+  </section>
+  <section class="section-bottom">
+    <button type="button" class="btn-default ico-top">TOP</button>
+  </section>
+</div>
+
+<footer role="contentinfo">
+  <div class="link_area">
+    <a href="#">로그인</a>
+    <a href="#">회원가입</a>
+    <a href="#">고객행복센터</a>
+    <a href="#">전체서비스</a>
+  </div>
+  <p class="copyright">&copy; <strong>HUNET.</strong> All Rights Reserved</p>
+</footer>
+
+</body>
+</html>
