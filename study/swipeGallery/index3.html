@@ -679,10 +679,6 @@
             },
             onSlideNext:function(){
                 fnFillText($(this))
-            },
-            onSlideBefore:function(idx){
-              // 이미지에 부여한 스케일을 제거하기 위해 ..
-              $('.bx-monthly01 .slide-add img').attr('style','')
             }
           });
         }
@@ -705,12 +701,6 @@
 
           console.log('sliderMonthly : ' , sliderMonthly)
           var caption = sliderMonthly.getCurrentSlideElement().find('.cont-wrap').clone();
-
-          // 현재 보여지고 있는 슬라이드의 이미지 스케일을 조정한다.
-          // 필요 없음 빼세욤.
-          sliderMonthly.getCurrentSlideElement().find('img').css({
-            'transform':'scale(1.1)'
-          })
 
           // 하단 텍스트 영역에 clone()한 Element를 넣는다.
           $('.swipe-gallery-text').html(caption);
