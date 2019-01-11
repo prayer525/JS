@@ -644,33 +644,48 @@
 		</section>
     <script>
       $(function(){
-        var sliderMonthly = $('#BXmonthly01').bxSlider({
-          auto: false,
-          infiniteLoop: true,
-          pager: false,  
-          controls: true,
-          minSlides: 1,
-          slideMargin: 0,
-          speed: 400,
-          preloadImages: 'all',
-          adaptiveHeight:false,
-          preventDefaultSwipeY:true,
-          nextSelector:$('.bx-monthly01 .btn-next'),
-          prevSelector:$('.bx-monthly01 .btn-prev'),
-          onSliderLoad:function(idx){
-              fnFillText($(this));
-          },
-          onSlidePrev:function(){
-              fnFillText($(this))
-          },
-          onSlideNext:function(){
-              fnFillText($(this))
-          },
-          onSlideBefore:function(idx){
-            // 이미지에 부여한 스케일을 제거하기 위해 ..
-            $('.bx-monthly01 .slide-add img').attr('style','')
-          }
-        });
+        var sliderMonthly;
+        
+        // BxSlider가 정상적으로 로딩이 안됐을 경우 재호출을 위해 Function화
+        function fnRunSlider(){
+          sliderMonthly = $('#BXmonthly01').bxSlider({
+            auto: false,
+            infiniteLoop: true,
+            pager: false,  
+            controls: true,
+            minSlides: 1,
+            slideMargin: 0,
+            speed: 400,
+            preloadImages: 'all',
+            adaptiveHeight:false,
+            preventDefaultSwipeY:true,
+            nextSelector:$('.bx-monthly01 .btn-next'),
+            prevSelector:$('.bx-monthly01 .btn-prev'),
+            onSliderLoad:function(idx){
+
+              if(sliderMonthly != undefined){
+                console.log('slider : ' , idx, sliderMonthly)
+                fnFillText($(this));
+              }else{
+                console.log('bxslider reload fail retry this')
+                setTimeout(function(){
+                  fnRunSlider();
+                },100)
+              }
+              
+            },
+            onSlidePrev:function(){
+                fnFillText($(this))
+            },
+            onSlideNext:function(){
+                fnFillText($(this))
+            },
+            onSlideBefore:function(idx){
+              // 이미지에 부여한 스케일을 제거하기 위해 ..
+              $('.bx-monthly01 .slide-add img').attr('style','')
+            }
+          });
+        }
 
         function fnFillText(_this){
           var _h = 0;
@@ -687,6 +702,8 @@
           
           // 현재 보여지고 있는 슬라이드의 .cont-wrap 부분을 가저온다.
           // clone()하지 않을 경우 해당 컨텐츠 자체가 이동을 하기 때문에 clone()을 해준다.
+
+          console.log('sliderMonthly : ' , sliderMonthly)
           var caption = sliderMonthly.getCurrentSlideElement().find('.cont-wrap').clone();
 
           // 현재 보여지고 있는 슬라이드의 이미지 스케일을 조정한다.
@@ -706,6 +723,8 @@
               height:_h+'px'
           },500)
         }
+
+        fnRunSlider();;
 
         $('#BXmonthly02').bxSlider({
           auto: true,
