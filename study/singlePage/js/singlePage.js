@@ -3,6 +3,9 @@
     $('html').addClass('ui-mobile');
 
     $.singlePage = {
+        option:{
+            contentWrapper : 'body',
+        },
         whichTransitionEvent:function(){
             var t,
             el = document.createElement("fakeelement");
@@ -44,16 +47,13 @@
         animation:{
             end:null
         },
-        pageMove:function(e){
-            console.log('getPage : ' , $.singlePage.getPage(e))
-        },
         getPage:function(e){
             $('<div></div>').load(e.data('href') + ' > div', function(data){
                 var content = $( $(this).html() );
 
                 $.singlePage.beforeShowPage(content);
                 
-                $('body').append(content)
+                $($.singlePage.option.contentWrapper).append(content)
             });
         },
         beforeShowPage:function(content){
@@ -104,13 +104,14 @@
         document: $( document )
     });
 
-    console.log('aa')
+    $.fn.singlePage = function(opt){
+        $.extend( $.singlePage.option, opt);
+    }
+    
     $(document).off('click', '[data-href]').on('click', '[data-href]', function(){
         event.preventDefault();
 
-        console.log('element click');
-
-        $.singlePage.pageMove($(this));
+        $.singlePage.getPage($(this));
 
         return false;
     })

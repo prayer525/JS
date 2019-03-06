@@ -2,7 +2,17 @@
 @import "reset.css";
 @import "transition.css";
 
+/* dummy css */
+.content-wrap {position:relative; width:100%; height:100%; overflow:hidden; z-index:50;}
+.menu-wrap {position:fixed; width:100%; height:100%; overflow:hidden; padding-left:10rem; z-index:30;}
 .layer-content {position:fixed; width:100%; height:100%; background:#fff; overflow:hidden;}
 .page-wrap {width:100%; height:100%; background:#fff; overflow:hidden; padding-top:4rem;}
 .nav-header {position:absolute; top:0; left:0; width:100%; height:4rem; line-height:4rem; padding:0 1rem;}
-.content-wrap {position:relative; width:100%; height:100%; overflow:hidden; overflow-y:auto; -webkit-overflow-scrolling:touch;}
+.article-wrap {position:relative; width:100%; height:100%; overflow:hidden; overflow-y:auto; -webkit-overflow-scrolling:touch;}
+
+.btn-back {position:absolute; top:0.5rem; left:1rem; display:inline-block; border:1px solid #ccc; height:3rem; line-height:2rem; color:#666; font-size:1.2rem; padding:0.5rem 1rem;}
+.btn-toggle-menu {position:absolute; top:0.5rem; right:1rem; display:inline-block; border:1px solid #ccc; height:3rem; line-height:2rem; color:#666; font-size:1.2rem; padding:0.5rem 1rem;}
+
+.btn-list {overflow:hidden; padding:1rem;}
+.btn-list li {margin-bottom:1rem;}
+.btn-list li a {display:block; width:100%; height:4.5rem; line-height:2.5rem; border:1px solid #ccc; color:#666; font-size:1.4rem; padding:1rem;}

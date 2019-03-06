@@ -4,33 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Index page</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <script type="text/javascript" src="../js/jquery.js"></script>
-    <script type="text/javascript" src="../js/singlePage.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
+    <title>Page 1</title>
 </head>
 <body>
-<div class="content-wrap">
-    <div style="height:4rem">
-        <a href="#" class="btn-toggle-menu">Menu</a>
+<div class="page-wrap" data-role="page" data-transition="slideLeft">
+    <div class="nav-header">
+        <a href="#" class="btn-back" data-role="back"> Go Back</a>
+        <a href="#" class="btn-toggle-menu" data-role="back">Menu</a>
     </div>
-    <div data-role="page">
+    <div class="article-wrap">
         <ul class="btn-list">
             <li><a href="sub_page1.html" data-href="sub_page1.html">Go to sub_page1.html</a></li>
             <li><a href="sub_page2.html" data-href="sub_page2.html">Go to sub_page2.html</a></li>
             <li><a href="sub_page3.html" data-href="sub_page3.html">Go to sub_page3.html</a></li>
         </ul>
+
+        <div>This page is sub page 1.</div>
     </div>
-</div>
-<div class="menu-wrap">
-
-</div>
-<div class="select-wrap">
-
-</div>
-<div class="guide-wrap">
-
 </div>
 </body>
 </html>
