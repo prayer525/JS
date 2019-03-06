@@ -1,7 +1,8 @@
 @charset "utf-8";
 @import "reset.css";
+@import "transition.css";
 
 .layer-content {position:fixed; width:100%; height:100%; background:#fff; overflow:hidden;}
-.page-wrap {position:relative; width:100%; height:100%; background:#fff; overflow:hidden; padding-top:4rem;}
+.page-wrap {width:100%; height:100%; background:#fff; overflow:hidden; padding-top:4rem;}
 .nav-header {position:absolute; top:0; left:0; width:100%; height:4rem; line-height:4rem; padding:0 1rem;}
 .content-wrap {position:relative; width:100%; height:100%; overflow:hidden; overflow-y:auto; -webkit-overflow-scrolling:touch;}
