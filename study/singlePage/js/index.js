@@ -40,7 +40,14 @@ $(function(){
     scroller.addEventListener('scrollend', function(e){
         // console.log('scrollend scroller : ' , scroller)
         // console.log('scrollend scroller.currentSegment : ' , scroller.currentSegment)
-    }, false)
+    }, false);
+
+    // custom scroll tab
+    $('#custom-list').swipeTab({
+        moveEnd : function(idx){
+            console.log('move end : ' , idx)
+        }
+    });
 
     // sly swipe slide
     

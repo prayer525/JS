@@ -42,6 +42,46 @@
             <li>item6</li>
         </ul>
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <style>
+    .custom-list {width:100%; overflow:hidden;}
+    .custom-list * {
+    }
+    .custom-list>ul>li {display:inline-block; float:left;}
+    .custom-list>ul>li>a {
+        display:block; 
+        border-radius:0.5rem;
+        background:#ccc;
+        width:12rem; 
+        height:4rem; 
+        line-height:2rem; 
+        color:#666; 
+        font-size:1.4rem; 
+        padding:1rem; 
+        margin-right:1rem; 
+        -webkit-user-drag: none;
+        transition:0.3s;
+    }
+    .custom-list>ul>li.active a {
+        width:20rem;
+        background:#bb162b;
+        color:#fff;
+    }
+    </style>
+    <div class="custom-list" id="custom-list">
+        <ul>
+            <li class="active"><a href="#">Tab 1</a></li>
+            <li><a href="#">Tab 2</a></li>
+            <li><a href="#">Tab 3</a></li>
+            <li><a href="#">Tab 4</a></li>
+            <li><a href="#">Tab 5</a></li>
+            <li><a href="#">Tab 6</a></li>
+        </ul>
+    </div>
+
     <div data-role="page">
         <ul class="btn-list">
             <li><a href="sub_page1.html" data-href="sub_page1.html">Go to sub_page1.html</a></li>
