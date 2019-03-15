@@ -17,77 +17,196 @@
     <a href="#" class="btn-toggle-menu">Menu</a>
 </span>
 <div class="content-wrap">
-    <div class="swipe-wrap">
-        <p> swipe wrap </p>
-        <p> swipe wrap </p>
-        <p> swipe wrap </p>
-        <p> swipe wrap </p>
-        <p> swipe wrap </p>
-        <p> swipe wrap </p>
-    </div>
-    <style>
-.frame {  height: 160px; padding: 0; }
-.frame .slidee {display:table; margin: 0; padding: 0; width:1000px; height: 100%; list-style: none; }
-.frame .slidee li { display:inline-block; background:#eaeaea; margin: 0 5px 0 0; padding: 0; width: 120px; height: 120px; transition:0.3s;}
-.frame .slidee li.active {width:240px;}
+    <div class="main-wrap">
+        <div class="swipe-wrap">
+            <p> swipe wrap </p>
+            <p> swipe wrap </p>
+            <p> swipe wrap </p>
+            <p> swipe wrap </p>
+            <p> swipe wrap </p>
+            <p> swipe wrap </p>
+        </div>
+        <style>
+    .frame {  height: 160px; padding: 0; }
+    .frame .slidee {display:table; margin: 0; padding: 0; width:1000px; height: 100%; list-style: none; }
+    .frame .slidee li { display:inline-block; background:#eaeaea; margin: 0 5px 0 0; padding: 0; width: 120px; height: 120px; transition:0.3s;}
+    .frame .slidee li.active {width:240px;}
 
-    </style>
-    <div class="frame" id="frame">
-        <ul class="slidee">
-            <li class="active">item1</li>
-            <li>item2</li>
-            <li>item3</li>
-            <li>item4</li>
-            <li>item5</li>
-            <li>item6</li>
-        </ul>
-    </div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <style>
-    .custom-list {width:100%; overflow:hidden;}
-    .custom-list * {
-    }
-    .custom-list>ul>li {display:inline-block; float:left;}
-    .custom-list>ul>li>a {
-        display:block; 
-        border-radius:0.5rem;
-        background:#ccc;
-        width:12rem; 
-        height:4rem; 
-        line-height:2rem; 
-        color:#666; 
-        font-size:1.4rem; 
-        padding:1rem; 
-        margin-right:1rem; 
-        -webkit-user-drag: none;
-        transition:0.3s;
-    }
-    .custom-list>ul>li.active a {
-        width:20rem;
-        background:#bb162b;
-        color:#fff;
-    }
-    </style>
-    <div class="custom-list" id="custom-list">
-        <ul>
-            <li class="active"><a href="#">Tab 1</a></li>
-            <li><a href="#">Tab 2</a></li>
-            <li><a href="#">Tab 3</a></li>
-            <li><a href="#">Tab 4</a></li>
-            <li><a href="#">Tab 5</a></li>
-            <li><a href="#">Tab 6</a></li>
-        </ul>
-    </div>
+        </style>
+        <div class="frame" id="frame">
+            <ul class="slidee">
+                <li class="active">item1</li>
+                <li>item2</li>
+                <li>item3</li>
+                <li>item4</li>
+                <li>item5</li>
+                <li>item6</li>
+            </ul>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <style>
+        .custom-list {width:100%; overflow:hidden;}
+        .custom-list * {
+        }
+        .custom-list>ul>li {display:inline-block; float:left;}
+        .custom-list>ul>li>a {
+            display:block; 
+            border-radius:0.5rem;
+            background:#ccc;
+            width:12rem; 
+            height:4rem; 
+            line-height:2rem; 
+            color:#666; 
+            font-size:1.4rem; 
+            padding:1rem; 
+            margin-right:1rem; 
+            -webkit-user-drag: none;
+            transition:0.3s;
+        }
+        .custom-list>ul>li.active a {
+            width:20rem;
+            background:#bb162b;
+            color:#fff;
+        }
+        </style>
+        <div class="custom-list" id="custom-list">
+            <ul>
+                <li class="active"><a href="#">Tab 1</a></li>
+                <li><a href="#">Tab 2</a></li>
+                <li><a href="#">Tab 3</a></li>
+                <li><a href="#">Tab 4</a></li>
+                <li><a href="#">Tab 5</a></li>
+                <li><a href="#">Tab 6</a></li>
+            </ul>
+        </div>
 
-    <div data-role="page">
-        <ul class="btn-list">
-            <li><a href="sub_page1.html" data-href="sub_page1.html">Go to sub_page1.html</a></li>
-            <li><a href="sub_page2.html" data-href="sub_page2.html">Go to sub_page2.html</a></li>
-            <li><a href="sub_page3.html" data-href="sub_page3.html">Go to sub_page3.html</a></li>
-        </ul>
+        <style>
+        fieldset {display:block; width:100%; padding:1rem;}
+        fieldset label {display:inline-block; font-size:1.4rem; vertical-align:middle;}
+        fieldset input {display:inline-block; border:1px solid #ccc; border-radius:0.5rem; width:12rem; height:3rem; font-size:1.4rem; vertical-align:middle; padding:0.5rem 1rem;}
+        fieldset button {display:inline-block; border:1px solid #ccc; border-radius:0.5rem; width:12rem; font-size:1.4rem; height:3rem;}
+        </style>
+        
+        <fieldset>
+            <legend> slider test</legend>
+            <p>
+                <label for="moveIdx">Go to Tab : </label> <input type="number" id="moveIdx" />
+                <button type="button" class="btn-execution"> Execution </button>
+            </p>
+            
+        </fieldset>
+
+        <div data-role="page">
+            <ul class="btn-list">
+                <li><a href="sub_page1.html" data-href="sub_page1.html">Go to sub_page1.html</a></li>
+                <li><a href="sub_page2.html" data-href="sub_page2.html">Go to sub_page2.html</a></li>
+                <li><a href="sub_page3.html" data-href="sub_page3.html">Go to sub_page3.html</a></li>
+            </ul>
+
+            <p>test1</p>
+            <p>test2</p>
+            <p>test3</p>
+            <p>test4</p>
+            <p>test5</p>
+            <p>test6</p>
+            <p>test7</p>
+            <p>test8</p>
+            <p>test9</p>
+            <p>test10</p>
+            <p>test11</p>
+            <p>test12</p>
+            <p>test13</p>
+            <p>test14</p>
+            <p>test15</p>
+            <p>test16</p>
+            <p>test17</p>
+            <p>test18</p>
+            <p>test19</p>
+            <p>test20</p>
+            <p>test21</p>
+            <p>test22</p>
+            <p>test23</p>
+            <p>test24</p>
+            <p>test25</p>
+            <p>test26</p>
+            <p>test27</p>
+            <p>test28</p>
+            <p>test29</p>
+            <p>test30</p>
+            <p>test31</p>
+            <p>test32</p>
+            <p>test33</p>
+            <p>test34</p>
+            <p>test35</p>
+            <p>test36</p>
+            <p>test37</p>
+            <p>test38</p>
+            <p>test39</p>
+            <p>test40</p>
+            <p>test41</p>
+            <p>test42</p>
+            <p>test43</p>
+            <p>test44</p>
+            <p>test45</p>
+            <p>test46</p>
+            <p>test47</p>
+            <p>test48</p>
+            <p>test49</p>
+            <p>test50</p>
+            <p>test51</p>
+            <p>test52</p>
+            <p>test53</p>
+            <p>test54</p>
+            <p>test55</p>
+            <p>test56</p>
+            <p>test57</p>
+            <p>test58</p>
+            <p>test59</p>
+            <p>test60</p>
+            <p>test61</p>
+            <p>test62</p>
+            <p>test63</p>
+            <p>test64</p>
+            <p>test65</p>
+            <p>test66</p>
+            <p>test67</p>
+            <p>test68</p>
+            <p>test69</p>
+            <p>test70</p>
+            <p>test71</p>
+            <p>test72</p>
+            <p>test73</p>
+            <p>test74</p>
+            <p>test75</p>
+            <p>test76</p>
+            <p>test77</p>
+            <p>test78</p>
+            <p>test79</p>
+            <p>test80</p>
+            <p>test81</p>
+            <p>test82</p>
+            <p>test83</p>
+            <p>test84</p>
+            <p>test85</p>
+            <p>test86</p>
+            <p>test87</p>
+            <p>test88</p>
+            <p>test89</p>
+            <p>test90</p>
+            <p>test91</p>
+            <p>test92</p>
+            <p>test93</p>
+            <p>test94</p>
+            <p>test95</p>
+            <p>test96</p>
+            <p>test97</p>
+            <p>test98</p>
+            <p>test99</p>
+            <p>test100</p>
+        </div>
     </div>
 
     <div class="back-pannel"><!-- cover for content wrap --></div>

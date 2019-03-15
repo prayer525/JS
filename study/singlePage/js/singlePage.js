@@ -157,8 +157,6 @@ function fnWhichAnimationEvent(eType){
             moveEnd:null
         };
 
-        $.extend(option, opt)
-
         var status = {
             'start' : false,
             'move' : false,
@@ -166,7 +164,8 @@ function fnWhichAnimationEvent(eType){
             'startX':null,
             'endX':0,
             'moveX':null,
-            'selIdx':0
+            'selIdx':0,
+            'moveSpeed':2
         }
 
         // 초기화
@@ -201,25 +200,29 @@ function fnWhichAnimationEvent(eType){
             $this.on('mouseleave', fnc.fnTouchEnd);
             $this.on('click', fnc.fnClick);
         }
-
+        // tab click event
         fnc.fnClick = function(e){
             var evt = fnc.fnCheckEvent(e);
 
             status.selIdx = $(evt.target).parent('li').index();
+
+            console.log('fnClick')
 
             fnc.fnChangeTab();
 
             return false;
         }
 
+        // touch start event
         fnc.fnTouchStart = function(e){
-            status.start = true;
-
             var evt = fnc.fnCheckEvent(e);
+
+            status.start = true;
 
             status.startX = evt.clientX;
         }
 
+        // touch move event
         fnc.fnTouchMove = function(e){
             if(!status.start){
                 return false;
@@ -230,7 +233,7 @@ function fnWhichAnimationEvent(eType){
 
             status.moveX = evt.clientX - status.startX
 
-            var move = status.endX + status.moveX*2
+            var move = status.endX + status.moveX*status.moveSpeed
 
             if(move >= 0){
                 move = 0
@@ -241,31 +244,25 @@ function fnWhichAnimationEvent(eType){
             $thisUl.css({
                 'transform' : 'translateX(' + move + 'px)'
             })
-
         }
 
+        // touch end event
         fnc.fnTouchEnd = function(e){
             status.end = true;
             status.start = false;
-
-            if(!status.move){
-                // return false;
-            }
-
             status.move = false;
-
             if(Math.abs(status.moveX) > 30){
-                if( (status.endX + status.moveX * 2) >= 0){
+                if( (status.endX + status.moveX * status.moveSpeed) >= 0){
                     status.endX = 0;
                 }else{
-                    status.endX += status.moveX * 2
+                    status.endX += status.moveX * status.moveSpeed
                 }
 
                 fnc.fnGetMoveIdx();
 
                 fnc.fnChangeTab();
             }else if(Math.abs(status.moveX) <= 30 && Math.abs(status.moveX) > 0){
-                
+                console.log('touch end')
                 fnc.fnMoveTab();
             }
         }
@@ -291,10 +288,6 @@ function fnWhichAnimationEvent(eType){
                 fnc.fnSetWidth();
 
                 fnc.fnMoveTab();
-
-                if(option.moveEnd != null && typeof option.moveEnd == 'function'){
-                    option.moveEnd(status.selIdx);
-                }
             },300)
         }
 
@@ -302,7 +295,6 @@ function fnWhichAnimationEvent(eType){
             status.endX = status.selIdx * -defaultWidth;
 
             var oriPos = $thisUl[0].style.transform.replace('translateX(', '').replace('px)','')*1 - status.endX*1;
-            console.log('oriPos : ' , oriPos)
             
             var moveInter = setInterval(function(){
                 if(Math.abs(oriPos) <= 3 && Math.abs(oriPos) >= 0){
@@ -318,6 +310,10 @@ function fnWhichAnimationEvent(eType){
                 })
 
                 if(oriPos == 0){
+                    if(option.moveEnd != null && typeof option.moveEnd == 'function'){
+                        option.moveEnd(status.selIdx);
+                    }
+
                     clearInterval(moveInter)
                 }
             },2)
@@ -353,10 +349,25 @@ function fnWhichAnimationEvent(eType){
                 evt = evt.originalEvent.touches[0];
             }
 
-            return evt
+            return evt;
+        }
+
+        // Method
+        $this.getIndex = function(){
+            return status.selIdx;
+        }
+
+        $this.moveTab = function(idx){
+            status.selIdx = idx;
+
+            console.log('method move tab')
+
+            fnc.fnChangeTab();
         }
 
         fnc.init();
+
+        return $this;
     }
 })( jQuery );
 

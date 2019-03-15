@@ -43,11 +43,18 @@ $(function(){
     }, false);
 
     // custom scroll tab
-    $('#custom-list').swipeTab({
+    var tab1 = $('#custom-list').swipeTab({
         moveEnd : function(idx){
-            console.log('move end : ' , idx)
+            console.log('move end callback : ' , idx)
         }
     });
+
+    $('.btn-execution').off('click').on('click', function(){
+        var idx = $('#moveIdx').val();
+        tab1.moveTab(idx)
+    })
+
+    
 
     // sly swipe slide
     
