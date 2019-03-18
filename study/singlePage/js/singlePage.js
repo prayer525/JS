@@ -220,8 +220,6 @@ function fnWhichAnimationEvent(eType){
         fnc.fnClick = function(){
             option.selIdx = $(status.target.target).parent('li').index();
 
-            console.log('click sel index : ' , option.selIdx)
-
             fnc.fnChangeTab();
 
             status.target = null;
@@ -283,10 +281,12 @@ function fnWhichAnimationEvent(eType){
             }else if(status.start && status.move){
                 status.start = false;
                 status.move = false;
-                
+
                 if(Math.abs(status.moveX) > 30){
                     if( (status.endX + status.moveX * option.moveSpeed) >= 0){
                         status.endX = 0;
+                    }else if((status.endX + status.moveX * option.moveSpeed) < (defaultWidth - listWidth) ){
+                        status.endX = defaultWidth - listWidth;
                     }else{
                         status.endX += status.moveX * option.moveSpeed
                     }
