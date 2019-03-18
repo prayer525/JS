@@ -179,12 +179,15 @@ function fnWhichAnimationEvent(eType){
 
         // Library 내부에서 사용되는 각 상태 값들
         var status = {
-            'start' : false,
+            // (Touchstart, Mousedown) 의 여부를 체크해서 Drag 중인지 단순 마우스 이동인지를 판단.
+            'start' : false, 
+            
             'move' : false,
             'end' : false,
             'startX':null,
             'moveX':null,
-            'endX':0
+            'endX':0,
+            'target':null
         }
 
         // 초기화
@@ -200,92 +203,100 @@ function fnWhichAnimationEvent(eType){
 
         // 기존에 등록 되어있던 이벤트 삭제
         fnc.rmEvent = function(){
-            $this.off('touch', fnc.fnClick);
-            $this.off('touchstart', fnc.fnTouchStart);
-			$this.off('touchmove', fnc.fnTouchMove);
-            $this.off('touchend', fnc.fnTouchEnd);
-            $this.off('mousedown', fnc.fnTouchStart);
-			$this.off('mousemove', fnc.fnTouchMove);
-			$this.off('mouseup', fnc.fnTouchEnd);
+            $this.off('touchstart mousedown', fnc.fnTouchStart);
+			$this.off('touchmove mousemove', fnc.fnTouchMove);
+            $this.off('touchend mouseup', fnc.fnTouchEnd);
             $this.off('mouseleave', fnc.fnTouchEnd);
-            $this.off('click', fnc.fnClick);
         }
 
         // 이벤트 신규 등록
         fnc.regEvent = function(){
-            $this.on('touch', fnc.fnClick);
-            $this.on('touchstart', fnc.fnTouchStart);
-			$this.on('touchmove', fnc.fnTouchMove);
-            $this.on('touchend', fnc.fnTouchEnd);
-            $this.on('mousedown', fnc.fnTouchStart);
-            $this.on('mousemove', fnc.fnTouchMove);
-            $this.on('mouseup', fnc.fnTouchEnd);
+            $this.on('touchstart mousedown', fnc.fnTouchStart);
+			$this.on('touchmove mousemove', fnc.fnTouchMove);
+            $this.on('touchend mouseup', fnc.fnTouchEnd);
             $this.on('mouseleave', fnc.fnTouchEnd);
-            $this.on('click', fnc.fnClick);
         }
         // tab click event
-        fnc.fnClick = function(e){
-            var evt = fnc.fnCheckEvent(e);
+        fnc.fnClick = function(){
+            option.selIdx = $(status.target.target).parent('li').index();
 
-            option.selIdx = $(evt.target).parent('li').index();
+            console.log('click sel index : ' , option.selIdx)
 
             fnc.fnChangeTab();
+
+            status.target = null;
 
             return false;
         }
 
         // touch start event
         fnc.fnTouchStart = function(e){
+            e.stopPropagation();
+
             var evt = fnc.fnCheckEvent(e);
 
             status.start = true;
+            status.target = evt;
 
             status.startX = evt.clientX;
         }
 
         // touch move event
         fnc.fnTouchMove = function(e){
-            if(!status.start){
-                return false;
+            e.stopPropagation();
+
+            if(status.start){
+                status.move = true;
+
+                var evt = fnc.fnCheckEvent(e);
+
+                status.moveX = evt.clientX - status.startX
+
+                var move = status.endX + status.moveX*option.moveSpeed;
+
+                if(move >= 0){
+                    move = 0
+                }else if(move < defaultWidth - listWidth){
+                    move = defaultWidth - listWidth;
+                }
+
+                $thisUl.css({
+                    'transform' : 'translateX(' + move + 'px)'
+                })
             }
-            var evt = fnc.fnCheckEvent(e);
-
-            status.move = true;
-
-            status.moveX = evt.clientX - status.startX
-
-            var move = status.endX + status.moveX*option.moveSpeed;
-
-            if(move >= 0){
-                move = 0
-            }else if(move < defaultWidth - listWidth){
-                move = defaultWidth - listWidth;
-            }
-
-            console.log('move 2 : ' , move)
-
-            $thisUl.css({
-                'transform' : 'translateX(' + move + 'px)'
-            })
         }
 
         // touch end event
         fnc.fnTouchEnd = function(e){
+            e.stopPropagation();
+
+            var evt = fnc.fnCheckEvent(e);
+
             status.end = true;
-            status.start = false;
-            status.move = false;
-            if(Math.abs(status.moveX) > 30){
-                if( (status.endX + status.moveX * option.moveSpeed) >= 0){
-                    status.endX = 0;
-                }else{
-                    status.endX += status.moveX * option.moveSpeed
+
+            if(status.start && !status.move){
+                status.start = false;
+
+                fnc.fnClick(evt);
+
+                return false;
+            }else if(status.start && status.move){
+                status.start = false;
+                status.move = false;
+                
+                if(Math.abs(status.moveX) > 30){
+                    if( (status.endX + status.moveX * option.moveSpeed) >= 0){
+                        status.endX = 0;
+                    }else{
+                        status.endX += status.moveX * option.moveSpeed
+                    }
+    
+                    fnc.fnGetMoveIdx();
+    
+                    fnc.fnChangeTab();
+                }else if(Math.abs(status.moveX) <= 30 && Math.abs(status.moveX) > 0){
+                    fnc.fnMoveTab();
                 }
-
-                fnc.fnGetMoveIdx();
-
-                fnc.fnChangeTab();
-            }else if(Math.abs(status.moveX) <= 30 && Math.abs(status.moveX) > 0){
-                fnc.fnMoveTab();
             }
         }
 

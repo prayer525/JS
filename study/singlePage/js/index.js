@@ -8,9 +8,11 @@ $(function(){
     $('.btn-toggle-menu').off('click').on('click', function(){
         if($(this).hasClass('show-menu')){
             $(this).removeClass('show-menu');
+            $('html, body').removeClass('over-hidden');
             $('.content-wrap').removeClass('show-menu');
         }else{
             $(this).addClass('show-menu');
+            $('html, body').addClass('over-hidden');
             $('.content-wrap').addClass('show-menu');
         }
 
