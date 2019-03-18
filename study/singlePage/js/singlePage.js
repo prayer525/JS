@@ -142,30 +142,49 @@ function fnWhichAnimationEvent(eType){
 })( jQuery );
 
 
-
+/***********************************************************************************************************
+ *  Function : Clickable Swiper Slide Tab
+ ***********************************************************************************************************/
 (function( $, undefined ) {
     $.fn.swipeTab = function(opt){
+        // 현재 객체를[ $(el) ] $this 객체에 할당
         var $this = this;
-        var $thisUl = $this.find('ul');
-        var $thisLi = $this.find('li');
-        var fnc = {};
-        var itemWidth = [];
-        var defaultWidth = 0;
-        var endPos = 0;
 
+        // 현재 객체의 첫번째 <UL>을 할당
+        var $thisUl = $this.find('ul');
+
+        // 탭을 할당
+        var $thisLi = $this.find('li');
+
+        // Library 내부에서 사용될 함수의 객체 모델
+        var fnc = {};
+
+        // list item의 넓이 배열 : Drag시 움직인 거리 기반으로 현재 선택되어야 할 Item의 Index를 구하는데 사용
+        var itemWidth = [];
+        
+        // Tab Item의 기본 넓이를 구함 : (현재 선택된 탭의 인덱스 * defaultWidth) 로 현재 활성화 된 탭으로 이동시킨다.
+        var defaultWidth = $thisUl.find('li:not(.active)').outerWidth();
+
+        // Tab List의 전체 넓이를 할당
+        var listWidth = 0;
+
+        // 사용자로부터 받을 수 있는 옵션 : 필요시 추가 가능
         var option = {
-            moveEnd:null
+            moveEnd:null, // 탭 동작이 끝난 후 실행시킬 Callback Function
+            selIdx:0, // 초기 선택 탭
+            moveSpeed:2 // Drag 스피드 : 2일 경우 (Drag한 거리 : 슬라이드된 거리가 1:2의 비율이다.)
         };
 
+        $.extend(option, opt)
+
+        // Library 내부에서 사용되는 각 상태 값들
         var status = {
             'start' : false,
             'move' : false,
             'end' : false,
             'startX':null,
-            'endX':0,
             'moveX':null,
-            'selIdx':0,
-            'moveSpeed':2
+            'endX':0
         }
 
         // 초기화
@@ -173,6 +192,10 @@ function fnWhichAnimationEvent(eType){
             fnc.rmEvent();
             fnc.regEvent();
             fnc.fnSetWidth();
+            
+            if(option.selIdx != 0){
+                fnc.fnChangeTab();
+            }
         }
 
         // 기존에 등록 되어있던 이벤트 삭제
@@ -204,9 +227,7 @@ function fnWhichAnimationEvent(eType){
         fnc.fnClick = function(e){
             var evt = fnc.fnCheckEvent(e);
 
-            status.selIdx = $(evt.target).parent('li').index();
-
-            console.log('fnClick')
+            option.selIdx = $(evt.target).parent('li').index();
 
             fnc.fnChangeTab();
 
@@ -233,13 +254,15 @@ function fnWhichAnimationEvent(eType){
 
             status.moveX = evt.clientX - status.startX
 
-            var move = status.endX + status.moveX*status.moveSpeed
+            var move = status.endX + status.moveX*option.moveSpeed;
 
             if(move >= 0){
                 move = 0
-            }else if(move < endPos){
-                move = endPos;
+            }else if(move < defaultWidth - listWidth){
+                move = defaultWidth - listWidth;
             }
+
+            console.log('move 2 : ' , move)
 
             $thisUl.css({
                 'transform' : 'translateX(' + move + 'px)'
@@ -252,17 +275,16 @@ function fnWhichAnimationEvent(eType){
             status.start = false;
             status.move = false;
             if(Math.abs(status.moveX) > 30){
-                if( (status.endX + status.moveX * status.moveSpeed) >= 0){
+                if( (status.endX + status.moveX * option.moveSpeed) >= 0){
                     status.endX = 0;
                 }else{
-                    status.endX += status.moveX * status.moveSpeed
+                    status.endX += status.moveX * option.moveSpeed
                 }
 
                 fnc.fnGetMoveIdx();
 
                 fnc.fnChangeTab();
             }else if(Math.abs(status.moveX) <= 30 && Math.abs(status.moveX) > 0){
-                console.log('touch end')
                 fnc.fnMoveTab();
             }
         }
@@ -274,7 +296,7 @@ function fnWhichAnimationEvent(eType){
                 v += value;
 
                 if(v - (value / 2) > Math.abs(status.endX) ){
-                    status.selIdx = idx;
+                    option.selIdx = idx;
                     
                     return false;
                 }
@@ -282,17 +304,13 @@ function fnWhichAnimationEvent(eType){
         }
 
         fnc.fnChangeTab = function(){
-            $thisLi.eq(status.selIdx).addClass('active').siblings('li').removeClass('active');
+            $thisLi.eq(option.selIdx).addClass('active').siblings('li').removeClass('active');
 
-            setTimeout(function(){
-                fnc.fnSetWidth();
-
-                fnc.fnMoveTab();
-            },300)
+            fnc.fnMoveTab();
         }
 
         fnc.fnMoveTab = function(){
-            status.endX = status.selIdx * -defaultWidth;
+            status.endX = option.selIdx * -defaultWidth;
 
             var oriPos = $thisUl[0].style.transform.replace('translateX(', '').replace('px)','')*1 - status.endX*1;
             
@@ -311,7 +329,7 @@ function fnWhichAnimationEvent(eType){
 
                 if(oriPos == 0){
                     if(option.moveEnd != null && typeof option.moveEnd == 'function'){
-                        option.moveEnd(status.selIdx);
+                        option.moveEnd(option.selIdx);
                     }
 
                     clearInterval(moveInter)
@@ -321,25 +339,16 @@ function fnWhichAnimationEvent(eType){
 
         // create tab list
         fnc.fnSetWidth = function(){
-            var _w = 0;
             var _l = $thisLi.length;
 
             $thisLi.each(function(idx){
                 itemWidth[idx] = $(this).outerWidth();
 
-                _w += itemWidth[idx];
-
-                if(idx == _l - 2){
-                    endPos = -_w;
-                }
-
-                if(!$(this).hasClass('active')){
-                    defaultWidth = itemWidth[idx];
-                }
+                listWidth += itemWidth[idx];
             })
 
             $thisUl.css({
-                'width' : _w+'px'
+                'width' : listWidth+'px'
             });
         }
 
@@ -354,13 +363,11 @@ function fnWhichAnimationEvent(eType){
 
         // Method
         $this.getIndex = function(){
-            return status.selIdx;
+            return option.selIdx;
         }
 
         $this.moveTab = function(idx){
-            status.selIdx = idx;
-
-            console.log('method move tab')
+            option.selIdx = idx;
 
             fnc.fnChangeTab();
         }

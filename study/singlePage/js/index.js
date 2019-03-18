@@ -44,6 +44,7 @@ $(function(){
 
     // custom scroll tab
     var tab1 = $('#custom-list').swipeTab({
+        selIdx:2,
         moveEnd : function(idx){
             console.log('move end callback : ' , idx)
         }
