@@ -57,6 +57,10 @@ $(function(){
         tab1.moveTab(idx)
     })
 
+    var tab2 = $('#custom-list2').swipeTab({
+        selIdx:1
+    });
+
     
 
     // sly swipe slide
