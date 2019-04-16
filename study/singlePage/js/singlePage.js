@@ -208,7 +208,10 @@ function fnWhichAnimationEvent(eType){
             'endX':0,
 
             // event target : click 이벤트를 위해 최초 터치시의 event 를 저장
-            'evt':null
+            'evt':null,
+
+            // tab의 animate 상태
+            'animated':false
         }
 
         // 초기화
@@ -229,6 +232,7 @@ function fnWhichAnimationEvent(eType){
 			$this.off('touchmove mousemove', fnc.fnTouchMove);
             $this.off('touchend mouseup', fnc.fnTouchEnd);
             $this.off('mouseleave', fnc.fnTouchEnd);
+            $this.off('dblclick', function(event){ event.preventDefault(); })
         }
 
         // 이벤트 신규 등록
@@ -237,6 +241,7 @@ function fnWhichAnimationEvent(eType){
 			$this.on('touchmove mousemove', fnc.fnTouchMove);
             $this.on('touchend mouseup', fnc.fnTouchEnd);
             $this.on('mouseleave', fnc.fnTouchEnd);
+            $this.on('dblclick', function(event){ event.preventDefault(); })
         }
 
         // tab click event
@@ -246,14 +251,18 @@ function fnWhichAnimationEvent(eType){
         fnc.fnClick = function(){
             // target의 parent(li)의 인덱스를 글로벌 변수인 option.selIdx에 저장
             // 글로벌 변수이기 때문에 fnc.fnChangeTab()에 parameter를 넘길 필요 없고 option.selIdx를 참조하면 된다.
-            option.selIdx = $(status.evt.target).parent('li').index();
+            var idx = $(status.evt.target).parent('li').index();
 
-            fnc.fnChangeTab();
-            
-            // 한번 사용된 status.evt target은 초기화 해준다.
-            status.evt = null;
+            if(idx != -1){
+                option.selIdx = idx;
 
-            return false;
+                fnc.fnChangeTab();
+
+                // 한번 사용된 status.evt target은 초기화 해준다.
+                status.evt = null;
+
+                return false;
+            }
         }
 
         // touch start event
@@ -316,7 +325,7 @@ function fnWhichAnimationEvent(eType){
             status.end = true;
             
             // target에 클릭 되었으나 움직이지 않은 경우 Click 이벤트로 간주
-            if(status.start && !status.move){
+            if(status.start && !status.move && !status.animated){
                 // 클릭 상태는 다시 false로.
                 status.start = false;
 
@@ -326,7 +335,7 @@ function fnWhichAnimationEvent(eType){
                 return false;
             }
             // target에 클릭 되고 움직였을 경우 Drag 이벤트로 간주
-            else if(status.start && status.move){
+            else if(status.start && status.move && !status.animated){
                 // click 상태와 move 상태를 false로 초기화 한다.
                 status.start = false;
                 status.move = false;
@@ -335,17 +344,14 @@ function fnWhichAnimationEvent(eType){
                 if(Math.abs(status.moveX) > 30){
                     // 값이 0 보다 커질 경우는 좌측에 더이상 탭이 없다는 것이므로  endX를 0으로 강제 한다.
                     if( (status.endX + status.moveX * option.moveSpeed) >= 0){
-                        console.log('aa')
                         status.endX = 0;
                     }
                     // 값이 전체 넓이에서 기본 탭의 넓이만큼을 뺀 값보다 작으면 마지막 아이템이라는 것이므로 endX를 마지막 아이템의 위치로 강제 한다.
                     else if((status.endX + status.moveX * option.moveSpeed) < (defaultWidth - listWidth) ){
-                        console.log('bb : ' , defaultWidth - listWidth)
                         status.endX = defaultWidth - listWidth;
                     }
                     // 첫번째나 마지막 아이템이 아닌경우 현재 드래그 된 위치를 반환 한다.
                     else{
-                        console.log('cc')
                         status.endX += status.moveX * option.moveSpeed
                     }
 
@@ -392,6 +398,10 @@ function fnWhichAnimationEvent(eType){
 
         // 탭을 활정화 된 탭으로 이동시키는 함수
         fnc.fnMoveTab = function(){
+            // 탭의 animate 상태를 true로 변경한다.
+            // 탭이 animate 상태일 경우 추가 이벤트를 막는다.
+            status.animated = true;
+
             // 마지막으로 선택된 탭의 X 좌표를 구한다. : -(마지막에 선택된 탭의 index * 탭의 기본 넓이)
             status.endX = option.selIdx * -defaultWidth;
             
@@ -434,6 +444,8 @@ function fnWhichAnimationEvent(eType){
                     if(option.moveEnd != null && typeof option.moveEnd == 'function'){
                         option.moveEnd(option.selIdx);
                     }
+
+                    status.animated = false;
 
                     clearInterval(moveInter)
                 }
