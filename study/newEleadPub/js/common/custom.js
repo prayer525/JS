@@ -181,7 +181,8 @@ function fnWhichAnimationEvent(eType){
         var option = {
             moveEnd:null, // 탭 동작이 끝난 후 실행시킬 Callback Function
             selIdx:0, // 초기 선택 탭
-            moveSpeed:2 // Drag 스피드 : 2일 경우 (Drag한 거리 : 슬라이드된 거리가 1:2의 비율이다.)
+            moveSpeed:2, // Drag 스피드 : 2일 경우 (Drag한 거리 : 슬라이드된 거리가 1:2의 비율이다.)
+            pageNavigation:null // page navigation : jquery object
         };
 
         // 기본 옵션 값과 사용자로부터 입력받은 옵션값을 merge 한다.
@@ -251,7 +252,22 @@ function fnWhichAnimationEvent(eType){
         fnc.fnClick = function(){
             // target의 parent(li)의 인덱스를 글로벌 변수인 option.selIdx에 저장
             // 글로벌 변수이기 때문에 fnc.fnChangeTab()에 parameter를 넘길 필요 없고 option.selIdx를 참조하면 된다.
-            var idx = $(status.evt.target).parent('li').index();
+            
+            var _target, idx;
+
+            // 현재 클릭된 타겟이 wrapper일 경우 li 의 index를 구할 수 없기 때문에 Block 처리 한다.
+            if($(status.evt.target)[0].id == $this[0].id){
+                return false;
+            }
+
+            _target = $(status.evt.target).parent()
+
+            // LI의 Iindex를 구해야 하기 때문에 LI를 찾을 때 까지 탐색 한다.
+            while(_target[0].tagName != 'LI'){
+                _target = _target.parent();
+            }
+
+            var idx = _target.index();
 
             if(idx != -1){
                 option.selIdx = idx;
@@ -391,6 +407,11 @@ function fnWhichAnimationEvent(eType){
         fnc.fnChangeTab = function(){
             // 글로벌 변수에 저장된 index 값을 기반으로 탭을 활성화
             $thisLi.eq(option.selIdx).addClass('active').siblings('li').removeClass('active');
+
+            // page navigation 이 'null'이 아닐 경우 page navigation을 활성화 시켜준다.
+            if(option.pageNavigation != null){
+                $(option.pageNavigation[0].children[option.selIdx]).addClass('active').siblings().removeClass('active');
+            }
 
             // 탭 활성화 후 활성화 된 탭으로 이동
             fnc.fnMoveTab();

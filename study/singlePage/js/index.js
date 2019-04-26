@@ -22,6 +22,7 @@ $(function(){
     // custom scroll tab
     var tab1 = $('#custom-list').swipeTab({
         selIdx:2,
+        pageNavigation:$('#custom-list-navi'),
         moveEnd : function(idx){
             console.log('move end callback : ' , idx)
         }

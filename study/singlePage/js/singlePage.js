@@ -181,7 +181,8 @@ function fnWhichAnimationEvent(eType){
         var option = {
             moveEnd:null, // 탭 동작이 끝난 후 실행시킬 Callback Function
             selIdx:0, // 초기 선택 탭
-            moveSpeed:2 // Drag 스피드 : 2일 경우 (Drag한 거리 : 슬라이드된 거리가 1:2의 비율이다.)
+            moveSpeed:2, // Drag 스피드 : 2일 경우 (Drag한 거리 : 슬라이드된 거리가 1:2의 비율이다.)
+            pageNavigation:null
         };
 
         // 기본 옵션 값과 사용자로부터 입력받은 옵션값을 merge 한다.
@@ -391,6 +392,11 @@ function fnWhichAnimationEvent(eType){
         fnc.fnChangeTab = function(){
             // 글로벌 변수에 저장된 index 값을 기반으로 탭을 활성화
             $thisLi.eq(option.selIdx).addClass('active').siblings('li').removeClass('active');
+
+            // page navigation 이 'null'이 아닐 경우 page navigation을 활성화 시켜준다.
+            if(option.pageNavigation != null){
+                $(option.pageNavigation[0].children[option.selIdx]).addClass('active').siblings().removeClass('active');
+            }
 
             // 탭 활성화 후 활성화 된 탭으로 이동
             fnc.fnMoveTab();
