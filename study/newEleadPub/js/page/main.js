@@ -22,6 +22,12 @@ fnList.pageMain = function(){
 		}
 	});
 
+	$('.lead-list').off('touchstart').on('touchstart', function(){
+		pageMain.mainSwipeLoop.freez();
+	}).off('touchend').on('touchend', function(){
+		pageMain.mainSwipeLoop.unfreez();
+	})
+
 	$('.main-tab-navi').find('a').off('click').on('click', function(){
 		pageMain.mainSwipeLoop.slide($(this).parent('li').index(), 500)
 		return false;
@@ -65,6 +71,13 @@ fnList.pageMain = function(){
         moveEnd : function(idx){
             // console.log('move end callback : ' , idx)
         }
+	});
+	
+	/* OPEN LEAD LIST SWIPE */
+	var listSwipe = Swiped.init({
+        query: '.lead-list li',
+        list: true,
+        right: 65
     });
 
 }

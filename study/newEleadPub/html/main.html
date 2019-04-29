@@ -9,6 +9,7 @@
 	<script type="text/javascript" src="../lib/jquery.min.js"></script>
 	<script type="text/javascript" src="../lib/main.swipe.js"></script>
 	<script type="text/javascript" src="../lib/list.swiper.js"></script>
+	<script type="text/javascript" src="../lib/item.swiper.js"></script>
 	<script type="text/javascript" src="../js/common/custom.js"></script>
 	<script type="text/javascript" src="../js/common/common.js"></script>
 	<script type="text/javascript" src="../js/page/main.js"></script>
@@ -115,153 +116,173 @@
 	
 					<!-- Open Lead Tab -->
 					<li class="main-swipe-cont-openlead">
-						<h2 class="tit-h2">OPEN LEAD</h2>
+						<h2 class="tit-h2 fixed">OPEN LEAD</h2>
 
-						<!-- Lead Type Filter Tab -->
-						<div class="tab-slide-custom-wrap">
-							<div class="tab-slide-custom" id="openlead-tab-list">
-								<ul>
-									<li class="red active"><a href="#"><span>OVER<br />DELAYED</span><em>4</em></a></li>
-									<li class="gold"><a href="#"><span>DELAYED</span><em>4</em></a></li>
-									<li class="sky"><a href="#"><span>NEW</span><em>4</em></a></li>
-									<li class="dark-gray"><a href="#"><span>ALL</span><em>4</em></a></li>
-									<li class="gray"><a href="#"><span>TAKE OVER</span><em>4</em></a></li>
+						<div class="scroll-wrap">
+							<!-- Lead Type Filter Tab -->
+							<div class="tab-slide-custom-wrap">
+								<div class="tab-slide-custom" id="openlead-tab-list">
+									<ul>
+										<li class="red active"><a href="#"><span>OVER<br />DELAYED</span><em>4</em></a></li>
+										<li class="gold"><a href="#"><span>DELAYED</span><em>4</em></a></li>
+										<li class="sky"><a href="#"><span>NEW</span><em>4</em></a></li>
+										<li class="dark-gray"><a href="#"><span>ALL</span><em>4</em></a></li>
+										<li class="gray"><a href="#"><span>TAKE OVER</span><em>4</em></a></li>
+									</ul>
+								</div>
+								<ul class="tab-slide-custom-navi">
+									<li class="active">&nbsp;</li>
+									<li>&nbsp;</li>
+									<li>&nbsp;</li>
+									<li>&nbsp;</li>
+									<li>&nbsp;</li>
 								</ul>
 							</div>
-							<ul class="tab-slide-custom-navi">
-								<li class="active">&nbsp;</li>
-								<li>&nbsp;</li>
-								<li>&nbsp;</li>
-								<li>&nbsp;</li>
-								<li>&nbsp;</li>
+							<!-- // Lead Type Filter Tab -->
+
+							<!-- Lead Search Area -->
+							<div class="search-wrap">
+								<i class="fas fa-search"></i>
+								<fieldset>
+									<legend>lead search</legend>
+									<input type="text" />
+									<button type="button"><span class="icon dripicons-cross"></span></button>
+								</fieldset>
+							</div>
+							<!-- // Lead Search Area -->
+							
+							<!-- Lead List -->
+							<ul class="lead-list-wrap">
+								<!-- User Group -->
+								<li>
+									<h2>
+										<i class="fas fa-user"></i>
+										<span class="name">User Name</span>
+										<span class="contact-name"></span>
+										<span class="cnt">1</span>
+									</h2>
+									<ul class="lead-list">
+										<li class="over">
+											<a href="#" title="">
+												<span class="lead-type">
+													<i class="fas fa-car"></i>
+													<span class="lead-number">KM00<br />567890</span>
+												</span>
+												<div>
+													<h3>Test Drive Request</h3>
+													<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+													<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+													<div class="lead-progress">
+														<span class="wrap"><span><!-- bar --></span></span>
+													</div>
+												</div>
+											</a>
+											<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+										</li>
+										<li class="delayed">
+											<a href="#" title="">
+												<span class="lead-type">
+													<i class="fas fa-book"></i>
+													<span class="lead-number">KM00<br />567890</span>
+												</span>
+												<div>
+													<h3>Brochure Request</h3>
+													<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+													<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+													<div class="lead-progress">
+														<span class="wrap"><span><!-- bar --></span></span>
+													</div>
+												</div>
+											</a>
+											<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+										</li>
+										<li class="new">
+											<a href="#" title="">
+												<span class="lead-type">
+													<i class="fas fa-map-marker-alt"></i>
+													<span class="lead-number">KM00<br />567890</span>
+												</span>
+												<div>
+													<h3>Walk-In</h3>
+													<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+													<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+													<div class="lead-progress">
+														<span class="wrap"><span><!-- bar --></span></span>
+													</div>
+												</div>
+											</a>
+											<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+										</li>
+									</ul>
+								</li>
+								<!-- // User Group -->
+
+								<!-- User Group -->
+								<li>
+									<h2>
+										<i class="fas fa-user"></i>
+										<span class="name">User Name</span>
+										<span class="contact-name"></span>
+										<span class="cnt">1</span>
+									</h2>
+									<ul class="lead-list">
+										<li class="over">
+											<a href="#" title="">
+												<span class="lead-type">
+													<i class="fas fa-car"></i>
+													<span class="lead-number">KM00<br />567890</span>
+												</span>
+												<div>
+													<h3>Test Drive Request</h3>
+													<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+													<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+													<div class="lead-progress">
+														<span class="wrap"><span><!-- bar --></span></span>
+													</div>
+												</div>
+											</a>
+											<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+										</li>
+										<li class="delayed">
+											<a href="#" title="">
+												<span class="lead-type">
+													<i class="fas fa-book"></i>
+													<span class="lead-number">KM00<br />567890</span>
+												</span>
+												<div>
+													<h3>Brochure Request</h3>
+													<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+													<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+													<div class="lead-progress">
+														<span class="wrap"><span><!-- bar --></span></span>
+													</div>
+												</div>
+											</a>
+											<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+										</li>
+										<li class="new">
+											<a href="#" title="">
+												<span class="lead-type">
+													<i class="fas fa-map-marker-alt"></i>
+													<span class="lead-number">KM00<br />567890</span>
+												</span>
+												<div>
+													<h3>Walk-In</h3>
+													<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+													<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+													<div class="lead-progress">
+														<span class="wrap"><span><!-- bar --></span></span>
+													</div>
+												</div>
+											</a>
+											<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+										</li>
+									</ul>
+								</li>
+								<!-- // User Group -->
 							</ul>
+							<!-- // Lead List -->
 						</div>
-						<!-- // Lead Type Filter Tab -->
-
-						<!-- Lead Search Area -->
-						<div class="search-wrap">
-							<i class="fas fa-search"></i>
-							<fieldset>
-								<legend>lead search</legend>
-								<input type="text" />
-								<button type="button"><span class="icon dripicons-cross"></span></button>
-							</fieldset>
-						</div>
-						<!-- // Lead Search Area -->
-						
-						<!-- Lead List -->
-						<ul class="lead-list-wrap">
-							<!-- User Group -->
-							<li>
-								<h2>
-									<i class="fas fa-user"></i>
-									<span class="name">User Name</span>
-									<span class="contact-name"></span>
-									<span class="cnt">1</span>
-								</h2>
-								<ul class="lead-list">
-									<li class="over">
-										<span class="lead-type">
-											<i class="fas fa-car"></i>
-											<span class="lead-number">KM00<br />567890</span>
-										</span>
-										<div>
-											<h3>Test Drive Request</h3>
-											<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
-											<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
-											<div class="lead-progress">
-												<span class="wrap"><span><!-- bar --></span></span>
-											</div>
-										</div>
-									</li>
-									<li class="delayed">
-										<span class="lead-type">
-											<i class="fas fa-book"></i>
-											<span class="lead-number">KM00<br />567890</span>
-										</span>
-										<div>
-											<h3>Brochure Request</h3>
-											<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
-											<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
-											<div class="lead-progress">
-												<span class="wrap"><span><!-- bar --></span></span>
-											</div>
-										</div>
-									</li>
-									<li class="new">
-										<span class="lead-type">
-											<i class="fas fa-map-marker-alt"></i>
-											<span class="lead-number">KM00<br />567890</span>
-										</span>
-										<div>
-											<h3>Walk-In</h3>
-											<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
-											<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
-											<div class="lead-progress">
-												<span class="wrap"><span><!-- bar --></span></span>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</li>
-							<!-- // User Group -->
-
-							<!-- User Group -->
-							<li>
-								<h2>
-									<i class="fas fa-user"></i>
-									<span class="name">User Name</span>
-									<span class="contact-name"></span>
-									<span class="cnt">1</span>
-								</h2>
-								<ul class="lead-list">
-									<li class="over">
-										<span class="lead-type">
-											<i class="fas fa-car"></i>
-											<span class="lead-number">KM00<br />567890</span>
-										</span>
-										<div>
-											<h3>Test Drive Request</h3>
-											<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
-											<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
-											<div class="lead-progress">
-												<span class="wrap"><span><!-- bar --></span></span>
-											</div>
-										</div>
-									</li>
-									<li class="delayed">
-										<span class="lead-type">
-											<i class="fas fa-book"></i>
-											<span class="lead-number">KM00<br />567890</span>
-										</span>
-										<div>
-											<h3>Brochure Request</h3>
-											<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
-											<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
-											<div class="lead-progress">
-												<span class="wrap"><span><!-- bar --></span></span>
-											</div>
-										</div>
-									</li>
-									<li class="new">
-										<span class="lead-type">
-											<i class="fas fa-map-marker-alt"></i>
-											<span class="lead-number">KM00<br />567890</span>
-										</span>
-										<div>
-											<h3>Walk-In</h3>
-											<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
-											<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
-											<div class="lead-progress">
-												<span class="wrap"><span><!-- bar --></span></span>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</li>
-							<!-- // User Group -->
-						</ul>
-						<!-- // Lead List -->
 					</li>
 					<!-- // Open Lead Tab -->
 	
