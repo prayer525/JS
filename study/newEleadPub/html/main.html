@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="../lib/main.swipe.js"></script>
 	<script type="text/javascript" src="../lib/list.swiper.js"></script>
 	<script type="text/javascript" src="../lib/item.swiper.js"></script>
+	<script type="text/javascript" src="../lib/Chart.js"></script>
 	<script type="text/javascript" src="../js/common/custom.js"></script>
 	<script type="text/javascript" src="../js/common/common.js"></script>
 	<script type="text/javascript" src="../js/page/main.js"></script>
@@ -152,15 +153,14 @@
 							<!-- // Lead Search Area -->
 							
 							<!-- Lead List -->
-							<ul class="lead-list-wrap">
+							<ul class="lead-list-wrap" id="open-lead-list">
 								<!-- User Group -->
-								<li>
-									<h2>
+								<li class="show">
+									<h3>
 										<i class="fas fa-user"></i>
 										<span class="name">User Name</span>
-										<span class="contact-name"></span>
-										<span class="cnt">1</span>
-									</h2>
+										<span class="cnt">3</span>
+									</h3>
 									<ul class="lead-list">
 										<li class="over">
 											<a href="#" title="">
@@ -169,7 +169,7 @@
 													<span class="lead-number">KM00<br />567890</span>
 												</span>
 												<div>
-													<h3>Test Drive Request</h3>
+													<h4>Test Drive Request</h4>
 													<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
 													<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
 													<div class="lead-progress">
@@ -186,7 +186,7 @@
 													<span class="lead-number">KM00<br />567890</span>
 												</span>
 												<div>
-													<h3>Brochure Request</h3>
+													<h4>Brochure Request</h4>
 													<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
 													<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
 													<div class="lead-progress">
@@ -203,7 +203,7 @@
 													<span class="lead-number">KM00<br />567890</span>
 												</span>
 												<div>
-													<h3>Walk-In</h3>
+													<h4>Walk-In</h4>
 													<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
 													<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
 													<div class="lead-progress">
@@ -219,12 +219,12 @@
 
 								<!-- User Group -->
 								<li>
-									<h2>
-										<i class="fas fa-user"></i>
-										<span class="name">User Name</span>
-										<span class="contact-name"></span>
-										<span class="cnt">1</span>
-									</h2>
+									<h3>
+										<i class="fas fa-building"></i>
+										<span class="name">Company Name</span>
+										<span class="contact-name">Contact Name</span>
+										<span class="cnt">2</span>
+									</h3>
 									<ul class="lead-list">
 										<li class="over">
 											<a href="#" title="">
@@ -233,24 +233,7 @@
 													<span class="lead-number">KM00<br />567890</span>
 												</span>
 												<div>
-													<h3>Test Drive Request</h3>
-													<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
-													<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
-													<div class="lead-progress">
-														<span class="wrap"><span><!-- bar --></span></span>
-													</div>
-												</div>
-											</a>
-											<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
-										</li>
-										<li class="delayed">
-											<a href="#" title="">
-												<span class="lead-type">
-													<i class="fas fa-book"></i>
-													<span class="lead-number">KM00<br />567890</span>
-												</span>
-												<div>
-													<h3>Brochure Request</h3>
+													<h4>Test Drive Request</h4>
 													<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
 													<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
 													<div class="lead-progress">
@@ -267,7 +250,7 @@
 													<span class="lead-number">KM00<br />567890</span>
 												</span>
 												<div>
-													<h3>Walk-In</h3>
+													<h4>Walk-In</h4>
 													<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
 													<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
 													<div class="lead-progress">
@@ -282,19 +265,454 @@
 								<!-- // User Group -->
 							</ul>
 							<!-- // Lead List -->
+
+							<!-- Takeover Lead List -->
+							<dl class="takeover-lead-list" id="takeover-lead-list" style="display:none;">
+								<dt>
+									<i class="fas fa-id-badge"></i>
+									<span class="name">Salesman Name</span>
+								</dt>
+								<dd>
+									<ul class="lead-list-wrap">
+										<!-- User Group -->
+										<li class="show">
+											<h3>
+												<i class="fas fa-user"></i>
+												<span class="name">User Name</span>
+												<span class="cnt">3</span>
+											</h3>
+											<ul class="lead-list">
+												<li class="over">
+													<a href="#" title="">
+														<span class="lead-type">
+															<i class="fas fa-car"></i>
+															<span class="lead-number">KM00<br />567890</span>
+														</span>
+														<div>
+															<h4>Test Drive Request</h4>
+															<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+															<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+															<div class="lead-progress">
+																<span class="wrap"><span><!-- bar --></span></span>
+															</div>
+														</div>
+													</a>
+													<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+												</li>
+												<li class="delayed">
+													<a href="#" title="">
+														<span class="lead-type">
+															<i class="fas fa-book"></i>
+															<span class="lead-number">KM00<br />567890</span>
+														</span>
+														<div>
+															<h4>Brochure Request</h4>
+															<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+															<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+															<div class="lead-progress">
+																<span class="wrap"><span><!-- bar --></span></span>
+															</div>
+														</div>
+													</a>
+													<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+												</li>
+												<li class="new">
+													<a href="#" title="">
+														<span class="lead-type">
+															<i class="fas fa-map-marker-alt"></i>
+															<span class="lead-number">KM00<br />567890</span>
+														</span>
+														<div>
+															<h4>Walk-In</h4>
+															<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+															<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+															<div class="lead-progress">
+																<span class="wrap"><span><!-- bar --></span></span>
+															</div>
+														</div>
+													</a>
+													<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+												</li>
+											</ul>
+										</li>
+										<!-- // User Group -->
+
+										<!-- User Group -->
+										<li>
+											<h3>
+												<i class="fas fa-user"></i>
+												<span class="name">User Name</span>
+												<span class="cnt">2</span>
+											</h3>
+											<ul class="lead-list">
+												<li class="over">
+													<a href="#" title="">
+														<span class="lead-type">
+															<i class="fas fa-car"></i>
+															<span class="lead-number">KM00<br />567890</span>
+														</span>
+														<div>
+															<h4>Test Drive Request</h4>
+															<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+															<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+															<div class="lead-progress">
+																<span class="wrap"><span><!-- bar --></span></span>
+															</div>
+														</div>
+													</a>
+													<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+												</li>
+												<li class="new">
+													<a href="#" title="">
+														<span class="lead-type">
+															<i class="fas fa-map-marker-alt"></i>
+															<span class="lead-number">KM00<br />567890</span>
+														</span>
+														<div>
+															<h4>Walk-In</h4>
+															<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+															<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+															<div class="lead-progress">
+																<span class="wrap"><span><!-- bar --></span></span>
+															</div>
+														</div>
+													</a>
+													<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+												</li>
+											</ul>
+										</li>
+										<!-- // User Group -->
+									</ul>
+								</dd>
+								<dt>
+									<i class="fas fa-id-badge"></i>
+									<span class="name">Salesman Name</span>
+								</dt>
+								<dd>
+									<ul class="lead-list-wrap">
+										<!-- User Group -->
+										<li class="show">
+											<h3>
+												<i class="fas fa-user"></i>
+												<span class="name">User Name</span>
+												<span class="cnt">3</span>
+											</h3>
+											<ul class="lead-list">
+												<li class="over">
+													<a href="#" title="">
+														<span class="lead-type">
+															<i class="fas fa-car"></i>
+															<span class="lead-number">KM00<br />567890</span>
+														</span>
+														<div>
+															<h4>Test Drive Request</h4>
+															<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+															<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+															<div class="lead-progress">
+																<span class="wrap"><span><!-- bar --></span></span>
+															</div>
+														</div>
+													</a>
+													<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+												</li>
+												<li class="delayed">
+													<a href="#" title="">
+														<span class="lead-type">
+															<i class="fas fa-book"></i>
+															<span class="lead-number">KM00<br />567890</span>
+														</span>
+														<div>
+															<h4>Brochure Request</h4>
+															<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+															<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+															<div class="lead-progress">
+																<span class="wrap"><span><!-- bar --></span></span>
+															</div>
+														</div>
+													</a>
+													<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+												</li>
+												<li class="new">
+													<a href="#" title="">
+														<span class="lead-type">
+															<i class="fas fa-map-marker-alt"></i>
+															<span class="lead-number">KM00<br />567890</span>
+														</span>
+														<div>
+															<h4>Walk-In</h4>
+															<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+															<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+															<div class="lead-progress">
+																<span class="wrap"><span><!-- bar --></span></span>
+															</div>
+														</div>
+													</a>
+													<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+												</li>
+											</ul>
+										</li>
+										<!-- // User Group -->
+
+										<!-- User Group -->
+										<li>
+											<h3>
+												<i class="fas fa-user"></i>
+												<span class="name">User Name</span>
+												<span class="cnt">2</span>
+											</h3>
+											<ul class="lead-list">
+												<li class="over">
+													<a href="#" title="">
+														<span class="lead-type">
+															<i class="fas fa-car"></i>
+															<span class="lead-number">KM00<br />567890</span>
+														</span>
+														<div>
+															<h4>Test Drive Request</h4>
+															<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+															<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+															<div class="lead-progress">
+																<span class="wrap"><span><!-- bar --></span></span>
+															</div>
+														</div>
+													</a>
+													<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+												</li>
+												<li class="new">
+													<a href="#" title="">
+														<span class="lead-type">
+															<i class="fas fa-map-marker-alt"></i>
+															<span class="lead-number">KM00<br />567890</span>
+														</span>
+														<div>
+															<h4>Walk-In</h4>
+															<p><i class="fas fa-car-alt"></i><span>Rio</span></p>
+															<p><i class="far fa-calendar-alt"></i><span>25-12-2018 Morning</span></p>
+															<div class="lead-progress">
+																<span class="wrap"><span><!-- bar --></span></span>
+															</div>
+														</div>
+													</a>
+													<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+												</li>
+											</ul>
+										</li>
+										<!-- // User Group -->
+									</ul>
+								</dd>
+							</dl>
+							<!-- Takeover Lead List -->
 						</div>
 					</li>
 					<!-- // Open Lead Tab -->
 	
 					<!-- My Task Tab -->
-					<li style="background:green;">
-						
+					<!-- Open Lead Tab -->
+					<li class="main-swipe-cont-mytask">
+						<h2 class="tit-h2 fixed">MY TASK</h2>
+
+						<div class="scroll-wrap">
+							<div class="first-contact-summary-wrap">
+								<ul class="first-contact-summary-list">
+									<li><a href="#">
+										<i class="fas fa-user"></i>
+										<strong>14:33</strong>
+										<span>Customer<br />Name</span>
+									</a></li>
+									<li><a href="#">
+										<i class="fas fa-building"></i>
+										<strong>Contacted</strong>
+										<span>Company<br />Name</span>
+									</a></li>
+									<li><a href="#">
+										<i class="fas fa-user"></i>
+										<strong>14:33</strong>
+										<span>Customer<br />Name</span>
+									</a></li>
+									<li><a href="#">
+										<i class="fas fa-user"></i>
+										<strong>14:33</strong>
+										<span>Customer<br />Name</span>
+									</a></li>
+								</ul>
+							</div>
+
+							<!-- Lead Type Filter Tab -->
+							<div class="tab-slide-custom-wrap">
+								<div class="tab-slide-custom" id="mytask-tab-list">
+									<ul>
+										<li class="orange active"><a href="#"><span>REPLY</span><em>4</em></a></li>
+										<li class="red"><a href="#"><span>PAST DUE</span><em>4</em></a></li>
+										<li class="gold"><a href="#"><span>TODAY</span><em>4</em></a></li>
+										<li class="sky"><a href="#"><span>TO DO</span><em>4</em></a></li>
+										<li class="dark-gray"><a href="#"><span>ALL</span><em>4</em></a></li>
+									</ul>
+								</div>
+								<ul class="tab-slide-custom-navi">
+									<li class="active">&nbsp;</li>
+									<li>&nbsp;</li>
+									<li>&nbsp;</li>
+									<li>&nbsp;</li>
+									<li>&nbsp;</li>
+								</ul>
+							</div>
+							<!-- // Lead Type Filter Tab -->
+
+							<!-- Lead Search Area -->
+							<div class="search-wrap">
+								<i class="fas fa-search"></i>
+								<fieldset>
+									<legend>lead search</legend>
+									<input type="text" />
+									<button type="button"><span class="icon dripicons-cross"></span></button>
+								</fieldset>
+							</div>
+							<!-- // Lead Search Area -->
+
+							<!-- Lead List -->
+							<ul class="lead-list-wrap" id="mytask-lead-list">
+								<!-- User Group -->
+								<li class="show">
+									<h3>
+										<i class="fas fa-user"></i>
+										<span class="name">User Name</span>
+										<span class="cnt">2</span>
+									</h3>
+									<ul class="lead-list">
+										<li class="over">
+											<a href="#" title="">
+												<span class="lead-type">
+													<i class="fas fa-car"></i>
+													<span class="lead-number">KM00<br />567890</span>
+												</span>
+												<div>
+													<h4>Follow-up Contact <sup class="reply"></sup></h4>
+													<p><i class="fas fa-file-alt"></i><span>Financial Enquiry</span></p>
+													<p><i class="fas fa-thumbtack"></i><span>Email Sent - Request</span></p>
+													<div class="lead-progress">
+														<span class="wrap"><span><!-- bar --></span></span>
+													</div>
+												</div>
+											</a>
+											<button type="button" class="disabled"><i class="fas fa-desktop"></i><span>for Web</span></button>
+										</li>
+										<li class="delayed">
+											<a href="#" title="">
+												<span class="lead-type">
+													<i class="fas fa-book"></i>
+													<span class="lead-number">KM00<br />567890</span>
+												</span>
+												<div>
+													<h4>Test Drive <sup class="todo"></sup></h4>
+													<p><i class="fas fa-file-alt"></i><span>Financial Enquiry</span></p>
+													<p><i class="fas fa-thumbtack"></i><span>Email Sent - Request</span></p>
+													<div class="lead-progress">
+														<span class="wrap"><span><!-- bar --></span></span>
+													</div>
+												</div>
+											</a>
+											<button type="button"><i class="fas fa-portrait"></i><span>Contact</span></button>
+										</li>
+									</ul>
+								</li>
+								<!-- // User Group -->
+
+								<!-- User Group -->
+								<li>
+									<h3>
+										<i class="fas fa-building"></i>
+										<span class="name">Company Name</span>
+										<span class="contact-name">Contact Name</span>
+										<span class="cnt">2</span>
+									</h3>
+									<ul class="lead-list">
+										<li class="over">
+											<a href="#" title="">
+												<span class="lead-type">
+													<i class="fas fa-car"></i>
+													<span class="lead-number">KM00<br />567890</span>
+												</span>
+												<div>
+													<h4>Follow-up Contact <sup class="past"></sup></h4>
+													<p><i class="fas fa-file-alt"></i><span>Financial Enquiry</span></p>
+													<p><i class="fas fa-thumbtack"></i><span>Email Sent - Request</span></p>
+													<div class="lead-progress">
+														<span class="wrap"><span><!-- bar --></span></span>
+													</div>
+												</div>
+											</a>
+											<button type="button" class="disabled"><i class="fas fa-desktop"></i><span>Assign</span></button>
+										</li>
+										<li class="delayed">
+											<a href="#" title="">
+												<span class="lead-type">
+													<i class="fas fa-book"></i>
+													<span class="lead-number">KM00<br />567890</span>
+												</span>
+												<div>
+													<h4>Test Drive <sup class="today"></sup></h4>
+													<p><i class="fas fa-file-alt"></i><span>Financial Enquiry</span></p>
+													<p><i class="fas fa-thumbtack"></i><span>Email Sent - Request</span></p>
+													<div class="lead-progress">
+														<span class="wrap"><span><!-- bar --></span></span>
+													</div>
+												</div>
+											</a>
+											<button type="button"><i class="fas fa-check-square"></i><span>Assign</span></button>
+										</li>
+									</ul>
+								</li>
+								<!-- // User Group -->
+							</ul>
+							<!-- // Lead List -->
+						</div>
 					</li>
 					<!-- // My Task Tab -->
 	
 					<!-- Performance Tab -->
-					<li style="background:yellow;">
-						
+					<li class="main-swipe-cont-performance">
+						<h2 class="tit-h2 fixed">PERFORMANCE</h2>
+
+						<style>
+						.radar-chart-wrap {position:relative; background:url('../images/img_radar_chart.png') center top no-repeat; background-size:contain; margin:3rem 0 5rem 0;}
+						.radar-chart-wrap #radar-chart {transform:translate3d(0, 0.8rem, 0) rotate(180deg)}
+						.radar-chart-wrap .chart-label {position:absolute; display:inline-block; text-align:center;}
+						.radar-chart-wrap .chart-label em {display:block; color:#58595B; font-size:1.2rem; text-align:center;}
+						.radar-chart-wrap .chart-label strong {display:inline-block; line-height:2.7rem; color:#58595B; font-size:2.2rem;}
+						.radar-chart-wrap .chart-label i {display:inline-block; line-height:2.7rem; font-size:1.2rem; margin-left:0.5rem;}
+						.radar-chart-wrap .chart-label i.up {color:#D52536;}
+						.radar-chart-wrap .chart-label i.down {color:#8497A6;}
+						.radar-chart-wrap .chart-label.task {top:1rem; left:4rem;}
+						.radar-chart-wrap .chart-label.lead {top:1rem; right:4rem;}
+						.radar-chart-wrap .chart-label.cont {bottom:-4.5rem; left:50%; margin-left:-2rem;}
+						.radar-chart-wrap .legend {position:absolute; bottom:-2rem; right:2rem;}
+						.radar-chart-wrap .legend p {color:#7E8083; font-size:1.2rem; margin:0; line-height:2rem;}
+						.radar-chart-wrap .legend p i {display:inline-block; border-radius:0.4rem; width:0.8rem; height:0.8rem; vertical-align:middle; margin-right:0.5rem;}
+						.radar-chart-wrap .legend p .current {background:#F15D6B;}
+						.radar-chart-wrap .legend p .previous {background:#C4C6C8;}
+
+						.line-chart-wrap {clear:both; overflow:hidden;}
+						</style>
+
+						<div class="scroll-wrap">
+							<div class="radar-chart-wrap">
+								<canvas id="radar-chart"></canvas>
+
+								<span class="chart-label task"><em>Task</em><strong>50</strong><i class="up">▲</i></span>
+								<span class="chart-label lead"><em>Lead</em><strong>50</strong><i class="down">▼</i></span>
+								<span class="chart-label cont"><em>Contract</em><strong>50</strong><i class="down">▼</i></span>
+
+								<div class="legend">
+									<p><i class="current"></i><span>Dec, 2018</span></p>
+									<p><i class="previous"></i><span>Nov, 2018</span></p>
+								</div>
+							</div>
+
+							<ul class="line-chart-wrap">
+								<li></li>
+								<li></li>
+							</ul>
+						</div>
 					</li>
 					<!-- // Performance Tab -->
 				</ul>

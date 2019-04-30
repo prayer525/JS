@@ -22,7 +22,7 @@ fnList.pageMain = function(){
 		}
 	});
 
-	$('.lead-list').off('touchstart').on('touchstart', function(){
+	$('.lead-list, .first-contact-summary-wrap').off('touchstart').on('touchstart', function(){
 		pageMain.mainSwipeLoop.freez();
 	}).off('touchend').on('touchend', function(){
 		pageMain.mainSwipeLoop.unfreez();
@@ -67,9 +67,15 @@ fnList.pageMain = function(){
 
     /* OPEN LEAD */
     var openleadTab = $('#openlead-tab-list').swipeTab({
-        pageNavigation:$('.tab-slide-custom-navi'),
+        pageNavigation:$('#openlead-tab-list').next('ul'),
         moveEnd : function(idx){
-            // console.log('move end callback : ' , idx)
+            if(idx == 4){
+				$('#takeover-lead-list').show();
+				$('#open-lead-list').hide()
+			}else{
+				$('#takeover-lead-list').hide();
+				$('#open-lead-list').show()
+			}
         }
 	});
 	
@@ -78,6 +84,83 @@ fnList.pageMain = function(){
         query: '.lead-list li',
         list: true,
         right: 65
-    });
+	});
+	
+	/* Lead list accordion event */
+	$('.lead-list-wrap h3').off('click').on('click', function(){
+		$(this).parent('li').toggleClass('show');
+	})
+
+	/* Takeover list accordion event */
+	$('.takeover-lead-list dt').off('click').on('click', function(){
+		$(this).next('dd').toggleClass('show');
+	})
+
+	/* MY TASK */
+	var mytaskleadTab = $('#mytask-tab-list').swipeTab({
+        pageNavigation:$('#mytask-tab-list').next('ul'),
+        moveEnd : function(idx){
+            
+        }
+	});
+
+	/* Performance */
+	var ctxR = document.getElementById("radar-chart").getContext('2d');
+	window.myRadarChart = new Chart(ctxR, {
+		type: 'radar',
+		data: {
+			labels: [" ", " ", " "],
+			datasets: [{
+					label: "Current Month",
+					data: [5, 5, 5],
+					backgroundColor: [
+						'rgba(235, 11, 11, .77)',
+					],
+					borderColor: [
+						'rgba(235, 11, 11, .77)',
+					],
+					borderWidth: 1,
+					radius:0
+				},{
+					label: "Previous Month",
+					data: [4, 5, 6],
+					backgroundColor: [
+						'rgba(196, 198, 200, 1)',
+					],
+					borderColor: [
+						'rgba(196, 198, 200, 1)',
+					],
+					borderWidth: 1,
+					radius:0
+				},{
+					label: "dummy",
+					data: [0, 0, 0],
+					backgroundColor: [
+						'rgba(196, 198, 200, 0)',
+					],
+					borderColor: [
+						'rgba(196, 198, 200, 0)',
+					],
+					borderWidth: 1,
+					radius:0
+				}
+			]
+		},
+		options: {
+			responsive: true,
+			legend: {
+				display: false
+			},
+			scale: {
+				display: false
+			},
+			pointer:{
+				display:false
+			}
+		}
+	});
+
+	
+	$('.radar-chart-wrap').css('height', $(document).width() / 2 + 'px');
 
 }

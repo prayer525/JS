@@ -58,7 +58,7 @@
                 return false;
             });
 
-        });
+        }, {passive:true});
     }
 
     function extend() {
@@ -207,9 +207,6 @@
 
         if (this.startSwipe) {
             this.move();
-
-            //prevent scroll
-            e.preventDefault();
         }
     };
 
@@ -226,7 +223,6 @@
         }
 
         e.stopPropagation();
-        e.preventDefault();
     };
 
     /**
