@@ -31,6 +31,10 @@ fnList.pageLogin = function(){
 			fnSetCountry();
 		});
 
+		$('.btn-go-login').off('click').on('click', function(){
+			location.href="main.html";
+		})
+
 		function fnSetCountry(){
 			var selCountry = $('.sel-country-list input[name=select-country]:checked');
 

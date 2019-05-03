@@ -104,6 +104,34 @@ fnList.pageMain = function(){
         }
 	});
 
+	var firstContactLeadSlide = null;
+	$("#first-contact-lead-list").touchSlider({
+        roll:true,
+		flexible:false,
+		btn_prev:$('.first-contact-slide-navi .btn-prev'),
+		btn_next:$('.first-contact-slide-navi .btn-next'),
+        initComplete : function (e) {
+            firstContactLeadSlide = this;
+        },
+        counter : function (e) {
+			$(firstContactLeadSlide).find('>ul>li').scrollTop(0);
+        }
+	});
+
+	$('.first-contact-summary-list li').off('click', 'a').on('click', 'a', function(){
+		var idx = $(this).parent('li').index();
+
+		firstContactLeadSlide.go_page(idx);
+
+		setTimeout(function(){
+			$('.layer-popup-wrap, .first-contact-wrap').addClass('show');
+		}, 150)
+	})
+
+	$('.first-contact-wrap .btn-skip').off('click').on('click', function(){
+		$('.layer-popup-wrap, .first-contact-wrap').removeClass('show');
+	})
+
 	/* Performance */
 	var ctxR = document.getElementById("radar-chart").getContext('2d');
 	window.myRadarChart = new Chart(ctxR, {
@@ -159,8 +187,83 @@ fnList.pageMain = function(){
 			}
 		}
 	});
-
-	
 	$('.radar-chart-wrap').css('height', $(document).width() / 2 + 'px');
+
+	var optLineGraph = {
+							responsive: true,
+							legend: {
+								display: false
+							},
+							scales: {
+								xAxes:[{
+									display:false
+								}],
+								yAxes: [{
+									display: false,
+									type: 'linear',
+									position: 'left',
+									ticks: {
+										min: 0
+									}
+								}],
+							},
+							pointer:{
+								display:false
+							}
+						};
+	var ctxLO = document.getElementById("chart-lead-to-offer").getContext('2d');
+	var chartLeadToOffer = new Chart(ctxLO, {
+		type: 'line',
+		data: {
+			"labels": ["", "", "", "", "", ""],
+			"datasets": [{
+				"label": "value",
+				"data": [, , , , 23, ],
+				"fill": false,
+				"borderWidth":0,
+				"lineTension": 0,
+				"pointRadius":4,
+				"pointBackgroundColor":"rgb(255,90,38)",
+				"pointBorderColor":"rgb(255,90,38)"
+			},{
+				"label": "value",
+				"data": [10, 10, 10, 10, 23, 23],
+				"fill": true,
+				"backgroundColor":"rgba(255,90,38, 0.55)",
+				"borderWidth":0,
+				"borderColor": "rgba(255,90,38, 0)",
+				"lineTension": 0,
+				"pointRadius":0
+			}]
+		},
+		options: optLineGraph
+	});
+
+	var ctxLC = document.getElementById("chart-leat-to-contract").getContext('2d');
+	var chartLeadToContract = new Chart(ctxLC, {
+		type: 'line',
+		data: {
+			"labels": ["", "", "", "", "", ""],
+			"datasets": [{
+				"label": "value",
+				"data": [, , , , 23, ],
+				"fill": false,
+				"borderWidth":0,
+				"lineTension": 0,
+				"pointRadius":4,
+				"pointBackgroundColor":"rgb(255,145,48)",
+				"pointBorderColor":"rgb(255,145,48)"
+			},{
+				"label": "value",
+				"data": [10, 10, 10, 10, 23, 23],
+				"fill": true,
+				"backgroundColor":"rgba(255,145,48, 0.55)",
+				"borderColor": "rgba(255,145,48, 0)",
+				"lineTension": 0,
+				"pointRadius":0
+			}]
+		},
+		options: optLineGraph
+	});
 
 }

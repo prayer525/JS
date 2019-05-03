@@ -302,7 +302,7 @@
 				}
 			}
 			
-			//this.counter();
+			// this.counter();
 		},
 		
 		touchstart : function (e) {
@@ -610,7 +610,19 @@
 				this.opts.counter.call(this, this.get_page());
 			}
 		},
-		
+		heightReset:function(){
+			console.log('this.get_page().current : ' , this.get_page().current)
+			console.log('this._tg : ' , this._tg)
+			console.log('this._list.eq(this.get_page().current-1) : ' , this._list.eq(this.get_page().current-1))
+			console.log('this._list.eq(this.get_page().current).height() : ' , this._list.eq(this.get_page().current-1).height())
+			var _this = this;
+			setTimeout(function(){
+				_this._tg.css({
+					"height" : _this._list.eq(_this.get_page().current-1).height() + "px"
+				});
+			},30)
+			
+		},
 		autoPlay : function () {
 			var _this = this;
 			this._timer = setInterval(function () {

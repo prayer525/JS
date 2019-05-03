@@ -11,13 +11,6 @@ ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,
 form,fieldset,legend,a,textarea,input,select,option,button,label,table,caption,tbody,tfoot,thead,tr,th,td,
 article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{
 	margin:0;padding:0;border:0;outline:0;background:transparent;font-style:normal;
-	-webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
-                                    supported by Chrome and Opera */
 }
 /* =====  Media ===== */
 audio:not([controls]){display:none;height:0;}

@@ -67,25 +67,38 @@ function fnWhichAnimationEvent(eType){
     $.singlePage = {
         option:{
             contentWrapper : 'body',
-        },
+		},
+		content:null,
         transition:{},
         animation:{},
         getPage:function(e){
-            $('<div></div>').load(e.data('href') + ' > div', function(data){
-                var content = $( $(this).html() );
+			var target = e;
+            $('<div></div>').load(target.data('href') + ' > div', function(data){
+				var content = $( $(this).html() );
 
-                $.singlePage.beforeShowPage(content);
-                
-                $($.singlePage.option.contentWrapper).append(content)
+				$.singlePage.content = content;
+				
+				$.singlePage.beforeShowPage($.singlePage.content);
+				
+				$($.singlePage.option.contentWrapper).append($.singlePage.content)
+
+				fnList[content.attr('id')]()
+
+				if(!target.data('preload')){
+					$.singlePage.showPage($.singlePage.content);
+				}
             });
-        },
+		},
+		preloadPage:function(){
+			$.singlePage.showPage($.singlePage.content); 
+		},
         beforeShowPage:function(content){
             content.find('[data-role=back]').one('click', function(){
                 $.singlePage.beforeHidePage(content);
             })
-            $.singlePage.showPage(content);
         },
         showPage:function(content){
+			content.removeClass('hide');
             content.addClass('ui-page ui-page-active slide in');
 
             content.one($.singlePage.transition.end, function(){
@@ -544,3 +557,4 @@ function fnWhichAnimationEvent(eType){
 })( jQuery );
 
 
+$.singlePage.option.contentWrapper = '.content-wrap .select-wrap';
