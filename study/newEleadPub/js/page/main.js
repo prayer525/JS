@@ -81,10 +81,16 @@ fnList.pageMain = function(){
 	
 	/* OPEN LEAD LIST SWIPE */
 	var listSwipe = Swiped.init({
-        query: '.lead-list li',
+        query: '.lead-list li a',
         list: true,
-        right: 65
+		right: 65
 	});
+
+	$('.lead-list li').off('click', 'button').on('click', 'button', function(e){
+		$.each(listSwipe, function(idx, item){
+			item.close(true);
+		})
+	})
 	
 	/* Lead list accordion event */
 	$('.lead-list-wrap h3').off('click').on('click', function(){

@@ -68,6 +68,7 @@ function fnWhichAnimationEvent(eType){
         option:{
             contentWrapper : 'body',
 		},
+		zIndex : 1,
 		content:null,
         transition:{},
         animation:{},
@@ -81,6 +82,8 @@ function fnWhichAnimationEvent(eType){
 				$.singlePage.beforeShowPage($.singlePage.content);
 				
 				$($.singlePage.option.contentWrapper).append($.singlePage.content)
+
+				$('#'+content.attr('id')).css('z-index : ', $.singlePage.zIndex++)
 
 				fnList[content.attr('id')]()
 
@@ -113,6 +116,7 @@ function fnWhichAnimationEvent(eType){
             content.removeClass('slide in');
         },
         beforeHidePage:function(content){
+			$.singlePage.zIndex--;
             $.singlePage.hidePage(content);
         },
         hidePage:function(content){
