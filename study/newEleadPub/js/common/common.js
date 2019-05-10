@@ -1,4 +1,70 @@
 var fnList = {};
+var Data = {
+	data:{
+	},
+	apiData:{
+	},
+	set:function(k,v){
+		if(v === undefined){
+			v = '';
+		}
+		Data.data[k] = v;
+	},
+	get:function(k){
+		if(Data.data[k] === undefined){
+			Data.data[k] = '';
+		}
+		return Data.data[k];
+	},
+	setData:function(k,v){
+		if(v === undefined){
+			v = '';
+		}
+		Data.apiData[k] = v;
+		Data.put();
+	},
+	getData:function(k){
+		if(Data.apiData[k] === undefined){
+			Data.apiData[k] = '';
+		}
+		return Data.apiData[k];
+	},
+	getItem:function(k, v){
+		var itemValue = '';
+		if(Data.apiData[k] === undefined || Data.apiData[k][v] === undefined){
+			itemValue = '';
+		}else{
+			itemValue = Data.apiData[k][v];
+		}
+		return itemValue;
+	},
+	put:function(callBack){
+		window.localStorage.setItem("data", JSON.stringify(Data.data));
+		window.localStorage.setItem("apiData", JSON.stringify(Data.apiData));
+		if(callBack !== undefined){
+			callBack();
+		}
+	},
+	withdraw:function(callBack){
+		var _data = window.localStorage.getItem("data");
+
+		if(_data != undefined){
+			Data.data = JSON.parse(_data);
+
+			var _apiData = window.localStorage.getItem("apiData");
+
+			if(_apiData != undefined){
+				Data.apiData = JSON.parse(_apiData);
+
+				if(callBack !== undefined){
+					callBack();
+				}
+			}
+		}
+	}
+}
+window.Data = Data;
+Data.withdraw();
 
 // 공통 이벤트 바인드
 $(function(){

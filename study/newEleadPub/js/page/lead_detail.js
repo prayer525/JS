@@ -1,18 +1,7 @@
 fnList.pageLeadDetail = function(){
-	console.log('pageLeadDetail : ' , $.singlePage)
+	console.log('pageLeadDetail')
 
-	/* lead summary slider */
-	// var leadHistoryList = null;
-    // $("#lead-history-list").touchSlider({
-    //     roll:false,
-    //     flexible:false,
-    //     initComplete : function (e) {
-	// 		leadHistoryList = this;
-    //     },
-    //     counter : function (e) {
-			
-    //     }
-	// });
+	console.log(Data.getData('leadId') );
 
 	$('.other-lead-wrap-summary').load('./other_lead_list.html .other-lead-wrap', function(){
 
@@ -26,8 +15,6 @@ fnList.pageLeadDetail = function(){
 			}
 		});
 	})
-
-	// fnList.pageOtherLeadList();
 
 	setTimeout(function(){
 		$.singlePage.preloadPage()

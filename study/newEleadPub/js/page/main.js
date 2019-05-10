@@ -91,6 +91,10 @@ fnList.pageMain = function(){
 			item.close(true);
 		})
 	})
+
+	$('#open-lead-list .lead-list li').off('click', 'a').on('click', 'a', function(e){
+		Data.setData('leadId', 'TestId');
+	})
 	
 	/* Lead list accordion event */
 	$('.lead-list-wrap h3').off('click').on('click', function(){
@@ -136,6 +140,10 @@ fnList.pageMain = function(){
 
 	$('.first-contact-wrap .btn-skip').off('click').on('click', function(){
 		$('.layer-popup-wrap, .first-contact-wrap').removeClass('show');
+	})
+
+	$('#mytask-lead-list .lead-list li').off('click', 'button').on('click', 'button', function(e){
+		fnList.selLayerContact();
 	})
 
 	/* Performance */

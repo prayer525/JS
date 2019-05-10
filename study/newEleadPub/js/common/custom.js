@@ -132,7 +132,15 @@ function fnWhichAnimationEvent(eType){
         },
         afterHidePage:function(content){
             content.remove();
-        }
+		},
+		goPage:function(url, param){
+			var triggerElement = $('<a></a>')
+				.data('href', url)
+				.data('preload', param.preload)
+
+			$.singlePage.getPage(triggerElement);
+				
+		}
     };
 
     // To Do : Users select using to Transition or Animation and append start, move
@@ -561,4 +569,4 @@ function fnWhichAnimationEvent(eType){
 })( jQuery );
 
 
-$.singlePage.option.contentWrapper = '.content-wrap .select-wrap';
+$.singlePage.option.contentWrapper = '.content-wrap .layer-page-wrap';
