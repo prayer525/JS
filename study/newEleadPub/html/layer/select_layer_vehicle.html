@@ -10,19 +10,25 @@
 <body>
 
 <div id="selectLayerVehicle" class="select-layer">
-	<button type="button" class="btn-select-layer-close"><i class="fas fa-times"></i></button>
 	<div class="select-layer-content-wrap">
+		<button type="button" class="btn-select-layer-close"><i class="fas fa-times"></i></button>
+
 		<h3>Vehicle Model</h3>
 		
+		<!-- preferred vehicle -->
 		<div class="pre-select-preferred-vehicle">
 			<p><span>Requested Vehicle</span><strong>Model01</strong></p>
 		</div>
+		<!-- // preferred vehicle -->
 
+		<!-- Vehicle Type Selector -->
 		<ul class="tab-select" id="tab-vehicle-type">
 			<li class="on"><a href="#"><span>Vehicle</span></a></li>
 			<li><a href="#"><span>Model</span></a></li>
 		</ul>
+		<!-- // Vehicle Type Selector -->
 		
+		<!-- Vehicle List -->
 		<div class="sel-vehicle-list-wrap">
 			<ul>
 				<li>
@@ -67,9 +73,11 @@
 				</li>
 			</ul>
 		</div>
-	</div>
-	<div class="popup-footer-btn static">
-		<button type="button" class="btn-select-layer-confirm disabled">CONFIRM</button>
+		<!-- // Vehicle List -->
+
+		<div class="popup-footer-btn static">
+			<button type="button" class="btn-select-layer-confirm disabled">CONFIRM</button>
+		</div>
 	</div>
 </div>
 </body>

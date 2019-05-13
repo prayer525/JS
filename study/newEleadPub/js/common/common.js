@@ -82,7 +82,7 @@ $(function(){
 	 ********************************************************************************************/
 	$('.select-layer-wrap').off('click', '.btn-select-layer-close').on('click', '.btn-select-layer-close', function(){
 		$('.back-pannel').removeClass('show');
-		$(this).parent('div').removeClass('show');
+		$(this).parent('div').parent('div').removeClass('show');
 	})
 
 	/* scroll top/down to header hide */

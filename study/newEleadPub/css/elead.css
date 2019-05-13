@@ -28,11 +28,11 @@
 .back-pannel.show {display:block;}
 
 /* Select Layer */
-.select-layer {position:absolute; bottom:0; left:0; width:100%; max-height:100%; background:#fff; transition:linear 0.5s;}
+.select-layer {position:absolute; width:100%; height:100%; background:transparent; transform:translate3d(0,0,0); transition:linear 0.3s;}
 .select-layer .btn-select-layer-close {position:absolute; top:-4.5rem; left:50%; display:inline-block;; border:none; border-radius:1.8rem; background:#D52536; width:3.5rem; height:3.5rem; color:#fff; font-size:2.2rem; margin:0 auto; transform:translateX(-50%)}
 .select-layer .btn-select-layer-close i {height:3.5rem; line-height:3.5rem;}
 .select-layer .btn-select-layer-confirm {display:block; width:100%; height:4.5rem; border:none; background:#D52536; color:#fff; font-size:1.5rem;}
-.select-layer.show {bottom:100%;}
+.select-layer.show {transform:translate3d(0, -100%, 0);}
 
 .layer-popup-wrap {position:fixed; top:0; left:0; visibility:hidden; width:100%; height:100%; z-index:70; transform:translate3d(0, 0,0) scale(1); transition:0.5s;}
 .layer-popup-wrap.show {visibility:visible;}
@@ -357,7 +357,7 @@
 
 /* Switch Select List */
 .switch-select li {position:relative; width:100%; height:4.5rem; overflow:hidden; padding:0.5rem; opacity:1; transition:0.5s;}
-.switch-select li input {position:absolute; top:0; left:0; }
+.switch-select li input {position:absolute; top:0; left:0;  opacity:0;}
 .switch-select li label {position:relative; display:block; border-radius:0.5rem; box-shadow:0 0.1rem 0.3rem 0.2rem rgba(0,0,0,0.1); width:100%; height:3.5rem; line-height:3.5rem; color:#58595B; font-size:1.4rem; padding-left:4rem;}
 .switch-select li i {position:absolute; top:0; width:2rem; height:3.5rem; line-height:3.5rem; color:#C4C6C8; font-size:1.6rem; text-align:center;}
 .switch-select li span {vertical-align:baseline;}
@@ -372,7 +372,7 @@
 /* select next activity item */
 .outcome-sel-next-activity {overflow:hidden; padding:0 1rem; margin-bottom:1rem;}
 .outcome-sel-next-activity li {position:relative; float:left; display:inline-block; width:33.3333%; padding:0.5rem;}
-.outcome-sel-next-activity li input {position:absolute; top:0; left:0;}
+.outcome-sel-next-activity li input {position:absolute; top:0; left:0; opacity:0;}
 .outcome-sel-next-activity li label {display:table; border:1px solid #C4C6C8; border-radius:0.5rem; width:100%; height:7.5rem; text-align:center; box-sizing:content-box; padding-top:0.5rem;}
 .outcome-sel-next-activity li label i {display:table-row; width:100%; height:2.5rem; color:#C4C6C8; font-size:2rem; vertical-align:middle;}
 .outcome-sel-next-activity li label i:before {display:table-cell; vertical-align:middle;}
@@ -403,7 +403,7 @@
 
 
 /* Module */
-.select-layer-content-wrap {background:linear-gradient(to bottom, #F3F4F4 15rem, #ffffff 15rem); padding:1.5rem;}
+.select-layer-content-wrap {position:absolute; bottom:0; left:0; background:linear-gradient(to bottom, #F3F4F4 15rem, #ffffff 15rem); width:100%; max-height:100%; padding:1.5rem;}
 .select-layer-content-wrap h3 {color:#BB162B; font-size:2.1rem; text-align:center;}
 
 .select-layer-content-wrap.no-pad {padding:0;}
@@ -419,7 +419,7 @@
 .sel-vehicle-list-wrap {background:#fff; padding:1rem 0; margin-top:1.5rem; overflow:hidden; overflow-x:auto; -webkit-overflow-scrolling:touch;}
 .sel-vehicle-list-wrap ul {width:95rem;}
 .sel-vehicle-list-wrap ul li {position:relative; float:left; display:inline-block; padding-right:1rem;}
-.sel-vehicle-list-wrap ul li input {position:absolute; top:0; left:0;}
+.sel-vehicle-list-wrap ul li input {position:absolute; top:0; left:0; opacity:0;}
 .sel-vehicle-list-wrap ul li label {display:table-row;  }
 .sel-vehicle-list-wrap ul li label span {display:table-cell; border:1px solid #C4C6C8; border-radius:0.5rem; background:#fff; width:8.5rem; height:6.5rem; line-height:1.8rem; color:#58595B; font-size:1.3rem; text-align:center; vertical-align:middle;}
 .sel-vehicle-list-wrap ul li input:checked + label span {border-color:#D52536; color:#D52536;}
@@ -439,7 +439,7 @@
 .sel-schedule-time-list-wrap {background:#fff; padding:1.5rem; overflow:hidden; overflow-x:auto; -webkit-overflow-scrolling:touch;}
 .sel-schedule-time-list-wrap ul {width:110.5rem;}
 .sel-schedule-time-list-wrap ul li {position:relative; float:left; display:inline-block; padding-right:0.5rem;}
-.sel-schedule-time-list-wrap ul li input {position:absolute; top:0; left:0;}
+.sel-schedule-time-list-wrap ul li input {position:absolute; top:0; left:0; opacity:0;}
 .sel-schedule-time-list-wrap ul li label {display:inline-block; border:1px solid #C4C6C8; border-radius:0.5rem; width:6rem; height:3rem; line-height:3rem; color:#444444; font-size:1.3rem; text-align:center;}
 .sel-schedule-time-list-wrap ul li input:checked + label {box-shadow:0 0.1rem 0.3rem 0.2rem rgba(0,0,0,0.1); border-color:#D52536; color:#D52536;}
 .sel-schedule-time-list-wrap ul li input:disabled + label {border-color:#E8E8E8; background:#F3F4F4; color:#C4C6C8;}
