@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Select Layer Schedule</title>
+</head>
+<body>
+<div id="selectLayerSchedule" class="select-layer">
+	<button type="button" class="btn-select-layer-close"><i class="fas fa-times"></i></button>
+	<div class="select-layer-content-wrap no-pad">
+		<h3>Schedule Booking</h3>
+		
+		<!-- Schedule Calendar -->
+		<div class="sel-schedule-calendar-wrap">
+			<input type="text" id="sel-schedule-calendar" />
+		</div>
+		<!-- // Schedule Calendar -->
+
+		<!-- Schedule Time List -->
+		<div class="sel-schedule-time-list-wrap">
+			<ul class="sel-schedule-time-list">
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time1">
+					<label for="time1">08:00</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time2">
+					<label for="time2">08:30</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time3">
+					<label for="time3">09:00</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time4" disabled="disabled">
+					<label for="time4">09:30</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time5">
+					<label for="time5">10:00</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time6">
+					<label for="time6">10:30</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time7" disabled="disabled">
+					<label for="time7">11:00</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time8">
+					<label for="time8">11:30</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time9">
+					<label for="time9">12:00</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time10" disabled="disabled">
+					<label for="time10">12:30</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time11">
+					<label for="time11">13:00</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time12">
+					<label for="time12">13:30</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time13">
+					<label for="time13">14:00</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time14">
+					<label for="time14">14:30</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time15">
+					<label for="time15">15:00</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time16">
+					<label for="time16">15:30</label>
+				</li>
+				<li>
+					<input type="radio" name="sel-schedule-time" id="time17">
+					<label for="time17">16:00</label>
+				</li>
+			</ul>
+		</div>
+		<!-- Schedule Time List -->
+
+		<!-- Schedule Time Controll Pannel -->
+		<table class="sel-schedule-time-controll">
+			<caption>schedule tile controll pannel</caption>
+			<colgroup>
+				<col width="35%" />
+				<col width="30%" />
+				<col width="35%" />
+			</colgroup>
+			<tbody>
+				<tr>
+					<td>
+						<span>From</span>
+						<strong>08:00</strong>
+					</td>
+					<td>
+						<button type="button">- 30 Min</button>
+						<button type="button">+ 30 Min</button>
+						<button type="button">All day</button>
+					</td>
+					<td>
+						<span>To</span>
+						<strong>09:00</strong>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- // Schedule Time Controll Pannel -->
+
+		<!-- Other schedule list on time -->
+		<style>
+		.other-schedule-list-on-time {background:#fff; padding:1rem 0.5;}
+		.other-schedule-list-on-time h4 {padding:0 1rem;}
+		.other-schedule-list-wrap {padding:1rem; overflow:hidden; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+		.other-schedule-list-wrap ul {width:110rem;}
+		.other-schedule-list-wrap ul li {float:left; display:inline-block; border:1px solid #C4C6C8; border-radius:0.5rem; width:10.5rem; height:8rem; padding:1rem 0.5rem; margin-right:0.5rem;}
+		.other-schedule-list-wrap ul li span {color:#D52536; font-size:1.2rem;}
+		.other-schedule-list-wrap ul li p {color:#58595B; font-size:1.3rem; padding-top:0.5rem; }
+		</style>
+		<div class="other-schedule-list-on-time">
+			<h4>Booked list</h4>
+			<div class="other-schedule-list-wrap">
+				<ul class="other-schedule-list">
+					<li>
+						<span>09:30 - 10:30</span>
+						<p>Q-customers name</p>
+					</li>
+					<li>
+						<span>09:30 - 10:30</span>
+						<p>Q-customers name</p>
+					</li>
+					<li>
+						<span>09:30 - 10:30</span>
+						<p>Q-customers name</p>
+					</li>
+					<li>
+						<span>09:30 - 10:30</span>
+						<p>Q-customers name</p>
+					</li>
+					<li>
+						<span>09:30 - 10:30</span>
+						<p>Q-customers name</p>
+					</li>
+					<li>
+						<span>09:30 - 10:30</span>
+						<p>Q-customers name</p>
+					</li>
+					<li>
+						<span>09:30 - 10:30</span>
+						<p>Q-customers name</p>
+					</li>
+					<li>
+						<span>09:30 - 10:30</span>
+						<p>Q-customers name</p>
+					</li>
+					<li>
+						<span>09:30 - 10:30</span>
+						<p>Q-customers name</p>
+					</li>
+					<li>
+						<span>09:30 - 10:30</span>
+						<p>Q-customers name</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- // Other schedule list on time -->
+
+	</div>
+	<div class="popup-footer-btn static">
+		<button type="button" class="btn-select-layer-confirm disabled">CONFIRM</button>
+	</div>
+</div>
+</body>
+</html>

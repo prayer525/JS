@@ -19,13 +19,13 @@
 		</div>
 
 		<div class="wrap-gray">
-			<ul class="tab-select">
+			<ul class="tab-select" id="tab-outcome-type">
 				<li class="on"><a href="#"><span>CONTINUE</span></a></li>
 				<li><a href="#"><span>CLOSE</span></a></li>
 			</ul>
 		</div>
 
-		<div class="tab-select-content">
+		<div class="tab-select-content" id="tab-outcome-type-cont">
 			<h4>Continue type</h4>
 			<ul class="switch-select">
 				<li>
@@ -62,11 +62,49 @@
 				</li>
 			</ul>
 		</div>
+
+		<div class="outcome-form-wrap">
+			<div class="outcome-form-plan-next-activity">
+				<ul class="outcome-sel-next-activity">
+					<li><input type="radio" name="sel-next-activity" id="sel-next-activity-showroom"><label for="sel-next-activity-showroom"><i class="fas fa-map-marker-alt"></i><span>Showroom<br />Visit</span></label></li>	
+					<li><input type="radio" name="sel-next-activity" id="sel-next-activity-testdrive"><label for="sel-next-activity-testdrive"><i class="fas fa-car"></i><span>Test Drive</span></label></li>	
+					<li><input type="radio" name="sel-next-activity" id="sel-next-activity-follow"><label for="sel-next-activity-follow"><i class="fas fa-user-check"></i><span>Follow-up<br />Contact</span></label></li>	
+				</ul>
+
+				<ul class="plan-next-activity-form">
+					<li class="sel-next-activity-vehicle require">
+						<div>
+							<i class="fas fa-car left"></i>
+							<span>Vehicle select</span>
+							<i class="fas fa-check-square right "></i>
+						</div>
+					</li>
+					<li class="sel-next-activity-schedule require fill">
+						<div>
+							<i class="far fa-calendar-alt left"></i>
+							<span>Schedule select</span>
+							<i class="fas fa-check-square right"></i>
+						</div>
+					</li>
+					<li class="sel-next-activity-brochure">
+						<div>
+							<i class="fas fa-book left"></i>
+							<span>Brochure select</span>
+						</div>
+					</li>
+					<li>
+						<div>
+							<textarea name="" id="" placeholder="Comment"></textarea>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
 		
 	</div>
 
 	<div class="popup-footer-btn">
-		<button type="button" class="popup-btn-update">update</button>
+		<button type="button" class="popup-btn-update disabled">UPDATE</button>
 	</div>
 </div>
 </body>

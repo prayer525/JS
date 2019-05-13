@@ -75,6 +75,14 @@ $(function(){
 	// detail popup - comment show more : comment 영역을 클릭해도 보여지게 수정
 	$(document).off('click', '.lead-comment .comment').on('click', '.lead-comment .comment', function(){
 		$(this).next('button').trigger('click');
+	});
+
+	/********************************************************************************************
+	 * select-layer-wrap hide
+	 ********************************************************************************************/
+	$('.select-layer-wrap').off('click', '.btn-select-layer-close').on('click', '.btn-select-layer-close', function(){
+		$('.back-pannel').removeClass('show');
+		$(this).parent('div').removeClass('show');
 	})
 
 	/* scroll top/down to header hide */

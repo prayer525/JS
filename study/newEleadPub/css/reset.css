@@ -4,13 +4,14 @@
 *{-webkit-text-size-adjust:none;word-break:break-word;} /* 뷰표트 변환시 폰트크기 자동확대 방지 */
 *{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box;-moz-box-sizing:border-box;vertical-align:middle;-webkit-appearance:none;appearance:none;-moz-appearance:none;resize:none;outline:0;}
 
-html,body{position:relative;width:100%;height:100%;-webkit-tap-highlight-color:rgba(255,255,255,0); font-size:10px; font-family:Tahoma, sans-serif, helvetica;}
+html,body{position:relative;width:100%;height:100%;-webkit-tap-highlight-color:rgba(255,255,255,0); font-size:10px;}
 body,object,iframe,
 h1,h2,h3,h4,h5,h6,div,span,p,blockquote,pre,abbr,acronym,address,cite,code,del,dfn,em,img,figure,
 ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,
 form,fieldset,legend,a,textarea,input,select,option,button,label,table,caption,tbody,tfoot,thead,tr,th,td,
 article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{
 	margin:0;padding:0;border:0;outline:0;background:transparent;font-style:normal;
+	font-family:Tahoma, sans-serif, helvetica;
 }
 /* =====  Media ===== */
 audio:not([controls]){display:none;height:0;}

@@ -1,9 +1,3 @@
-@charset "utf-8";
-@import "reset.css";
-@import 'dripicons.css';
-@import 'awesomefont.css';
-@import 'transition.css';
-
 .over-hidden {overflow:hidden;}
 
 /* dummy css */
@@ -13,7 +7,8 @@
 .bg-gray {background:#f6f6f6 !important;}
 .bg-white {background:#ffffff !important;}
 /* main content wrap */
-.main-wrap {position:relative; background:#fff; width:100%; height:100%; overflow:hidden; overflow-y:auto; -webkit-overflow-scrolling: touch;}
+.main-wrap {position:relative; background:#fff; width:100%; height:100%; overflow:hidden; overflow-y:auto; -webkit-overflow-scrolling: touch; z-index:10;}
+.layer-page-wrap {position:static; z-index:20;}
 
 /* GNB */
 .menu-wrap {position:fixed; top:0; right:0; width:100%; height:100%; overflow:hidden; padding-left:25vw; z-index:30;}
@@ -28,8 +23,8 @@
 .page-wrap.hide {position:absolute; top:0; left:100%;}
 .nav-header {position:absolute; top:0; left:0; width:100%; height:4rem; line-height:4rem; padding:0 1rem;}
 .select-page-wrap {position:absolute; top:0; left:0;}
-.select-layer-wrap {position:absolute; bottom:-100%; left:0; width:100%; height:100%; background:transparent;}
-.back-pannel {position:absolute; top:0; left:0; display:none; width:100%; height:100%; background:rgba(0,0,0,0.5);}
+.select-layer-wrap {position:absolute; bottom:-100%; left:0; width:100%; height:100%; background:transparent; z-index:30;}
+.back-pannel {position:absolute; top:0; left:0; display:none; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:25;}
 .back-pannel.show {display:block;}
 
 /* Select Layer */
@@ -304,8 +299,9 @@
 .detail-wrap {position:relative; height:100%; padding:5rem 0 4.5rem; overflow:hidden; overflow-y:auto; -webkit-overflow-scrolling:touch; z-index:10;}
 .popup-lead-wrap {background:linear-gradient(to bottom, #f6f6f6 3.5rem, #ffffff 3.5rem); padding:0 1.5rem;}
 .popup-footer-btn {position:absolute; bottom:0; left:0; width:100%; height:4.5rem; z-index:30;}
+.popup-footer-btn.static {position:static;}
 .popup-footer-btn button {display:block; border:none; background:#D52536; width:100%; height:100%; color:#fff; font-size:2rem;}
-.popup-footer-btn.disalbed button {background:#7E8083;}
+.popup-footer-btn button.disabled {background:#7E8083;}
 
 .other-lead-wrap {position:relative; height:100%; overflow:hidden;}
 .other-lead-wrap h4 {position:absolute; top:0; left:0; background:#f6f6f6; width:100%; height:3.5rem; line-height:3.5rem; color:#58595B; font-size:1.3rem; padding:0rem 1.5rem;}
@@ -360,19 +356,107 @@
 .tab-select-content h4 {color:#58595B; font-size:1.4rem; padding-bottom:0.7rem;}
 
 /* Switch Select List */
-.switch-select li {position:relative; width:100%; overflow:hidden; padding:0.5rem;}
-.switch-select li input {position:absolute; top:0; left:0;}
-.switch-select li label {position:relative; display:block; border-radius:0.5rem; box-shadow:0 0.1rem 0.3rem 0.2rem rgba(0,0,0,0.1); width:100%; height:3.5rem; line-height:3.5rem; color:#58595B; font-size:1.4rem; padding-left:4rem; transition:0.5s;}
+.switch-select li {position:relative; width:100%; height:4.5rem; overflow:hidden; padding:0.5rem; opacity:1; transition:0.5s;}
+.switch-select li input {position:absolute; top:0; left:0; }
+.switch-select li label {position:relative; display:block; border-radius:0.5rem; box-shadow:0 0.1rem 0.3rem 0.2rem rgba(0,0,0,0.1); width:100%; height:3.5rem; line-height:3.5rem; color:#58595B; font-size:1.4rem; padding-left:4rem;}
 .switch-select li i {position:absolute; top:0; width:2rem; height:3.5rem; line-height:3.5rem; color:#C4C6C8; font-size:1.6rem; text-align:center;}
 .switch-select li span {vertical-align:baseline;}
 .switch-select li .left {left:1rem;}
 .switch-select li .right {display:none; right:1rem;}
 .switch-select li input:checked + label {border:1px solid #E8E8E8;  background:#F3F4F4; height:3.5rem !important; line-height:3.5rem !important; opacity:1 !important}
-.switch-select li input:checked + label .left,
 .switch-select li input:checked + label .right {display:inline-block;}
 .switch-select li input:checked + label span {display:inline !important;}
-.switch-select.selected li {padding:0;}
-.switch-select.selected li label {height:0; box-shadow:none; line-height:0; opacity:0;}
-.switch-select.selected li label .left, 
-.switch-select.selected li label span {display:none;}
+.switch-select.selected li {height:0; padding:0; opacity:0;}
+.switch-select.selected li.on {height:4.5rem; padding:0.5rem; opacity:1;}
+
+/* select next activity item */
+.outcome-sel-next-activity {overflow:hidden; padding:0 1rem; margin-bottom:1rem;}
+.outcome-sel-next-activity li {position:relative; float:left; display:inline-block; width:33.3333%; padding:0.5rem;}
+.outcome-sel-next-activity li input {position:absolute; top:0; left:0;}
+.outcome-sel-next-activity li label {display:table; border:1px solid #C4C6C8; border-radius:0.5rem; width:100%; height:7.5rem; text-align:center; box-sizing:content-box; padding-top:0.5rem;}
+.outcome-sel-next-activity li label i {display:table-row; width:100%; height:2.5rem; color:#C4C6C8; font-size:2rem; vertical-align:middle;}
+.outcome-sel-next-activity li label i:before {display:table-cell; vertical-align:middle;}
+.outcome-sel-next-activity li label span {display:table-cell; color:#58595B; font-size:1.3rem; height:3.5rem; vertical-align:middle;}
+.outcome-sel-next-activity li:last-child label i {font-size:1.8rem;}
+.outcome-sel-next-activity li input:checked + label {border-color:#D52536; box-shadow:0 0.1rem 0.3rem 0.2rem rgba(0,0,0,0.1);}
+.outcome-sel-next-activity li input:checked + label i,
+.outcome-sel-next-activity li input:checked + label span {color:#D52536;}
+
+/* Outcome input - plan next activity - text drive */
+.plan-next-activity-form {background:#F8F8F8; padding:1.5rem 1rem;}
+.plan-next-activity-form li {padding:0 0.5rem 1rem;}
+.plan-next-activity-form li div {position:relative;}
+.plan-next-activity-form li div span {display:block; border-radius:0.5rem; box-shadow:0 0.1rem 0.3rem 0.2rem rgba(0,0,0,0.1); background:#fff; width:100%; height:3.5rem; line-height:3.5rem; color:#58595B; font-size:1.4rem; padding:0 3rem 0 4rem;}
+.plan-next-activity-form li div i {position:absolute; top:0; width:4rem; height:3.5rem; line-height:3.5rem; font-size:1.8rem; text-align:center;}
+.plan-next-activity-form li div .left {left:0; color:#C4C6C8;}
+.plan-next-activity-form li div .right {right:0; width:3rem;}
+.plan-next-activity-form li div textarea {display:block; border:none; border-radius:0.5rem; box-shadow:0 0.1rem 0.3rem 0.2rem rgba(0,0,0,0.1); background:#fff; width:100%; height:12.8rem; line-height:1.8rem; color:#58595B; font-size:1.4rem; padding:1rem; resize:none;}
+.plan-next-activity-form li.require .right {color:#D52536;}
+.plan-next-activity-form li.require.fill .right {color:#ABC582;}
+
+
+
+
+
+
+
+
+
+/* Module */
+.select-layer-content-wrap {background:linear-gradient(to bottom, #F3F4F4 15rem, #ffffff 15rem); padding:1.5rem;}
+.select-layer-content-wrap h3 {color:#BB162B; font-size:2.1rem; text-align:center;}
+
+.select-layer-content-wrap.no-pad {padding:0;}
+.select-layer-content-wrap.no-pad h3 {padding-top:1.5rem;}
+
+/* layer select vehicle */
+.pre-select-preferred-vehicle {margin-top:1.5rem; margin-bottom:1rem;}
+.pre-select-preferred-vehicle p {display:block; border-radius:0.5rem; box-shadow:0 0.1rem 0.3rem 0.2rem rgba(0,0,0,0.1); background:#fff; width:100%; height:3.5rem; line-height:3.5rem; overflow:hidden;}
+.pre-select-preferred-vehicle p span {float:left; display:inline-block; color:#58595B; font-size:1.3rem; padding-left:1rem;}
+.pre-select-preferred-vehicle p strong {float:right; display:inline-block;; color:#D52536; font-size:1.4rem; padding-right:1rem;}
+
+/* layer vehicle list */
+.sel-vehicle-list-wrap {background:#fff; padding:1rem 0; margin-top:1.5rem; overflow:hidden; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+.sel-vehicle-list-wrap ul {width:95rem;}
+.sel-vehicle-list-wrap ul li {position:relative; float:left; display:inline-block; padding-right:1rem;}
+.sel-vehicle-list-wrap ul li input {position:absolute; top:0; left:0;}
+.sel-vehicle-list-wrap ul li label {display:table-row;  }
+.sel-vehicle-list-wrap ul li label span {display:table-cell; border:1px solid #C4C6C8; border-radius:0.5rem; background:#fff; width:8.5rem; height:6.5rem; line-height:1.8rem; color:#58595B; font-size:1.3rem; text-align:center; vertical-align:middle;}
+.sel-vehicle-list-wrap ul li input:checked + label span {border-color:#D52536; color:#D52536;}
+
+/* layer schedule calendar */ 
+.sel-schedule-calendar-wrap {background:#F3F4F4; padding:1rem 0.5rem 1.5rem;}
+.sel-schedule-calendar-wrap>input {display:none;}
+.sel-schedule-calendar-wrap .mbsc-material .mbsc-cal-c {padding:0;}
+.sel-schedule-calendar-wrap .mbsc-material .mbsc-fr-w {background:#F3F4F4; color:#A3A6B4;}
+.sel-schedule-calendar-wrap .mbsc-material .mbsc-fr-btn {color:#C4C6C8;}
+.sel-schedule-calendar-wrap .mbsc-material .mbsc-cal-day-date {background:#fff; color:#43425D; font-size:1.2rem;}
+.sel-schedule-calendar-wrap .mbsc-material .mbsc-cal-c .mbsc-cal .mbsc-cal-body .mbsc-selected .mbsc-cal-cell-txt {background:#D52536; color:#fff;}
+.sel-schedule-calendar-wrap .mbsc-material .mbsc-cal-year,
+.sel-schedule-calendar-wrap .mbsc-material .mbsc-cal-month {color:#58595B;}
+
+/* layer schedule time list */
+.sel-schedule-time-list-wrap {background:#fff; padding:1.5rem; overflow:hidden; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+.sel-schedule-time-list-wrap ul {width:110.5rem;}
+.sel-schedule-time-list-wrap ul li {position:relative; float:left; display:inline-block; padding-right:0.5rem;}
+.sel-schedule-time-list-wrap ul li input {position:absolute; top:0; left:0;}
+.sel-schedule-time-list-wrap ul li label {display:inline-block; border:1px solid #C4C6C8; border-radius:0.5rem; width:6rem; height:3rem; line-height:3rem; color:#444444; font-size:1.3rem; text-align:center;}
+.sel-schedule-time-list-wrap ul li input:checked + label {box-shadow:0 0.1rem 0.3rem 0.2rem rgba(0,0,0,0.1); border-color:#D52536; color:#D52536;}
+.sel-schedule-time-list-wrap ul li input:disabled + label {border-color:#E8E8E8; background:#F3F4F4; color:#C4C6C8;}
+
+/* layer schedule time controll pannel */
+.sel-schedule-time-controll {table-layout:fixed; background:#F3F4F4; width:100%;}
+.sel-schedule-time-controll td {line-height:3rem; text-align:center; padding:1rem 0; vertical-align:middle;}
+.sel-schedule-time-controll td span {color:#9F9F9F; font-size:1.3rem;}
+.sel-schedule-time-controll td strong {display:block; color:#58595B; font-size:2.0rem; line-height:2.2rem; padding-bottom:2rem;}
+.sel-schedule-time-controll td button {display:inline-block; border:none; border-radius:0.5rem; box-shadow:0 0.1rem 0.3rem 0.2rem rgba(0,0,0,0.1); background:#8497A6; width:6.5rem; height:2.3rem; line-height:2.3rem; color:#fff; font-size:1.2rem;}
+
+
+
+
+
+
+
+
+
 
