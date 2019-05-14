@@ -51,7 +51,25 @@ fnList.pageMain = function(){
     });
     $('.menu-cover').off('click').on('click', function(){
         $('.btn-toggle-menu').trigger('click');
-    })
+	});
+	
+	/* Hide Loading Layer */
+	var progressWidth = 0;
+	var loadingProgressInterval = setInterval(function(){
+		progressWidth++;
+		if(progressWidth > 100){
+			clearInterval(loadingProgressInterval);
+
+			setTimeout(function(){
+				$('.loading-wrap').addClass('complete').on('transitionend', function(){
+					$(this).remove();
+				})
+			}, 1000)
+		}else{
+			$('.loading-progress-wrap .progress-wrap div').css('width', progressWidth+'%')
+		}
+	},20);
+	
     
     /* lead summary slider */
     $("#dashboard-lead-list").touchSlider({

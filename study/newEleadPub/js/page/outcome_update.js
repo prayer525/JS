@@ -19,6 +19,9 @@ fnList.pageOutcomeUpdate = function(){
 		fnList.selLayerSchedule();
 	})
 
+	$('.plan-next-activity-form .sel-next-activity-brochure').off('click').on('click', function(e){
+		fnList.selLayerBrochure();
+	})
 	
 
 	setTimeout(function(){
