@@ -405,7 +405,7 @@
 /* Module */
 .select-layer-content-wrap {position:absolute; bottom:0; left:0; background:linear-gradient(to bottom, #F3F4F4 15rem, #ffffff 15rem); width:100%; max-height:90vh; padding:0rem;}
 .select-layer-content-wrap h3 {color:#BB162B; font-size:2.1rem; text-align:center; padding-top:1.5rem;}
-.select-layer-content-wrap .pad-wrap {padding:1.5rem;}
+.select-layer-content-wrap .pad-wrap {padding:1.5rem; padding-top:0;}
 
 
 /* layer select vehicle */
