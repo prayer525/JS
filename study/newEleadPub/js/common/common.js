@@ -12,9 +12,10 @@ var Data = {
 	},
 	get:function(k){
 		if(Data.data[k] === undefined){
-			Data.data[k] = '';
+			return '';
+		}else{
+			return Data.data[k];
 		}
-		return Data.data[k];
 	},
 	setData:function(k,v){
 		if(v === undefined){
@@ -25,18 +26,17 @@ var Data = {
 	},
 	getData:function(k){
 		if(Data.apiData[k] === undefined){
-			Data.apiData[k] = '';
+			return '';
+		}else{
+			return Data.apiData[k];
 		}
-		return Data.apiData[k];
 	},
 	getItem:function(k, v){
-		var itemValue = '';
 		if(Data.apiData[k] === undefined || Data.apiData[k][v] === undefined){
-			itemValue = '';
+			return '';
 		}else{
-			itemValue = Data.apiData[k][v];
+			return Data.apiData[k][v];
 		}
-		return itemValue;
 	},
 	put:function(callBack){
 		window.localStorage.setItem("data", JSON.stringify(Data.data));
@@ -66,12 +66,49 @@ var Data = {
 window.Data = Data;
 Data.withdraw();
 
+var fnMainTab = {
+	tab : [
+		{
+			page : 'dashboard', 
+			fnName : 'pageDashboard'
+		},{
+			page : 'open_lead', 
+			fnName : 'pageOpenLead'
+		},{
+			page : 'my_task', 
+			fnName : 'pageMyTask'
+		},{
+			page : 'performance', 
+			fnName : 'pagePerformance'
+		}
+	],
+	change:function(idx){
+		$('<div></div>').load('../html/'+fnMainTab.tab[idx].page + '.html #'+fnMainTab.tab[idx].fnName, function(data){
+			selLayer = $( $(this).html() );
+
+			console.log('selLayer : ' , selLayer, idx)
+
+			$('.main-swipe-cont>li').eq(idx).html(selLayer.html());
+
+			fnList[fnMainTab.tab[idx].fnName]();
+		});
+	}
+}
+
 // 공통 이벤트 바인드
 $(function(){
-	// detail popup - comment show more
-	$(document).off('click', '.lead-comment').on('click', '.lead-comment', function(){
-		$(this).find('.comment').toggleClass('show');
-	})
+	/********************************************************************************************
+	 * - detail popup - comment show more
+	 * - detail popup - comment show more : comment 영역을 클릭해도 보여지게 수정
+	 ********************************************************************************************/ 
+	$(document).off('click', '.lead-comment button').on('click', '.lead-comment button', function(){
+		$(this).parent('div').toggleClass('show');
+	}).off('click', '.lead-comment .comment').on('click', '.lead-comment .comment', function(){
+		if($(this).next('button').css('display') != 'none'){
+			$(this).next('button').trigger('click');
+		}
+	});
+
 	/********************************************************************************************
 	 * select-layer-wrap hide
 	 ********************************************************************************************/
@@ -79,6 +116,37 @@ $(function(){
 		$('.back-pannel').removeClass('show');
 		$(this).parent('div').parent('div').removeClass('show');
 	})
+	
+	/********************************************************************************************
+	 * Lead list accordion event
+	 ********************************************************************************************/
+	$(document).off('click', '.lead-list-wrap h3').on('click', '.lead-list-wrap h3', function(){
+		$(this).parent('li').toggleClass('show');
+	})
+
+	/********************************************************************************************
+	 * Comment length count
+	 ********************************************************************************************/
+	$(document).off('keyup', 'textarea').on('keyup', 'textarea', function(){
+		var _length = $(this).val().length;
+
+		$(this).prev('.max-comment-length').find('.cnt').text(_length);
+	})
+
+	$.fn.changeTab = function(){
+		var _this = this;
+		var _id = _this.attr('id');
+	
+		console.log('changeTab : ' , _this, _id)
+	
+		_this.find('a').off('click').on('click', function(){
+			var _idx = $(this).parent('li').index();
+			$(this).parent('li').addClass('on').siblings('li').removeClass('on');
+			$('.'+_id).eq(_idx).show().siblings('.'+_id).hide();
+	
+			return false;
+		});
+	}
 
 	/* scroll top/down to header hide */
 	// Hide Header on on scroll down

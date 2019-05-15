@@ -568,5 +568,4 @@ function fnWhichAnimationEvent(eType){
     }
 })( jQuery );
 
-
 $.singlePage.option.contentWrapper = '.content-wrap .layer-page-wrap';

@@ -65,7 +65,7 @@ fnList.selLayerBrochure = function(param){
 		
 		setTimeout(function(){
 			layer.show()
-		}, 30);
+		},30);
 	}
 
 	layer.show = function(){

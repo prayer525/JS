@@ -16,7 +16,6 @@ fnList.pageLeadDetail = function(){
 		});
 	})
 
-	setTimeout(function(){
-		$.singlePage.preloadPage()
-	}, 1000)
+	// after loading
+	$.singlePage.preloadPage()
 }

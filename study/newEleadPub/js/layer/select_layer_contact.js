@@ -16,17 +16,15 @@ fnList.selLayerContact = function(param){
 	}
 
 	layer.eventBind = function(){
-		selLayer.find('.preferred-channel li:last-child div').on('click', function(){
+		selLayer.find('.preferred-channel li div').on('click', function(){
 			layer.hide();
-
-			$.singlePage.goPage('outcome_update.html', {'preload':'true'});
 		});
 		
 		$('.select-layer-wrap').append(selLayer);
 
 		setTimeout(function(){
 			layer.show()
-		}, 30);
+		},30);
 	}
 
 	layer.show = function(){
