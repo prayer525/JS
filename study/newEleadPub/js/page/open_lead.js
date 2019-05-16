@@ -26,6 +26,10 @@ fnList.pageOpenLead = function(){
         list: true,
 		right: 65
 	});
+
+	$('.lead-list-wrap li').off('click', '>h3').on('click', '>h3', function(){
+		$(this).parent('li').toggleClass('show');
+	})
 	
 	$('.lead-list li').off('click', 'button').on('click', 'button', function(e){
 		$.each(listSwipe, function(idx, item){
