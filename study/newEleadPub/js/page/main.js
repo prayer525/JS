@@ -14,12 +14,13 @@ fnList.pageMain = function(){
                 fnList.pageMain();
 			}
 
+			console.log('index : ' , index)
+			fnMainTab.change(index);
+
 			$('.main-swipe-cont-wrap .main-swipe-cont>li>.scroll-wrap').scrollTop(0)
 			$('.main-tab-navi').find('li').removeClass('on')
 		},
 		transitionEnd: function(index, element) {
-			console.log('index : ' , index)
-			fnMainTab.change(index);
 			$('.main-tab-navi').find('li').eq(index).addClass('on')
 		}
 	});
