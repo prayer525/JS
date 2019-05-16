@@ -120,7 +120,7 @@ $(function(){
 	/********************************************************************************************
 	 * Lead list accordion event
 	 ********************************************************************************************/
-	$('.lead-list-wrap>li',document).on('click', 'h3', function(){
+	$(document).on('click', '.lead-list-wrap>li>h3', function(){
 		$(this).parent('li').toggleClass('show');
 	})
 
