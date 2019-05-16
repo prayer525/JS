@@ -1,11 +1,7 @@
 fnList.pageDashboard = function(){
 	console.log('pageDashboard : ' , fnList.pageMain.mainSwipeLoop);
 
-	$('.dashboard-lead-list-wrap').on('touchstart', function(){
-		fnList.pageMain.mainSwipeLoop.freez();
-	}).off('touchend').on('touchend', function(){
-		fnList.pageMain.mainSwipeLoop.unfreez();
-	})
+	fnList.initTabEvent();
 
 	/* lead summary slider */
     // $("#dashboard-lead-list").touchSlider({

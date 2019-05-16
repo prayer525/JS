@@ -15,7 +15,7 @@ fnList.pageMain = function(){
 			}
 
 			console.log('index : ' , index)
-			fnMainTab.change(index);
+			fnList.fnMainTab.change(index);
 
 			$('.main-swipe-cont-wrap .main-swipe-cont>li>.scroll-wrap').scrollTop(0)
 			$('.main-tab-navi').find('li').removeClass('on')
@@ -25,7 +25,7 @@ fnList.pageMain = function(){
 		}
 	});
 
-	fnMainTab.change(0);
+	fnList.fnMainTab.change(0);
 
 	$('.main-tab-navi').find('a').off('click').on('click', function(){
 		pageMain.mainSwipeLoop.slide($(this).parent('li').index(), 500)

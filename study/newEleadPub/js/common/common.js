@@ -1,4 +1,82 @@
-var fnList = {};
+var fnList = {
+	initTabEvent:function(){
+		// prevent tab touch start 
+		$('.lead-list, .first-contact-summary-wrap, .dashboard-lead-list-wrap').on('touchstart', function(){
+			fnList.pageMain.mainSwipeLoop.freez();
+		}).off('touchend').on('touchend', function(){
+			fnList.pageMain.mainSwipeLoop.unfreez();
+		})
+
+		// toggle event button in lead item
+		var listSwipe = Swiped.init({
+			query: '.lead-list li a',
+			list: true,
+			right: 65
+		});
+		$('.lead-list li').off('click', 'button').on('click', 'button', function(e){
+			$.each(listSwipe, function(idx, item){
+				item.close(true);
+			})
+		})
+
+		// acordian menu with user name
+		$('.lead-list-wrap li').off('click', '>h3').on('click', '>h3', function(){
+			$(this).parent('li').toggleClass('show');
+		})
+
+		// page scroll event
+		$('.scroll-wrap').scroll(function(event){
+			fnList.hasScrolled($(this).scrollTop());
+		});
+	},
+	hasScrolled:function(st){
+		var lastScrollTop = 0;
+		var delta = 5;
+		var navbarHeight = 50;
+		
+		// Make sure they scroll more than delta
+		if(Math.abs(lastScrollTop - st) <= delta)
+			return;
+		if (st > lastScrollTop && st > navbarHeight){
+			$('.controll-btn-wrap, .main-swipe-cont .tit-h2').addClass('nav-up');
+		} else {
+			if(st + $('.scroll-wrap').height() < $(document).height()) {
+				$('.controll-btn-wrap, .main-swipe-cont .tit-h2').removeClass('nav-up');
+			}
+		}
+
+		lastScrollTop = st;
+	},
+	fnMainTab:{
+		tab : [
+			{
+				page : 'dashboard', 
+				fnName : 'pageDashboard'
+			},{
+				page : 'open_lead', 
+				fnName : 'pageOpenLead'
+			},{
+				page : 'my_task', 
+				fnName : 'pageMyTask'
+			},{
+				page : 'performance', 
+				fnName : 'pagePerformance'
+			}
+		],
+		change:function(idx){
+			var _this = this;
+			$('<div></div>').load('../html/'+_this.tab[idx].page + '.html #'+_this.tab[idx].fnName, function(data){
+				selLayer = $( $(this).html() );
+	
+				console.log('selLayer : ' , selLayer, idx)
+	
+				$('.main-swipe-cont>li').eq(idx).html(selLayer.html());
+	
+				fnList[_this.tab[idx].fnName]();
+			});
+		}
+	}
+};
 var Data = {
 	data:{
 	},
@@ -66,35 +144,6 @@ var Data = {
 window.Data = Data;
 Data.withdraw();
 
-var fnMainTab = {
-	tab : [
-		{
-			page : 'dashboard', 
-			fnName : 'pageDashboard'
-		},{
-			page : 'open_lead', 
-			fnName : 'pageOpenLead'
-		},{
-			page : 'my_task', 
-			fnName : 'pageMyTask'
-		},{
-			page : 'performance', 
-			fnName : 'pagePerformance'
-		}
-	],
-	change:function(idx){
-		$('<div></div>').load('../html/'+fnMainTab.tab[idx].page + '.html #'+fnMainTab.tab[idx].fnName, function(data){
-			selLayer = $( $(this).html() );
-
-			console.log('selLayer : ' , selLayer, idx)
-
-			$('.main-swipe-cont>li').eq(idx).html(selLayer.html());
-
-			fnList[fnMainTab.tab[idx].fnName]();
-		});
-	}
-}
-
 // 공통 이벤트 바인드
 $(function(){
 	/********************************************************************************************
@@ -139,31 +188,5 @@ $(function(){
 	
 			return false;
 		});
-	}
-
-	/* scroll top/down to header hide */
-	// Hide Header on on scroll down
-	var lastScrollTop = 0;
-	var delta = 5;
-	var navbarHeight = 50;
-
-	$('.scroll-wrap').scroll(function(event){
-		hasScrolled($(this).scrollTop());
-	});
-
-	function hasScrolled(st) {
-
-		// Make sure they scroll more than delta
-		if(Math.abs(lastScrollTop - st) <= delta)
-			return;
-		if (st > lastScrollTop && st > navbarHeight){
-			$('.controll-btn-wrap, .main-swipe-cont .tit-h2').addClass('nav-up');
-		} else {
-			if(st + $('.scroll-wrap').height() < $(document).height()) {
-				$('.controll-btn-wrap, .main-swipe-cont .tit-h2').removeClass('nav-up');
-			}
-		}
-
-		lastScrollTop = st;
 	}
 })
