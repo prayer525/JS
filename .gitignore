@@ -1,3 +1,4 @@
 MyKia_cordova/platforms
 MyKia_cordova/plugins
 MyKia_cordova/node_modules
+*.zip

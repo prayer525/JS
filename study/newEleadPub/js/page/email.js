@@ -24,14 +24,6 @@ fnList.pageEmail = function(){
 			$('#pageEmail .popup-footer-btn').removeClass('twice');
 			$('#pageEmail .popup-footer-btn button').addClass('disabled').show();
 		}
-		
-		// if($(this).is(':checked')){
-		// 	$(this).siblings('input').prop('checked', false)
-		// 	$('.popup-footer-btn button').removeClass('disabled');
-		// }else{
-		// 	$('.popup-footer-btn button').addClass('disabled');
-		// }
-		// $('.popup-footer-btn button').removeClass('disabled');
 	});
 
 	$('#pageEmail').off('click', '.btn-next').on('click', '.btn-next', function(){
@@ -43,6 +35,8 @@ fnList.pageEmail = function(){
 			$('#pageEmail .popup-footer-btn button').addClass('disabled')
 		}
 	})
+
+	fnList.fnLayerEvent();
 
 	// after loading
 	$.singlePage.preloadPage()

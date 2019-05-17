@@ -20,7 +20,7 @@
 .sub-menu-list li a {display:inline-block; background: #e0e0e0; width:100%; height:4rem; line-height:2rem; color:#666; font-size:1.4rem; padding:1rem;}
 
 /* .layer-content {position:fixed; width:100%; height:100%; background:#fff; overflow:hidden;} */
-.page-wrap {width:100%; height:100%; background:#f6f6f6; overflow:hidden; z-index:10;}
+.page-wrap {width:100%; height:100%; background:#f6f6f6; overflow:hidden !important; z-index:10;}
 .page-wrap.hide {position:absolute; top:0; left:100%;}
 .nav-header {position:absolute; top:0; left:0; width:100%; height:4rem; line-height:4rem; padding:0 1rem;}
 .select-page-wrap {position:absolute; top:0; left:0;}
@@ -432,9 +432,12 @@
 .outcome-sel-next-activity li input:checked + label i,
 .outcome-sel-next-activity li input:checked + label span {color:#D52536;}
 
+.plan-next-activity-form {padding:1.5rem}
+
 /* Outcome input - plan next activity - text drive */
-.sel-schedule-form {background:#F8F8F8; padding:1.5rem 1rem 0;}
-.sel-schedule-form li {padding:0 0.5rem 1rem;}
+.sel-schedule-form {background:transparent;}
+.sel-schedule-form li {padding-bottom: 1rem;}
+.sel-schedule-form li:last-child {padding:0;}
 .sel-schedule-form li div {position:relative;}
 .sel-schedule-form li div span {display:block; border-radius:0.5rem; box-shadow:0 0.1rem 0.3rem 0.2rem rgba(0,0,0,0.1); background:#fff; width:100%; height:4.5rem; line-height:4.5rem; color:#58595B; font-size:1.6rem; padding:0 3rem 0 4rem;}
 .sel-schedule-form li div i {position:absolute; top:0; width:4rem; height:4.5rem; line-height:4.5rem; font-size:2rem; text-align:center;}
@@ -556,7 +559,12 @@
 .layer-brochure-list-wrap ul li label {display:table-cell; border:1px solid #C4C6C8; border-radius:0.5rem; width:8.5rem; height:6.5rem; color:#58595B; font-size:1.3rem; text-align:center;}
 .layer-brochure-list-wrap ul li input:checked + label {border-color:#D52536; color:#D52536;}
 
-
+/* Offer List */
+.sel-offer-list {}
+.sel-offer-list li {position:relative; margin-bottom:0.8rem;}
+.sel-offer-list li input {position:absolute; top:0; left:0; visibility:hidden;}
+.sel-offer-list li label {display:block; border:1px solid #C4C6C8; background:#fff; width:100%; min-height:4.5rem; line-height:2.1rem; color:#58595B; font-size:1.4rem; padding:1.2rem 1rem;}
+.sel-offer-list li input:checked + label {border-color:#D52536; box-shadow:0 0.1rem 0.3rem 0.2rem rgba(0,0,0,0.1); color:#D52536;}
 
 
 

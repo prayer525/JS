@@ -27,6 +27,8 @@ var fnList = {
 		// page scroll event
 		$('.scroll-wrap').scroll(function(event){
 			fnList.hasScrolled($(this).scrollTop());
+		}).resize(function(){
+			console.log($(this).outerHeight())
 		});
 	},
 	hasScrolled:function(st){
@@ -35,8 +37,6 @@ var fnList = {
 		var navbarHeight = 50;
 		
 		// Make sure they scroll more than delta
-		if(Math.abs(lastScrollTop - st) <= delta)
-			return;
 		if (st > lastScrollTop && st > navbarHeight){
 			$('.controll-btn-wrap, .main-swipe-cont .tit-h2').addClass('nav-up');
 		} else {
@@ -75,6 +75,23 @@ var fnList = {
 				fnList[_this.tab[idx].fnName]();
 			});
 		}
+	},
+	fnLayerEvent:function(){
+		$(document).off('click', '.sel-vehicle-layer').on('click', '.sel-vehicle-layer', function(e){
+			fnList.selLayerVehicle();
+		})
+
+		$(document).off('click', '.sel-schedule-layer').on('click', '.sel-schedule-layer', function(e){
+			fnList.selLayerSchedule();
+		})
+
+		$(document).off('click', '.sel-brochure-layer').on('click', '.sel-brochure-layer', function(e){
+			fnList.selLayerBrochure();
+		})
+
+		$(document).off('click', '.sel-offer-layer').on('click', '.sel-offer-layer', function(e){
+			fnList.selLayerOffer();
+		})
 	}
 };
 var Data = {

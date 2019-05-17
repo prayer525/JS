@@ -45,17 +45,7 @@ fnList.pageOutcomeUpdate = function(){
 		$('.outcome-form-wrap .outcome-comment-wrap').show();
 	})
 
-	$('.sel-schedule-form .sel-vehicle-layer').off('click').on('click', function(e){
-		fnList.selLayerVehicle();
-	})
-
-	$('.sel-schedule-form .sel-schedule-layer').off('click').on('click', function(e){
-		fnList.selLayerSchedule();
-	})
-
-	$('.sel-schedule-form .sel-brochure-layer').off('click').on('click', function(e){
-		fnList.selLayerBrochure();
-	})
+	fnList.fnLayerEvent();
 
 	// after loading
 	$.singlePage.preloadPage()
