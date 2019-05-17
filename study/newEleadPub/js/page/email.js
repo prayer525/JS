@@ -23,6 +23,7 @@ fnList.pageEmail = function(){
 			$('.email-template-list-wrap').removeClass('hide');
 			$('#pageEmail .popup-footer-btn').removeClass('twice');
 			$('#pageEmail .popup-footer-btn button').addClass('disabled').show();
+			$('.email-form-wrap').addClass('hide')
 		}
 	});
 
@@ -33,6 +34,7 @@ fnList.pageEmail = function(){
 			$('.email-template-list-wrap').addClass('hide');
 			$('#pageEmail .popup-footer-btn').addClass('twice');
 			$('#pageEmail .popup-footer-btn button').addClass('disabled')
+			$('.email-form-wrap').removeClass('hide')
 		}
 	})
 

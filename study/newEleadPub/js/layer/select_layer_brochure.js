@@ -1,83 +1,70 @@
 fnList.selLayerBrochure = function(param){
-	$('.select-layer-wrap #selectLayerBrochure').remove();
+	var createLayerParam = {
+		id : '#selectLayerBrochure',
+		page : 'select_layer_brochure',
+		bindEvent : function(layer){
+			console.log('layer : ' , layer)
+			var btnConfirm = layer.selLayer.find('.btn-select-layer-confirm');
+			// confirm layer
+			btnConfirm.off('click').on('click', function(){
+				if($(this).hasClass('disabled')){
+					return false;
+				}else{
+					layer.hide();
+				}
+			})
 
-	var selLayer = null;
+			// borchure list
+			var brochureList = {
+				width : 0,
+				ul : $('.layer-brochure-list'),
+				li : $('.layer-brochure-list li'),
+				list : $('.layer-selected-brochure-list'),
+				temp : $('<li><span></span><button><i class="fas fa-times-circle"></i></button></li>'),
+				init : function(){
+					$.each(brochureList.li, function(idx, item){
+						brochureList.width += $(item).outerWidth();
+					})
 
-	var layer = $('<div></div>').load('../html/layer/select_layer_brochure.html #selectLayerBrochure', function(data){
-		console.log('request layer');
-		selLayer = $( $(this).html() );
-		layer.dataBind(selLayer);
-	});
+					brochureList.ul.css('width', brochureList.width + 'px');
 
-	layer.dataBind = function(){
-		console.log('dataBind selLayer')
-
-		layer.eventBind();
-	}
-
-	layer.eventBind = function(){
-		$('.select-layer-wrap').append(selLayer);
-
-		// confirm layer
-		$('#selectLayerBrochure .btn-select-layer-confirm').off('click').on('click', function(){
-			if($(this).hasClass('disabled')){
-				return false;
-			}else{
-				layer.hide();
-			}
-		});
-
-		// brochure list width
-		var liWidth = 0;
-		$.each($('.layer-brochure-list-wrap li'), function(idx, item){
-			liWidth += $(item).outerWidth()
-		});
-		$('.layer-brochure-list-wrap ul').css('width', liWidth+'px');
-
-		// select brochure list
-		var selTemp = $('<li><span></span><button><i class="fas fa-times-circle"></i></button></li>');
-
-		$('.layer-brochure-list input').off('change').on('change', function(){
-			if($(this).is(':checked')){
-				var temp = selTemp.clone();
-
-				temp.find('span').text($(this).next('label').text())
-				temp.addClass($(this).attr('id'));
-				$('.layer-selected-brochure-list').append(temp)
-			}else{
-				$('.layer-selected-brochure-list').find('.'+$(this).attr('id')).remove();
-			}
-
-			if($('.layer-selected-brochure-list li').length > 0){
-				$('#selectLayerBrochure .btn-select-layer-confirm').removeClass('disabled')
-			}else{
-				$('#selectLayerBrochure .btn-select-layer-confirm').addClass('disabled')
-			}
-		})
-
-		$('.layer-selected-brochure-list').off('click', 'button').on('click', 'button', function(){
-			var _li = $(this).parent('li')
-			var _class = _li.attr('class')
-			$('.layer-brochure-list').find('#'+_class).prop('checked', false);
-
-			_li.remove();
-		})
+					brochureList.ul.find('input').off('change').on('change', function(){
+						if($(this).is(':checked')){
+							var temp = brochureList.temp.clone();
 		
-		setTimeout(function(){
-			layer.show()
-		},30);
+							temp.find('span').text($(this).next('label').text())
+							temp.addClass($(this).attr('id'));
+							brochureList.list.append(temp)
+						}else{
+							brochureList.list.find('.'+$(this).attr('id')).remove();
+						}
+
+						brochureList.fnCheckValidate();
+					})
+
+					brochureList.list.off('click', 'button').on('click', 'button', function(){
+						var _li = $(this).parent('li');
+						var _class = _li.attr('class');
+
+						brochureList.ul.find('#'+_class).prop('checked', false);
+		
+						_li.remove();
+
+						brochureList.fnCheckValidate();
+					})
+				},
+				fnCheckValidate : function(){
+					if(brochureList.list.find('>li').length > 0){
+						btnConfirm.removeClass('disabled')
+					}else{
+						btnConfirm.addClass('disabled')
+					}
+				}
+			}
+
+			brochureList.init();
+		}
 	}
 
-	layer.show = function(){
-		console.log('show')
-		$('.back-pannel').addClass('show');
-		$('.select-layer-wrap #selectLayerBrochure').addClass('show');
-	}
-
-	layer.hide = function(){
-		console.log('hide')
-		$('.back-pannel').removeClass('show');
-		$('.select-layer-wrap #selectLayerBrochure').removeClass('show');
-	}
-
+	fnList.fnCreateLayer(createLayerParam);
 }

@@ -1,42 +1,26 @@
 fnList.selLayerContact = function(param){
-	$('.select-layer-wrap #selectLayerContact').remove();
+	console.log('selLayerContact')
+	
+	var createLayerParam = {
+		id : '#selectLayerContact',
+		page : 'select_layer_contact',
+		bindEvent : function(layer){
+			var btnConfirm = layer.selLayer.find('.btn-select-layer-confirm')
+			// confirm layer
+			btnConfirm.off('click').on('click', function(){
+				if($(this).hasClass('disabled')){
+					return false;
+				}else{
+					layer.hide();
+				}
+			});
 
-	var selLayer = null;
-
-	var layer = $('<div></div>').load('../html/layer/select_layer_contact.html #selectLayerContact', function(data){
-		console.log('request layer');
-		selLayer = $( $(this).html() );
-		layer.dataBind(selLayer);
-	});
-
-	layer.dataBind = function(){
-		console.log('dataBind selLayer')
-
-		layer.eventBind();
+			layer.selLayer.find('.preferred-channel li div').on('click', function(){
+				layer.hide();
+			});
+		}
 	}
 
-	layer.eventBind = function(){
-		selLayer.find('.preferred-channel li div').on('click', function(){
-			layer.hide();
-		});
-		
-		$('.select-layer-wrap').append(selLayer);
-
-		setTimeout(function(){
-			layer.show()
-		},30);
-	}
-
-	layer.show = function(){
-		console.log('show')
-		$('.back-pannel').addClass('show');
-		$('.select-layer-wrap #selectLayerContact').addClass('show');
-	}
-
-	layer.hide = function(){
-		console.log('hide')
-		$('.back-pannel').removeClass('show');
-		$('.select-layer-wrap #selectLayerContact').removeClass('show');
-	}
+	fnList.fnCreateLayer(createLayerParam);
 
 }

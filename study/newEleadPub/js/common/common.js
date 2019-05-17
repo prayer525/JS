@@ -92,6 +92,40 @@ var fnList = {
 		$(document).off('click', '.sel-offer-layer').on('click', '.sel-offer-layer', function(e){
 			fnList.selLayerOffer();
 		})
+	},
+	fnCreateLayer:function(param){
+		$('.select-layer-wrap').find(param.id).remove();
+
+		var layer = {
+			selLayer : null,
+			dataBind : function(){
+				$('.select-layer-wrap').append(layer.selLayer);
+				
+
+				layer.selLayer.off('click', '.btn-select-layer-close').on('click', '.btn-select-layer-close', function(){
+					layer.hide();
+				})
+	
+				param.bindEvent(layer);
+
+				setTimeout(function(){
+					layer.show()
+				},30);
+			},
+			show : function(){
+				$('body').addClass('block-scroll');
+				$('.select-layer-wrap').find(param.id).addClass('show');
+			},
+			hide : function(){
+				$('body').removeClass('block-scroll');
+				$('.select-layer-wrap').find(param.id).removeClass('show');
+			}
+		}
+
+		$('<div></div>').load('../html/layer/'+param.page+'.html ' + param.id, function(data){
+			layer.selLayer = $( $(this).html() );
+			layer.dataBind();
+		});
 	}
 };
 var Data = {
@@ -174,14 +208,6 @@ $(function(){
 			$(this).next('button').trigger('click');
 		}
 	});
-
-	/********************************************************************************************
-	 * select-layer-wrap hide
-	 ********************************************************************************************/
-	$('.select-layer-wrap').off('click', '.btn-select-layer-close').on('click', '.btn-select-layer-close', function(){
-		$('.back-pannel').removeClass('show');
-		$(this).parent('div').parent('div').removeClass('show');
-	})
 
 	/********************************************************************************************
 	 * Comment length count

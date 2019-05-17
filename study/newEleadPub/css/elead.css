@@ -1,4 +1,10 @@
-.over-hidden {overflow:hidden;}
+.over-hidden {overflow:hidden !important;}
+
+.back-pannel {position:absolute; top:0; left:0; display:none; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:25;}
+
+.block-scroll .scroll-wrap,
+.block-scroll .detail-wrap {overflow:hidden !important;}
+.block-scroll .back-pannel {display:block;}
 
 /* dummy css */
 .content-wrap {position:relative; background:#fff; width:100%; height:100%; overflow:hidden; transition:0.5s; z-index:50;}
@@ -25,8 +31,6 @@
 .nav-header {position:absolute; top:0; left:0; width:100%; height:4rem; line-height:4rem; padding:0 1rem;}
 .select-page-wrap {position:absolute; top:0; left:0;}
 .select-layer-wrap {position:absolute; bottom:-100%; left:0; width:100%; height:100%; background:transparent; z-index:30;}
-.back-pannel {position:absolute; top:0; left:0; display:none; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:25;}
-.back-pannel.show {display:block;}
 
 /* Select Layer */
 .select-layer {position:absolute; width:100%; height:100%; background:transparent; transform:translate3d(0,0,0); overflow:hidden; overflow-y:auto; transition:linear 0.3s;}
@@ -477,7 +481,8 @@
 .email-template-list-wrap.hide li input:checked + label .right {display:block;}
 
 /* Email - information form */
-.email-form-wrap {padding:1.5rem;}
+.email-form-wrap {padding:1.5rem; padding-top:0.5rem;}
+.email-form-wrap.hide {display:none;}
 .email-form {border-radius:0.5rem; box-shadow:0 0.2rem 0.5rem 0.3rem rgba(0,0,0,0.2); background:#F6F6F6; margin-top:2rem;}
 .email-form li {position:relative; border-bottom:1px solid #E4E5E6; overflow:hidden;}
 .email-form li:last-child {border:none;}
