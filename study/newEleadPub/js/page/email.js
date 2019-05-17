@@ -37,7 +37,10 @@ fnList.pageEmail = function(){
 			$('.email-form-wrap').removeClass('hide')
 		}
 	})
-	
+
+	// open layer event bind
+	fnList.fnBindLayer();
+
 	// after loading
 	$.singlePage.preloadPage()
 }

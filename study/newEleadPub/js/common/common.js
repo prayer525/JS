@@ -76,6 +76,23 @@ var fnList = {
 			});
 		}
 	},
+	fnBindLayer:function(){
+		$('.sel-vehicle-layer').off('click').on('click', function(e){
+			fnList.selLayerVehicle();
+		})
+	
+		$('.sel-schedule-layer').off('click').on('click', function(e){
+			fnList.selLayerSchedule();
+		})
+	
+		$('.sel-brochure-layer').off('click').on('click', function(e){
+			fnList.selLayerBrochure();
+		})
+	
+		$('.sel-offer-layer').off('click').on('click', function(e){
+			fnList.selLayerOffer();
+		})
+	},
 	fnCreateLayer:function(param){
 		$('.select-layer-wrap').find(param.id).remove();
 
@@ -191,22 +208,6 @@ $(function(){
 			$(this).next('button').trigger('click');
 		}
 	});
-
-	$(document).off('click', '.sel-vehicle-layer').on('click', '.sel-vehicle-layer', function(e){
-		fnList.selLayerVehicle();
-	})
-
-	$(document).off('click', '.sel-schedule-layer').on('click', '.sel-schedule-layer', function(e){
-		fnList.selLayerSchedule();
-	})
-
-	$(document).off('click', '.sel-brochure-layer').on('click', '.sel-brochure-layer', function(e){
-		fnList.selLayerBrochure();
-	})
-
-	$(document).off('click', '.sel-offer-layer').on('click', '.sel-offer-layer', function(e){
-		fnList.selLayerOffer();
-	})
 
 	/********************************************************************************************
 	 * Comment length count

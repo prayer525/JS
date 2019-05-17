@@ -45,6 +45,9 @@ fnList.pageOutcomeUpdate = function(){
 		$('.outcome-form-wrap .outcome-comment-wrap').show();
 	})
 
+	// open layer event bind
+	fnList.fnBindLayer();
+
 	// after loading
 	$.singlePage.preloadPage()
 }
