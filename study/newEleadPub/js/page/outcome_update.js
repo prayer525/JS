@@ -53,16 +53,31 @@ fnList.pageOutcomeUpdate = function(){
 
 
 	try{
-		$('#demo-inline').mobiscroll().scroller({
+		var scroller = $('#demo-inline').mobiscroll().scroller({
 			display: 'inline',
 			layout: 'liquid',
 			wheels: [
 				[{
 					label: 'First wheel',
 					data: ['0', '1', '2', '3', '4', '5', '6', '7']
+				},{
+					label: 'First wheel',
+					data: ['0', '1', '2', '3', '4', '5', '6', '7']
+				},{
+					label: 'First wheel',
+					data: ['0', '1', '2', '3', '4', '5', '6', '7']
+				},{
+					label: 'First wheel',
+					data: ['0', '1', '2', '3', '4', '5', '6', '7']
 				}]
-			]
+			],
+			onInit:function(evt, inst){
+				console.log(evt, inst)
+
+				// $('#demo-inline').append($('<span class="top"></span><span class="bottom"></span>'));
+			}
 		});
+
 
 	}catch(e){
 		console.log('error : ' , e)
