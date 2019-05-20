@@ -1,5 +1,5 @@
 fnList.pageDashboard = function(){
-	console.log('pageDashboard : ' , fnList.pageMain.mainSwipeLoop);
+	console.log('pageDashboard');
 
 	fnList.initTabEvent();
 

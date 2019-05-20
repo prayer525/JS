@@ -50,4 +50,21 @@ fnList.pageOutcomeUpdate = function(){
 
 	// after loading
 	$.singlePage.preloadPage()
+
+
+	try{
+		$('#demo-inline').mobiscroll().scroller({
+			display: 'inline',
+			layout: 'liquid',
+			wheels: [
+				[{
+					label: 'First wheel',
+					data: ['0', '1', '2', '3', '4', '5', '6', '7']
+				}]
+			]
+		});
+
+	}catch(e){
+		console.log('error : ' , e)
+	}
 }
