@@ -76,6 +76,7 @@ function fnWhichAnimationEvent(eType){
 			var target = e;
             $('<div></div>').load(target.data('href') + ' > div', function(data){
 				var content = $( $(this).html() );
+				var contentId = content.attr('id');
 
 				$.singlePage.content = content;
 				
@@ -83,9 +84,14 @@ function fnWhichAnimationEvent(eType){
 				
 				$($.singlePage.option.contentWrapper).append($.singlePage.content)
 
-				$('#'+content.attr('id')).css('z-index : ', $.singlePage.zIndex++)
+				$('#'+contentId).css('z-index : ', $.singlePage.zIndex++)
 
-				fnList[content.attr('id')]()
+				try{
+					fnList[contentId]()
+				}catch(e){
+					console.log('error page id : ' , contentId);
+					console.log('error Desc : ' , e)
+				}
 
 				if(!target.data('preload')){
 					$.singlePage.showPage($.singlePage.content);

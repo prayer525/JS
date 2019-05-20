@@ -52,34 +52,27 @@ fnList.pageOutcomeUpdate = function(){
 	$.singlePage.preloadPage()
 
 
-	try{
-		var scroller = $('#demo-inline').mobiscroll().scroller({
-			display: 'inline',
-			layout: 'liquid',
-			wheels: [
-				[{
-					label: 'First wheel',
-					data: ['0', '1', '2', '3', '4', '5', '6', '7']
-				},{
-					label: 'First wheel',
-					data: ['0', '1', '2', '3', '4', '5', '6', '7']
-				},{
-					label: 'First wheel',
-					data: ['0', '1', '2', '3', '4', '5', '6', '7']
-				},{
-					label: 'First wheel',
-					data: ['0', '1', '2', '3', '4', '5', '6', '7']
-				}]
-			],
-			onInit:function(evt, inst){
-				console.log(evt, inst)
-
-				// $('#demo-inline').append($('<span class="top"></span><span class="bottom"></span>'));
-			}
-		});
-
-
-	}catch(e){
-		console.log('error : ' , e)
-	}
+	var hourArr = ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'];
+	var minArr = ['00','05','10','15','20','25','30','35','40','45','50','55'];
+	var scroller = $('#demo-inline').mobiscroll().scroller({
+		display: 'inline',
+		theme:'ios',
+		layout: 'liquid',
+		showLabel:false,
+		wheels: [
+			[{
+				label: 'From Hours',
+				data: hourArr
+			},{
+				label: 'From Minutes',
+				data: minArr
+			},{
+				label: 'To Hours',
+				data: hourArr
+			},{
+				label: 'To Minute',
+				data: minArr
+			}]
+		]
+	});
 }
