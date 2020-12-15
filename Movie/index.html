@@ -9,17 +9,20 @@
 </head>
 <body>
 <script>
-    
-axios.post('https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',{
-    key : "53b6a105245674610485b736392fffc9",
-    targetDt : "20201214"
-},{
-    headers: {
-        'Access-Control-Allow-Origin': '*'
-    }
-}).then(function(response){
-    console.log('response : ' , response)
+$(function(){
+    /*
+    $.ajax({
+        type:'GET',
+        url:'https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=53b6a105245674610485b736392fffc9&targetDt=20201214',
+        dataType:'json'
+    })
+    */
+
+    axios.get('https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=53b6a105245674610485b736392fffc9&targetDt=20201214').then(function(response){
+        console.log('response : ' , response)
+    })
 })
+
 
 </script>
 </body>
