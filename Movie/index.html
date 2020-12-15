@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
 <script type="module">
-import {$,jQuery} from './node_modules/jquery/dist/jquery.min.js';
 import axios from './node_modules/axios/dist/axios.js';
-// export for others scripts to use
-window.$ = $;
-window.jQuery = jQuery;
 
 axios.post('http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',{
     key : "53b6a105245674610485b736392fffc9",
