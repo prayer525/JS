@@ -11,16 +11,41 @@
 <body>
 	<button type="button" class="btn-alert">Alert</button>
     <button type="button" class="btn-confirm">Confirm</button>
-    
+
+    <div class="nav">
+        <a href="#">A</a>&nbsp;&nbsp;
+        <a href="#">B</a>&nbsp;&nbsp;
+        <a href="#">C</a>&nbsp;&nbsp;
+        <a href="#">D</a>&nbsp;&nbsp;
+    </div>
 <script>
 $(function(){
-    $('.btn-alert').on('click', function(){
-        alert('Alert 입니다.')
-    })
+    var wait1000 = ()=> new Promise((resolve, reject)=> {setTimeout(resolve, 1000)})
 
-    $('.btn-confirm').on('click', function(){
-        confirm('Confirm 입니다.')
+wait1000()
+    .then(function() {
+        console.log('Yay! 1')
+        wait1000()
     })
+    .then(function() {
+        console.log('Yay! 2')
+        return wait1000()
+    })
+    .then(function() {
+        console.log('Yay! 3')
+        wait1000()
+    })
+    .then(function() {
+        console.log('Wheeyee!')
+    });
+
+
+    $('.nav a').click(function(){
+        $('.nav a').removeClass('active').removeAttr('aria-label');
+
+        $(this).addClass('active').attr('aria-label','메뉴선택됨');
+    });
+
 })
 </script>
 </body>
