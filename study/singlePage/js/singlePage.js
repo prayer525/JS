@@ -405,57 +405,34 @@ function fnWhichAnimationEvent(eType){
         // 탭을 활정화 된 탭으로 이동시키는 함수
         fnc.fnMoveTab = function(){
             // 탭의 animate 상태를 true로 변경한다.
-            // 탭이 animate 상태일 경우 추가 이벤트를 막는다.
-            status.animated = true;
+			// 탭이 animate 상태일 경우 추가 이벤트를 막는다.
+			status.animated = true;
 
-            // 마지막으로 선택된 탭의 X 좌표를 구한다. : -(마지막에 선택된 탭의 index * 탭의 기본 넓이)
-            status.endX = option.selIdx * -defaultWidth;
-            
-            // 슬라이드의 현재 TranslationX 값을 구해 마지막에 선택된 탭과의 차이 값을 구한다. : 이 값이 슬라이드의 실제 이동 거리이다.
-            var oriPos = $thisUl[0].style.transform.replace('translateX(', '').replace('px)','')*1 - status.endX*1;
-            
-            // Tab slide animation
-            var moveInter = setInterval(function(){
-                // 소숫점의 경우가 있기 때문에 == 0으로 비교하지 않음
+			// 마지막으로 선택된 탭의 X 좌표를 구한다. : -(마지막에 선택된 탭의 index * 탭의 기본 넓이)
+			status.endX = option.selIdx * -defaultWidth;
 
-                // 남은 이동 거리가 3보다 작을 경우 0으로 할당 : 마지막 animate 값
-                if(Math.abs(oriPos) <= 3 && Math.abs(oriPos) >= 0){
-                    oriPos = 0;
-                }
-                // oriPos 가 '-' 값일 경우 : oriPos에 값을 + 해줘서 좌측으로 슬라이드 
-                else if(oriPos < 3){
-                    oriPos += 2; // 이 값을 조절 함으로써 animation의 부러움 여부를 결정 : 값이 크면 뚝뚝 끊기는 느낌적인 느낌?
-                }
-                // oriPos 가 '+' 값일 경우 : oriPos에 값을 - 해줘서 우측으로 슬라이드 
-                else{
-                    oriPos -= 2; // 이 값을 조절 함으로써 animation의 부러움 여부를 결정 : 값이 크면 뚝뚝 끊기는 느낌적인 느낌?
-                }
-                
-                // 마지막으로 선택된 탭의 좌표에서 oriPos를 더한 값 만큼 에이메이션 효과를 준다.
-                // $.fn.css()로 변경한 값은 animate`할 수 없다.
-                // 이유는 나도 모름 ... 찾아주세요 
-                // 예상 1. $.fn.css()로 변경한 값은 animate`할 수 없다.
-                // 예상 2. animate시 부분 속성인 translationX 값 만으론 animation 할 수 없다. (Full 속성 사용 : transform:translate3d(x,y,z) )
-                $thisUl.css({
-                    transform : 'translateX(' + (status.endX + oriPos) + 'px)'
-                })
+			$thisUl.css({
+				transform : 'translateX(' + status.endX + 'px)',
+				transition : '0.3s'
+			})
 
-                // oriPos == 0일 경우 clearInterval로 animation 효과를 멈춘다.
-                if(oriPos == 0){
-                    // 사용자로부터 callback 함수를 받은게 있다면 마지막에 선택된 index 값을 반환 하면서 실행한다.
-                    // 마지막으로 선택된 index만 넘겨도 callback 함수에서 모든걸 처리 할 수 있지만
-                    // 추가로 넘기고싶은 데이터가 았다면 여기에 추가해주면 된다.
-                    // 또한, 여기서는 모든 animation 동작이 끝난 후 callback 함수를 반환 하지만
-                    // 필요의 경우 (touchmove, mousemove) 이벤트 도중에도 이와 같은 callback 함수를 할당 할 수 있다.
-                    if(option.moveEnd != null && typeof option.moveEnd == 'function'){
-                        option.moveEnd(option.selIdx);
-                    }
+			if(option.moveEnd != null && typeof option.moveEnd == 'function'){
+				setTimeout(function(){
+					option.moveEnd(option.selIdx);
 
-                    status.animated = false;
+					status.animated = false;
+				}, 300)
+			}else{
+				status.animated = false;
+			}
 
-                    clearInterval(moveInter)
-                }
-            }, 2); // 이 앖을 조절 함으로써 얼마나 빠르게 동작하느냐가 결정 : 위의 oriPos -= 2 값과 같이 바꿔가면서 실행 해보세요
+			// 아래의 코드가 없을 경우 style에 transition: all 0.3s ease 0s; 이 추가 되고
+			// 이 후 동작에 딜레이가 생김 : 다른 방법이 있으면 추후 변경
+			$($thisUl).one($thisUl.transition.end, function(){
+				$(this).css({
+					'transition':''
+				})
+			})
         }
 
         // create tab list : 탭 list의 전체 넓이를 구한다.
