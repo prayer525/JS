@@ -2,22 +2,17 @@
 <html>
 <head>
 <meta charset=utf-8 />
-  <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+<script src="./videojs/src/js/video.js"></script>
 </head>
 <body>
-  <video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360"
-  data-setup='{}'>
-    <source src="rtmp://m.relay001.ktcdn.co.kr/mtnlive/_definst_/720" type="rtmp/flv">
-  </video>
-
-  <video id="my_video_2" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360"
-  data-setup='{}'>
-    <source src="rtmp://m.relay001.ktcdn.co.kr/mtnlive/_definst_/720" type="application/x-mpegURL">
-  </video>
-
-  <script src="https://unpkg.com/video.js/dist/video.js"></script>
-  <script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js"></script>
-  <script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+    <video
+    id="livestation-player"
+    class="video-js vjs-default-skin"
+    controls
+    preload="auto"
+    data-setup='{}'>
+  <source src="rtmp://m.relay001.ktcdn.co.kr/mtnlive/_definst_/720" type="video/mp4"></source>
+</video>
 
 </body>
 </html>
