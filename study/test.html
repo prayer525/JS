@@ -1,52 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Index page</title>
-	<link rel="stylesheet" href="../css/common.css">
-	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<meta charset=utf-8 />
+  <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
 </head>
 <body>
-	<button type="button" class="btn-alert">Alert</button>
-    <button type="button" class="btn-confirm">Confirm</button>
+  <video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360"
+  data-setup='{}'>
+    <source src="rtmp://m.relay001.ktcdn.co.kr/mtnlive/_definst_/720" type="rtmp/flv">
+  </video>
 
-    <div class="nav">
-        <a href="#">A</a>&nbsp;&nbsp;
-        <a href="#">B</a>&nbsp;&nbsp;
-        <a href="#">C</a>&nbsp;&nbsp;
-        <a href="#">D</a>&nbsp;&nbsp;
-    </div>
-<script>
-$(function(){
-    var wait1000 = ()=> new Promise((resolve, reject)=> {setTimeout(resolve, 1000)})
+  <video id="my_video_2" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360"
+  data-setup='{}'>
+    <source src="rtmp://m.relay001.ktcdn.co.kr/mtnlive/_definst_/720" type="application/x-mpegURL">
+  </video>
 
-wait1000()
-    .then(function() {
-        console.log('Yay! 1')
-        wait1000()
-    })
-    .then(function() {
-        console.log('Yay! 2')
-        return wait1000()
-    })
-    .then(function() {
-        console.log('Yay! 3')
-        wait1000()
-    })
-    .then(function() {
-        console.log('Wheeyee!')
-    });
+  <script src="https://unpkg.com/video.js/dist/video.js"></script>
+  <script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js"></script>
+  <script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
 
-
-    $('.nav a').click(function(){
-        $('.nav a').removeClass('active').removeAttr('aria-label');
-
-        $(this).addClass('active').attr('aria-label','메뉴선택됨');
-    });
-
-})
-</script>
 </body>
 </html>
