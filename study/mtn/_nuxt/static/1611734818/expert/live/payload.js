@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/expert/live", {data:[{}],fetch:[],mutations:void 0});
