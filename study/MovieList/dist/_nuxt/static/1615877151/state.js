@@ -1,0 +1,1 @@
+window.__NUXT__=(function(a){return {staticAssetsBase:"\u002FJS\u002Fstudy\u002FMovieList\u002Fdist\u002F_nuxt\u002Fstatic\u002F1615877151",layout:"default",error:a,serverRendered:true,routePath:"\u002F",config:{app:{basePath:"\u002FJS\u002Fstudy\u002FMovieList\u002Fdist\u002F",assetsPath:"\u002FJS\u002Fstudy\u002FMovieList\u002Fdist\u002F_nuxt\u002F",cdnURL:a}}}}(null));
