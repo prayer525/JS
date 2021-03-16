@@ -21,8 +21,9 @@ export default {
 	  '~/assets/css/common.scss'
   ],
 
+  // Router의 rool를 지정해주는 필드
   router: {
-	base: '/JS/study/MovieList/dist/'
+	// base: '/MovieList/dist/'
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -34,6 +35,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+	'@nuxtjs/moment'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

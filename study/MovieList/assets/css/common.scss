@@ -185,3 +185,49 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+
+.container {
+	margin: 0 auto;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
+
+	h1 {
+		font-size:24px;
+	}
+
+	fieldset {
+		margin:10px 0;
+
+		input {
+			border: 1px solid #aaa;
+			border-radius: 5px;
+			padding:5px 20px;
+		}
+	}
+}
+
+.tbl-list {
+	table-layout:fixed;
+	border-collapse: collapse;
+	width:100%;
+	margin-top:10px;
+
+	thead {
+		th {
+			background-color:#eaeaea;
+			padding: 10px 0;
+		}
+	}
+	tbody {
+		td {
+			border-bottom:1px solid #aaa;
+			color:#333;
+			padding:5px 0;
+		}
+	}
+}
